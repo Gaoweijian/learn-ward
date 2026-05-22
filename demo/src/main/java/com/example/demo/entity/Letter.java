@@ -112,4 +112,9 @@ public class Letter {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public String toString() {
+        return "Letter{id=" + id + ", upper='" + letterUpper + "', lower='" + letterLower + "'}";
+    }
 }

@@ -112,4 +112,9 @@ public class Hanzi {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public String toString() {
+        return "Hanzi{id=" + id + ", hanzi='" + hanzi + "', pinyin='" + pinyin + "'}";
+    }
 }

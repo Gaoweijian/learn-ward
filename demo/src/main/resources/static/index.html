@@ -1432,6 +1432,9 @@
 
         /* 笔画动画相关 */
         .stroke-animation-btn {
+            position: absolute;
+            top: 16px;
+            left: 16px;
             width: 48px;
             height: 48px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1444,6 +1447,7 @@
             align-items: center;
             justify-content: center;
             color: white;
+            z-index: 10;
         }
 
         .stroke-animation-btn:hover {
@@ -2095,7 +2099,7 @@
                                 <button class="voice-btn" id="voiceBtn" onclick="event.stopPropagation();playVoice()" title="播放发音">
                                     <i class="fas fa-volume-up"></i>
                                 </button>
-                                <button class="stroke-animation-btn" id="strokeBtn" onclick="event.stopPropagation();showStrokeAnimation()" title="笔画动画" style="top: 16px; left: 16px;">
+                                <button class="stroke-animation-btn" id="strokeBtn" onclick="event.stopPropagation();showStrokeAnimation()" title="笔画动画">
                                     <i class="fas fa-pen-fancy"></i>
                                 </button>
                                 <div class="card-main-content" id="cardFrontContent">一</div>

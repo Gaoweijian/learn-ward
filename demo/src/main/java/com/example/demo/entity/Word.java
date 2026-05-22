@@ -112,4 +112,9 @@ public class Word {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public String toString() {
+        return "Word{id=" + id + ", word='" + word + "', category='" + category + "'}";
+    }
 }

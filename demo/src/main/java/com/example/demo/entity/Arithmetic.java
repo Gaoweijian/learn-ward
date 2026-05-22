@@ -101,4 +101,9 @@ public class Arithmetic {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public String toString() {
+        return "Arithmetic{id=" + id + ", question='" + question + "', answer=" + answer + "}";
+    }
 }

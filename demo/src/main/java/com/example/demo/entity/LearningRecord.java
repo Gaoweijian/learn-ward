@@ -123,4 +123,9 @@ public class LearningRecord {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public String toString() {
+        return "LearningRecord{id=" + id + ", userId=" + userId + ", moduleType='" + moduleType + "', score=" + score + "}";
+    }
 }
