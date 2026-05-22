@@ -19,12 +19,44 @@
             --danger: #F87171;
             --warning: #FBBF24;
             --bg: #f5f6fa;
+            --bg-card: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-input: #ffffff;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --text-light: #999;
+            --border-color: #e0e0e0;
+            --shadow-color: rgba(0,0,0,0.1);
+            --overlay-bg: rgba(0,0,0,0.5);
+            --header-bg: #ffffff;
+            --table-stripe: #f8f9fa;
+            --modal-bg: #ffffff;
+            --modal-input-bg: #f8f9fa;
+        }
+
+        [data-theme="dark"] {
+            --bg: #1a1a2e;
+            --bg-card: #252540;
+            --bg-secondary: #1e1e32;
+            --bg-input: #2a2a40;
+            --text-primary: #e8e8e8;
+            --text-secondary: #b0b0b0;
+            --text-light: #707070;
+            --border-color: #404060;
+            --shadow-color: rgba(0,0,0,0.4);
+            --overlay-bg: rgba(0,0,0,0.7);
+            --header-bg: #1e1e32;
+            --table-stripe: #2a2a40;
+            --modal-bg: #252540;
+            --modal-input-bg: #2a2a40;
         }
 
         body {
             font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
             background: var(--bg);
             min-height: 100vh;
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* 顶部导航 */
@@ -109,13 +141,13 @@
         }
 
         .stat-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: 16px;
             padding: 24px;
             display: flex;
             align-items: center;
             gap: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px var(--shadow-color);
             transition: transform 0.3s ease;
         }
 
@@ -136,21 +168,21 @@
         .stat-info h3 {
             font-size: 28px;
             font-weight: bold;
-            color: #333;
+            color: var(--text-primary);
         }
 
         .stat-info p {
             font-size: 14px;
-            color: #888;
+            color: var(--text-light);
         }
 
         /* Tab 导航 */
         .tab-nav {
-            background: white;
+            background: var(--bg-card);
             border-radius: 16px 16px 0 0;
             display: flex;
             overflow-x: auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px var(--shadow-color);
         }
 
         .tab-btn {
@@ -159,7 +191,7 @@
             background: none;
             font-size: 15px;
             font-weight: 600;
-            color: #666;
+            color: var(--text-secondary);
             cursor: pointer;
             transition: all 0.3s ease;
             white-space: nowrap;
@@ -171,21 +203,21 @@
 
         .tab-btn:hover {
             color: var(--primary);
-            background: #f8f9fa;
+            background: var(--bg-secondary);
         }
 
         .tab-btn.active {
             color: var(--primary);
             border-bottom-color: var(--primary);
-            background: #f8f9fa;
+            background: var(--bg-secondary);
         }
 
         /* 内容区 */
         .tab-content {
-            background: white;
+            background: var(--bg-card);
             border-radius: 0 0 16px 16px;
             padding: 24px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px var(--shadow-color);
             min-height: 500px;
         }
 
@@ -211,7 +243,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            background: #f5f6fa;
+            background: var(--bg-secondary);
             padding: 8px 12px;
             border-radius: 12px;
             flex: 1;
@@ -223,6 +255,7 @@
             background: none;
             outline: none;
             font-size: 14px;
+            color: var(--text-primary);
             flex: 1;
         }
 
@@ -246,23 +279,23 @@
         .data-table td {
             padding: 14px 16px;
             text-align: left;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .data-table th {
-            background: #f8f9fa;
+            background: var(--table-stripe);
             font-weight: 600;
-            color: #333;
+            color: var(--text-primary);
             font-size: 14px;
         }
 
         .data-table tr:hover {
-            background: #f8f9fa;
+            background: var(--table-stripe);
         }
 
         .data-table td {
             font-size: 14px;
-            color: #555;
+            color: var(--text-secondary);
         }
 
         .table-actions {
@@ -307,7 +340,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: var(--overlay-bg);
             display: none;
             align-items: center;
             justify-content: center;
@@ -319,7 +352,7 @@
         }
 
         .modal {
-            background: white;
+            background: var(--bg-card);
             border-radius: 20px;
             width: 90%;
             max-width: 500px;
@@ -341,7 +374,7 @@
 
         .modal-header {
             padding: 20px 24px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -350,18 +383,18 @@
         .modal-header h3 {
             font-size: 18px;
             font-weight: bold;
-            color: #333;
+            color: var(--text-primary);
         }
 
         .modal-close {
             width: 32px;
             height: 32px;
             border: none;
-            background: #f5f6fa;
+            background: var(--bg-secondary);
             border-radius: 8px;
             cursor: pointer;
             font-size: 18px;
-            color: #666;
+            color: var(--text-secondary);
         }
 
         .modal-body {
@@ -376,7 +409,7 @@
             display: block;
             font-size: 14px;
             font-weight: 600;
-            color: #333;
+            color: var(--text-primary);
             margin-bottom: 8px;
         }
 
@@ -385,9 +418,11 @@
         .form-group textarea {
             width: 100%;
             padding: 12px 16px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid var(--border-color);
             border-radius: 10px;
             font-size: 14px;
+            background: var(--bg-input);
+            color: var(--text-primary);
             transition: border-color 0.3s ease;
         }
 
@@ -406,15 +441,15 @@
 
         .modal-footer {
             padding: 16px 24px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: flex-end;
             gap: 12px;
         }
 
         .btn-cancel {
-            background: #f5f6fa;
-            color: #666;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
         }
 
         .btn-cancel:hover {
@@ -461,7 +496,7 @@
         .empty-state {
             text-align: center;
             padding: 60px 20px;
-            color: #888;
+            color: var(--text-light);
         }
 
         .empty-state i {
@@ -485,7 +520,7 @@
         .spinner {
             width: 40px;
             height: 40px;
-            border: 3px solid #f0f0f0;
+            border: 3px solid var(--border-color);
             border-top-color: var(--primary);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
@@ -508,13 +543,13 @@
         .pagination button {
             min-width: 36px;
             height: 36px;
-            border: 1px solid #e0e0e0;
-            background: white;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
             border-radius: 8px;
             font-size: 14px;
             cursor: pointer;
             transition: all 0.2s ease;
-            color: #555;
+            color: var(--text-secondary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -539,19 +574,19 @@
 
         .pagination .page-info {
             font-size: 13px;
-            color: #888;
+            color: var(--text-light);
             padding: 0 8px;
         }
 
         .pagination .page-size-select {
             height: 36px;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 0 8px;
             font-size: 13px;
-            color: #555;
+            color: var(--text-secondary);
             outline: none;
-            background: white;
+            background: var(--bg-card);
             cursor: pointer;
         }
 
@@ -590,7 +625,7 @@
 
         /* 学习记录样式 */
         .record-item {
-            background: #f8f9fa;
+            background: var(--bg-secondary);
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 12px;
@@ -619,13 +654,13 @@
 
         .record-details h4 {
             font-size: 16px;
-            color: #333;
+            color: var(--text-primary);
             margin-bottom: 4px;
         }
 
         .record-details p {
             font-size: 13px;
-            color: #888;
+            color: var(--text-light);
         }
 
         .record-score {
@@ -640,7 +675,26 @@
 
         .record-score .label {
             font-size: 12px;
-            color: #888;
+            color: var(--text-light);
+        }
+
+        /* 深色模式切换按钮 */
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.3);
         }
     </style>
 </head>
@@ -652,6 +706,9 @@
             <h1 class="header-title">学习管理系统</h1>
         </div>
         <div class="header-right">
+            <button class="theme-toggle" id="themeToggle" title="切换深色模式">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
             <button class="btn btn-back" onclick="location.href='index.html'">
                 <i class="fas fa-home"></i> 返回学习
             </button>
@@ -1685,6 +1742,7 @@
 
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
             loadStats();
             loadData('hanzi');
         });
@@ -1695,6 +1753,32 @@
                 closeModal();
             }
         });
+
+        // ==================== 深色模式 ====================
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (theme === 'dark') {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
     </script>
 </body>
 </html>
