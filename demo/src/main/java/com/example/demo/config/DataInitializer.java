@@ -1,6 +1,8 @@
 package com.example.demo.config;
 
+import com.example.demo.entity.Book;
 import com.example.demo.entity.User;
+import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,6 +17,9 @@ public class DataInitializer implements CommandLineRunner {
     
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private BookRepository bookRepository;
     
     @Override
     public void run(String... args) {
@@ -45,7 +50,7 @@ public class DataInitializer implements CommandLineRunner {
             child2.setNickname("小红");
             userRepository.save(child2);
         }
-        
+
         System.out.println("默认用户初始化完成！");
         System.out.println("管理员账号: admin / admin123");
         System.out.println("儿童账号: child1 / 123456, child2 / 123456");

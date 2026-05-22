@@ -341,6 +341,18 @@
             .single-card { padding: 30px 16px 20px; border-radius: 20px; }
             .nav-btn { width: 40px; height: 40px; font-size: 16px; }
         }
+
+        /* 语言切换按钮 */
+        .lang-toggle-btn {
+            width: 42px; height: 42px;
+            background: linear-gradient(135deg, #118AB2, #06D6A0);
+            border: none; border-radius: 11px;
+            color: white; font-size: 14px; font-weight: bold;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.25s; flex-shrink: 0;
+        }
+        .lang-toggle-btn:hover { transform: scale(1.06); }
     </style>
 </head>
 <body>
@@ -357,12 +369,15 @@
             <button class="view-toggle-btn" id="viewToggleBtn" onclick="toggleViewMode()" title="切换单字/网格视图">
                 <i class="fas fa-id-card" id="viewToggleIcon"></i>
             </button>
+            <button class="lang-toggle-btn" id="langToggleBtn" onclick="toggleLanguage()" title="切换语言">
+                <span id="langFlag">中</span>
+            </button>
         </div>
 
         <!-- 统计栏 -->
         <div class="stats-bar" id="statsBar" style="display:none;">
-            <span class="stats-text">当前第 <strong id="statPage">1</strong> 页</span>
-            <span class="stats-text">共 <strong id="statTotal">0</strong> 个汉字</span>
+            <span class="stats-text"><span id="statPageLabel">当前第</span> <strong id="statPage">1</strong> <span id="statPageUnit">页</span></span>
+            <span class="stats-text"><span id="statTotalLabel">共</span> <strong id="statTotal">0</strong> <span id="statHanziUnit">个汉字</span></span>
         </div>
 
         <!-- 卡片区域 -->
@@ -393,6 +408,79 @@
     (function() {
         var API_BASE = '/api/admin/hanzi';
         var PAGE_SIZE = 12;
+
+        // ---- 多语言支持 ----
+        var _hcLang = localStorage.getItem('language') || 'zh';
+        var _hcI18n = {
+            zh: {
+                title: '汉字卡片',
+                searchPlaceholder: '搜索汉字、拼音或含义...',
+                searchBtn: '搜索',
+                loading: '加载中...',
+                emptyNoMatch: '没有找到匹配的汉字',
+                emptyNoData: '暂无汉字数据',
+                page: '当前第',
+                total: '共',
+                hanzi: '个汉字',
+                prev: '上一页',
+                next: '下一页',
+                jumpPage: '跳转',
+                pageOf: '第',
+                pageSlash: '/',
+                page: '页',
+                gridView: '网格视图',
+                singleView: '单字视图',
+                close: '关闭',
+                prevStroke: '上一笔',
+                nextStroke: '下一笔',
+                strokeAnimation: '笔画动画',
+                groupWord: '组词：'
+            },
+            en: {
+                title: 'Hanzi Cards',
+                searchPlaceholder: 'Search hanzi, pinyin or meaning...',
+                searchBtn: 'Search',
+                loading: 'Loading...',
+                emptyNoMatch: 'No matching hanzi found',
+                emptyNoData: 'No hanzi data available',
+                page: 'Page',
+                total: 'of',
+                hanzi: 'hanzi',
+                prev: 'Prev',
+                next: 'Next',
+                jumpPage: 'Jump',
+                pageOf: 'Page',
+                pageSlash: '/',
+                page: '',
+                gridView: 'Grid View',
+                singleView: 'Single View',
+                close: 'Close',
+                prevStroke: 'Prev Stroke',
+                nextStroke: 'Next Stroke',
+                strokeAnimation: 'Stroke Animation',
+                groupWord: 'Word: '
+            }
+        };
+
+        function L(key) {
+            return _hcI18n[_hcLang][key] || key;
+        }
+
+        function initLang() {
+            var flag = document.getElementById('langFlag');
+            if (flag) flag.textContent = _hcLang === 'zh' ? '中' : 'EN';
+            document.title = L('title');
+            document.querySelector('.title').textContent = L('title');
+            document.getElementById('searchInput').placeholder = L('searchPlaceholder');
+            document.querySelector('.search-btn').textContent = L('searchBtn');
+        }
+
+        window.toggleLanguage = function() {
+            _hcLang = _hcLang === 'zh' ? 'en' : 'zh';
+            localStorage.setItem('language', _hcLang);
+            initLang();
+            showToast(_hcLang === 'zh' ? '已切换到中文' : 'Switched to English');
+        };
 
         // ---- 状态（全部用 window 级别确保全局可访问）----
         window._hcState = {
@@ -515,6 +603,10 @@
                 bar.style.display = 'flex';
                 document.getElementById('statPage').textContent = state.currentPage + 1;
                 document.getElementById('statTotal').textContent = state.totalElements;
+                document.getElementById('statPageLabel').textContent = L('page');
+                document.getElementById('statPageUnit').textContent = L('page');
+                document.getElementById('statTotalLabel').textContent = L('total');
+                document.getElementById('statHanziUnit').textContent = L('hanzi');
             } else {
                 bar.style.display = 'none';
             }
@@ -665,13 +757,14 @@
             // --- 跳转 ---
             parts.push(
                 '<span class="page-jump">',
-                '到第 <input type="number" class="page-jump-input" id="jumpInput" min="1" max="', tp, '" onkeydown="if(event.key===\'Enter\')doJumpPage()"> 页 ',
-                '<button class="page-jump-btn" onclick="doJumpPage()">跳转</button>',
+                '到第 <input type="number" class="page-jump-input" id="jumpInput" min="1" max="', tp, '" onkeydown="if(event.key===\'Enter\')doJumpPage()"> ',
+                L('page') === 'Page' ? 'page ' : '页 ',
+                '<button class="page-jump-btn" onclick="doJumpPage()">' + L('jumpPage') + '</button>',
                 '</span>'
             );
 
             // --- 统计文字 ---
-            parts.push('<span class="page-info">第 ', (cp + 1), ' / ', tp, ' 页 &nbsp;·&nbsp; 共 ', te, ' 个</span>');
+            parts.push('<span class="page-info">' + L('pageOf') + ' ', (cp + 1), ' ' + L('pageSlash') + ' ', tp, ' ' + L('page') + ' &nbsp;·&nbsp; ' + L('total') + ' ', te, ' ' + L('hanzi') + '</span>');
 
             bar.innerHTML = parts.join('');
         }
@@ -790,6 +883,7 @@
         });
 
         // ---- 启动加载 ----
+        initLang();
         loadCards();
     })();
     </script>

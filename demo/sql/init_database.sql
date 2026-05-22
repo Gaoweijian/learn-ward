@@ -303,6 +303,36 @@ INSERT INTO `learning_record` (user_id, module_type, question_ids, answers, corr
 (3, 'letter', '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]', '[true, true, true, true, false, true, true, false, true, true]', 8, 10, 80);
 
 -- ===============================================
+-- 8. 书籍表
+-- ===============================================
+DROP TABLE IF EXISTS `book`;
+CREATE TABLE `book` (
+    `id` BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '书籍ID',
+    `book_name` VARCHAR(200) NOT NULL COMMENT '书名',
+    `description` TEXT COMMENT '简介',
+    `html_url` VARCHAR(500) COMMENT 'HTML页面地址', vcv 踩踩踩c 从vc
+    cv
+[yj[[hup=p7=u-67=-]]]
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='书籍表';
+
+-- 插入示例书籍数据
+INSERT INTO `book` (book_name, description, html_url) VALUES
+-- ('唐诗三百首', '经典唐诗选集，包含李白、杜甫、白居易等唐代诗人的代表作品，适合儿童启蒙学习。', '/books/tangshi.html'),
+-- ('安徒生童话', '世界经典的童话故事集，包含《丑小鸭》《卖火柴的小女孩》《皇帝的新装》等脍炙人口的故事。', '/books/andersen.html'),
+-- ('三字经', '中国传统启蒙读物，三字一句朗朗上口，涵盖历史、天文、地理、道德等丰富知识。', '/books/sanzijing.html'),
+-- ('十万个为什么', '科普知识百科，解答孩子们对自然、科学、生活的各种疑问，激发好奇心和探索精神。', '/books/whys.html'),
+-- ('格林童话', '德国格林兄弟收集整理的民间童话集，包含《白雪公主》《灰姑娘》《小红帽》等经典故事。', '/books/grimm.html'),
+-- ('成语故事', '精选一百个常用成语的由来故事，帮助孩子理解成语含义，感受中华文化博大精深。', '/books/chengyu.html'),
+-- ('伊索寓言', '古希腊寓言故事集，通过动物故事讲述人生哲理，如《龟兔赛跑》《狼来了》等。', '/books/aesop.html'),
+-- ('弟子规', '传统儿童行为规范读物，教导孩子孝悌、谨信、爱众、亲仁等基本做人准则。', '/books/dizigui.html'),
+-- ('小王子', '法国作家圣埃克苏佩里的经典童话，讲述来自小行星B-612的小王子的星际旅行故事。', '/books/prince.html'),
+-- ('千字文', '一千个不重复的汉字组成的韵文，涵盖天文、地理、历史、修身等内容，是经典蒙学教材。', '/books/qianziwen.html'),
+-- ('西游记（少儿版）', '中国四大名著之一《西游记》的少儿改编版，讲述唐僧师徒四人西天取经的精彩冒险。', '/books/xiyouji.html'),
+-- ('中国神话故事', '盘古开天、女娲补天、后羿射日、精卫填海等经典中国神话故事，展现中华灿烂文化。', '/books/shenhua.html');
+
+CREATE INDEX idx_book_name ON book(book_name);
+
+-- ===============================================
 -- 创建索引优化查询性能
 -- ===============================================
 CREATE INDEX idx_user_role ON user(role);
@@ -318,4 +348,4 @@ CREATE INDEX idx_learning_record_created ON learning_record(created_at);
 -- ===============================================
 -- 完成提示
 -- ===============================================
-SELECT '数据库初始化完成！共创建7张表，示例数据已插入。' AS Status;
+SELECT '数据库初始化完成！共创建8张表，示例数据已插入。' AS Status;

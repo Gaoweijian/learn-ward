@@ -13,6 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
         // 根路径映射到 index.html
         registry.addViewController("/").setViewName("forward:/index.html");
         registry.addViewController("/admin").setViewName("forward:/admin.html");
+        registry.addViewController("/books").setViewName("forward:/books.html");
     }
     
     @Override

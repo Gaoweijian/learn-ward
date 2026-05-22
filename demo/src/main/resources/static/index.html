@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FF8C42">
+    <meta name="description" content="儿童汉字启蒙学习系统 - 趣味学习，快乐成长">
     <title>儿童汉字启蒙学习</title>
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
     <style>
         * {
             margin: 0;
@@ -22,6 +26,38 @@
             --bg-gradient: linear-gradient(135deg, #FF9A56 0%, #FF6B6B 50%, #FF8E53 100%);
             --card-warm: linear-gradient(135deg, #FFB347 0%, #FFCC80 100%);
             --card-back-warm: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+            --text-primary: #333;
+            --text-secondary: #666;
+            --text-light: #999;
+            --bg-card: rgba(255,255,255,0.97);
+            --bg-secondary: #f8f9fa;
+            --bg-input: white;
+            --border-color: #e0e0e0;
+            --shadow-color: rgba(0,0,0,0.15);
+            --overlay-bg: rgba(0,0,0,0.5);
+            --drawer-bg: rgba(255,255,255,0.97);
+        }
+
+        [data-theme="dark"] {
+            --primary: #FF8C42;
+            --secondary: #FFD166;
+            --accent: #FF6B6B;
+            --green: #06D6A0;
+            --pink: #EF476F;
+            --teal: #118AB2;
+            --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --card-warm: linear-gradient(135deg, #2d2d44 0%, #3d3d5c 100%);
+            --card-back-warm: linear-gradient(135deg, #4a3f6b 0%, #5c4d7d 100%);
+            --text-primary: #e8e8e8;
+            --text-secondary: #b0b0b0;
+            --text-light: #707070;
+            --bg-card: rgba(30,30,50,0.97);
+            --bg-secondary: #1e1e32;
+            --bg-input: #2a2a40;
+            --border-color: #404060;
+            --shadow-color: rgba(0,0,0,0.4);
+            --overlay-bg: rgba(0,0,0,0.7);
+            --drawer-bg: rgba(30,30,50,0.98);
         }
 
         body {
@@ -29,6 +65,8 @@
             min-height: 100vh;
             background: var(--bg-gradient);
             overflow-x: hidden;
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* 加载遮罩 */
@@ -38,7 +76,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255,255,255,0.95);
+            background: var(--bg-card);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -80,14 +118,14 @@
         /* 侧边抽屉 */
         .drawer {
             width: 440px;
-            background: rgba(255,255,255,0.97);
+            background: var(--drawer-bg);
             backdrop-filter: blur(10px);
-            box-shadow: 4px 0 30px rgba(0,0,0,0.15);
+            box-shadow: 4px 0 30px var(--shadow-color);
             padding: 28px 24px;
             display: flex;
             flex-direction: column;
             transform: translateX(-100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
             position: fixed;
             left: 0;
             top: 0;
@@ -103,7 +141,7 @@
         .drawer-header {
             text-align: center;
             padding-bottom: 20px;
-            border-bottom: 2px dashed #e0e0e0;
+            border-bottom: 2px dashed var(--border-color);
             margin-bottom: 20px;
         }
 
@@ -115,39 +153,41 @@
         .drawer-title {
             font-size: 22px;
             font-weight: bold;
-            color: #D84315;
+            color: var(--primary);
         }
 
         .drawer-subtitle {
             font-size: 13px;
-            color: #888;
+            color: var(--text-light);
             margin-top: 5px;
         }
 
         /* 用户选择 */
         .user-section {
-            background: #f8f9fa;
+            background: var(--bg-secondary);
             border-radius: 16px;
             padding: 16px;
             margin-bottom: 20px;
+            transition: background 0.3s ease;
         }
 
         .user-section label {
             display: block;
             font-size: 14px;
-            color: #666;
+            color: var(--text-secondary);
             margin-bottom: 8px;
         }
 
         .user-select {
             width: 100%;
             padding: 12px 16px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid var(--border-color);
             border-radius: 12px;
             font-size: 16px;
-            background: white;
+            background: var(--bg-input);
             cursor: pointer;
             transition: all 0.3s ease;
+            color: var(--text-primary);
         }
 
         .user-select:focus {
@@ -159,7 +199,7 @@
         /* 模块选择 */
         .module-section h3 {
             font-size: 14px;
-            color: #666;
+            color: var(--text-secondary);
             margin-bottom: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -172,8 +212,8 @@
         }
 
         .module-card {
-            background: white;
-            border: 2px solid #e0e0e0;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
             border-radius: 14px;
             padding: 14px 8px;
             text-align: center;
@@ -189,18 +229,22 @@
         .module-name {
             font-size: 13px;
             font-weight: 600;
-            color: #333;
+            color: var(--text-primary);
         }
 
         .module-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px var(--shadow-color);
         }
 
         .module-card.active {
             border-color: #FF8C42;
             background: linear-gradient(135deg, #fff8f0 0%, #fff 100%);
             box-shadow: 0 4px 15px rgba(255,140,66,0.3);
+        }
+
+        [data-theme="dark"] .module-card.active {
+            background: linear-gradient(135deg, rgba(255,140,66,0.2) 0%, rgba(255,107,107,0.15) 100%);
         }
 
 
@@ -215,10 +259,11 @@
         }
 
         .module-quantity-item {
-            background: #f0f4f8;
+            background: var(--bg-secondary);
             border-radius: 12px;
             padding: 12px;
             margin-bottom: 8px;
+            transition: background 0.3s ease;
         }
 
         .module-quantity-item:last-child {
@@ -238,7 +283,7 @@
             gap: 8px;
             font-size: 13px;
             font-weight: 600;
-            color: #333;
+            color: var(--text-primary);
         }
 
         .module-quantity-value {
@@ -251,7 +296,7 @@
             width: 100%;
             height: 6px;
             -webkit-appearance: none;
-            background: #ddd;
+            background: var(--border-color);
             border-radius: 3px;
             outline: none;
         }
@@ -312,11 +357,12 @@
             display: flex;
             align-items: center;
             padding: 16px 24px;
-            background: rgba(255,255,255,0.95);
+            background: var(--bg-card);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 20px var(--shadow-color);
             margin-bottom: 20px;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
         }
 
         .menu-btn {
@@ -343,7 +389,7 @@
             text-align: center;
             font-size: 20px;
             font-weight: bold;
-            color: #333;
+            color: var(--text-primary);
         }
 
         .top-actions {
@@ -354,16 +400,17 @@
         .action-btn {
             width: 48px;
             height: 48px;
-            background: #f0f0f0;
+            background: var(--bg-secondary);
             border: none;
             border-radius: 14px;
             font-size: 18px;
             cursor: pointer;
             transition: all 0.3s ease;
+            color: var(--text-primary);
         }
 
         .action-btn:hover {
-            background: #e0e0e0;
+            background: var(--border-color);
         }
 
         /* 学习区域 */
@@ -378,11 +425,12 @@
 
         /* 进度条 */
         .progress-container {
-            background: rgba(255,255,255,0.95);
+            background: var(--bg-card);
             border-radius: 20px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 20px var(--shadow-color);
+            transition: background 0.3s ease;
         }
 
         .progress-header {
@@ -395,7 +443,7 @@
         .progress-text {
             font-size: 16px;
             font-weight: 600;
-            color: #333;
+            color: var(--text-primary);
         }
 
         .progress-score {
@@ -406,7 +454,7 @@
 
         .progress-bar {
             height: 12px;
-            background: #e0e0e0;
+            background: var(--border-color);
             border-radius: 6px;
             overflow: hidden;
         }
@@ -462,7 +510,7 @@
 
         .flip-card-front {
             background: var(--card-warm);
-            color: #5D4037;
+            color: var(--text-primary);
         }
 
         .flip-card-back {
@@ -482,12 +530,14 @@
             font-size: 28px;
             margin-top: 15px;
             opacity: 0.85;
+            color: var(--text-secondary);
         }
 
         .card-hint {
             font-size: 16px;
             opacity: 0.6;
             margin-top: auto;
+            color: var(--text-light);
         }
 
         .card-answer-label {
@@ -680,7 +730,7 @@
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: #ddd;
+            background: var(--border-color);
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -706,13 +756,14 @@
         .study-mode-section {
             margin-top: 12px;
             padding: 12px;
-            background: #f0f4f8;
+            background: var(--bg-secondary);
             border-radius: 12px;
+            transition: background 0.3s ease;
         }
 
         .study-mode-section h4 {
             font-size: 13px;
-            color: #666;
+            color: var(--text-secondary);
             margin-bottom: 10px;
         }
 
@@ -724,9 +775,9 @@
         .mode-btn {
             flex: 1;
             padding: 10px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid var(--border-color);
             border-radius: 10px;
-            background: white;
+            background: var(--bg-input);
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
@@ -735,6 +786,7 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
+            color: var(--text-primary);
         }
 
         .mode-btn:hover {
@@ -747,6 +799,10 @@
             color: #FF8C42;
         }
 
+        [data-theme="dark"] .mode-btn.active {
+            background: linear-gradient(135deg, rgba(255,140,66,0.2) 0%, rgba(255,107,107,0.15) 100%);
+        }
+
         /* 题库弹窗 */
         .question-modal {
             position: fixed;
@@ -754,7 +810,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: var(--overlay-bg);
             z-index: 200;
             display: none;
             align-items: center;
@@ -769,7 +825,7 @@
         }
 
         .modal-container {
-            background: white;
+            background: var(--bg-card);
             border-radius: 24px;
             width: 90%;
             max-width: 800px;
@@ -778,6 +834,7 @@
             flex-direction: column;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             animation: modalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: background 0.3s ease;
         }
 
         @keyframes modalSlideUp {
@@ -790,14 +847,14 @@
             align-items: center;
             justify-content: space-between;
             padding: 20px 28px;
-            border-bottom: 2px solid #f0f0f0;
+            border-bottom: 2px solid var(--border-color);
             flex-shrink: 0;
         }
 
         .modal-title {
             font-size: 20px;
             font-weight: bold;
-            color: #333;
+            color: var(--text-primary);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -806,7 +863,7 @@
         .modal-close-btn {
             width: 40px;
             height: 40px;
-            background: #f5f5f5;
+            background: var(--bg-secondary);
             border: none;
             border-radius: 12px;
             font-size: 18px;
@@ -815,6 +872,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--text-primary);
         }
 
         .modal-close-btn:hover {
@@ -826,7 +884,7 @@
             display: flex;
             gap: 16px;
             padding: 16px 28px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-color);
             flex-shrink: 0;
             flex-wrap: wrap;
         }
@@ -840,11 +898,13 @@
         .search-input {
             width: 100%;
             padding: 12px 16px 12px 42px;
-            border: 2px solid #e8e8e8;
+            border: 2px solid var(--border-color);
             border-radius: 14px;
             font-size: 15px;
             outline: none;
             transition: all 0.3s ease;
+            background: var(--bg-input);
+            color: var(--text-primary);
         }
 
         .search-input:focus {
@@ -857,7 +917,7 @@
             left: 14px;
             top: 50%;
             transform: translateY(-50%);
-            color: #aaa;
+            color: var(--text-light);
             font-size: 15px;
         }
 
@@ -869,7 +929,7 @@
 
         .selected-info {
             font-size: 13px;
-            color: #666;
+            color: var(--text-secondary);
             white-space: nowrap;
         }
 
@@ -905,13 +965,13 @@
         }
 
         .btn-clear {
-            background: #f3f4f6;
-            color: #666;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
         }
 
         .btn-clear:hover {
-            background: #e5e7eb;
-            color: #333;
+            background: var(--border-color);
+            color: var(--text-primary);
         }
 
         .btn-confirm {
@@ -925,7 +985,7 @@
         }
 
         .btn-confirm:disabled {
-            background: #ccc;
+            background: var(--border-color);
             box-shadow: none;
             transform: none;
         }
@@ -943,8 +1003,8 @@
         }
 
         .library-item {
-            background: #fafafa;
-            border: 2px solid #eee;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
             border-radius: 16px;
             padding: 16px 12px;
             text-align: center;
@@ -956,13 +1016,17 @@
         .library-item:hover {
             border-color: #FFD166;
             transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+            box-shadow: 0 6px 16px var(--shadow-color);
         }
 
         .library-item.selected {
             border-color: #06D6A0;
             background: linear-gradient(135deg, #e8fff5 0%, #f0fff9 100%);
             box-shadow: 0 4px 12px rgba(6,214,160,0.25);
+        }
+
+        [data-theme="dark"] .library-item.selected {
+            background: linear-gradient(135deg, rgba(6,214,160,0.2) 0%, rgba(0,184,148,0.15) 100%);
         }
 
         .item-check-mark {
@@ -994,7 +1058,7 @@
 
         .item-label {
             font-size: 12px;
-            color: #888;
+            color: var(--text-light);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -1007,16 +1071,16 @@
             align-items: center;
             gap: 8px;
             padding: 16px 0 8px;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--border-color);
             flex-shrink: 0;
         }
 
         .page-btn {
             min-width: 36px;
             height: 36px;
-            border: 2px solid #e8e8e8;
+            border: 2px solid var(--border-color);
             border-radius: 10px;
-            background: white;
+            background: var(--bg-card);
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -1024,7 +1088,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #555;
+            color: var(--text-secondary);
         }
 
         .page-btn:hover:not(:disabled) {
@@ -1045,7 +1109,7 @@
 
         .page-info {
             font-size: 13px;
-            color: #888;
+            color: var(--text-light);
             margin: 0 8px;
         }
 
@@ -1074,12 +1138,13 @@
         }
 
         .completion-card {
-            background: rgba(255,255,255,0.95);
+            background: var(--bg-card);
             border-radius: 30px;
             padding: 50px 40px;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 50px var(--shadow-color);
             max-width: 500px;
             margin: 0 auto;
+            transition: background 0.3s ease;
         }
 
         .completion-icon {
@@ -1090,7 +1155,7 @@
         .completion-title {
             font-size: 32px;
             font-weight: bold;
-            color: #333;
+            color: var(--text-primary);
             margin-bottom: 30px;
         }
 
@@ -1102,9 +1167,10 @@
         }
 
         .stat-item {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: var(--bg-secondary);
             border-radius: 16px;
             padding: 20px;
+            transition: background 0.3s ease;
         }
 
         .stat-value {
@@ -1114,7 +1180,7 @@
 
         .stat-label {
             font-size: 14px;
-            color: #666;
+            color: var(--text-secondary);
             margin-top: 5px;
         }
 
@@ -1166,8 +1232,8 @@
         }
 
         .btn-home {
-            background: #f0f0f0;
-            color: #333;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
         }
 
         .completion-btn:hover {
@@ -1228,6 +1294,14 @@
             50% { opacity: 0.5; }
         }
 
+        /* 深色模式下开始页面调整 */
+        [data-theme="dark"] .welcome-title,
+        [data-theme="dark"] .welcome-subtitle,
+        [data-theme="dark"] .open-drawer-hint {
+            color: var(--text-primary);
+            text-shadow: none;
+        }
+
         /* 遮罩层 */
         .overlay {
             position: fixed;
@@ -1235,7 +1309,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: var(--overlay-bg);
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
@@ -1253,17 +1327,505 @@
             top: 20px;
             left: 50%;
             transform: translateX(-50%) translateY(-100px);
-            background: rgba(0,0,0,0.8);
-            color: white;
+            background: var(--bg-card);
+            color: var(--text-primary);
             padding: 14px 28px;
             border-radius: 12px;
             font-size: 16px;
             z-index: 9999;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 4px 20px var(--shadow-color);
         }
 
         .toast.show {
             transform: translateX(-50%) translateY(0);
+        }
+
+        /* 深色模式切换按钮 */
+        .theme-toggle {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-secondary);
+            border: none;
+            border-radius: 14px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+        }
+
+        .theme-toggle:hover {
+            background: var(--border-color);
+        }
+
+        /* 语言切换按钮 */
+        .lang-toggle {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #118AB2 0%, #06D6A0 100%);
+            border: none;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .lang-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(6,214,160,0.4);
+        }
+
+        .lang-toggle .lang-flag {
+            font-size: 18px;
+        }
+
+        /* 错题本按钮 */
+        .wrong-note-btn {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            border: none;
+            border-radius: 14px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+        }
+
+        .wrong-note-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+        }
+
+        .wrong-note-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            min-width: 20px;
+            height: 20px;
+            background: #FF6B6B;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(255,107,107,0.5);
+        }
+
+        .wrong-note-badge.hidden {
+            display: none;
+        }
+
+        /* 笔画动画相关 */
+        .stroke-animation-btn {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 14px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .stroke-animation-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(102,126,234,0.4);
+        }
+
+        .stroke-animation-btn.active {
+            background: linear-gradient(135deg, #FFD166 0%, #FF8C42 100%);
+        }
+
+        /* 笔画动画容器 */
+        .stroke-animation-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay-bg);
+            z-index: 300;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stroke-animation-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .stroke-animation-container {
+            background: var(--bg-card);
+            border-radius: 28px;
+            padding: 32px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+            animation: modalPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.85) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .stroke-canvas-wrapper {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 20px;
+            border-radius: 20px;
+            background: #fefefe;
+            border: 3px solid var(--border-color);
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .stroke-canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 17px;
+        }
+
+        .stroke-hanzi-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 140px;
+            font-weight: 900;
+            color: #f0f0f0;
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        .stroke-hanzi-display.show-strokes {
+            color: transparent;
+        }
+
+        .stroke-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .stroke-control-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stroke-play-btn {
+            background: linear-gradient(135deg, #06D6A0 0%, #00B894 100%);
+            color: white;
+        }
+
+        .stroke-reset-btn {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .stroke-prev-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .stroke-next-btn {
+            background: linear-gradient(135deg, #FFD166 0%, #FF8C42 100%);
+            color: white;
+        }
+
+        .stroke-control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .stroke-control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .stroke-info {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .stroke-info strong {
+            color: var(--primary);
+        }
+
+        .stroke-tips {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .stroke-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            background: var(--bg-secondary);
+            border: none;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all 0.25s;
+        }
+
+        .stroke-close-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* 错题本弹窗 */
+        .wrong-note-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay-bg);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .wrong-note-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .wrong-note-container {
+            background: var(--bg-card);
+            border-radius: 24px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: background 0.3s ease;
+        }
+
+        .wrong-note-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .wrong-note-item {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: background 0.3s ease;
+        }
+
+        .wrong-note-content {
+            flex: 1;
+        }
+
+        .wrong-note-main {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .wrong-note-sub {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .wrong-note-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 8px;
+        }
+
+        .wrong-note-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .wrong-note-btn-action {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-review {
+            background: linear-gradient(135deg, #06D6A0 0%, #00B894 100%);
+            color: white;
+        }
+
+        .btn-delete {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+        }
+
+        .btn-delete:hover {
+            background: #FF6B6B;
+            color: white;
+        }
+
+        .empty-wrong-note {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+
+        .empty-wrong-note-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        /* 复习提醒设置 */
+        .reminder-section {
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .reminder-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .reminder-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .reminder-toggle {
+            position: relative;
+            width: 48px;
+            height: 26px;
+        }
+
+        .reminder-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .reminder-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border-color);
+            transition: 0.3s;
+            border-radius: 26px;
+        }
+
+        .reminder-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        .reminder-toggle input:checked + .reminder-slider {
+            background: linear-gradient(135deg, #FF8C42 0%, #FF6B6B 100%);
+        }
+
+        .reminder-toggle input:checked + .reminder-slider:before {
+            transform: translateX(22px);
+        }
+
+        .reminder-settings {
+            display: none;
+        }
+
+        .reminder-settings.active {
+            display: block;
+        }
+
+        .reminder-time {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .reminder-time input {
+            padding: 8px 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            background: var(--bg-input);
+            color: var(--text-primary);
+        }
+
+        .reminder-tip {
+            font-size: 12px;
+            color: var(--text-light);
         }
 
         /* 响应式 */
@@ -1362,6 +1924,29 @@
             </div>
 
             <!-- 各部分题目数量选择 -->
+            <!-- 复习提醒设置 -->
+            <div class="reminder-section">
+                <div class="reminder-header">
+                    <div class="reminder-title">
+                        <span>🔔</span>
+                        <span>复习提醒</span>
+                    </div>
+                    <label class="reminder-toggle">
+                        <input type="checkbox" id="reminderToggle" onchange="toggleReminder()">
+                        <span class="reminder-slider"></span>
+                    </label>
+                </div>
+                <div class="reminder-settings" id="reminderSettings">
+                    <div class="reminder-time">
+                        <span style="font-size:13px;color:var(--text-secondary);">每日提醒时间:</span>
+                        <input type="time" id="reminderTime" value="19:00" onchange="saveReminderSettings()">
+                    </div>
+                    <div class="reminder-tip">
+                        <i class="fas fa-info-circle"></i> 将在设定时间提醒您复习错题
+                    </div>
+                </div>
+            </div>
+
             <div class="module-quantity-section" id="moduleQuantitySection">
                 <!-- 选题模式切换 -->
                 <div class="study-mode-section">
@@ -1455,8 +2040,21 @@
                 </button>
                 <div class="top-title" id="topTitle">儿童汉字启蒙</div>
                 <div class="top-actions">
+                    <button class="lang-toggle" id="langToggle" title="切换语言" onclick="toggleLanguage()">
+                        <span class="lang-flag" id="langFlag">中</span>
+                    </button>
+                    <button class="theme-toggle" id="themeToggle" title="切换深色模式">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </button>
+                    <button class="wrong-note-btn" id="wrongNoteBtn" title="错题本">
+                        <i class="fas fa-book-medical"></i>
+                        <span class="wrong-note-badge hidden" id="wrongNoteBadge">0</span>
+                    </button>
                     <button class="action-btn" onclick="location.href='hanzi-cards.html'" title="汉字卡片">
                         <i class="fas fa-th-large"></i>
+                    </button>
+                    <button class="action-btn" onclick="location.href='books.html'" title="书籍管理">
+                        <i class="fas fa-book"></i>
                     </button>
                     <button class="action-btn" onclick="location.href='admin.html'" title="管理后台">
                         <i class="fas fa-cog"></i>
@@ -1493,6 +2091,9 @@
                             <div class="flip-card-front" id="cardFront">
                                 <button class="voice-btn" id="voiceBtn" onclick="event.stopPropagation();playVoice()" title="播放发音">
                                     <i class="fas fa-volume-up"></i>
+                                </button>
+                                <button class="stroke-animation-btn" id="strokeBtn" onclick="event.stopPropagation();showStrokeAnimation()" title="笔画动画" style="top: 16px; left: 16px;">
+                                    <i class="fas fa-pen-fancy"></i>
                                 </button>
                                 <div class="card-main-content" id="cardFrontContent">一</div>
                                 <div class="card-sub-content" id="cardFrontSub">yī</div>
@@ -1603,6 +2204,69 @@
         </div>
     </div>
 
+    <!-- 错题本弹窗 -->
+    <div class="wrong-note-modal" id="wrongNoteModal">
+        <div class="wrong-note-container">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>📋</span>
+                    <span>错题本</span>
+                </div>
+                <button class="modal-close-btn" onclick="closeWrongNoteModal()">&times;</button>
+            </div>
+            <div class="wrong-note-list" id="wrongNoteList"></div>
+            <div class="modal-toolbar" style="border-top: 1px solid var(--border-color); border-bottom: none;">
+                <div class="toolbar-actions">
+                    <button class="toolbar-btn btn-clear" onclick="clearAllWrongNotes()">
+                        <i class="fas fa-trash"></i> 清空错题本
+                    </button>
+                    <button class="toolbar-btn btn-confirm" onclick="reviewWrongNotes()">
+                        <i class="fas fa-play"></i> 复习全部错题
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 复习提醒通知 -->
+    <div class="toast" id="reminderToast"></div>
+
+    <!-- 笔画动画弹窗 -->
+    <div class="stroke-animation-modal" id="strokeAnimationModal">
+        <div class="stroke-animation-container" onclick="event.stopPropagation()">
+            <button class="stroke-close-btn" onclick="closeStrokeAnimation()"><i class="fas fa-times"></i></button>
+            <h3 id="strokeTitle" style="margin-bottom: 16px; color: var(--text-primary);">
+                <i class="fas fa-pen-fancy" style="color: var(--primary);"></i> 笔画动画
+            </h3>
+            <div class="stroke-canvas-wrapper">
+                <canvas class="stroke-canvas" id="strokeCanvas" width="280" height="280"></canvas>
+                <div class="stroke-hanzi-display" id="strokeHanziDisplay"></div>
+            </div>
+            <div class="stroke-info" id="strokeInfo">
+                第 <strong id="strokeCurrent">1</strong> / <strong id="strokeTotal">1</strong> 笔
+            </div>
+            <div class="stroke-controls">
+                <button class="stroke-control-btn stroke-prev-btn" id="strokePrevBtn" onclick="prevStroke()">
+                    <i class="fas fa-chevron-left"></i> 上一笔
+                </button>
+                <button class="stroke-control-btn stroke-play-btn" id="strokePlayBtn" onclick="playStrokeAnimation()">
+                    <i class="fas fa-play"></i> 播放
+                </button>
+                <button class="stroke-control-btn stroke-next-btn" id="strokeNextBtn" onclick="nextStroke()">
+                    下一笔 <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="stroke-controls">
+                <button class="stroke-control-btn stroke-reset-btn" onclick="resetStrokeAnimation()">
+                    <i class="fas fa-redo"></i> 重置
+                </button>
+            </div>
+            <div class="stroke-tips" id="strokeTips">
+                点击"播放"按钮观看笔画顺序动画，或使用"上一笔/下一笔"按钮逐步查看
+            </div>
+        </div>
+    </div>
+
     <script>
         const API_BASE = '/api';
 
@@ -1644,6 +2308,8 @@
         let answers = [];
         let hasAnswered = []; // 标记每题是否已作答
         let currentUtterance = null; // 当前语音实例
+        let wrongNotes = []; // 错题本数据
+        let reminderTimeout = null; // 复习提醒定时器
 
         // 各模块题目数量
         const moduleQuantities = {
@@ -1671,6 +2337,836 @@
             letter: '字母',
             word: '单词'
         };
+
+        // ==================== 多语言支持 ====================
+        const translations = {
+            zh: {
+                appTitle: '儿童汉字启蒙',
+                welcomeTitle: '欢迎来到汉字启蒙',
+                welcomeSubtitle: '点击左上角菜单开始学习吧',
+                openDrawerHint: '打开侧边栏选择学习内容',
+                selectUser: '选择学习账号',
+                selectModule: '选择学习模块',
+                randomMode: '随机选题',
+                customMode: '自定义选题',
+                startLearning: '开始学习',
+                progress: '第 {current} / {total} 题',
+                score: '得分: {score}%',
+                correct: '认识',
+                incorrect: '不认识',
+                prevQuestion: '上一题',
+                nextQuestion: '下一题',
+                clickToFlip: '点击卡片查看答案',
+                answerIs: '答案是',
+                darkModeOn: '已切换到深色模式',
+                darkModeOff: '已切换到浅色模式',
+                langSwitched: '已切换到中文',
+                wrongNoteAdded: '已加入错题本',
+                wrongNoteTitle: '错题本',
+                emptyWrongNotes: '暂无错题记录',
+                clearWrongNotes: '清空错题本',
+                reviewAll: '复习全部错题',
+                reminderTitle: '复习提醒',
+                reminderEnabled: '提醒已开启',
+                reminderDisabled: '提醒已关闭',
+                strokeAnimation: '笔画动画',
+                strokeOf: '第 {current} / {total} 笔',
+                strokePrev: '上一笔',
+                strokeNext: '下一笔',
+                strokePlay: '播放',
+                strokeReset: '重置',
+                strokeTips: '点击"播放"按钮观看笔画顺序动画，或使用"上一笔/下一笔"按钮逐步查看',
+                strokeLoading: '正在加载笔画数据...',
+                strokeNotSupported: '该汉字暂不支持笔画动画',
+                menuBtn: '菜单',
+                cardsBtn: '汉字卡片',
+                adminBtn: '管理后台',
+                wrongNotesBtn: '错题本'
+            },
+            en: {
+                appTitle: 'Chinese Learning',
+                welcomeTitle: 'Welcome to Chinese Learning',
+                welcomeSubtitle: 'Click the menu to start learning',
+                openDrawerHint: 'Open the sidebar to select content',
+                selectUser: 'Select User',
+                selectModule: 'Select Module',
+                randomMode: 'Random Mode',
+                customMode: 'Custom Mode',
+                startLearning: 'Start Learning',
+                progress: 'Question {current} / {total}',
+                score: 'Score: {score}%',
+                correct: 'Know',
+                incorrect: "Don't Know",
+                prevQuestion: 'Previous',
+                nextQuestion: 'Next',
+                clickToFlip: 'Click card to reveal',
+                answerIs: 'Answer is',
+                darkModeOn: 'Dark mode enabled',
+                darkModeOff: 'Light mode enabled',
+                langSwitched: 'Switched to English',
+                wrongNoteAdded: 'Added to wrong notes',
+                wrongNoteTitle: 'Wrong Notes',
+                emptyWrongNotes: 'No wrong notes yet',
+                clearWrongNotes: 'Clear All',
+                reviewAll: 'Review All',
+                reminderTitle: 'Review Reminder',
+                reminderEnabled: 'Reminder enabled',
+                reminderDisabled: 'Reminder disabled',
+                strokeAnimation: 'Stroke Animation',
+                strokeOf: 'Stroke {current} / {total}',
+                strokePrev: 'Previous',
+                strokeNext: 'Next',
+                strokePlay: 'Play',
+                strokeReset: 'Reset',
+                strokeTips: 'Click "Play" to watch stroke animation, or use "Prev/Next" buttons to step through',
+                strokeLoading: 'Loading stroke data...',
+                strokeNotSupported: 'Stroke animation not available for this character',
+                menuBtn: 'Menu',
+                cardsBtn: 'Cards',
+                adminBtn: 'Admin',
+                wrongNotesBtn: 'Wrong Notes'
+            }
+        };
+
+        let currentLang = localStorage.getItem('language') || 'zh';
+
+        function initLanguage() {
+            updateLangFlag();
+            applyTranslations();
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            localStorage.setItem('language', currentLang);
+            updateLangFlag();
+            applyTranslations();
+            showToast(t('langSwitched'));
+        }
+
+        function updateLangFlag() {
+            const flag = document.getElementById('langFlag');
+            if (flag) {
+                flag.textContent = currentLang === 'zh' ? '中' : 'EN';
+            }
+        }
+
+        function t(key) {
+            return translations[currentLang][key] || key;
+        }
+
+        function applyTranslations() {
+            // 顶部标题
+            const topTitle = document.getElementById('topTitle');
+            if (topTitle) topTitle.textContent = t('appTitle');
+
+            // 开始界面
+            const welcomeTitle = document.querySelector('.welcome-title');
+            if (welcomeTitle) welcomeTitle.textContent = t('welcomeTitle');
+            const welcomeSubtitle = document.querySelector('.welcome-subtitle');
+            if (welcomeSubtitle) welcomeSubtitle.textContent = t('welcomeSubtitle');
+            const openHint = document.querySelector('.open-drawer-hint span');
+            if (openHint) openHint.textContent = t('openDrawerHint');
+
+            // 用户选择
+            const userLabel = document.querySelector('.user-section label');
+            if (userLabel) userLabel.textContent = t('selectUser');
+
+            // 模块选择
+            const moduleSection = document.querySelector('.module-section h3');
+            if (moduleSection) moduleSection.textContent = t('selectModule');
+
+            // 随机/自定义选题
+            const randomLabel = document.querySelector('.mode-toggle label:first-child');
+            if (randomLabel) randomLabel.textContent = t('randomMode');
+            const customLabel = document.querySelector('.mode-toggle label:last-child');
+            if (customLabel) customLabel.textContent = t('customMode');
+
+            // 开始按钮
+            if (startBtn) startBtn.innerHTML = `<i class="fas fa-play"></i> ${t('startLearning')}`;
+
+            // 学习区域
+            const cardHint = document.querySelector('.card-hint');
+            if (cardHint) cardHint.textContent = t('clickToFlip');
+            const cardAnswerLabel = document.querySelector('.card-answer-label');
+            if (cardAnswerLabel) cardAnswerLabel.textContent = t('answerIs');
+
+            // 按钮文字
+            const btnKnowSpan = document.querySelector('#btnKnow span:nth-child(2)');
+            if (btnKnowSpan) btnKnowSpan.textContent = t('correct');
+            const btnDontKnowSpan = document.querySelector('#btnDontKnow span:nth-child(2)');
+            if (btnDontKnowSpan) btnDontKnowSpan.textContent = t('incorrect');
+
+            // 导航按钮
+            const btnPrev = document.getElementById('btnPrev');
+            if (btnPrev) btnPrev.innerHTML = `<span>◀</span><span>${t('prevQuestion')}</span>`;
+            const btnNext = document.getElementById('btnNext');
+            if (btnNext) btnNext.innerHTML = `<span>${t('nextQuestion')}</span><span>▶</span>`;
+
+            // 笔画动画
+            const strokeTitle = document.getElementById('strokeTitle');
+            if (strokeTitle) strokeTitle.innerHTML = `<i class="fas fa-pen-fancy" style="color: var(--primary);"></i> ${t('strokeAnimation')}`;
+            const strokeTips = document.getElementById('strokeTips');
+            if (strokeTips) strokeTips.textContent = t('strokeTips');
+
+            // 错题本
+            const wrongNoteModalTitle = document.querySelector('#wrongNoteModal .modal-title span:last-child');
+            if (wrongNoteModalTitle) wrongNoteModalTitle.textContent = t('wrongNoteTitle');
+            const clearBtn = document.querySelector('.btn-clear');
+            if (clearBtn) clearBtn.innerHTML = `<i class="fas fa-trash"></i> ${t('clearWrongNotes')}`;
+            const reviewBtn = document.querySelector('.btn-confirm');
+            if (reviewBtn) reviewBtn.innerHTML = `<i class="fas fa-play"></i> ${t('reviewAll')}`;
+
+            // 复习提醒
+            const reminderTitle = document.querySelector('.reminder-title');
+            if (reminderTitle) reminderTitle.textContent = t('reminderTitle');
+
+            // 更新按钮title
+            const menuBtn = document.getElementById('menuBtn');
+            if (menuBtn) menuBtn.title = t('menuBtn');
+            const cardsBtn = document.querySelector('[onclick*="hanzi-cards"]');
+            if (cardsBtn) cardsBtn.title = t('cardsBtn');
+            const adminBtn = document.querySelector('[onclick*="admin"]');
+            if (adminBtn) adminBtn.title = t('adminBtn');77123645656987
+            const wrongNoteBtn = document.getElementById('wrongNoteBtn');
+            if (wrongNoteBtn) wrongNoteBtn.title = t('wrongNotesBtn');
+
+            updateProgressDisplay();
+        }
+        // 更新学习进度显示（支持多语言）
+        function updateProgressDisplay() {
+            if (!questions.length || !studyArea.classList.contains('active')) return;
+
+            const progressTemplate = t('progress');
+            progressText.textContent = progressTemplate
+                .replace('{current}', currentIndex + 1)
+                .replace('{total}', questions.length);
+
+            const answeredCount = answers.length;
+            const correct = answers.filter(a => a).length;
+            const score = answeredCount > 0 ? Math.round((correct / answeredCount) * 100) : 0;
+            const scoreTemplate = t('score');
+            progressScore.textContent = scoreTemplate.replace('{score}', score);
+
+            progressFill.style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
+        }
+
+        // ==================== 深色模式 ====================
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+            showToast(newTheme === 'dark' ? '已切换到深色模式' : '已切换到浅色模式');
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (theme === 'dark') {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        // ==================== 错题本功能 ====================
+        function loadWrongNotes() {
+            const saved = localStorage.getItem('wrongNotes');
+            wrongNotes = saved ? JSON.parse(saved) : [];
+            updateWrongNoteBadge();
+        }
+
+        function saveWrongNotes() {
+            localStorage.setItem('wrongNotes', JSON.stringify(wrongNotes));
+            updateWrongNoteBadge();
+        }
+
+        function updateWrongNoteBadge() {
+            const badge = document.getElementById('wrongNoteBadge');
+            const count = wrongNotes.length;
+            if (count > 0) {
+                badge.textContent = count > 99 ? '99+' : count;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function addToWrongNotes(question, module) {
+            // 检查是否已存在
+            const exists = wrongNotes.some(note =>
+                note.moduleType === module && note.questionId === question.id
+            );
+
+            if (!exists) {
+                const note = {
+                    id: Date.now(),
+                    moduleType: module,
+                    questionId: question.id,
+                    content: getQuestionContent(question, module),
+                    subContent: getQuestionSubContent(question, module),
+                    addedAt: new Date().toISOString(),
+                    reviewCount: 0,
+                    lastReviewed: null
+                };
+                wrongNotes.unshift(note); // 添加到开头
+                saveWrongNotes();
+                showToast('已加入错题本');
+            }
+        }
+
+        function getQuestionContent(question, module) {
+            switch (module) {
+                case 'hanzi': return question.hanzi;
+                case 'number': return String(question.numberValue);
+                case 'arithmetic': return question.question;
+                case 'letter': return question.letter.toUpperCase();
+                case 'word': return question.word;
+                default: return '';
+            }
+        }
+
+        function getQuestionSubContent(question, module) {
+            switch (module) {
+                case 'hanzi': return `${question.pinyin} - ${question.meaning || ''}`;
+                case 'number': return question.englishName || '';
+                case 'arithmetic': return `答案: ${question.answer}`;
+                case 'letter': return `${question.letter.toLowerCase()} - ${question.wordExample || ''}`;
+                case 'word': return question.meaning || '';
+                default: return '';
+            }
+        }
+
+        function removeFromWrongNotes(noteId) {
+            wrongNotes = wrongNotes.filter(note => note.id !== noteId);
+            saveWrongNotes();
+            renderWrongNoteList();
+        }
+
+        function openWrongNoteModal() {
+            const modal = document.getElementById('wrongNoteModal');
+            modal.classList.add('active');
+            renderWrongNoteList();
+        }
+
+        function closeWrongNoteModal() {
+            const modal = document.getElementById('wrongNoteModal');
+            modal.classList.remove('active');
+        }
+
+        function renderWrongNoteList() {
+            const container = document.getElementById('wrongNoteList');
+
+            if (wrongNotes.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-wrong-note">
+                        <div class="empty-wrong-note-icon">📝</div>
+                        <div style="font-size:18px;margin-bottom:8px;">错题本空空如也</div>
+                        <div style="font-size:13px;">太棒了！学习过程中没有遇到不认识的题目</div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = wrongNotes.map(note => `
+                <div class="wrong-note-item">
+                    <div class="wrong-note-content">
+                        <div class="wrong-note-main">${note.content}</div>
+                        <div class="wrong-note-sub">${note.subContent}</div>
+                        <div class="wrong-note-meta">
+                            <span>📚 ${moduleNames[note.moduleType] || note.moduleType}</span>
+                            <span>📅 ${formatDate(note.addedAt)}</span>
+                            ${note.reviewCount > 0 ? `<span>🔄 已复习${note.reviewCount}次</span>` : ''}
+                        </div>
+                    </div>
+                    <div class="wrong-note-actions">
+                        <button class="wrong-note-btn-action btn-review" onclick="reviewSingleNote(${note.id})">
+                            <i class="fas fa-play"></i> 复习
+                        </button>
+                        <button class="wrong-note-btn-action btn-delete" onclick="removeFromWrongNotes(${note.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function formatDate(isoString) {
+            const date = new Date(isoString);
+            return `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+        }
+
+        function clearAllWrongNotes() {
+            if (wrongNotes.length === 0) return;
+            if (confirm('确定要清空所有错题吗？')) {
+                wrongNotes = [];
+                saveWrongNotes();
+                renderWrongNoteList();
+                showToast('已清空错题本');
+            }
+        }
+
+        function reviewSingleNote(noteId) {
+            const note = wrongNotes.find(n => n.id === noteId);
+            if (!note) return;
+
+            // 更新复习次数
+            note.reviewCount++;
+            note.lastReviewed = new Date().toISOString();
+            saveWrongNotes();
+            closeWrongNoteModal();
+
+            // 切换到对应模块进行单题复习
+            selectedModule = note.moduleType;
+            questions = [{
+                id: note.questionId,
+                ...getQuestionDataFromNote(note)
+            }];
+            currentIndex = 0;
+            answers = new Array(questions.length).fill(undefined);
+            hasAnswered = new Array(questions.length).fill(undefined);
+
+            topTitle.textContent = '复习错题';
+            startScreen.classList.add('hidden');
+            completionContainer.classList.remove('active');
+            studyArea.classList.add('active');
+
+            renderCard();
+        }
+
+        function getQuestionDataFromNote(note) {
+            // 根据错题内容还原题目数据
+            switch (note.moduleType) {
+                case 'hanzi':
+                    return { hanzi: note.content, pinyin: note.subContent.split(' - ')[0], meaning: note.subContent.split(' - ')[1] || '' };
+                case 'number':
+                    return { numberValue: parseInt(note.content), englishName: note.subContent };
+                case 'arithmetic':
+                    return { question: note.content, answer: parseInt(note.subContent.replace('答案: ', '')) };
+                case 'letter':
+                    return { letter: note.content.toLowerCase(), wordExample: note.subContent.split(' - ')[1] || '' };
+                case 'word':
+                    return { word: note.content, meaning: note.subContent };
+                default:
+                    return {};
+            }
+        }
+
+        function reviewWrongNotes() {
+            if (wrongNotes.length === 0) {
+                showToast('错题本为空');
+                return;
+            }
+            closeWrongNoteModal();
+
+            // 准备复习题目
+            questions = wrongNotes.map(note => ({
+                id: note.questionId,
+                ...getQuestionDataFromNote(note)
+            }));
+
+            currentIndex = 0;
+            answers = new Array(questions.length).fill(undefined);
+            hasAnswered = new Array(questions.length).fill(undefined);
+
+            topTitle.textContent = '复习错题';
+            startScreen.classList.add('hidden');
+            completionContainer.classList.remove('active');
+            studyArea.classList.add('active');
+
+            showToast(`开始复习 ${questions.length} 道错题`);
+            renderCard();
+        }
+
+        // ==================== 汉字笔画动画 ====================
+        let strokeData = null;
+        let currentStrokeIndex = 0;
+        let strokeAnimationTimer = null;
+        let isPlaying = false;
+
+        // 常用汉字笔画数据（简化版，使用SVG路径）
+        const strokeDatabase = {
+            // 一: 横
+            '一': { strokes: ['M15,50 L85,50'], strokeNames: ['横'] },
+            // 二: 两横
+            '二': { strokes: ['M20,30 L80,30', 'M15,70 L85,70'], strokeNames: ['横', '横'] },
+            // 三: 三横
+            '三': { strokes: ['M20,20 L80,20', 'M25,50 L75,50', 'M15,80 L85,80'], strokeNames: ['横', '横', '横'] },
+            // 人: 撇捺
+            '人': { strokes: ['M50,20 L20,80', 'M50,40 L80,80'], strokeNames: ['撇', '捺'] },
+            // 大: 横、撇、捺
+            '大': { strokes: ['M15,30 L85,30', 'M50,30 L15,85', 'M50,30 L85,85'], strokeNames: ['横', '撇', '捺'] },
+            // 小: 竖、点、点
+            '小': { strokes: ['M50,15 L50,80', 'M50,35 L35,55', 'M50,35 L65,55'], strokeNames: ['竖', '点', '点'] },
+            // 中: 口中间一竖
+            '中': { strokes: ['M20,20 L80,20', 'M20,20 L20,80', 'M80,20 L80,80', 'M20,80 L80,80', 'M50,20 L50,80'], strokeNames: ['横', '竖', '竖', '横', '竖'] },
+            // 日: 方形中间一横
+            '日': { strokes: ['M25,20 L75,20', 'M25,20 L25,80', 'M75,20 L75,80', 'M25,80 L75,80', 'M25,50 L75,50'], strokeNames: ['横', '竖', '竖', '横', '横'] },
+            // 月: 月牙形
+            '月': { strokes: ['M30,15 L70,15', 'M30,15 L30,85', 'M30,85 L70,85', 'M70,15 Q60,50 70,85'], strokeNames: ['横', '竖', '横', '竖弯钩'] },
+            // 水: 多种笔画
+            '水': { strokes: ['M50,10 L50,90', 'M50,30 L25,55', 'M50,40 L30,65', 'M50,40 L75,60'], strokeNames: ['竖', '横撇', '竖钩', '捺'] },
+            // 火: 点、撇、撇、捺
+            '火': { strokes: ['M50,15 L55,30', 'M50,30 L30,70', 'M50,40 L45,70', 'M50,40 L75,70'], strokeNames: ['点', '撇', '撇', '捺'] },
+            // 山: 竖、竖折、竖
+            '山': { strokes: ['M50,15 L50,85', 'M30,35 L30,85 L70,85', 'M70,35 L70,85'], strokeNames: ['竖', '竖折', '竖'] },
+            // 上: 横、竖、下横
+            '上': { strokes: ['M30,30 L70,30', 'M50,30 L50,80', 'M25,80 L75,80'], strokeNames: ['横', '竖', '横'] },
+            // 下: 横、竖、点
+            '下': { strokes: ['M25,30 L75,30', 'M50,30 L50,80', 'M70,60 L75,70'], strokeNames: ['横', '竖', '点'] },
+            // 口: 四边形
+            '口': { strokes: ['M25,25 L75,25', 'M25,25 L25,75', 'M75,25 L75,75', 'M25,75 L75,75'], strokeNames: ['横', '竖', '竖', '横'] },
+            // 手: 横、撇、竖钩、横
+            '手': { strokes: ['M20,25 L80,25', 'M60,25 L30,85', 'M30,60 L30,85 L55,85', 'M15,85 L85,85'], strokeNames: ['横', '撇', '竖钩', '横'] },
+            // 马: 横、竖折、横
+            '马': { strokes: ['M25,20 L75,20', 'M25,20 L20,80', 'M80,20 L80,80', 'M25,80 L75,80', 'M35,50 L65,50'], strokeNames: ['横', '竖', '竖', '横', '横'] },
+            // 鸟: 鸟字头、鸟身
+            '鸟': { strokes: ['M30,15 L70,15', 'M50,15 L50,35', 'M30,35 L70,35', 'M30,35 L30,55', 'M70,35 L70,55', 'M30,55 L70,55', 'M50,55 L50,85', 'M50,85 L75,85'], strokeNames: ['横', '竖', '横', '竖', '竖', '横', '竖', '横折钩'] },
+            // 鱼: 鱼字头、鱼身
+            '鱼': { strokes: ['M30,10 L70,10', 'M30,10 L30,25', 'M70,10 L70,25', 'M30,25 L70,25', 'M25,25 L25,85 L75,85 L75,25', 'M50,45 L50,70'], strokeNames: ['横', '竖', '竖', '横', '方框', '竖'] },
+            // 花: 草字头、化
+            '花': { strokes: ['M20,25 L35,35', 'M80,25 L65,35', 'M50,35 L50,90', 'M50,55 L25,85', 'M50,55 L75,85'], strokeNames: ['撇', '撇', '竖', '撇', '捺'] }
+        };
+
+        function showStrokeAnimation() {
+            if (selectedModule !== 'hanzi') {
+                showToast('笔画动画仅支持汉字模块');
+                return;
+            }
+
+            const currentQuestion = questions[currentIndex];
+            if (!currentQuestion) return;
+
+            const hanzi = currentQuestion.hanzi;
+            const modal = document.getElementById('strokeAnimationModal');
+            const hanziDisplay = document.getElementById('strokeHanziDisplay');
+            const canvas = document.getElementById('strokeCanvas');
+
+            hanziDisplay.textContent = hanzi;
+            document.getElementById('strokeHanziDisplay').classList.remove('show-strokes');
+
+            // 加载笔画数据
+            loadStrokeData(hanzi).then(data => {
+                strokeData = data;
+                currentStrokeIndex = 0;
+                updateStrokeDisplay();
+                modal.classList.add('active');
+            });
+        }
+
+        async function loadStrokeData(hanzi) {
+            // 先检查本地数据库
+            if (strokeDatabase[hanzi]) {
+                return strokeDatabase[hanzi];
+            }
+
+            // 尝试从API获取（如果有）
+            try {
+                const response = await fetch(`/api/admin/hanzi/${hanzi}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.strokeData) {
+                        return JSON.parse(data.strokeData);
+                    }
+                }
+            } catch (e) {
+                console.log('API获取笔画数据失败');
+            }
+
+            // 生成默认笔画数据（简化处理）
+            return generateDefaultStrokeData(hanzi);
+        }
+
+        function generateDefaultStrokeData(hanzi) {
+            // 估算笔画数并生成简单的笔画路径
+            const strokeCount = hanzi.length > 1 ? hanzi.length * 2 : 3;
+            const strokes = [];
+            const strokeNames = [];
+
+            for (let i = 0; i < Math.min(strokeCount, 10); i++) {
+                const y = 20 + (i * 60) / Math.max(strokeCount, 1);
+                strokes.push(`M${20 + i * 3},${y} L${80 - i * 3},${y}`);
+                strokeNames.push(`横${i + 1}`);
+            }
+
+            return { strokes, strokeNames };
+        }
+
+        function closeStrokeAnimation() {
+            const modal = document.getElementById('strokeAnimationModal');
+            modal.classList.remove('active');
+            stopStrokeAnimation();
+        }
+
+        function updateStrokeDisplay() {
+            if (!strokeData) return;
+
+            const total = strokeData.strokes.length;
+            document.getElementById('strokeCurrent').textContent = currentStrokeIndex + 1;
+            document.getElementById('strokeTotal').textContent = total;
+            document.getElementById('strokeInfo').innerHTML =
+                `${t('strokeOf').replace('{current}', currentStrokeIndex + 1).replace('{total}', total)} - ${strokeData.strokeNames[currentStrokeIndex] || ''}`;
+
+            // 更新按钮状态
+            document.getElementById('strokePrevBtn').disabled = currentStrokeIndex <= 0;
+            document.getElementById('strokeNextBtn').disabled = currentStrokeIndex >= total - 1;
+
+            // 绘制当前笔画
+            drawStrokes(currentStrokeIndex + 1);
+        }
+
+        function drawStrokes(drawCount) {
+            const canvas = document.getElementById('strokeCanvas');
+            const ctx = canvas.getContext('2d');
+            const size = 280;
+            const scale = size / 100;
+
+            ctx.clearRect(0, 0, size, size);
+
+            if (!strokeData) return;
+
+            // 绘制已完成的笔画（灰色）
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 8;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            for (let i = 0; i < drawCount - 1 && i < strokeData.strokes.length; i++) {
+                drawPath(ctx, strokeData.strokes[i], scale);
+            }
+
+            // 绘制当前笔画（红色）
+            if (drawCount > 0 && drawCount <= strokeData.strokes.length) {
+                ctx.strokeStyle = '#FF6B6B';
+                ctx.lineWidth = 10;
+                drawPath(ctx, strokeData.strokes[drawCount - 1], scale);
+            }
+
+            // 显示笔画数
+            const hanziDisplay = document.getElementById('strokeHanziDisplay');
+            if (drawCount >= strokeData.strokes.length) {
+                hanziDisplay.classList.add('show-strokes');
+            } else {
+                hanziDisplay.classList.remove('show-strokes');
+            }
+        }
+
+        function drawPath(ctx, pathData, scale) {
+            // 简单解析SVG路径
+            const commands = pathData.match(/[MLQCZ][^MLQCZ]*/gi) || [];
+            ctx.beginPath();
+
+            commands.forEach(cmd => {
+                const type = cmd[0].toUpperCase();
+                const coords = cmd.slice(1).trim().split(/[\s,]+/).map(parseFloat);
+
+                switch (type) {
+                    case 'M':
+                        ctx.moveTo(coords[0] * scale, coords[1] * scale);
+                        break;
+                    case 'L':
+                        ctx.lineTo(coords[0] * scale, coords[1] * scale);
+                        break;
+                    case 'Q':
+                        ctx.quadraticCurveTo(
+                            coords[0] * scale, coords[1] * scale,
+                            coords[2] * scale, coords[3] * scale
+                        );
+                        break;
+                    case 'C':
+                        ctx.bezierCurveTo(
+                            coords[0] * scale, coords[1] * scale,
+                            coords[2] * scale, coords[3] * scale,
+                            coords[4] * scale, coords[5] * scale
+                        );
+                        break;
+                    case 'Z':
+                        ctx.closePath();
+                        break;
+                }
+            });
+
+            ctx.stroke();
+        }
+
+        function prevStroke() {
+            if (currentStrokeIndex > 0) {
+                currentStrokeIndex--;
+                updateStrokeDisplay();
+            }
+        }
+
+        function nextStroke() {
+            if (strokeData && currentStrokeIndex < strokeData.strokes.length - 1) {
+                currentStrokeIndex++;
+                updateStrokeDisplay();
+            }
+        }
+
+        function playStrokeAnimation() {
+            if (!strokeData) return;
+
+            if (isPlaying) {
+                stopStrokeAnimation();
+                return;
+            }
+
+            // 重置到开始
+            currentStrokeIndex = 0;
+            isPlaying = true;
+            document.getElementById('strokePlayBtn').innerHTML = '<i class="fas fa-pause"></i> 暂停';
+
+            animateStroke();
+        }
+
+        function animateStroke() {
+            if (!isPlaying || !strokeData) return;
+
+            if (currentStrokeIndex < strokeData.strokes.length) {
+                updateStrokeDisplay();
+                currentStrokeIndex++;
+
+                strokeAnimationTimer = setTimeout(() => {
+                    animateStroke();
+                }, 600);
+            } else {
+                stopStrokeAnimation();
+                currentStrokeIndex = strokeData.strokes.length - 1;
+                updateStrokeDisplay();
+            }
+        }
+
+        function stopStrokeAnimation() {
+            isPlaying = false;
+            if (strokeAnimationTimer) {
+                clearTimeout(strokeAnimationTimer);
+                strokeAnimationTimer = null;
+            }
+            document.getElementById('strokePlayBtn').innerHTML = '<i class="fas fa-play"></i> 播放';
+        }
+
+        function resetStrokeAnimation() {
+            stopStrokeAnimation();
+            currentStrokeIndex = 0;
+            updateStrokeDisplay();
+        }
+
+        // 根据当前模块控制笔画按钮显示
+        function updateStrokeButtonVisibility() {
+            const strokeBtn = document.getElementById('strokeBtn');
+            if (strokeBtn) {
+                strokeBtn.style.display = selectedModule === 'hanzi' ? 'flex' : 'none';
+            }
+        }
+
+        // ==================== 复习提醒 ====================
+        function initReminder() {
+            const saved = localStorage.getItem('reminderEnabled');
+            const savedTime = localStorage.getItem('reminderTime');
+
+            if (saved === 'true') {
+                document.getElementById('reminderToggle').checked = true;
+                document.getElementById('reminderSettings').classList.add('active');
+            }
+
+            if (savedTime) {
+                document.getElementById('reminderTime').value = savedTime;
+            }
+
+            if (saved === 'true') {
+                scheduleReminder();
+            }
+        }
+
+        function toggleReminder() {
+            const enabled = document.getElementById('reminderToggle').checked;
+            const settings = document.getElementById('reminderSettings');
+
+            localStorage.setItem('reminderEnabled', enabled);
+            settings.classList.toggle('active', enabled);
+
+            if (enabled) {
+                scheduleReminder();
+                showToast('复习提醒已开启');
+            } else {
+                cancelReminder();
+                showToast('复习提醒已关闭');
+            }
+        }
+
+        function saveReminderSettings() {
+            const time = document.getElementById('reminderTime').value;
+            localStorage.setItem('reminderTime', time);
+
+            if (document.getElementById('reminderToggle').checked) {
+                scheduleReminder();
+            }
+        }
+
+        function scheduleReminder() {
+            cancelReminder();
+
+            const time = document.getElementById('reminderTime').value;
+            const [hours, minutes] = time.split(':').map(Number);
+
+            const now = new Date();
+            const target = new Date();
+            target.setHours(hours, minutes, 0, 0);
+
+            // 如果已过今天的提醒时间，设置为明天
+            if (target <= now) {
+                target.setDate(target.getDate() + 1);
+            }
+
+            const delay = target.getTime() - now.getTime();
+
+            reminderTimeout = setTimeout(() => {
+                showReminderNotification();
+                // 继续调度明天的提醒
+                scheduleReminder();
+            }, delay);
+        }
+
+        function cancelReminder() {
+            if (reminderTimeout) {
+                clearTimeout(reminderTimeout);
+                reminderTimeout = null;
+            }
+        }
+
+        function showReminderNotification() {
+            const count = wrongNotes.length;
+            if (count === 0) return;
+
+            const toast = document.getElementById('reminderToast');
+            toast.innerHTML = `
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <span style="font-size:24px;">🔔</span>
+                    <div>
+                        <div style="font-weight:bold;">该复习啦！</div>
+                        <div style="font-size:13px;opacity:0.9;">您有 ${count} 道错题待复习</div>
+                    </div>
+                </div>
+            `;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 5000);
+
+            // 播放提示音（如果浏览器支持）
+            if ('Notification' in window && Notification.permission === 'granted') {
+                // 已有权限
+            } else if ('Notification' in window && Notification.permission !== 'denied') {
+                Notification.requestPermission();
+            }
+        }
 
         // 显示提示
         function showToast(message) {
@@ -1747,6 +3243,7 @@
                 qtySection.classList.remove('active');
             }
             updateStartButton();
+            updateStrokeButtonVisibility();
         }
 
         // 设置学习模式
@@ -2080,12 +3577,7 @@
             const q = questions[currentIndex];
 
             // 更新进度
-            progressText.textContent = `第 ${currentIndex + 1} / ${questions.length} 题`;
-            const answeredCount = answers.length;
-            const correct = answers.filter(a => a).length;
-            const score = answeredCount > 0 ? Math.round((correct / answeredCount) * 100) : 0;
-            progressScore.textContent = `得分: ${score}%`;
-            progressFill.style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
+            updateProgressDisplay();
 
             // 重置卡片状态（如果该题未作答，则重置为正面）
             if (hasAnswered[currentIndex] === undefined) {
@@ -2306,6 +3798,13 @@
             const questionIds = questions.map(q => q.id);
             const answerResults = answers.map(a => a === undefined ? 'unanswered' : (a ? 'correct' : 'incorrect'));
 
+            // 将答错的题目添加到错题本
+            answers.forEach((answer, index) => {
+                if (answer === false && questions[index]) {
+                    addToWrongNotes(questions[index], selectedModule);
+                }
+            });
+
             try {
                 await fetch(`${API_BASE}/study/record`, {
                     method: 'POST',
@@ -2402,6 +3901,12 @@
         menuBtn.addEventListener('click', toggleDrawer);
         overlay.addEventListener('click', closeDrawer);
 
+        // 深色模式切换
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+        // 错题本按钮
+        document.getElementById('wrongNoteBtn').addEventListener('click', openWrongNoteModal);
+
         userSelect.addEventListener('change', (e) => {
             currentUserId = e.target.value || null;
             updateStartButton();
@@ -2467,7 +3972,25 @@
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
             loadUsers();
+            initTheme();
+            initLanguage();
+            loadWrongNotes();
+            initReminder();
+            registerServiceWorker();
+            updateStrokeButtonVisibility();
         });
+
+        // 注册 Service Worker (PWA)
+        async function registerServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                try {
+                    const registration = await navigator.serviceWorker.register('sw.js');
+                    console.log('SW registered:', registration.scope);
+                } catch (error) {
+                    console.log('SW registration failed:', error);
+                }
+            }
+        }
     </script>
 </body>
 </html>
