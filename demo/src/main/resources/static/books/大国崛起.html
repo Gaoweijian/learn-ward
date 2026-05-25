@@ -1,0 +1,3379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大国崛起 - 历史小白友好版</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+:root {
+  --bg: #f8f6f0;
+  --surface: #ffffff;
+  --surface2: #f0ede5;
+  --text: #2c2c2c;
+  --text-muted: #6b6b6b;
+  --accent: #c0392b;
+  --gold: #b8860b;
+  --border: rgba(0,0,0,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.9;
+  font-size: 17px;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(192,57,43,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 70%, rgba(184,134,11,0.06) 0%, transparent 50%);
+  z-index: 0;
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 800px; padding: 2rem; }
+
+.hero h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  background: linear-gradient(135deg, #c0392b, #b8860b, #c0392b);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s ease infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.hero .subtitle {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.3rem;
+  color: var(--text-muted);
+  letter-spacing: 0.3em;
+  margin-bottom: 2rem;
+}
+
+.hero .desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  line-height: 2;
+}
+
+.hero .scroll-hint {
+  font-size: 0.85rem;
+  color: rgba(0,0,0,0.25);
+  animation: bounce 2s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* ===== NAVIGATION ===== */
+.side-nav {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 8px;
+  background: rgba(248,246,240,0.9);
+  backdrop-filter: blur(12px);
+  border-radius: 0 16px 16px 0;
+  border: 1px solid var(--border);
+  border-left: none;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.side-nav::-webkit-scrollbar { width: 0; }
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.nav-item:hover { background: rgba(0,0,0,0.04); color: var(--text); }
+.nav-item.active { background: rgba(192,57,43,0.12); color: var(--accent); }
+
+.nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+
+.nav-item.active .nav-dot { transform: scale(1.5); }
+
+.nav-label { opacity: 0; transition: opacity 0.3s; }
+.nav-item:hover .nav-label { opacity: 1; }
+
+/* ===== GUIDE MAP (导游图) ===== */
+.guide-section {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--gold);
+}
+
+.section-desc {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+  font-size: 0.95rem;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.2rem;
+}
+
+.guide-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.guide-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 40px rgba(192,57,43,0.12);
+}
+
+.guide-card .card-emoji { font-size: 2rem; margin-bottom: 0.5rem; }
+.guide-card .card-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.guide-card .card-country { font-size: 0.9rem; color: var(--gold); margin-bottom: 0.5rem; }
+.guide-card .card-period {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: rgba(0,0,0,0.04);
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+.guide-card .card-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.6rem;
+  line-height: 1.7;
+}
+
+/* ===== TIMELINE ===== */
+.timeline-section {
+  padding: 6rem 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--gold));
+}
+
+.tl-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding: 0.8rem 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.3s;
+}
+
+.tl-item:hover {
+  border-color: rgba(192,57,43,0.4);
+  transform: translateX(4px);
+}
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -33px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+}
+
+.tl-year {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 700;
+  color: var(--gold);
+  font-size: 0.9rem;
+}
+
+.tl-event {
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+.tl-country {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ===== CHAPTER SECTIONS ===== */
+.chapter {
+  padding: 5rem 2rem;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.chapter-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.chapter-emoji { font-size: 3rem; margin-bottom: 1rem; }
+
+.chapter-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+}
+
+.chapter-country {
+  font-size: 1.1rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.chapter-period-badge {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  background: rgba(0,0,0,0.04);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.chapter-subtitle {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-top: 0.8rem;
+  font-style: italic;
+}
+
+.chapter-body p {
+  text-indent: 2em;
+  margin-bottom: 1.2rem;
+  line-height: 2;
+  color: rgba(44,44,44,0.85);
+  text-align: justify;
+}
+
+/* Key quote highlight */
+.chapter-body blockquote {
+  margin: 2rem 0;
+  padding: 1.2rem 1.5rem;
+  border-left: 3px solid var(--gold);
+  background: rgba(184,134,11,0.06);
+  border-radius: 0 12px 12px 0;
+  font-family: 'Noto Serif SC', serif;
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 2;
+}
+
+/* ===== COUNTRY NAV BAR ===== */
+.country-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 2rem;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  backdrop-filter: blur(12px);
+}
+
+.country-nav a {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.3s;
+  border: 1px solid transparent;
+}
+
+.country-nav a:hover {
+  color: var(--text);
+  border-color: var(--border);
+  background: rgba(0,0,0,0.03);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ===== BACK TO TOP ===== */
+.back-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(192,57,43,0.3);
+}
+
+.back-top.visible { opacity: 1; }
+.back-top:hover { transform: translateY(-3px); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .side-nav { display: none; }
+  .chapter { padding: 3rem 1.2rem; }
+  .guide-grid { grid-template-columns: 1fr 1fr; }
+  .hero h1 { letter-spacing: 0.08em; }
+  .chapter-body p { font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .guide-grid { grid-template-columns: 1fr; }
+  body { font-size: 15px; }
+}
+
+/* Separator between chapters */
+.chapter-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), var(--accent), var(--border), transparent);
+  max-width: 600px;
+  margin: 0 auto;
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <h1>大国崛起</h1>
+    <p class="subtitle">THE RISE OF THE GREAT POWERS</p>
+    <p class="desc">公元1500年至今，九个世界性大国相继登上历史舞台。从伊比利亚的航海先驱到美洲的新兴霸主，从工业革命的轰鸣到全球化浪潮的涌动——五百年大国兴衰，一部人类文明的交响曲。</p>
+    <p class="scroll-hint">↓ 向下滚动开始探索</p>
+  </div>
+</section>
+
+<!-- COUNTRY NAV -->
+<nav class="country-nav" id="countryNav">
+  <a href="#guide">导游图</a>
+  <a href="#timeline">时间轴</a>
+  <a href="#ep01">葡萄牙&西班牙</a>
+  <a href="#ep02">荷兰</a>
+  <a href="#ep03">英国(上)</a>
+  <a href="#ep04">英国(下)</a>
+  <a href="#ep05">法国</a>
+  <a href="#ep06">德国</a>
+  <a href="#ep07">日本</a>
+  <a href="#ep08">俄罗斯</a>
+  <a href="#ep09">苏联</a>
+  <a href="#ep10">美国(上)</a>
+  <a href="#ep11">美国(下)</a>
+  <a href="#ep12">结语</a>
+</nav>
+
+<!-- SIDE NAV -->
+<nav class="side-nav" id="sideNav">
+
+  <a href="#intro" class="nav-item" data-target="intro">
+    <span class="nav-dot" style="background:#1a1a2e"></span>
+    <span class="nav-label">导语</span>
+  </a>
+
+  <a href="#ep01" class="nav-item" data-target="ep01">
+    <span class="nav-dot" style="background:#16697a"></span>
+    <span class="nav-label">第一集 海洋时代</span>
+  </a>
+
+  <a href="#ep02" class="nav-item" data-target="ep02">
+    <span class="nav-dot" style="background:#db6400"></span>
+    <span class="nav-label">第二集 小国大业</span>
+  </a>
+
+  <a href="#ep03" class="nav-item" data-target="ep03">
+    <span class="nav-dot" style="background:#3d5a80"></span>
+    <span class="nav-label">第三集 走向现代</span>
+  </a>
+
+  <a href="#ep04" class="nav-item" data-target="ep04">
+    <span class="nav-dot" style="background:#293241"></span>
+    <span class="nav-label">第四集 工业先声</span>
+  </a>
+
+  <a href="#ep05" class="nav-item" data-target="ep05">
+    <span class="nav-dot" style="background:#6a040f"></span>
+    <span class="nav-label">第五集 激情岁月</span>
+  </a>
+
+  <a href="#ep06" class="nav-item" data-target="ep06">
+    <span class="nav-dot" style="background:#2d6a4f"></span>
+    <span class="nav-label">第六集 帝国春秋</span>
+  </a>
+
+  <a href="#ep07" class="nav-item" data-target="ep07">
+    <span class="nav-dot" style="background:#e63946"></span>
+    <span class="nav-label">第七集 百年维新</span>
+  </a>
+
+  <a href="#ep08" class="nav-item" data-target="ep08">
+    <span class="nav-dot" style="background:#457b9d"></span>
+    <span class="nav-label">第八集 寻道图强</span>
+  </a>
+
+  <a href="#ep09" class="nav-item" data-target="ep09">
+    <span class="nav-dot" style="background:#bc4749"></span>
+    <span class="nav-label">第九集 风云新途</span>
+  </a>
+
+  <a href="#ep10" class="nav-item" data-target="ep10">
+    <span class="nav-dot" style="background:#1d3557"></span>
+    <span class="nav-label">第十集 新国新梦</span>
+  </a>
+
+  <a href="#ep11" class="nav-item" data-target="ep11">
+    <span class="nav-dot" style="background:#e76f51"></span>
+    <span class="nav-label">第十一集 危局新政</span>
+  </a>
+
+  <a href="#ep12" class="nav-item" data-target="ep12">
+    <span class="nav-dot" style="background:#264653"></span>
+    <span class="nav-label">第十二集 大道行思</span>
+  </a>
+
+</nav>
+
+<!-- GUIDE MAP -->
+<section class="guide-section" id="guide">
+  <h2 class="section-title">九大国导游图</h2>
+  <p class="section-desc">点击卡片跳转到对应章节，快速了解每个大国的崛起故事</p>
+  <div class="guide-grid">
+
+    <a href="#ep01" class="guide-card" style="border-left: 3px solid #16697a">
+      <div class="card-emoji">⛵</div>
+      <div class="card-title">第一集 海洋时代</div>
+      <div class="card-country">葡萄牙 &amp; 西班牙</div>
+      <span class="card-period">15-16世纪</span>
+      <div class="card-desc">伊比利亚半岛的双子星</div>
+    </a>
+
+    <a href="#ep02" class="guide-card" style="border-left: 3px solid #db6400">
+      <div class="card-emoji">🌷</div>
+      <div class="card-title">第二集 小国大业</div>
+      <div class="card-country">荷兰</div>
+      <span class="card-period">17世纪</span>
+      <div class="card-desc">海上马车夫的传奇</div>
+    </a>
+
+    <a href="#ep03" class="guide-card" style="border-left: 3px solid #3d5a80">
+      <div class="card-emoji">👑</div>
+      <div class="card-title">第三集 走向现代</div>
+      <div class="card-country">英国（上）</div>
+      <span class="card-period">16-18世纪</span>
+      <div class="card-desc">君主立宪的诞生</div>
+    </a>
+
+    <a href="#ep04" class="guide-card" style="border-left: 3px solid #293241">
+      <div class="card-emoji">🏭</div>
+      <div class="card-title">第四集 工业先声</div>
+      <div class="card-country">英国（下）</div>
+      <span class="card-period">18-19世纪</span>
+      <div class="card-desc">工业革命的号角</div>
+    </a>
+
+    <a href="#ep05" class="guide-card" style="border-left: 3px solid #6a040f">
+      <div class="card-emoji">🎯</div>
+      <div class="card-title">第五集 激情岁月</div>
+      <div class="card-country">法国</div>
+      <span class="card-period">17-19世纪</span>
+      <div class="card-desc">大革命与启蒙之光</div>
+    </a>
+
+    <a href="#ep06" class="guide-card" style="border-left: 3px solid #2d6a4f">
+      <div class="card-emoji">🦅</div>
+      <div class="card-title">第六集 帝国春秋</div>
+      <div class="card-country">德国</div>
+      <span class="card-period">19-20世纪</span>
+      <div class="card-desc">铁血统一与两度沉浮</div>
+    </a>
+
+    <a href="#ep07" class="guide-card" style="border-left: 3px solid #e63946">
+      <div class="card-emoji">⛩️</div>
+      <div class="card-title">第七集 百年维新</div>
+      <div class="card-country">日本</div>
+      <span class="card-period">19-20世纪</span>
+      <div class="card-desc">脱亚入欧的抉择</div>
+    </a>
+
+    <a href="#ep08" class="guide-card" style="border-left: 3px solid #457b9d">
+      <div class="card-emoji">❄️</div>
+      <div class="card-title">第八集 寻道图强</div>
+      <div class="card-country">俄罗斯</div>
+      <span class="card-period">17-20世纪</span>
+      <div class="card-desc">彼得大帝与帝国之路</div>
+    </a>
+
+    <a href="#ep09" class="guide-card" style="border-left: 3px solid #bc4749">
+      <div class="card-emoji">⚡</div>
+      <div class="card-title">第九集 风云新途</div>
+      <div class="card-country">苏联</div>
+      <span class="card-period">1917-1991</span>
+      <div class="card-desc">红色帝国的崛起与解体</div>
+    </a>
+
+    <a href="#ep10" class="guide-card" style="border-left: 3px solid #1d3557">
+      <div class="card-emoji">🗽</div>
+      <div class="card-title">第十集 新国新梦</div>
+      <div class="card-country">美国（上）</div>
+      <span class="card-period">18-19世纪</span>
+      <div class="card-desc">从殖民地到超级大国</div>
+    </a>
+
+    <a href="#ep11" class="guide-card" style="border-left: 3px solid #e76f51">
+      <div class="card-emoji">🦅</div>
+      <div class="card-title">第十一集 危局新政</div>
+      <div class="card-country">美国（下）</div>
+      <span class="card-period">20世纪</span>
+      <div class="card-desc">大萧条与罗斯福新政</div>
+    </a>
+
+    <a href="#ep12" class="guide-card" style="border-left: 3px solid #264653">
+      <div class="card-emoji">📖</div>
+      <div class="card-title">第十二集 大道行思</div>
+      <div class="card-country">结语</div>
+      <span class="card-period">纵观五百年</span>
+      <div class="card-desc">大国兴衰的历史启示</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section" id="timeline">
+  <h2 class="section-title">五百年大事年表</h2>
+  <p class="section-desc">从大航海时代到全球化，关键历史节点一览</p>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-year">1143</div>
+      <div class="tl-event">葡萄牙独立</div>
+      <div class="tl-country">葡萄牙</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1415</div>
+      <div class="tl-event">恩里克王子航海探索</div>
+      <div class="tl-country">葡萄牙</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1443</div>
+      <div class="tl-event">穿越博哈多尔角</div>
+      <div class="tl-country">葡萄牙</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1488</div>
+      <div class="tl-event">迪亚士发现好望角</div>
+      <div class="tl-country">葡萄牙</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1492</div>
+      <div class="tl-event">哥伦布发现美洲</div>
+      <div class="tl-country">西班牙</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1494</div>
+      <div class="tl-event">托尔德西利亚斯条约</div>
+      <div class="tl-country">葡西</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1498</div>
+      <div class="tl-event">达·伽马到达印度</div>
+      <div class="tl-country">葡萄牙</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1519</div>
+      <div class="tl-event">麦哲伦环球航行</div>
+      <div class="tl-country">西班牙</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1581</div>
+      <div class="tl-event">荷兰联省共和国成立</div>
+      <div class="tl-country">荷兰</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1602</div>
+      <div class="tl-event">东印度公司成立</div>
+      <div class="tl-country">荷兰</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1609</div>
+      <div class="tl-event">阿姆斯特丹银行成立</div>
+      <div class="tl-country">荷兰</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1640</div>
+      <div class="tl-event">英国资产阶级革命</div>
+      <div class="tl-country">英国</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1688</div>
+      <div class="tl-event">光荣革命</div>
+      <div class="tl-country">英国</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1689</div>
+      <div class="tl-event">权利法案颁布</div>
+      <div class="tl-country">英国</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1776</div>
+      <div class="tl-event">美国独立宣言</div>
+      <div class="tl-country">美国</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1789</div>
+      <div class="tl-event">法国大革命爆发</div>
+      <div class="tl-country">法国</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1804</div>
+      <div class="tl-event">拿破仑加冕称帝</div>
+      <div class="tl-country">法国</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1815</div>
+      <div class="tl-event">滑铁卢战役</div>
+      <div class="tl-country">法国</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1837</div>
+      <div class="tl-event">维多利亚女王登基</div>
+      <div class="tl-country">英国</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1853</div>
+      <div class="tl-event">黑船来航</div>
+      <div class="tl-country">日本</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1861</div>
+      <div class="tl-event">俄国废除农奴制</div>
+      <div class="tl-country">俄罗斯</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1868</div>
+      <div class="tl-event">明治维新</div>
+      <div class="tl-country">日本</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1871</div>
+      <div class="tl-event">德意志帝国成立</div>
+      <div class="tl-country">德国</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1914</div>
+      <div class="tl-event">第一次世界大战</div>
+      <div class="tl-country">德国</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1917</div>
+      <div class="tl-event">十月革命</div>
+      <div class="tl-country">苏联</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1929</div>
+      <div class="tl-event">大萧条</div>
+      <div class="tl-country">美国</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1933</div>
+      <div class="tl-event">罗斯福新政</div>
+      <div class="tl-country">美国</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1939</div>
+      <div class="tl-event">第二次世界大战</div>
+      <div class="tl-country">德国</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1945</div>
+      <div class="tl-event">二战结束</div>
+      <div class="tl-country">多国</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1991</div>
+      <div class="tl-event">苏联解体</div>
+      <div class="tl-country">苏联</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="chapter-divider"></div>
+<section class="chapter" id="intro">
+  <div class="chapter-header">
+    <div class="chapter-emoji">🌍</div>
+    <h2 class="chapter-title">导语</h2>
+    <div class="chapter-country"></div>
+    <span class="chapter-period-badge">1500年前后</span>
+    <div class="chapter-subtitle">五百年来的大国兴衰</div>
+  </div>
+  <div class="chapter-body">
+
+    <p>公元1500年前后的地理大发现，拉开了不同国家相互对话和相互竞争的历史大幕，由此，大国崛起的道路有了全球坐标。五百年来，在人类现代化进程的大舞台上，相继出现了九个世界性大国，它们是葡萄牙、西班牙、荷兰、英国、法国、德国、日本、俄罗斯和美国。大国兴衰更替的故事，留下了各具特色的发展道路和经验教训，启迪着今天，也影响着未来…… 绝大多数历史学家认为：公元1500年前后是人类历史的一个重要分水岭，从那个时候开始，人类的历史才称得上是真正意义上的世界史。在此之前，人类生活在相互隔绝而又各自独立的几块陆地上，没有哪一块大陆上的人能确切地知道，地球究竟是方的还是圆的，而几乎每一块陆地上的人都认为自己生活在世界的中心。</p>
+
+    <p>公元1500年前后，中国正处在明朝统治之下。郑和的船队七下西洋，但不是为了开拓贸易，而是为了宣扬皇帝的德威。郑和死后，中国人的身影就在海洋上消失了。阿拉伯和印度的商人与欧、亚、非大陆继续着商业往来，但他们的活动范围基本上局限在印度洋沿岸。这是当时欧洲人笔下的世界，已知的三块大陆——欧洲、亚洲和非洲，分别由三个信奉基督教的国王统治，其他地方都是混沌未开。</p>
+
+    <p>但就在公元1400年以后的两百年间，欧洲绘图人笔下的几大块陆地宛如正在成长的胚胎，逐渐由模糊的团状，演变成我们今天所熟悉的清晰可见的模样。正是从那个时候起，割裂的世界开始连接在一起，经由地理大发现而引发的国家竞争，拉开了不同的文明间相互联系、相互注视，同时也相互对抗和争斗的历史大幕。不可思议的是，开启人类这一历史大幕的，并不是当时欧洲的经济和文化中心，而是偏居在欧洲大陆西南角上两个面积不大的国家——葡萄牙和西班牙。五百年前，他们相继成为称雄全球的霸主，势力范围遍及欧洲、亚洲、非洲和美洲。</p>
+
+    <p>那么，究竟是什么力量推动小小的伊比利亚半岛征服海洋、进而主宰世界长达一个多世纪呢？</p>
+
+  </div>
+</section>
+
+<div class="chapter-divider"></div>
+<section class="chapter" id="ep01">
+  <div class="chapter-header">
+    <div class="chapter-emoji">⛵</div>
+    <h2 class="chapter-title">第一集 海洋时代</h2>
+    <div class="chapter-country">葡萄牙 &amp; 西班牙</div>
+    <span class="chapter-period-badge">15-16世纪</span>
+    <div class="chapter-subtitle">伊比利亚半岛的双子星</div>
+  </div>
+  <div class="chapter-body">
+
+    <p>海洋时代 征服是从被征服开始的。从公元前11世纪到公元11世纪的两千多年中，伊比利亚半岛上战火连绵不断，这块土地曾先后被罗马人、日尔曼人和摩尔人征服。正如一个个奋不顾身的斗牛士，生活在这块土地上的人们一刻也没有停止同入侵者的抗争，直到今天，我们依然可以清晰地感受到那种仿佛根植于基因中的追求刺激、喜欢冒险的豪情。漫长的两千多年，眼泪、创痛和牺牲终于换来了宝贵的自由。公元1143年，一个独立的君主制国家葡萄牙，在光复领土的战争中应运而生，并且得到了罗马教皇的承认，这是欧洲大陆上出现的第一个统一的民族国家。</p>
+
+    <p>采访：葡萄牙历史学家    J·H·萨拉依瓦 12和13世纪葡萄牙的特点是，它不是一个封建割据的国家，而是人民的王国，葡萄牙的国王不仅受到贵族、也就是他的臣属的支持，而且得到百姓的拥戴。强大的王权使葡萄牙人有了强烈的民族归属感，但实现国家的强盛却还有很长一段路程。葡萄牙只有不到十万平方公里的发展空间，资源十分匮乏，东面近邻的绵绵战火，又不断侵扰着这块贫瘠的土地，独立之后的葡萄牙王国在经历了两个世纪之后，也依然是危机四伏、风雨飘摇。这个率先建立的民族国家究竟能够持续多久？强大的君主制将会给它带来什么？葡萄牙民族的未来在哪里？一直靠近海捕捞谋生的人们，不得不把目光投向被称作“死亡绿海”的大西洋。</p>
+
+    <p>这个船型的纪念碑，是1960年葡萄牙政府为纪念“航海家恩里克”逝世五百周年而建的，碑的正面写着：“献给恩里克和发现海上之路的英雄”。正是海上之路使葡萄牙摆脱了贫穷和落后的境遇，正是在恩里克的带领下，葡萄牙启动了征服大海的行程。恩里克出生在1394年，是葡萄牙国王若昂一世的第三个儿子。当时的欧洲正从蒙昧的中世纪走出，发轫于意大利的文艺复兴如星星之火逐步燎原，科学和人文的思想一点、一点地照亮了欧洲的天空。</p>
+
+    <p>就在恩里克王子12岁的时候，1406年，一本尘封了一千两百多年的书籍的出版，引发了一场地理知识和观念的革命，这就是古希腊天文学家托勒密的著作——《地理学指南》。采访：原葡萄牙航海纪念委员会主席  若尔金·麦哲伦 这本书和希腊其他学者的许多作品一样，在当时一度被世人遗忘。其间，在亚洲，这本书并没有被遗忘。而在西欧，一直到1406年才在意大利被关注，从15世纪末期开始被印刷出版，才得到较为广泛的流传。尽管从今天看，托勒密绘制的世界地图谬误百出，比如，非洲和南极紧紧相连，除欧洲、亚洲、非洲以外，世界是一片漫无边际的海洋，赤道没有动植物生存等等，但在当时，它比起那些虚无缥缈的神话和道听途说的游记，仍然提供了许多较为可靠的地理信息。</p>
+
+    <p>世界真的是托勒密描绘的这个样子吗？大西洋真的无法航行吗？巨大的问号折磨着欧洲大陆，也燃烧着痴迷于地理学和航海战略的恩里克王子。与此同时，一场突如其来的大变故又把葡萄牙推向了历史的前台，撬动历史的主角就是这些今天看起来毫不起眼的胡椒粒。今天，连欧洲人自己也很难理解，他们的祖先为什么会对香料如此依赖！</p>
+
+    <p>采访：西班牙皇家国际战略研究所 研究员   卡洛斯·马拉穆德 在当时，14、15世纪的时候，保存食物的方法主要是依赖香料，因为当时没有冰箱。所以欧洲人对于香料的需求十分急迫，香料在欧洲市场的价格也达到了前所未有的高度。但是，利润丰厚的香料贸易，先是被阿拉伯商人垄断，接着，商路又被突然崛起的奥斯曼土耳其帝国阻断。欧洲急于摆脱困境，不论是神圣的宗教，还是世俗的商业，都希望能找到强有力的措施来扭转这种局面。在陆地上的军事突围失败之后，焦躁不安的欧洲人开始到海洋寻求出路。欧洲人如何才能成功呢？</p>
+
+    <p>萨格里什，葡萄牙最南端的一个小渔村，直到今天，这里仍然荒凉无比。根据葡萄牙编年史的记载，15世纪时，在恩里克王子的主持下，这里曾经建立过人类历史上第一所国立航海学校，曾经有过为航海而建的天文台和图书馆，这座建于15世纪的灯塔，经历了近六百年的风霜雪雨，依然骄傲地矗立着。采访：葡萄牙宗教学 教授  娜塔丽亚·科雷雅·格德斯 根据当时史料的记载，尤其是传记作家费尔南·洛佩斯的记载，堂·恩里克王子是一个非常慎重、果断的人，他非常清楚他需要什么，善于同其身边的出色幕僚相处。</p>
+
+    <p>我们无从知道看起来面容古板的恩里克王子是因为具有雄才大略而包容，还是因为包容而具有了雄才大略。意大利人、阿拉伯人、犹太人、摩尔人，不同种族、甚至不同信仰的专家、学者，聚集在他的麾下。他们改进了中国指南针，把只配备一幅四角风帆的传统欧洲海船，改造成配备两幅或三幅大三角帆的多桅快速帆船，正是这些20多米长、60到80吨重的三角帆船最终成就了葡萄牙探险者的雄心；他们还成立了一个由数学家组成的委员会，把数学、天文学的理论应用在航海上，使航海成为一门真正意义上的科学。采访：葡萄牙历史学家   J·H·萨拉依瓦 航海发现是首先在葡萄牙作为国家计划的，是一个全国计划，是一个由一个王子主持的计划。这使得葡萄牙的航海大发现不像那些商人为贸易所进行的孤立探险，而是一个两百年来有规划、有系统组织的任务和策略。通过二十多年理论和实践的探索，原来神秘莫测、令人望而生畏的大西洋逐渐显露出一些规律。葡萄牙人终于向南出发了。</p>
+
+    <p>每个到葡萄牙游览的客人，罗卡角是必然的选择，这里是欧洲的“天涯海角”，是远航的水手们对陆地的最后记忆。刚刚进入秋天，冰冷的海风已经吹打得游人无法立足！千百年来，这块伸入海水的巨石就像一个孤独的老人，无奈地守望着波涛汹涌的大西洋，守望着欧洲的梦魇。直到16世纪，葡萄牙有史以来最伟大的诗人卡蒙斯在搏击大海的征程中创作了史诗《葡萄牙人之歌》，罗卡角才一扫往日荒凉、失落的阴霾，一跃而成为欧洲人开拓新世界的支点。</p>
+
+    <p>陆地在这里结束，海洋从这里开始。”（字幕） 一天天，一年年，有的人回来了，有的人消失了。公元1443年，在恩里克王子的指挥下，从罗卡角出发的葡萄牙航海家穿越了西非海岸的博哈多尔角。在此之前，这里是已知世界的尽头。为了这一天，恩里克王子和他的船队已经奋斗了21年。</p>
+
+    <p>与中国郑和的混合舰队相比，葡萄牙人的两三条帆船微不足道，但是，凭着爱冒险的天性、对财富的渴望以及强大的宗教热情，葡萄牙人终于冲破了中世纪欧洲航海界在心理和生理上的极限。采访：葡萄牙波尔图大学 副校长 路易斯·亚当·达·丰塞卡 随着海外扩张的继续推进，人们到达了越来越多的海域，于是形成了对“大海洋”、即今天的大西洋的全新认识，过去人们认为，“大海洋”仅仅是一个沿海狭长的海域，现在他们发现，这个大海洋比他们想象的大得多，它同时向南、向西无限地延伸。随着葡萄牙人沿着非洲西海岸，一路向南，源源不断的黄金、象牙、以及非洲胡椒涌入里斯本，充满了葡萄牙的国库。</p>
+
+    <p>幸运的是，就在葡萄牙大张旗鼓地进行海洋探索并从中获利的近一个世纪里，欧洲的其他地区还在中世纪的封闭中明争暗斗： 英格兰和法兰西还没有形成统一的民族国家，贵族之间战争不断； 德意志土地上大大小小的几百个邦国在进行着远交近攻的游戏； 意大利的城邦正享受着传统贸易带来的最后一段美好时光； 而葡萄牙的邻国西班牙还在为光复国土而战。到1460年，被葡萄牙绘在地图上的非洲西海岸已经达到了4000公里。就在这一年，恩里克去世了，这个终生未婚、在萨格里什苦修了45年的圣徒又回到了父母的身边。虽然恩里克一生从未亲自出海远航，却无愧于“航海家”的称谓，因为欧洲航海界所有载入史册的伟大发现，都是以他倾一生之力组织实施的航海计划作为起点的。</p>
+
+    <p>公元1487年7月，恩里克去世27年之后，葡萄牙航海事业的继承者若昂二世国王，派迪亚士率三艘帆船继续沿大西洋南下。航行半年后，船队突然遭遇了一次罕见的风暴，在被风暴裹挟、被动地向东南方漂泊了13个昼夜之后，迪亚士命令船队掉头北上，这时，他意外地发现：船队已经绕过了非洲的最南端。为纪念这次九死一生的传奇经历，迪亚士给这个海角取名“风暴角”。但若昂二世却郑重地将这个名字改为“好望角”。现在，只要再努一把力，葡萄牙人就能到达梦寐以求的东方。商路即将打通，意味着财富的香料贸易很快就要掌握在葡萄牙的手中了。</p>
+
+    <p>然而，就在这个时候，葡萄牙遭遇了一个强大的对手，那就是刚刚统一的邻国西班牙。那么，西班牙人将凭借什么和葡萄牙竞争呢? 格拉纳达是今天西班牙境内最具有伊斯兰风情的城市，伊斯兰建筑的经典之作阿尔汉布拉宫，经过了几个世纪的火灾兵难，仍然优雅端庄 五百多年前，西班牙光复运动的最后一仗就在这里进行。1490年春天，西班牙的伊莎贝尔女王率领十万大军包围了格拉纳达。采访：西班牙军事史学家   胡利奥·佩尼亚兰达·阿尔瓦尔 西班牙王国的重建，很大程度上要归功于收复失地的战争，这场战争持续了整整八个世纪。到15世纪，格拉纳达王国还处于穆斯林信徒摩尔人的统治之下。在格拉纳达对面的这座石头城堡里，伊莎贝尔女王亲自督战。这位女王平素一身洁白，每天要沐浴更衣四次，美貌曾惊艳欧洲王室。但此次她发下重誓：不夺取格拉纳达决不脱下自己的战袍。</p>
+
+    <p>1492年1月2日，在西班牙军队的猛烈攻击下，摩尔人弃城投降。长达八个世纪的战争宣告结束。伊莎贝尔女王亲吻了格拉纳达的土地，与她的丈夫费尔南德国王一起进入阿尔汉布拉宫。而就在西班牙的统一刚刚完成的时候，历史给西班牙送来了一个千载难逢的机遇。随着女王进入格拉纳达的队伍中，有一位等待女王召见的热那亚人，他就是后来名动天下的克里斯托夫·哥伦布。</p>
+
+    <p>从当时已经普遍传播的地圆学说中，哥伦布产生了一个想法，那就是：向西走也能到达东方。哥伦布相信，他的航海计划能很快将欧洲人带到东方，但是，在此前的六年中，哥伦布在葡萄牙却一直遭受冷遇。采访：西班牙古铁雷斯·梅利亚多学院 副院长 费尔南德·阿梅利戈·古埃尔沃阿兰戈 若昂二世没有接受哥伦布的建议，是因为葡萄牙的航海策略主要是越过好望角，经过非洲再向东，寻求新的航路到达亚洲，从而和印度进行贸易 航海知识丰富的葡萄牙专家们认为：向西航行到达东方的实际距离，将远远超过哥伦布的预测。但正是葡萄牙专家这个正确的判断，使葡萄牙王国丧失了一次历史的机遇。1492年1月，刚刚完成统一大业的伊莎贝尔女王第三次召见了哥伦布。</p>
+
+    <p>葡萄牙依靠海权的迅速崛起，让整个欧洲嫉妒得红了眼，但财力、物力和人才的缺乏使所有的国王、贵族、商人们望而却步。雄心勃勃的伊莎贝尔女王用23年的时间缔造了统一的西班牙，现在，她开始成为西班牙远洋探险的总赞助人。采访：西班牙古铁雷斯·梅利亚多学院 教授  索尼亚·阿尔达·梅西亚斯 只有统一的国家才有足够的实力和决心，来资助哥伦布这样一场伟大的航行，这也充分展示了当时欧洲封建强国的力量和决心。哥伦布与西班牙王室的谈判进行了三个月。</p>
+
+    <p>出生在布商家庭的哥伦布，从小就耳濡目染讨价还价的商业行为，在葡萄牙的八年航海经历又给了他提高价码的理由，哥伦布理直气壮地为自己争取足够的权益。而女王也并不认为与一个普通百姓坐下来讨论利益分配的问题有什么不妥。采访：西班牙国家远程教育大学 主讲教授  卡洛斯·马丁内斯·萧 对于殖民地的占领，虽然是由探险者完成的，但是其基础在于同王室签订的合同和条约，这就好像在合唱中当头的是领唱一样，得到的殖民地由探险者进行殖民，但是殖民地的主权还是属于王室的。</p>
+
+    <p>1492年4月17日，双方签订协议，国家的意志同航海家的愿望最终结合在了一起。哥伦布被任命为发现地的统帅，可以获得发现地所得一切财富和商品的十分之一并一概免税；对于以后驶往这一属地的船只，哥伦布可以收取其利润的八分之一。8月3日，带着女王授予的海军大元帅的任命状，哥伦布登上甲板，对女王资助给他的三艘帆船下达了出航的命令。</p>
+
+    <p>向西。再向西。帆船驶入了大西洋的腹地。为了减少船员们因离开陆地太远而产生的恐惧，哥伦布偷偷调整计程工具，每天都少报一些航行里数。但即便如此，两个月后，一无所获的船队依然走到了崩溃的边缘。10月10日，不安和激愤的船员们声称继续西行就将叛乱。激烈争论后，哥伦布提议：再走三天，三天后如果还看不见陆地，船队就返航。</p>
+
+    <p>采访：西班牙国家远程教育大学主讲教授   卡洛斯·马丁内斯·萧 他这么做无疑是十分明智的，因为仅仅在这次骚乱三天之后，曾经反对他的水手就在桅杆上高喊：“陆地！”这一天是1492年10月12日。英雄就在这一刻诞生了！哥伦布和他的船员看到的陆地，就是今天位于北美洲的巴哈马群岛，从那一天起，割裂的世界开始连接在一起。</p>
+
+    <p>虽然哥伦布至死都认为他到达了印度，但事实上，他到达的既不是中国，也不是印度，而是一块欧洲人从来都不知晓的新大陆。因为哥伦布的误判，这块土地上的原住民拥有了一个同他们毫不相干的名字——印地安人，直到今天，我们还感觉他们仿佛是亚洲的远方亲戚。就在哥伦布出发的这一年，人类最早的地球仪制作完成了，在这个地球仪上，属于美洲大陆的这个位置还是一片大海。</p>
+
+    <p>西班牙人成功的消息震动了整个欧洲。这一天——10月12日，后来被定为西班牙的国庆日。欢迎仪式十分热烈，伊莎贝尔女王兑现了向哥伦布允诺的所有物质和精神奖励，哥伦布在六个印地安人的簇拥下,举着五彩斑斓的鹦鹉招摇过市。但最早看到哥伦布凯旋的并不是西班牙女王伊莎贝尔，而是曾经拒绝了哥伦布的葡萄牙国王若昂二世，哥伦布返航时首先到达里斯本，若昂二世专门接见了他。</p>
+
+    <p>半信半疑的若昂二世拿来一碗干豆子，让哥伦布带来的印第安人在桌子上摆出新世界的模样。这个地理游戏后来让他暗自捶胸顿足：“见识短浅的人啊，我为什么让这样重要的大事溜走了呢？” 一切已经无可挽回，未知世界才刚刚浮出海平面，竞争就已经摆在两个毗邻的航海大国面前，谁将拥有未来世界的发现权呢？经过近一年时间的谈判，1494年6月7日，在罗马教皇的主持下，葡萄牙和西班牙在里斯本郊外的这个小镇签署条约：在地球上划一条线，然后像切西瓜一样把地球一分两半。葡萄牙拿走了东方，西班牙把美洲抱在了怀里。从当时绘制的这幅油画上看，讨价还价的过程异常激烈，但事实上，精确的计算并没有太大的意义，因为无论是葡萄牙人还是西班牙人，与欧洲以外的大陆才刚刚有了一点点接触，还没有人准确地知道这个地球究竟有多大。</p>
+
+    <p>采访：西班牙古铁雷斯·梅利亚多学院 院长  伊西德罗·塞甫尔维达·穆尼奥兹 这个条约在西方文明中产生的意义在于确立了大国瓜分殖民地的先例，这一趋势在后来的柏林条约中达到了顶峰，欧洲各国坐在一起将全世界已知和未知的地方全都加以分配，形成了当今世界格局的雏形。我们可以说西方世界开始全球扩张始于这个条约。游戏规则已经制定，接下来的事情就是看谁的行动更迅速了。1498年5月，经过四年的生死考验，葡萄牙航海家达·伽马率领的船队终于抵达印度的卡利卡特港，这也正是七十年前郑和下西洋时，展示天国德威的地方。</p>
+
+    <p>与郑和不同，葡萄牙人这次带来的不只是友好的问候，当印度人问他们到来的目的时，达·伽马很简练地回答说：“基督徒，香料”。这正是葡萄牙孜孜以求的目的，经过近一个世纪的艰难探索，恩里克王子的愿望终于变成了现实，欧洲航海家几十年知识和勇气的积累开始转化为耀眼的财富。面对葡萄牙在东方的成功，西班牙再次出发。1519年9月20日，又一个被葡萄牙冷落的航海家麦哲伦，带着5艘船和265名船员，开始了人类历史上第一次环绕地球的航行。</p>
+
+    <p>这无疑是一次划时代的壮举，它的意义甚至可以和人类离开地球登上月球相比，所不同的是，当美国宇航员尼尔·阿姆斯特朗小心翼翼地迈出那一步的时候，他知道全世界至少有七亿人正在为他喝彩。但450年前的麦哲伦却没有那么幸运。在历经1080个日夜、17000公里航程之后，1521年9月5日，就在这个宏伟的教堂里，18位环绕地球的幸存者手擎点亮的蜡烛，为在这次史诗般的伟大航行中死去的勇士祈祷，其中包括他们在菲律宾被杀的船长麦哲伦。18盏烛光是那么微弱，但它照亮的却是人类文明的进程！</p>
+
+    <p>现在展现在西欧人眼前的，已不是一个半球的四分之一，而是整个地球了。地球飞快地旋转，制图员夜以继日地辛勤工作，仍然满足不了人们对修订版地图的需求，地图在潮湿和未着色的时候就被取走，航海家开辟的新航线成为了欧洲控制世界的铁链 在坚船利炮的猛烈攻击下，一个个海上交通战略要点相继成为葡萄牙的囊中之物，正是利用从大西洋到印度洋的50多个据点，葡萄牙垄断了半个地球的商船航线。在16世纪初的前五年中，葡萄牙的香料交易量从22万英镑迅速上升到230万英镑，成为当时的海上贸易第一强国。与葡萄牙在东方的收获相比，西班牙在美洲大陆上的掠夺更加直接。</p>
+
+    <p>据统计，从1502年到1660年，西班牙从美洲得到18600吨注册白银和200吨注册黄金，到16世纪末，世界金银总产量中有83％被西班牙占有。与欧洲人的扩张相伴随的，却是美洲两大文明中心的悲歌。到1570年，战争屠杀和欧洲传来的流行病，使墨西哥地区的人口从2500万下降到265万，秘鲁的人口由900万下降到了130万。美洲大陆的原住民印第安人从那以后急剧减少了90%。采访：葡萄牙新里斯本大学 教授  安东尼奥·曼努埃尔·埃斯帕尼亚·欧西门 当葡萄牙和西班牙的王室联合起来时，就是在葡萄牙的菲利普一世或者是西班牙的菲利普二世统治期间，据说菲利普王国的太阳从来不降落，因为葡萄牙和西班牙国王的版图到达了整个世界，从墨西哥到菲律宾、中国、印度和非洲。</p>
+
+    <p>在欧洲，西班牙统治着近一半的天主教世界；在亚洲，它征服了菲律宾；而除巴西以外的美洲都归西班牙所有。葡萄牙的殖民地遍布非洲、巴西、以及环大西洋、印度洋航线的岛屿。伊比利亚半岛创造了神话般的奇迹，这奇迹会不会也像神话故事那样，见首不见尾，缥缈不定，来去匆匆呢？这是马德里唯一一个以国家名字命名的广场，西班牙的骄傲——作家塞万提斯的纪念碑赫然矗立在正中央，每一个走近塞万提斯的人，都忍不住要用手摸一下骑着瘦马的堂·吉诃德和紧随其后的仆人桑丘 采访：西班牙古铁雷斯·梅利亚多学院 院长  伊西德罗·塞甫尔维达·穆尼奥兹 塞万提斯生前出版了许多书，他的戏剧作品在当时也大受欢迎，但是，他年老时过着穷困潦倒的生活，他所认识的那些大人物都没有给他足够的生活资助，以至于他死的时候仍然十分贫困。</p>
+
+    <p>塞万提斯的命运，在有意无意间折射了伊比利亚半岛的荣辱兴衰。在强大的王权和狂热的宗教信仰的支撑下，伊比利亚半岛征服了海洋、获得了世界。但是，像潮水一样涌入的财富，几乎都用来支撑为宗教信仰、为殖民扩张而进行的战争，而没有用来发展真正能够让国家富强起来的工商业。势力强大的王公贵族不愿意看到工商业的发展导致新兴势力的崛起，他们甚至荒唐地把数以万计的从事工商业的外国人，从自己的国土上赶走了。采访：西班牙国家远程教育大学 主讲教授  卡洛斯·马丁内斯·萧 西班牙渐渐习惯了，不去投资本国的工业，而转身购买国外昂贵的商品，久而久之，国内的工业极度萎缩，而货币又急剧贬值，人们却还沉迷于消费 采访：原葡萄牙航海纪念委员会主席   若尔金·麦哲伦 我们知道，一个机构极有可能因为没有能力做出改变而“死亡”。我也知道葡萄牙和西班牙的殖民扩张时期就出现了这种情况，就是因为不能做出改变而衰落。</p>
+
+    <p>罗卡角的太阳缓缓落下，这是欧洲大陆的最后一抹阳光 到16世纪下半叶，曾经拥有难以计数的金银和无比强大的国家机器的伊比利亚半岛，在世界性的演出中开始谢幕。流水一般涌入的财富又像水一样流走了，除了奢侈的社会风气，没有留下像样的产业，老百姓甚至也没有获得像样的衣、食、住、行。</p>
+
+    <p>或许，沉醉于中世纪英雄梦想的堂·吉诃德至死都不明白，他的盾牌掩护的是一个旧世界，他的长矛刺向的是一个新世界，其结局只能是不断重复的无奈和失败！世界历史舞台上的第一场大戏悲剧性地落幕了。下一场，将会是哪一个国家，身披新世界的霞光登场演出呢？</p>
+
+  </div>
+</section>
+
+<div class="chapter-divider"></div>
+<section class="chapter" id="ep02">
+  <div class="chapter-header">
+    <div class="chapter-emoji">🌷</div>
+    <h2 class="chapter-title">第二集 小国大业</h2>
+    <div class="chapter-country">荷兰</div>
+    <span class="chapter-period-badge">17世纪</span>
+    <div class="chapter-subtitle">海上马车夫的传奇</div>
+  </div>
+  <div class="chapter-body">
+
+    <p>（荷兰） 在欧洲西北部，有一个和英国隔海相望的国家，它的面积只相当于今天的两个半北京，它的名字叫做荷兰。在八百年以前，这里是一片没有人烟，只有海潮出没的湿地和湖泊。从12世纪到14世纪，才逐步形成了人类可以居住的土地。直到今天，荷兰仍有三分之一的国土位于海平面以下。如果没有一系列复杂的水利设施阻挡，荷兰人口最稠密的地区，每天将被潮汐淹没两次。就是这样一个地方，在三百年前，也就是17世纪的时候，却是整个世界的经济中心和最富庶的地区。一个仅有150万人口的荷兰，将自己的势力几乎延伸到地球的每一个角落，被马克思称为当时的“海上第一强国”。荷兰人创造奇迹的故事，应该从什么地方开始叙述呢？</p>
+
+    <p>大海总是在最平静的地方掀起波涛。历史像大海，总是在最让人意想不到的地方创造奇迹。荷兰人崛起的故事，是从银白色的鲱鱼开始的。由于海流的变化，每到夏季，就有大批的鲱鱼洄游到荷兰北部的沿海区域。荷兰人每年可以从北海中捕获超过1000万公斤的鲱鱼。荷兰北方航海博物馆 馆长 维歇尔·克尔克迈尔： 它对荷兰的经济太重要了，很多人以此为生来挣钱。</p>
+
+    <p>14世纪时，荷兰的人口不到100万。当时约有20万人从事捕鱼业，小小的鲱鱼为五分之一的荷兰人提供了生计。但是，鲱鱼是一种自然资源，造物主并没有给荷兰人独享的权利。生活在北海边的其他民族，都组织了捕捞鲱鱼的船队。为了争夺渔场，荷兰人和苏格兰人之间曾爆发过三次战争。是什么力量使得荷兰在激烈的竞争中脱颖而出呢？1358年，在荷兰北部的一个小渔村中，一个名叫威廉姆·伯克尔斯宗的渔民发明了只需一刀就可以除去鱼肠子的方法。</p>
+
+    <p>荷兰莱顿大学历史系 教授 威廉·范德莫伦： 把鲱鱼的肚子剖开，把内脏取出，把头去掉，然后把盐放在里面，这样可以保存一年多的时间，那时候没有冰箱，这种方法很独特，所以，那就是为什么荷兰的鲱鱼能够在全欧洲畅销，特别是英格兰。荷兰渔民的一把小刀，将一种人人都可以染指的自然资源，转化为荷兰独占的资本。直到今天，许多荷兰人在食用鲱鱼时，仍刻意保持着这种几个世纪前形成的饮食习惯，鲱鱼被去除内脏之后，不经过任何烹调，直接提着鱼尾一口吞下。荷兰国务委员 约里斯·福尔胡弗： 从捕鱼业开始，（荷兰）产生了和东北欧、英格兰、南欧、非洲的贸易。由捕鱼的传统产生了海上（贸易）的传统。</p>
+
+    <p>借助鲱鱼，荷兰人开始了商旅生涯。如今在鹿特丹的一些古老房屋上，仍可以见到鲱鱼的图案。这些并不醒目的标志似乎在提醒人们注意：鹿特丹作为世界第一大港的历史，就是从一只只装满咸鲱鱼的大缸开始的。一旦以货物的流通和交换作为谋生手段，原本不利的地理位置也开始显示出巨大的优越性。地处西北欧的荷兰，面朝大西洋的北海，背靠广袤的欧洲大陆，欧洲的两条主要水道，从这里入海。为了排涝，荷兰人修建了多条运河，构成了当时欧洲最发达的水上交通网。这些优势使得荷兰具备了成为欧洲新的商品集散地的可能。</p>
+
+    <p>15世纪末的地理大发现，给欧洲带来前所未有的商业繁荣，也为荷兰提供了成就商业帝国的历史性机遇。如果说，最早开始远洋冒险的葡萄牙和西班牙，主要是依靠暴力去进行赤裸裸的财富掠夺，那么，紧随其后的荷兰人由于缺少强大的王权和充足的人力资源，十分自然地选择了依靠商业贸易来积累财富，同时也积累着足以让自己强盛起来的竞争技巧和商业体制。作为中间人、代理人、加工者和推销商，荷兰人从葡萄牙和西班牙那里装载香料、丝绸和黄金，然后把它们运销到欧洲各地。返航时，他们又为这两个最早的海上霸权国家运去波罗的海产粮区的小麦、瑞典的铁器、芬兰的木材，以及自己生产的海军补给品。</p>
+
+    <p>但是，荷兰商人很快发现，在这项利润丰厚的贸易中，他们不得不面对来自英格兰商人强有力的挑战。当时，英格兰的面积比荷兰大三倍，人口是荷兰的五倍。作为大西洋中的岛国，它比荷兰有着更加优越的地理位置。这一次，荷兰人将依靠什么样的手段，击败强大的竞争对手呢？就像发明一刀就能取出鲱鱼肠子的方法来打败对手一样，荷兰人打败英格兰是从设计一种造价更加低廉的船只开始的。荷兰海运博物馆 馆长 约斯特·舍肯伯鲁克： 英国商船上的水手都带着武器，所以，他们的船就需要更加坚硬的木头，而荷兰的船几乎没有装备武器。所以，考虑这些因素，就可以理解为什么荷兰的船造价很便宜，用荷兰的船运送货物也很便宜，于是荷兰就成为了欧洲的海上马车夫。</p>
+
+    <p>此前，典型的欧洲商船都建造有可以架设火炮的平台，这样做可以有效地防止海盗袭击。荷兰人第一个冒险建造出了一种仅能运送货物而不可装置火炮的商船。这样做的代价是，每一次航行都变成了充满风险的命运赌博，但它的好处是造船的成本低，价格只有英国船只的一半，于是，货物的运费也低。即使这样，荷兰人还不满足，为了能获得尽可能多的利润，他们又在船只上加上了一种特殊的设计。荷兰北方航运博物馆 馆长 维歇尔·克尔克迈尔： 它的设计很独特，它的船肚子很大，所以船身很大很圆。而甲板很小。这样的做法是因为，在斯堪的纳维亚，船所缴纳的税取决于甲板的宽度，甲板越窄，付的钱越少，所以，荷兰人造的船甲板很小，船肚子很大，利润也就越多。</p>
+
+    <p>在很大程度上，就是靠着这种船，荷兰人赢得了享誉世界的“海上马车夫”的称号。但是，要想在竞争中立于不败之地，仅仅依靠特殊的船只显然不够，最终决定胜负的关键，是那些驾驶船只的人。荷兰北方航运博物馆 馆长 维歇尔·克尔克迈尔： 1596年到1598年，一个有名的人叫巴伦支，他是荷兰的一个船长，他试图找到从北面到达亚洲的路线。他经过了三文雅，现在一个俄罗斯的岛屿，但是他们被冰封的海面困住了。</p>
+
+    <p>三文雅地处北极圈之内，巴伦支船长和17名荷兰水手在这里度过了8个月的漫长冬季。他们拆掉了船上的甲板做燃料，以便在零下40度的严寒中保持体温；他们靠打猎来取得勉强维持生存的衣服和食物。在这样恶劣的险境中，8个人死去了。但荷兰商人却做了一件令人难以想象的事情，他们私毫未动别人委托给他们的货物，而这些货物中就有可以挽救他们生命的衣物和药品。冬去春来，幸存的商人终于把货物几乎完好无损地带回荷兰，送到委托人手中。他们用生命作代价，守望信念，创造了传之后世的经商法则。在当时，这样的做法也给荷兰商人带来显而易见的好处，那就是赢得了海运贸易的世界市场。</p>
+
+    <p>阿姆斯特丹，荷兰海运博物馆。每个星期天，这里都要举行一个特殊的活动，目的是让孩子们通过切身体验来学习荷兰的历史。这样的活动年复一年地重复着，哪怕只有一个孩子参加也从不间断。教师由不同职业的志愿者担任，他们一丝不苟地带领孩子们重温四百多年前荷兰水手的生活。今天，荷兰的成年人经常向孩子们重复这样一句话：“荷兰之所以还是荷兰，是因为我们的祖先照顾好了自己的生意。”</p>
+
+    <p>荷兰人的祖先不仅仅是照顾好了自己的生意，实际上在距今五百多年前的16世纪末，他们几乎垄断了欧洲的海运贸易。</p>
+
+    <p>荷兰海运博物馆 馆长 约斯特·舍肯伯鲁克：</p>
+
+    <p>在某一段时间，荷兰船队的数量比英格兰、法国和苏格兰海上商船的总和还要大。荷兰的商船大概有1800艘，它们可以把货物运到欧洲的每一个角落。</p>
+
+    <p>伴随着商业贸易的发展，城市作为交易的市场、储存货物的仓库、维修船只的工场，在荷兰逐渐兴旺起来。渐渐地，生活在这些城市中的人们发现，一个超越商业贸易甚至是超越经济生活的难题，摆在了他们的面前，这就是到底应该由谁来管理城市，应该怎样管理城市？和欧洲其他地方一样，一开始，荷兰城市的主人是那些贵族们，因为城市是总是建立某个贵族的领地之上。贵族们建立起小型的军队，名义上是为城市提供保护，实际上是依靠武力取得税收。荷兰乌德勒兹大学政治历史系 教授 伊多·德汉： 这意味着，在城市里，有钱人比较有权力，他们可以主导讨价还价，贵族们依靠生意人给他们提供财富。</p>
+
+    <p>荷兰国务委员 约里斯·福尔胡弗： 商业和城市的兴起使人们产生了对经济自由的渴望。日渐富有的市民们最终做出一个让人惊讶的选择。他们像购买货物一样，从贵族手中买到了城市的自治权。从此，市民们自行立法，贵族不能直接向他们收税。“市民自治”为荷兰的城市注入了强大的发展动力。到公元15世纪末，将近一半的荷兰人生活在城市中。荷兰莱顿大学历史系 教授 威廉·范德莫伦： 每个城市都努力获得更多的贸易机会，城市由有钱的商人统治，由他们来决定城市的管理。</p>
+
+    <p>这座建于15世纪的市政厅，每隔15分钟就会再现这样一个重要的历史场面：贵族将城市的管理权转交给市民。发生在荷兰历史上的一个瞬间，借助这个特殊的计时工具成为了永恒。就在荷兰人忙于经营城市的时候，整个欧洲的政治版图开始发生急剧的变化。一些雄才大略的君主，凭借蒙古大军西征传入的火药，摧毁了骑士们守卫的贵族城堡，建立起葡萄牙、西班牙、英国和法国这样一些君主集权的国家。这些国家拥有着割据的贵族领地和独立的商业城邦无法比拟的优势，它们可以有效地动员和组织起整个民族的力量。葡萄牙和西班牙就是靠这样的优势，率先进入了世界大国的行列。</p>
+
+    <p>开始的时候，荷兰人似乎不为这种潮流所动。他们满足于生活在彼此独立的城市中，这些城市惟一关注的事情就是尽可能多地增加财富。荷兰莱顿大学历史系 教授 威廉·范德莫伦： 如果像英国、法国、西班牙一样有一个在国王统治下的国家，就会有很多别的问题，比如国王想要扩张使自己的国家成为欧洲最强大的国家，这就会花很多钱。但是，在1543年，不管荷兰人情愿与否，都不得不去面对国家这个问题。那一年，西班牙国王通过政治联姻的方式取得了荷兰的统治权。</p>
+
+    <p>接下来发生的事情很有意思。当西班牙国王宣布荷兰是西班牙神圣不可分割的一部分时，荷兰人认同了这种说法；当西班牙国王重新划分荷兰的行政区域时，他们坦然地接受了；当西班牙国王为荷兰派来新的总督时，他们也顺从地臣服了。但是当西班牙国王菲利普二世把手伸向他们的钱袋时，荷兰人奋起反抗了。荷兰乌德勒兹大学政治历史系 教授 伊多·德汉： 菲利浦二世需要很多的钱，因为他一直和法国打仗，要用大量的钱维持。他希望得到永久的财力保障，而荷兰人拒绝这样做，他们只同意在一段的时间内提供部分的钱。荷兰的独立战争爆发了。一开始，西班牙的军队轻而易举地粉碎了荷兰人一盘散沙似的抵抗。在不到六年的时间里，就有15万荷兰人死于非命。严峻的现实，让各自为政的荷兰省份不得不团结起来。1579年，来自荷兰北方七个省的代表在这间大厅中签署协议，组成军事同盟共同对敌。</p>
+
+    <p>此后，战争开始向有利于荷兰人的方向转化，一方面是由于荷兰人的联合，另一方面也是由于菲利普二世在欧洲四面树敌，连年的争霸战争耗尽了西班牙的国力。1581年7月26日，来自荷兰各起义城市的代表在海牙郑重宣布：废除西班牙国王对荷兰各省的统治权。把国王像一个不称职的经理人那样打发回家之后，荷兰人突然发现，他们实际上已经拥有了一个国家 那么，这个国家应该交由谁来管理和保护呢？</p>
+
+    <p>荷兰莱顿大学法学院 教授 埃弗特·阿尔克马： 他们并不急着说，我们现在没有国王，因为那时候从没有人这么做过，他们不能说我们是共和制的，因为这对他们来说还太前卫了。对于那些领导独立战争的商人们来说，他们最想得到的不是政治权利而是商业利润，所以，他们希望找到一个强有力的保护者，由他来照顾荷兰的安全，而自己去照顾好自己的生意。一个匪夷所思的现象出现了：荷兰人将自己的国家托付给了英国女王伊丽莎白一世。英国女王爽快地同意了做他们的君主，并派出军队保护荷兰人的生命财产安全。但是，精明的商人们很快发现，英国女王收取的保护费，实际上比他们赶走的西班牙国王还要高。</p>
+
+    <p>荷兰乌德勒兹大学政治历史系 教授 伊多·德汉： 荷兰的城市说，不，我们不这么认为，也许这不是一个很好的主意。我们可以有统治者，但是，他的权力不会太大。1581年，七个省份联合起来，宣布成立荷兰联省共和国。这是一个在人类历史上前所未有的国家。很多历史学家说，它是世界上第一个“赋予商人阶层充分的政治权利的国家”。荷兰国务委员 约里斯·福尔胡弗： 这在荷兰非常典型，它是一个共和民主的混合，实际的政治权力是在商人和知识精英的手中。</p>
+
+    <p>荷兰莱顿大学历史系教授 威廉·范德莫伦： 不同的省，尤其是拥有沿海城市的省份，由城市的商业精英们统治，而整个国家政府、这些省的代表和统治者，也由这些家族产生，所以，你可以认为，荷兰共和国有点像家族的企业。崭新的国家诞生了，但它的未来仍处于重重迷雾之中。如果用国土、资源、人口等条件来衡量，荷兰几乎不具备作为国家生存下去的条件。更何况组成共和国的七个省份依然是各自为政。荷兰莱顿大学法学院 教授 埃弗特·阿尔克马 它的结构非常松散，各省之间绝对独立，他们只能在决定税收上取得一致，在其他方面，如果他们意见不统一，就不能做出任何决定。所以，它非常松散，有时可以把他们比做现在的欧盟。</p>
+
+    <p>这个结构松散的小国，几乎是在刚刚建立的时候，就不得不面对一次严重的危机。在独立之前，与西班牙的贸易是荷兰最主要的经济来源之一，但是独立之后，西班牙国王封锁了本国的所有港口，禁止荷兰商船驶入西班牙。经济的生命线被扼断了，新生的共和国出路在哪里？荷兰凭借着自己的商业直觉，很快找到了自己的优势。因为这片土地上拥有人数众多、对财富充满强烈渴望的商人阶层，如果将他们的爱财之心转化为一种力量，那么，荷兰就拥有了比王权更为强大的武器。根据这个优势，荷兰人决定从精明的中间商变成远洋航行的斗士，靠自己去开辟前往东方和美洲的航线。那么，远洋航行需要的大量资金又从哪里来呢？</p>
+
+    <p>1602年，在共和国大议长奥登巴恩维尔特的主导下，荷兰联合东印度公司成立。就像他们创造了一个前所未有的国家一样，如今，他们又创造了一个前所未有的经济组织。</p>
+
+    <p>荷兰莱顿大学历史系 教授 维姆·范登德尔：</p>
+
+    <p>是的，可以这么说。它是第一个联合的股份公司，为了融资，他们发行股票，不过不是现代意义的股票。人们来到公司的办公室，在本子上记下自己借出了钱，公司承诺对这些股票分红，这就是荷兰东印度公司筹集资金的方法。</p>
+
+    <p>荷兰阿姆斯特丹历史博物馆 馆长 洛德韦克·瓦赫纳尔：</p>
+
+    <p>他们聚集了650万的资金，差不多相当于300万的欧元，而那时候，这些钱值几十亿，用这些钱他们建立了公司。</p>
+
+    <p>通过向全社会融资的方式，东印度公司成功地将分散的财富变成了自己对外扩张的资本。甚至，阿姆斯特丹市市长的女仆也成了东印度公司的股东之一。成千上万的国民愿意把安身立命的积蓄投入到这项利润丰厚，同时也存在着巨大风险的商业活动中，一方面是出于对财富的渴望，更重要的是，因为荷兰政府也是东印度公司的股东之一。政府将一些只有国家才能拥有的权利，折合为25000荷兰盾，入股东印度公司，这就大大增加了东印度公司的权限和信誉。</p>
+
+    <p>荷兰莱顿大学历史系 教授 维姆·范登德尔：</p>
+
+    <p>（政府给东印度公司的特权是）可以协商签订条约，发动战争，这样它就成了在亚洲的独立主权个体，或者说从南非到日本的整个地区，它都可以像一个国家那样运作。</p>
+
+    <p>在一切准备妥当之后，东印度公司的船队出航了。西班牙国王几乎是用鄙夷的态度对待这个不自量力的挑战者。但是，在东印度公司成立后的短短五年时间里，它每年都向海外派出50支商船队，这个数量超过了西班牙、葡萄牙船队数量的总和。</p>
+
+    <p>荷兰阿姆斯特丹历史博物馆 馆长 洛德韦克·瓦赫纳尔：</p>
+
+    <p>前十年他们（东印度公司）没有付任何的利息，因为投资者喜欢把钱投到造船、造房子，以及在亚洲建立一个贸易王国上面。做完这些，十年后，公司第一次给股东派发了红利。</p>
+
+    <p>连续十年不给股东们分红利。这样的经营方式为什么能够得到投资者的认可？</p>
+
+    <p>这是因为：荷兰人同时还创造了一种新的资本流转体制。1609年，世界历史上第一个股票交易所诞生在阿姆斯特丹。只要愿意，东印度公司的股东们可以随时通过股票交易所，将自己手中的股票变成现金。</p>
+
+    <p>早在四百多年前，在阿姆斯特丹的股票交易所中，就已经活跃着超过1000名的股票经纪人。他们虽然还没有穿上红马甲，但是固定的交易席位已经出现了。</p>
+
+    <p>这里成为当时整个欧洲最活跃的资本市场，前来从事股票交易的不仅有荷兰人，还有许许多多的外国人。大量的股息收入从这个面积不超过1000平方米的院子，流入荷兰国库和普通荷兰人的腰包，仅英国国债一项，荷兰每年就可获得超过2500万荷兰盾的收入，价值相当于200吨白银。</p>
+
+    <p>当大量的金银货币以空前的速度循环流通时，荷兰的经济血脉开始变得拥堵起来。这一次，荷兰人解决问题的探索直接进入了现代经济的核心领域——这就是建立银行。</p>
+
+    <p>英国银行博物馆 馆长 约翰·基沃恩：</p>
+
+    <p>阿姆斯特丹银行成立于1609年，大约比英国银行早一百年，它是一个城市银行、财政银行和兑换银行。它吸收存款，发放贷款。所有一定数量的支付款都要经过银行，因此，阿姆斯特丹银行对于荷兰的经济稳定起到了重要作用。更重要的是，它发明了我们现在所说的信用。那时叫做“想象中的货币”。</p>
+
+    <p>为了保障银行的信用，阿姆斯特丹市通过立法规定：任何人不能以任何借口限制银行的交易自由。由此，一个看上去不可思议的现象出现了：当荷兰和西班牙的军队正在海洋上厮杀时，西班牙贵族手中的白银仍可以自由地从阿姆斯特丹银行的金库中流进流出。荷兰的银行，可以合法地贷款给自己国家的敌人。</p>
+
+    <p>荷兰莱顿大学历史系 教授 威廉·范德莫伦：</p>
+
+    <p>荷兰人建立他们的政府，包括国家政府、地方政府都是为他们的商业利益服务的。</p>
+
+    <p>荷兰国务委员 约里斯·福尔胡弗：</p>
+
+    <p>当时欧洲不同的王国王室之间进行不停的争斗，荷兰始终在这些争斗中保持中立，而且它更专注于经济的发展。</p>
+
+    <p>历史学家们比较一致的意见是，荷兰的市民是现代商品经济制度的创造者，他们将银行、证券交易所、信用，以及有限责任公司有机地统一成一个相互贯通的金融和商业体系，由此带来了爆炸式的财富增长。</p>
+
+    <p>到17世纪中叶，荷兰联省共和国的全球商业霸权已经牢固地建立起来。此时，荷兰东印度公司已经拥有15000个分支机构，贸易额占到全世界总贸易额的一半。悬挂着荷兰三色旗的10000多艘商船游弋在世界的五大洋之上：</p>
+
+    <p>在东亚，他们占据了中国的台湾，垄断着日本的对外贸易；</p>
+
+    <p>在东南亚，他们把印度尼西亚变成了自己的殖民地，他们建立的第一个殖民据点——巴达维亚城，构成了今天雅加达的雏形；</p>
+
+    <p>在非洲，他们从葡萄牙手中夺取了新航线的要塞好望角；</p>
+
+    <p>在大洋洲，他们用荷兰一个省的名字命名了一个国家——新西兰；</p>
+
+    <p>在北美大陆的哈得逊河河口，东印度公司建造了新阿姆斯特丹城，今天，这座城市的名字叫做纽约。</p>
+
+    <p>荷兰阿姆斯特丹历史博物馆 馆长 洛德韦克·瓦赫纳尔：</p>
+
+    <p>阿姆斯特丹人是怎么看待自己的呢？请看这幅图，这幅《阿姆斯特丹女神》。17世纪阿姆斯特丹是世界的中心。这就是为什么阿姆斯特丹女神的手放在了地球的上面。我们的世界，我们的地球，这个世界是我们的。</p>
+
+    <p>马克思这样评价道：1648年的荷兰：已达到了商业繁荣的顶点。</p>
+
+    <p>正是在1648年，阿姆斯特丹的市民们决定建造一座新的市政厅。出于对质量的考虑，市民们没有预先规定工程完工的期限。实际上，他们一共花费了八年的时间和超过70吨的黄金，来营造这座宏伟的建筑。</p>
+
+    <p>只有正在创造历史的人们，才会有这种追求不朽的野心。</p>
+
+    <p>1656年，新的市政厅落成了。市民们进行了连续七天的狂欢。冯德尔，这位被称为荷兰“莎士比亚”的伟大诗人，特意为市政厅写了一首颂歌，歌词里唱道： “……我们阿姆斯特丹人扬帆远航……利润指引我们跨海越洋。为了爱财之心，我们走遍世界上所有的海港。”</p>
+
+    <p>在冯德尔创作这首颂歌的时候，荷兰东印度公司派出的一个外交使团，扬帆远航去了遥远的东方。</p>
+
+    <p>1656年，荷兰使团到达北京。入主中原刚刚八年的大清朝廷，以一种兴奋的态度接待了他们。但荷兰人遇到了那个时候所有到中国的外交使团都会遇到的一个麻烦，就是在觐见皇帝时必须行三拜九叩的大礼。事实上，一直到18世纪末，几乎没有一位欧洲国家的外交官愿意接受这种苛刻的天朝规矩。但是，荷兰人却毫不犹豫地答应了。</p>
+
+    <p>顺治皇帝接见了荷兰使团，并高兴地赏赐给这个来自世界上最富庶国家的使团大量礼物。回到住处，一个叫约翰·尼·霍夫的使团成员写下了他们答应跪拜条件的原因：“……我们只是不想为了所谓的尊严，而丧失重大的利益。”</p>
+
+    <p>荷兰人的重大利益是什么，就是通商和赚钱。</p>
+
+    <p>作为一个称霸全球的商业共和国，17世纪的荷兰从贸易中获得的巨额财富没有体现在王公贵族的豪奢宫殿中，它们被中产阶级商人们用来建造和装饰自己的住宅。荷兰人富裕的生活图景，被弗美尔、伦勃朗等一批卓越的现实主义画家真实地记录下来。</p>
+
+    <p>荷兰伦勃朗纪念馆 博士 桑德拉·贝希托尔：</p>
+
+    <p>在阿姆斯特丹有很多的艺术家，我们知道17世纪的时候，荷兰出现了大量出色的油画作品。17世纪中期，在阿姆斯特丹大约有800万到1500万张油画作品。那时，每个人都喜欢油画，每个阶层的家里都有油画，人们可以在市场买到这些作品。</p>
+
+    <p>在这些作品中几乎看不到国王、大臣和贵族，普通人、平凡的生活成为艺术殿堂的主角。一贯被忽略的芸芸众生，他们的喜悦、忧伤、内心中涌动的情感，甚至隐蔽的欲望，都被一一描绘下来。</p>
+
+    <p>这是17世纪的艺术大师弗美尔笔下的一个普普通通的荷兰清晨。温暖的色调、正常的生活秩序，构造出平静、祥和的氛围。主人公身上洋溢着蓬勃的生命力。只有良好的营养，充足的睡眠才能塑造出如此健康的体型。这种专注、平和的表情，只会出现在那些没有对饥饿的恐惧，不用时刻担心流离失所，在富足的环境中度过一生的人们的脸上。</p>
+
+    <p>直到今天，荷兰人的日子依然像这位厨娘一样富足和安逸，荷兰这个商业帝国所开创的商业规则，仍然在影响着世界。</p>
+
+    <p>1688年9月，一支庞大的舰队从阿姆斯特丹港拔锚起航，这些船上载着荷兰的最高执政官威廉三世和两万名荷兰士兵。威廉三世此行是受英国议会的邀请，前去保护英国国民的“宗教自由和财产”。</p>
+
+    <p>历史的安排竟是这样的巧合。17世纪末期，荷兰发展的速度慢了下来，逐渐失去了左右世界的霸权。无论在时间上还是空间上，威廉三世离开荷兰到英国，都成为了世界中心舞台的一次极有象征意义的转移。</p>
+
+    <p>UID: 1 性别: 男 精华: 1 积分: 3987 帖子: 787 阅读权限: 200 注册: 2006-9-5 状态:</p>
+
+    <p>#3发表于 2007-2-21 11:19 PM  资料 主页 个人空间 短消息 ［大国崛起］</p>
+
+  </div>
+</section>
+
+<div class="chapter-divider"></div>
+<section class="chapter" id="ep03">
+  <div class="chapter-header">
+    <div class="chapter-emoji">👑</div>
+    <h2 class="chapter-title">第三集 走向现代</h2>
+    <div class="chapter-country">英国（上）</div>
+    <span class="chapter-period-badge">16-18世纪</span>
+    <div class="chapter-subtitle">君主立宪的诞生</div>
+  </div>
+  <div class="chapter-body">
+
+    <p>（英国上）  本集片名： 第三集 走向现代</p>
+
+    <p>1588年7月7日，大西洋的海流与此前任何一个夏季一样，波涛汹涌。</p>
+
+    <p>这一天，130艘战船、8000名水手和两万名士兵从西班牙起航，这支浩浩荡荡的队伍拥有一个显赫的名号——无敌舰队。强大的西班牙帝国在它的护卫下，已经称霸了半个多世纪。</p>
+
+    <p>无敌舰队此行的目的是控制英吉利海峡，教训大西洋上的岛国英格兰。</p>
+
+    <p>英西战争源于宗教改革。16世纪30年代，英国已经变成了新教国家。信奉天主教的西班牙希望英国恢复信仰天主教，接受（信奉天主教的王室成员）亨利八世女儿玛丽的管制。</p>
+
+    <p>除了宗教信仰，让西班牙国王挥戈动武的另一个重要原因是：英格兰人正在试图抢占和扩大海上优势，西班牙帝国的利益遭到了前所未有的侵犯。</p>
+
+    <p>一个一直以来并不被欧洲大陆重视的小小岛国，为什么会对当时世界的第一大帝国西班牙发起挑战？英国人究竟凭借什么，敢于对抗已经在海洋上驰骋了近百年的西班牙？</p>
+
+    <p>油画上这位用巨型裙箍、僵硬皱领、宽大衣袖、绣金披纱来装饰的女性，就是当时英国的统治者――伊丽莎白一世。在重叠繁复的服装下，妇女的形体不见了，人们记住的是一个庄严高傲的王权偶像。一位著名的英国传记作家这样描述这位25岁登基、终身未婚的女王：“这只凶狠的老母鸡一动不动地坐着，孵育着英吉利民族。这民族初生的力量，在她的羽翼下，快速地变成熟，变统一了。她一动不动地坐着，但每根羽毛都竖了起来。”</p>
+
+    <p>1558年伊丽莎白一世继承王位的时候，从英吉利海峡的那一边，不断地传来西班牙和葡萄牙航海探险家成功发财的消息。这些消息，是一个即将全面来临的时代，对懵懂的人们发出的清晰信号。它意味着：在一个刚刚被重新发现的世界面前，谁能抢到先机，接受新的思想，谁更快地打破旧有的价值观念，谁就会更快地变得富有和强大。在新世界的游戏规则里，赢得海洋比赢得陆地更为重要。</p>
+
+    <p>历史给每个民族腾飞的机遇都是有限的。作为国家最高统治者，伊丽莎白一世没有错过时机。英格兰的任何一个地方距离海洋都不超过120公里，女王认为可以利用这个天然的优势，发展海洋贸易。但是这样做，无异于从西班牙人那里虎口夺食。伊丽莎白一世十分清楚对手的实力，她不希望在公开对抗中输给西班牙。</p>
+
+    <p>因此女王鼓励私掠船、海盗，像雷利和德雷克以及其他的人去扩大英国贸易，开拓殖民地，如弗吉尼亚，甚至袭击西班牙的贸易。他们像私掠船者一样行动，差不多就是海盗了，因此，如果他们和西班牙发生冲突，女王可以否认他们和她有关，并且说他们是违反政府的官方政策的。这样一来，女王可以不牵扯到一些海军行动，但是却积极鼓励他们，因为她把它看作发展国家的一种方式。</p>
+
+    <p>这里是英国南部的普利茅斯港，16世纪的英国航海者大多从这里启航。</p>
+
+    <p>1580年，普利茅斯人弗兰西斯·德雷克成为世界上第一个亲自完成环球航行的人，在这次历时三年的航行中，德雷克的船队不仅掠夺了南美的西班牙殖民地，而且还袭击了西班牙在欧洲的港口。满载而归的德雷克给投资者带来了4700倍的利润。作为资助者之一，伊丽莎白一世分到了16.3万英镑的红利，这个数字几乎相当于当时政府一年的支出。</p>
+
+    <p>高贵的女王亲自来到了德雷克的坐舰上，隆重地授予德雷克——这位职业更准确地说是海盗的人——骑士称号。同胞的成功和女王的鼓励，撑起了英国人远涉重洋的信心，越来越多的人前赴后继地加入到海外掠夺和贸易的行列中。</p>
+
+    <p>但是，这些新加入的竞争者，显然抢走了当时世界上最大的帝国——西班牙的利益。一次次的争夺和冲突之后，西班牙国王菲利普二世被彻底激怒了。1588年的夏天，他派出了自己所向披靡的舰队，以遮天蔽日的骇人威势，横渡英吉利海峡，进攻英国。</p>
+
+    <p>1588年的“英西大海战”是人类历史上最重要的海战之一，它决定了近代早期欧洲的命运，并且在一定程度上，对近代早期的世界都产生了影响。</p>
+
+    <p>伊丽莎白一世试图通过谈判来化解危机，但菲利普二世却面带冷笑，他坚信：无敌舰队在两周之后就会宣布英国人的败局。</p>
+
+    <p>然而，两周之后的局势却恰恰相反。无敌舰队遇到了大西洋上最强劲的对手，那是一支由商船和海盗组成的小型舰队。</p>
+
+    <p>起初呢，西班牙想依据人多、船大的优势，一举歼灭英国舰队，但没有想到，英国舰队虽然规模小，但它拥有更先进的火炮，再加上气候的原因，英国舰队利用它灵活机动的特点，在战争当中反而占据了优势。</p>
+
+    <p>几天激战之后，西班牙的无敌舰队被英国人打得一半沉入海底，一半奔逃回家。由于没有全歼对手，英国的舰长们甚至对这次胜利多少有些失望。但事实上，这次胜利的意义远远超出了他们的想象。</p>
+
+    <p>此次胜利也极大地振奋了英国人的士气，回顾历史，它确实标志着17世纪英国海上力量的崛起，自此西班牙的霸权开始向英国转移。无敌舰队惨败后50年间，西班牙仍旧保持着大国地位，但显然其根基已经动摇。</p>
+
+    <p>英国在1588年英西海战中的胜利，是一次以弱胜强的胜利，它再一次显示了在王权统治下的民族国家的力量。长期处在欧洲主流文明之外的岛国，第一次以强国的姿态向欧洲大陆发出了声音，并迅速进入世界海洋霸权和商业霸权的争夺中心。</p>
+
+    <p>西班牙慢慢退出了历史的主要舞台，一个新的海上强国初露峥嵘。伊丽莎白一世能带领这个正在崛起的岛国走多远？</p>
+
+    <p>你需要记住：英国在16世纪末实际上还是一个人口很少的小国。英国的强大最终还是通过商业和殖民地的经济扩张。西班牙阻挡了它的发展，荷兰人和后来的法国人都挡了它的路。因此英国必须利用它的海军，挑战所有这些国家的权威和力量，争夺他们的殖民地和贸易，而伊丽莎白（一世）是第一个真正成功做到这一点的人。</p>
+
+    <p>我认为，在欧洲以及英国社会由中世纪向现代社会转变的过程中，强有力的君主制是关键的一环。强大的君主对于这些国家是有益的，因为他们是爱国主义的核心，能给予国家明确的领导。</p>
+
+    <p>强有力的君主制给英国带来了早期的辉煌，使英国走出了成为大国的重要一步。在海外扩张和贸易不断拓展的同时，这个岛国的面貌和气质也在悄然转变。</p>
+
+    <p>伦敦城的面积扩大了一倍，1600年时人口已经超过20万，成为欧洲第一大城市。在贯穿伦敦的泰晤士河北岸，集中了城市的壮丽建筑；南岸则布满了各种剧院。今天，当年的那些剧院已难觅踪影，但却有一座剧院是个例外。</p>
+
+    <p>这座圆形建筑名叫“环球剧院”。它建成于1997年，但是里面的一切材料和布局，却都完全保留了伊丽莎白一世时代的样子。剧院从筹备到建成，用了接近50年，这样不计工时建造的目的，不单纯是为了增加一个文化景观，更重要的是，四百年前，那位被马克思称为“人类最伟大的天才之一”的戏剧家莎士比亚，曾是此剧院的股东、演员和剧作人。</p>
+
+    <p>这位身材短小、来自偏僻乡村的剧作家，在他的37部剧作中展露出惊人的才华和对人的内心世界的洞察力。莎士比亚站在16世纪的思想高度，把掩藏在历史深处的人性特点挖掘出来抛到了人们的脚下，他说：“看吧，我的朋友们，人类不是按照我的规格创造的，我所能做的一切就是把它们真实的样子展示给你们。”</p>
+
+    <p>今天，人们用这座可以容纳1600名观众的“环球剧院”来表达他们对这位天才的怀念之情。在5月到9月的演出季节里，这里依然场场爆满，莎士比亚那些被全世界公认的经典剧作，依然还是剧院唯一的选择。</p>
+
+    <p>在莎翁的历史剧当中，君主往往是反面角色。伊丽莎白女王呢，当然知道这一点，她并没有下令禁止演出莎士比亚的戏剧。尽管在哈姆雷特这样的剧中，就有“脆弱啊，你的名字是女人！”这样的台词。但是呢，这并没有影响伊丽莎白女王就坐在舞台对面的包厢里看戏。</p>
+
+    <p>女王的宽容，成就了莎士比亚的艺术高度，而女王的开明并不仅仅表现在对待艺术的态度上，在处理国家事务时，她也表现出高超的技巧和智慧。女王明白：权力的基础是全体英国人组成的民族，没有民众的支持做后盾，王朝就没有立身的可能。为了获得民众的支持，伊丽莎白一世在强化王权的同时，恪守了祖先传下来的一个重要的政治传统。</p>
+
+    <p>这一政治传统，来自于一段古老的往事。</p>
+
+    <p>这位看上去十分孔武有力的人，是英国早期历史上最重要的一位国王，他的称号是威廉一世，从这位国王开始，英国王室才有了正宗的血统传承，并且像欧洲大陆那样，建立起封建制度。</p>
+
+    <p>欧洲的封建制度是以庄园为基本单位的，庄园呢，它不仅是一块地产，而且是一个政权单位，贵族领主在庄园上，不仅有司法权，还有经营权，还有行政管辖权，因而庄园俨然是一个独立王国。</p>
+
+    <p>“封建”这个词呢，在欧洲与中国的含义是不一样的，在中国呢，它意味着“普天之下莫非王土,率土之滨莫非王臣”，他代表着集权和专制，在欧洲呢，由于封建制就是庄园制，所以它意味着分权，意味着国王没有大一统的权力。</p>
+
+    <p>在英国实行封建制度初期，国王与贵族都很清楚自己的地位，知道按照本分自己应该拥有什么，不应该拥有什么。虽然没有成文的法律，但是天长日久，国王和贵族遵照彼此间的承诺，各自履行义务、享受权利，成为英国社会约定俗成的一种规则。不过，国王和贵族之间的关系，并非一成不变。</p>
+
+    <p>13世纪初，英格兰出现了一位好战却又屡战屡败的国王约翰。在连年的对外战争中，他失去了英格兰在欧洲大陆几乎全部的领地。因此，约翰王又被称为“失地王”。为了维持战事，约翰王加紧了对市民和贵族的盘剥。</p>
+
+    <p>他把贵族们的继承税上涨了100倍，兵役免除税提高了16倍，与此同时，牛、羊、小麦的价格也都出现了成倍上涨。</p>
+
+    <p>约翰王越来越无所顾忌，他不断地开征新税和加税，这样呢，就破坏了贵族和国王之间那个不成文的却流传已久的惯例，到了1215年春天，愤怒的贵族们集结起来，武装讨伐国王，理由很简单，就是国王没有履行他的义务，却要求比惯例规定的更多的权力。</p>
+
+    <p>这是泰晤士河边一块宁静而美丽的草坪，草坪上这座具有希腊风格的圆顶纪念亭，当年曾位于节节胜利的贵族武装和约翰王驻地的正中间。1215年6月15日，面临绝路的约翰王，不得不同意与25位贵族代表，在这个亭子周围举行谈判。那是一场艰难的谈判，刀光剑影下，贵族代表与国王进行了整整四天的交锋和妥协，最后，《大宪章》——这份和平停战宣言终于签署了。</p>
+
+    <p>当时，缔约的双方，没有一个人会意识到他们的所作所为，正在书写英国历史上的一个重要篇章。</p>
+
+    <p>《大宪章》里有两条最著名的条款，以后呢，就写进了英国的大法里面去,第一条就是国王要宣誓“向任何人施以公正，不能剥夺他人的权利”；另一条是，如果法庭没有判决,国王也不能逮捕和剥夺他人的财产。这两个条款表明，臣民的权利是独立的，不是国王恩赐的，所以国王也不能剥夺它。</p>
+
+    <p>在大英图书馆的珍品展厅里，一张黑粗泛黄的羊皮纸，静静地躺在玻璃板下幽暗的光影里。这张单薄的羊皮纸，就是距今已有约八百年历史的《大宪章》，虽然它的边缘已经残破，当年用羽毛笔书写的字迹也早已模糊，却成为对君主权力进行限制的永久见证。</p>
+
+    <p>它一共只有63款，短短几千个字，却是第一次把国王和贵族之间一直以来既约定俗成但又模糊不清的权利关系，转化为了明确的法律文字。从此以后，英国国王的权力不再是至高无上的，他只能在法律的限制之下行使权力。</p>
+
+    <p>在约翰王签订城下之盟后，英国的历代君主，不断地将《大宪章》稍加修正后继续颁布。几个世纪下来，《大宪章》前前后后总共颁布超过了40次。尽管在很多时候，《大宪章》并不被大多数英国人明确感知，但是，这种长期的重申和普及，却积累起深厚的传统力量，将契约和法制的基本精神，注入到英国人的思想根基。</p>
+
+    <p>这条宽阔平缓的大河就是泰晤士河，一条被丘吉尔称作“穿过英国历史的河流”。英国的议会大厦就是泰晤士河畔最引人注目的建筑。</p>
+
+    <p>就在《大宪章》签订21年之后，英国的官方文件中出现了“议会”这个词。这个由贵族和国王的议事会转变而来的机构，逐渐成为依靠《大宪章》的法制原则来限制君主权力的重要力量。议会大厦上著名的大笨钟，每隔15分钟敲响一次，它像一位警惕而又忠实的站岗卫士，一丝不苟地履行着自己的职责，误差从来没有超过一秒钟。</p>
+
+    <p>伊丽莎白一世能够给英国带来早期的辉煌，在相当程度上，是因为她像这大笨钟的指针一样，遵守了《大宪章》的约定，维持了王权和贵族议会之间的平衡。</p>
+
+    <p>伊丽莎白（一世）是个威权主义的君主，但却不是一个暴君，也不是一个企图为所欲为的人。她试图在公认的法律和常规下统治。她经常召开议会——不是每年都召开，但是后来她每年都召开——实施大多数人，尤其是有影响的人想要的政策。</p>
+
+    <p>在伊丽莎白一世45年的治国生涯里，这位善于协调各种关系的女王没有滥用自己权力和威望，她终身节俭，不轻易战争。当王权与议会发生矛盾的时候，她总是会根据情况做出必要的让步。在她一生中，王权的扩张始终控制在议会能够忍受的范围之内。这二者之间的平衡和秩序给英国带来了一个相对稳定和宽松的社会环境。</p>
+
+    <p>1603年，70岁的伊丽莎白一世去世了。为了避免政治联姻伤害国家利益，女王终生未婚，孤独地走完了一生，却留下了一个国力日盛、处于上升态势中的英国。</p>
+
+    <p>22年之后，又一位对英国历史产生深刻影响的国王登基了。这是一位既会驾驭烈马、又能射箭打枪的年轻君主，他的称号是查理一世。</p>
+
+    <p>在伊丽莎白一世用君主制把英国带入强国之列后，查理一世能否将女王开创的有利局面延续下去？他能带领英国继续前行吗？</p>
+
+    <p>这里是伦敦白厅大街，英国主要的政府部门几乎都集中在这条街的两侧。在白厅大街，历史最悠久的建筑就是建于1619年的宴会大厅，根据记载，它是当时的伦敦城最高大的建筑。在大厅宽阔的天顶上，油画大师鲁本斯的作品仍然鲜艳，一位年迈的国王被天使授予皇冠的故事，还在散发着人间的生动气息。据说，当年郑重邀请鲁本斯来创作这些油画的人，就是英国历史上的第18位国王查理一世。</p>
+
+    <p>这位国王特别相信君权神授，在宴会大厅里他请画家把他的父王描绘成为一个圣徒，他还请鲁本斯把英国的对外扩张，描绘成按照上帝的意志所进行的一种征战。那么在他心目中这些油画，那么一方面是寓意着上帝赋予的神授君权，另一方面也寄托了他对外扩土开疆的一种野心。</p>
+
+    <p>面对伊丽莎白一世的王权所带来的荣耀，这位站在先王威权之上的年轻君主深信：自己是上帝派到世间的最高权威，拥有无上的权力。但他却忽视了一点，那就是：民众的支持和民族的利益。这个常常出现在伊丽莎白一世脑海中的概念，在查理一世的思想中逐渐消失了。</p>
+
+    <p>查理一世继任后，很快就遭遇了财政危机。那些由他个人主导的，英国与西班牙、与法国之间错综复杂的宗教战争，使得国库空虚，财政紧张，为了维持战事，查理一世想到的最主要的手段就是增加税收。</p>
+
+    <p>不过，英国国王在这件事上是不能随心所欲的。因为自《大宪章 》签署开始，开征新税的权利就属于议会。国王要想征收新税，必须得到议会的批准。</p>
+
+    <p>这个时候的议会，没有批准查理一世婚约中，所要求的足够经费；另外还驳回了国王因为战争要求增税的提议；不仅如此，议会还规定国王只能征收一年的关税，不得终身享有征收关税的权利。</p>
+
+    <p>一心想创造和伊丽莎白一世同样成就的查理一世，被议会发出的一道道紧箍咒逼急了，</p>
+
+    <p>他开始不经过议会，自行向商人征收新税，向乡绅强制性贷款。</p>
+
+    <p>国王和议会之间的激烈较量开始了。</p>
+
+    <p>1629年，查理一世派军队强行解散已经在英格兰召开了三个多世纪的议会。但是，在长达11年的无议会时期里，英国人并没有忘记几个世纪以来形成的规则。</p>
+
+    <p>在英国的历史上，形成了两大原则，一是王在议会，也就是说国王必须通过议会来进行统治。第二呢，是王在法下，也就是说法律高于国王，国王必须服从法律。可是呢，查理一世的做法就是把这样的两个原则全都给破坏了。因此呢，议会和国王之间的矛盾就越来越大，对立也就越来越尖锐，最终导致在1642年爆发了战争，而这个呢，就是近代历史上非常著名的“英国革命”，也叫“英国内战”。</p>
+
+    <p>这是一场争夺谁拥有国家最高权力的战争。在战争中，一位叫奥利弗·克伦威尔的议会军将领脱颖而出，在他的带领下，国王的军队被彻底击败，英吉利共和国成立，查理一世被俘。</p>
+
+    <p>白厅大街的宴会大厅没有成为查理一世实现宏图霸业的见证者，却见证了英国历史上的另一个重要时刻。就在鲁本斯的画作完成不久，查理一世本人，就在这座自己精心营造的宴会大厅外，甚至就在那位被描绘成圣徒的父王眼睛能够看到的地方，走到了人生的终点。</p>
+
+    <p>1649年1月30日，一个晴朗的冬日，宴会大厅前的广场上，凌晨就聚集了上千位伦敦市民，悲伤、恐惧、兴奋、茫然这些互相矛盾的表情，挂在他们的脸上。在难以控制的焦灼中，他们等待着一场断头的刑罚，受刑的就是被议会宣判为“暴君、杀人犯和国家公敌”的国王查理一世。</p>
+
+    <p>查理一世表现得很沉着。在踏上刑场之前，他坚持要穿两件衬衣，这样就不会冷得发抖，让围观的人误以为他在害怕。在留下遗言和做完祷告之后，这位49岁、已经临朝24年的君主，将头放在垫头砧上，伸手向刽子手示意，可以落斧了。</p>
+
+    <p>1649年发生的这件事，对于刚刚入关五年的中国清王朝几乎没有任何影响，但是对于欧洲大陆则完全不同。欧洲大大小小的宫廷都被震惊了，当时这些宫廷不是处于君主专制统治之下，就是正在渴望实行君主专制。隔海相望的岛国英国的做法，超越了那个时代普遍的政治观念。</p>
+
+    <p>归根结底，查理一世是违背了英国自古以来就形成的所谓的自由的传统，那么在开始的时候呢，所谓自由是指贵族对抗国王，可是后来呢，它逐步地就变成了整个国家反抗国王的暴政。在几百年的时间当中，王权和民权之间的这种斗争啊，是英国政治史发展的一个主线。那么正是在这样的一个抗争之中，英国走出了中世纪，走进了现代世界。</p>
+
+    <p>查理一世死后，议会把行政权力交给了以克伦威尔为首的国务会议。但是，英国人期盼的新生活却没有来临。</p>
+
+    <p>很快，克伦威尔开始实行军事独裁。英国内战推翻专制王朝的成果，就像附在玻璃板上的水彩画，被克伦威尔的独裁和社会动乱冲刷得了无痕迹。革命从反抗一个人的专制开始，却以另一个人的专制结束，“护国主”克伦威尔成为一个没有国王名号的“国王”。1653年，议会再次被解散。</p>
+
+    <p>事情总是物极必反。克伦威尔去世后，已经倒下的王朝又被用盛大的仪式请了回来。1685年，在经过一系列纷繁复杂的政权轮替后，查理一世的儿子詹姆士二世继承王位。对父王悲剧铭刻于心的詹姆士二世，不想重蹈覆辙，他准备扩充军队，试图让英国重新回到查理一世统治的时代。</p>
+
+    <p>人民不想冒可能发生内战的风险，而且他们希望詹姆士二世做一个可敬的理智的国王。但事实证明他是个很差劲的国王。他一意孤行，脱离议会统治，威胁到伦敦城和许多其他城镇的利益。表现的像一个专制独裁君主。他让英国多数有产精英觉得他们必须推翻他。</p>
+
+    <p>面对詹姆士二世的专制，处于十字路口的英国人，会选择用什么样的方式来反抗呢？</p>
+
+    <p>一个国家的政治选择，常常受到传统和某些重大事件的影响。</p>
+
+    <p>这一次，英国人没有像对待查理一世那样采取暴力革命的方式，教训告诉他们：推翻王朝容易，建立新制度却很难；他们也没有呼唤克伦威尔，因为克伦威尔式的革命并没有给国家带来真正的进步和发展。于是，1688年的英国人，采取了一种被后人称为“光荣革命”的方式，来结束王权的专制。</p>
+
+    <p>光荣革命中，有一群社会贵族精英，他们说，改变晚宴（规则）的时候到了，坐在桌前的人们该被换掉了，但不是通过流血的方式。</p>
+
+    <p>他（詹姆士二世）拥护者中的一些主要成员给詹姆士二世的女婿, 荷兰的一位新教君主威廉写了一封著名的信。他们邀请他来帮助反抗詹姆士二世的统治。此后迅速发生的一系列事件使威廉和平地入侵了英格兰，没有遭到反对。詹姆士的军队在他们到来之前就已解散, 威廉到达伦敦, 詹姆士逃跑. 没有发生战争。</p>
+
+    <p>议会在整个事件的演变过程中，都发挥了主导作用。接下来在确立新国王的时候，议会经过讨论，折中了两派意见，最终决定威廉夫妇共同为英国国王。</p>
+
+    <p>这是一个前所未有的变化，国王由议会决定产生，意味着君权从“神授”变成了“民授”，它根本性地改变了在英国已经存在了千年之久的王权性质。从1688年起，英国正式确立了议会高于王权的政治原则，并在以后的几十年里逐步建立起君主立宪制。</p>
+
+    <p>英国的君主他是国家的元首,是政府的首脑,是教会的首领,又是全国武装部队的总司令,但是呢，他实际上并不能直接管理国家,他必须任命一个首相,由这个首相来直接管理国家,那么，这个首相呢,必须从议会中多数党的首领中产生,这就是英国的君主立宪制。君主立宪制的本质,就是依法治国,也就是谁都不能高居法律之上,谁都不能为所欲为。</p>
+
+    <p>君主立宪政体的确立，标志着一个人统治一个国家的时代在这个岛国永远地结束了。</p>
+
+    <p>英国人赶走詹姆士二世、建立君主立宪制的革命，没有发生流血，这是它被历史学家称为“光荣革命”的一个根本原因。光荣革命创造了一种适合英国历史和政治传统的新的社会进步方式，那就是：用和平变革的方式实现社会进步。这种模式，成为它给后世留下的最独特的遗产。</p>
+
+    <p>光荣革命使英国摆脱了专制的统治，这个在世界上，它是第一个国家。它在这样做的时候，它采用了不流血的方法。从此以后呢，英国就是在议会制度的框架之内，进行和平和渐进的制度的改革，光荣革命之后，英国出现了一个相对宽松、相对自由的社会环境。</p>
+
+    <p>所谓的一个国家外部的崛起，实际上是它内部力量的一个外延，在一个内部，自己的国家制度还没有健全的情况下，就很难成为一个大国，即使成为一个大国，也不是可持续的。</p>
+
+    <p>从1588年战胜西班牙的大海战，到1688年的光荣革命，在整整一个世纪的时间里，英国一方面调整内部制度，一方面积极对外扩张。百年时间的积蓄之后，英国人开始释放自己的能量。光荣革命前后的英国，人口大量增长，商业和手工工业迅猛发展，对外贸易成为越来越重要的国计民生。</p>
+
+    <p>法国思想家伏尔泰曾经有过这样的评价：“使英格兰变得强大的是下述事实：从伊丽莎白时代开始，各方面已经就重商的必要性达成一致。把国王送上断头台的同一个国会，同时在忙于分配海外贸易的职位，仿佛任何事情也没有发生。查理一世的鲜血还在流淌着，这个国会却通过了《航海法》。”</p>
+
+    <p>经过三次英荷战争，英国最终迫使荷兰接受了《航海法》。《航海法》规定：输入英国及其属国的货物，必须使用英国的船只或者是输出国的船只。从此，荷兰船只逐渐退出驰骋了近一个世纪的茫茫海域。在打败了西班牙、葡萄牙之后，英国人将海上马车夫荷兰也赶下了海上霸主的位置。</p>
+
+    <p>现在，轮到英国人来制定海洋竞争和大国竞争的规则了。此时，在英国人眼里，除了陆地霸主法国，其他国家已不是对手。在建立帝国的道路上，英国已显示出不可阻挡的强劲力量：连续的征战中，英国建立起一支欧洲最强大的海军，它的商业触角已经伸向全世界。</p>
+
+    <p>因此，从1688年以后，虽然英国还不是一个民主国家，但它是一个开放的社会，在这个社会中，思想很容易向更广范围的人群传播。民众如果感觉合适就可以发展他们的经济生活。这是一项伟大的成就，而我们是世界上第一个取得这一成就的国家。</p>
+
+    <p>环顾当时的世界，法国正处在君主专制的鼎盛时期；俄国的彼得大帝还在南征北战，建立专制帝国；德国和意大利则四分五裂，人民正期待着强有力的王者出现；在亚洲，日本还在被封建幕府制度束缚；而中国，大清王朝268年的江山才刚刚坐了44年。</p>
+
+    <p>但是英国，这个地处边缘的小国，却在历史性的转变中抢占了先机，已经率先到达现代文明的入口处，即将一步步稳健地走向世界的中心。在下两个世纪里，它将傲视全球。（2006年10月）</p>
+
+    <p>UID: 1 性别: 男 精华: 1 积分: 3987 帖子: 787 阅读权限: 200 注册: 2006-9-5 状态:</p>
+
+    <p>#4发表于 2007-2-21 11:23 PM  资料 主页 个人空间 短消息 ［大国崛起］</p>
+
+  </div>
+</section>
+
+<div class="chapter-divider"></div>
+<section class="chapter" id="ep04">
+  <div class="chapter-header">
+    <div class="chapter-emoji">🏭</div>
+    <h2 class="chapter-title">第四集 工业先声</h2>
+    <div class="chapter-country">英国（下）</div>
+    <span class="chapter-period-badge">18-19世纪</span>
+    <div class="chapter-subtitle">工业革命的号角</div>
+  </div>
+  <div class="chapter-body">
+
+    <p>三百年前，当18世纪来临的时候，中国的康熙皇帝正在用他的文治武功，开辟一个新王朝的辉煌，并开始对遥远的西方产生了兴趣。此时的英国，正在孕育人类历史上一种崭新的生产方式，后世称之为“工业革命”。持续的海外扩张和殖民贸易，带动了对商品的需求；科学意识和市场意识，提高了英国人普遍的认识水准。在各种合力下，英国成为世界上第一个工业化国家，开创了影响深远的自由主义经济模式，并建立起一个地跨全球的“日不落帝国”，在18世纪中期到19世纪中期，引领着世界的发展。那么，工业的先声为什么会出现在英国？对于这个岛国来说，高速的工业化发展进程又意味着什么呢？</p>
+
+    <p>这里是英国西北部的一座滨海小城，它的名字叫格里诺克，1736年，工业革命之父、万能蒸汽机的发明者――詹姆斯·瓦特先生就出生在这里。今天，这座城市美丽而安宁，港湾中停泊着许多漂亮的游艇，街道上汽车稀少，人们生活闲适平静。</p>
+
+    <p>不过，大约三百年前，这里完全是另外一幅景象。由于靠近欧洲烟草中心的格拉斯哥市，格里诺克的出海口位置显得非常重要。港口中大型帆船你来我往，城市里载货马车喧嚣奔腾，酒馆里商人们吞云吐雾、高谈阔论。瓦特的祖父和父亲就是这些商人中比较成功的两位，他们从事的是格里诺克最红火的烟草贸易。</p>
+
+    <p>工业革命前的英国，有很多像瓦特家族这样的家庭，在新教思想影响下，开始努力创造财富，追求利润，他们想以现实的成就与上帝沟通，证明自己是上帝的选民。用他们自己的话来说，就是“弄钱是人生的主要之事。”</p>
+
+    <p>如果进一步扩大眼界看，就会发现瓦特的父辈们在格里诺克与美国的弗吉尼亚之间进行的贸易，仅仅是英国全球贸易中一个小小的部分。1686年时的一个统计表明，当时有近一半的英国船只都在从事美洲或印度贸易。这是当时让所有国家都会眼红的生意。</p>
+
+    <p>英国伦敦大学王家学院 教授 安德鲁?波特</p>
+
+    <p>我认为“光荣革命”带来了政治稳定的局面，其最重要的结果就是普通国民感觉有一个他们可以信赖的政府。由于对政府持有好感，国民愿意纳税来支持政府。他们更愿意承担必要的赋税支持国家对外作战，特别是在18世纪初期与法国和西班牙作战。</p>
+
+    <p>1763年，通过英法七年战争，英国才将挡在自己面前的法国和紧跟法国的西班牙暂时搬开。一位英国历史学家评论说：“从战争结束起，英国较其周围国家重要还是不重要，已无关紧要。因为英国已不再仅仅是一个欧洲强国，不再仅仅是德国、俄国或法国的对手。”</p>
+
+    <p>有史以来第一次，英国把自己看作是世界性的大国了。</p>
+
+    <p>英国威斯敏斯特大学 教授 理查德·哈丁</p>
+
+    <p>英法七年战争对英国的地位有着巨大的影响。这是海战第一次，对欧洲的外交格局产生了决定性作用。西班牙和法国再不能忽视英国的力量，如果对英宣战，他们就会失去重要的领地。</p>
+
+    <p>殖民扩张和海外市场的成熟，使各种商品的需求量越来越大，以手工工场为支撑的生产能力变得捉襟见肘。为了能经受住这种考验，几乎整个英国都被动员了起来。一位英国棉纺主，从他在伦敦的经理人那里得到这样的信息：“无论你能生产多少平纹布，好的次的我们都要。” “你必须想办法发明，在工业中你们大有可为，……”</p>
+
+    <p>市场上如黑洞般的迫切需求，首先出现在纺织业，因为这个行业的产品与普通人的生活最密切相关。为了以更快的速度生产，工匠们的聪明才智被充分调动了起来，新的发明一个接着一个，英国开始一步步接近“工业革命”的起跑线。</p>
+
+    <p>英国伦敦大学伯贝克学院 教授 米歇尔·亨特</p>
+
+    <p>旧式的纺织生产单位非常小，一般以户为单位，妻子、孩子甚至连丈夫一家人在一起织布。但随着飞梭和珍妮纺纱机等发明的出现，生产规模就大大扩展了，更多的人能在一起工作。这样就出现了工厂模式，为以后的工厂模式打下了基础。</p>
+
+    <p>在生产中大规模使用机器，极大地提高了手工工场的效率，并最终促成了现代工厂的诞生。但是这些工厂却有着共同的局限，它们几乎无一例外地都选择了靠近河流的地方作为厂址，这是因为到18世纪初，能够使机器运转的动力源，还是人类已经使用了将近两千年的风车和水排。这种依靠自然界提供的动力源，严重制约了生产。因此，哪个国家能最先造出适应工业化需求的动力机器，那它就将在竞赛中处于领先地位。那台能够启动新时代的机器，将会在怎样的机缘汇聚下诞生呢？率先跨入工业时代大门的英国人，究竟为此做了哪些准备？</p>
+
+    <p>事实上，当整个英国，甚至是整个欧洲，都伸直了脖子，盼望那台可以产生无穷动力的机器的时候，最终制造出“万能蒸汽发动机”的詹姆斯·瓦特先生，却正在面临一场前所未有的危机。</p>
+
+    <p>1773年3月，瓦特先生的合伙人破产了，这不仅使他失去了稳定的收入，而且不得不变卖家产来还债。37岁的瓦特抱怨说:“我还有妻子儿女，眼看自己变得雪染双鬓，却没有任何固定的职业来供养他们。”</p>
+
+    <p>1773年的秋天，瓦特又遭遇了一次家庭的变故,和他共同生活了九年的妻子去世了,而且给他留下了六个儿女,与他共同合作的工厂又破产了,这个时候,他的生活落到了最低谷。有一位朋友推荐他到俄国去工作,他说:“我眼下有这么多的事情要做，而我又这么贫困。我感觉到非常苦闷。”</p>
+
+    <p>但是英国，这片让瓦特先生沮丧的故土，此时也许会让一个不成功的商人离开，却不会让一个将会带来无限商机的发明家走出自己的视野，因为，它早已准备好了将聪明才智纳入实用轨道的各种机制。这些机制，如同一张巨大而细密的网，将世界上最优秀的人才和技术都搜罗到了英国。其中，专利保护就是重要的一种措施。</p>
+
+    <p>英国牛津大学科学历史学 教授 罗伯特·福克斯</p>
+
+    <p>专利最早产生于16世纪，但在16和17世纪申请专利并不常见。自18世纪以来专利申请才普遍起来，变得重要了。申请专利的目的很简单，即保护一项发明，使它保持新颖。专利给予发明者约15年左右的保护期，在此期间，他的发明受到保护，其他任何人不得仿冒。</p>
+
+    <p>晚年的瓦特，生活非常富庶。但是瓦特财富的主要来源，不是制造蒸汽机的工厂，而是被广泛转让的高效能蒸汽机的发明专利。</p>
+
+    <p>对技术创新的激励机制，对英国发展影响深远，直到已进入知识经济时代的今天，这个制定了世界上第一部专利法的国家，依然将科技创新战略作为国家发展战略，并在全球高新产品生产国中位列第四。</p>
+
+    <p>而250年前，英国对知识产权的保护和奖励，使几乎所有的人，都陷入了一种对新技术、新发明的狂热崇拜之中。一本英国刊物称，“工程技术的贡献大于战争和外交；它的贡献大于教堂和大学；它的贡献大于抽象的哲学和文学；在改变社会方面，它的贡献大于我们法律所作的贡献……”</p>
+
+    <p>在这种全民性的崇拜中，一个新兴阶层表现得最为虔诚，因为技术和发明与他们有着最为密切的利益关系。这个阶层当时被叫做“工厂主”，今天被称为“企业家”。1773年，正是他们中的一员挽留住了想要前往俄国的瓦特，他的名字叫马修·博尔顿。</p>
+
+    <p>中国南京大学世界历史系 教授 杨豫</p>
+
+    <p>博尔顿的索霍工厂在伯明翰，伯明翰是当时英国的小五金生产的中心，博尔顿的工厂有1000多个员工，他主要是生产小五金器械，甚至包括望远镜之类的产品，但是，博尔顿非常有眼光，他看到英国工业正在兴起，许多新的工厂需要新的动力，于是，他就决定转产蒸汽机和加工机械。</p>
+
+    <p>后来，当博尔顿和瓦特联手制造第一台蒸汽机时，英国的国王前来参观他们的工厂，当国王问博尔顿正在忙什么时，他说：“陛下，我正忙于制造一种君主们梦寐以求的商品。”国王不解地问到底是什么，博尔顿回答道：“是力量，陛下。”</p>
+
+    <p>正是具备了这种远见，博尔顿极力挽留住了穷困苦闷的瓦特，他在写给瓦特的信中说：“我将为发动机的竣工创造一切必要的条件，我们将向全世界提供各种规格的发动机。您需要一位“助产士”来减轻负担，并且把您的产儿介绍给全世界。”</p>
+
+    <p>马修·博尔顿和詹姆斯·瓦特有着完全不同的性格。两人能够走到一起是工业历史上最令人难以置信的一页。詹姆斯·瓦特心思细腻，做事动作迟缓并且非常容易焦虑。他常常会灰心丧气。他会将工作放到一边，感觉好像要彻底放弃了。与他形成鲜明对比的是，马修·博尔顿热情洋溢，生气勃勃，与人相处得很好，总是很乐观。当瓦特说：“不会起作用的。”博尔顿会说：“当然会成功的，只要再试一下就行。”</p>
+
+    <p>博尔顿与瓦特的天作之合，让瓦特彻底消除了后顾之忧。但是，如果瓦特只有一双技艺出众的手，那么，万能蒸汽机还是不会诞生。因为在瓦特之前，工匠们已经发明了蒸汽机，但这种蒸汽机笨重粗大并且耗煤，只有煤矿才勉强用得上。</p>
+
+    <p>中国科学技术协会 研究员 袁正光</p>
+
+    <p>在近代科学诞生的几千年当中，人类的活动基本上遵循这样一个模式：生产、技术、科学，也就是说凭经验进行生产，在漫长的生产过程当中，提炼出技术，然后在改进技术的过程当中产生科学。这是一个凭经验办事的过程，所以走了不少的弯路和错路。</p>
+
+    <p>瓦特没有重走人类几千年走过的弯路，为了对旧式蒸汽机进行脱胎换骨的改造，瓦特曾钻研过力学、数学、化学，做过系统的实验并仔细计算过气缸的热效能。为什么瓦特会使用这样一种以前的工匠们根本不会想到的方式来进行发明创造？他对于生产、技术、科学三者关系的认知从何而来？在瓦特研制蒸汽机之前的一个世纪里，正是欧洲历史上一个科学鼎盛的时期。从17世纪中期开始，近代科学在一批巨人的推动下产生。在这批科学巨人当中排在最中心位置的是一位妇孺皆知的人，他就是艾萨克·牛顿。</p>
+
+    <p>许多历史学家认为，如果从近代科学的角度看，正是牛顿开启了工业革命的大门。</p>
+
+    <p>这里是牛顿的故乡，传说牛顿就是看到这颗树上的苹果落地而受到了启发。虽然，直到今天，这颗树上最大的苹果也不会超过成人的一只拳头，但是，它丝毫也没有妨碍剑桥大学的这位旷世奇才，在17世纪带来一场科学的革命。</p>
+
+    <p>1687年，牛顿出版了自己最著名的著作《自然哲学的数学原理》。在这本深奥难懂的书中，牛顿用数学方法证明了万有引力定律和三大运动定律，这四大定律被认为是“人类智慧史上最伟大的一个成就”。运用这些定律，牛顿把星星、地球和自然界所有的力量都放在了他的天平上。</p>
+
+    <p>英国伦敦大学伯贝克学院 教授 米歇尔·亨特</p>
+
+    <p>牛顿体系的本质在于，地球和其他天体都按照相同规律运动，并且可以量化计算。你可以将太阳系的任何一部分拿出来，根据规律进行计算，从而精确地预知行星的位置和运动方式。</p>
+
+    <p>“我们被放在这有如戏院的世界上，每个事件的起源和缘由却完全隐瞒不让我们知道，我们既没有足够的智慧预见未来，也没有能力防止那些使我们不断受伤害的不幸事件发生。我们被悬挂在永恒的疑惧之中……”</p>
+
+    <p>这是英国历史上著名的哲学家休谟的一段话，它为我们真切地描述了当时的人们看待世界的被动心态。三百年前，人类的思想还充斥着迷信和恐惧，水为什么往低处流？太阳为什么升起落下？这些今天看来简单之极的问题，在当时却是根本无法认识和把握的。直到艾萨克·牛顿出现，人类才终于结束了这种状态。牛顿通过自己的伟大著作宣告了科学时代的来临，他告诉世人：自然界存在着规律，而且规律是能够被认识的。</p>
+
+    <p>牛顿的发现，给人类带来从未有过的自信。曾经匍匐在上帝脚下的人类，终于大胆地抬起头来，开始用自己理性的眼光打量世界。</p>
+
+    <p>英国牛津大学科学历史学 教授 罗伯特·福克斯</p>
+
+    <p>但是如果你一定要我说一个（最伟大的科学家），我想应该是牛顿。牛顿带来，至少是坚定了我们的信念，无可怀疑我们生活在一个有规律、受规律支配的宇宙中。这为18、19世纪乃至我们当今诸多科学领域的研究铺平了道路。</p>
+
+    <p>中国科学技术协会 研究员 袁正光</p>
+
+    <p>以牛顿为代表的近代科学诞生以后，人类社会飞速发展。就像马克思所说的那样，在资产阶级统治的不到一百年间，所创造的生产力超过了以往历史的总和。</p>
+
+    <p>1687年发表的《自然哲学的数学原理》，为牛顿赢得了巨大的荣誉，不久之后，牛顿就被选为英国最高的学术团体----英国皇家学会主席。欧洲的知识阶层认为，上帝创造了世界，而牛顿发现了上帝创造世界的方法。</p>
+
+    <p>法国的一位学者在读完《自然哲学的数学原理》后，对牛顿几乎产生了像对神一样的崇拜，他向每一个来自英国的人打探牛顿的生活细节：“他吃饭么？喝水么？睡觉么？和凡人一样过日子么？”</p>
+
+    <p>作为一名科学家，牛顿头上的光环可以说放射出了世界上最为绚丽的光芒，然而，对于他身上的那些与英雄人物并不协调的弱点，除了专门的研究人员之外，其他人便知之不多了。</p>
+
+    <p>英国皇家学会 秘书长 史蒂芬·考克斯</p>
+
+    <p>我觉得，艾萨克·牛顿可以说是个很不随和的人，他的许多轶事证明了这一点。他曾经与当时另一位著名科学家罗伯特·胡克争吵过，争论某个主意是谁第一个想到的。有故事说他特别不喜欢胡克，把他的肖像都毁掉了，所以我们今天能见到四、五张牛顿的画像，而胡克的画像却一张也见不到。</p>
+
+    <p>1727年，牛顿去世。英国以隆重的国葬仪式将他安葬在威斯敏斯特大教堂，这里一向是王公贵族的墓地，牛顿成为第一个安息在此的科学家。出殡的那天，成千上万的普通市民涌向街头为他送行；抬棺椁的，是两位公爵、三位伯爵和一位大法官；在教堂合唱的哀歌中，王公贵族、政府大臣和文人学士们一起向这位科学巨人告别。</p>
+
+    <p>目睹了牛顿葬礼的法国思想家伏尔泰为之深深感动，他感慨道：“走进威斯敏斯特教堂，人们所瞻仰的不是君王们的陵寝，而是国家为感谢那些为国增光的最伟大人物建立的纪念碑。这便是英国人民对于才能的尊敬。”</p>
+
+    <p>整个社会在向一个科学家表达着由衷的敬意，这是一个国家对于科学家的态度，也是一个国家对于科学的态度。</p>
+
+    <p>1765年，牛顿去世后30多年后，一种全新的蒸汽机在瓦特的手中诞生了，瓦特发明的蒸汽机不仅比原来的蒸汽机少用大量的煤，而且使人类从此开始拥有自己创造的动力，而不再受制于大自然。后来人们把解决了工业化核心问题的瓦特蒸汽机，作为工业革命的标志。瓦特也被称为“工业革命之父”。</p>
+
+    <p>美国耶鲁大学 教授 保罗·肯尼迪</p>
+
+    <p>当蒸汽时代和工业革命到来的时候，它推动着业已领先的英国继续前行，让这个小小的岛屿在后来的几百年中进一步地超越了其他各国。</p>
+
+    <p>UID: 1 性别: 男 精华: 1 积分: 3987 帖子: 787 阅读权限: 200 注册: 2006-9-5 状态:</p>
+
+    <p>#5发表于 2007-2-21 11:26 PM  资料 主页 个人空间 短消息 ［大国崛起］</p>
+
+  </div>
+</section>
+
+<div class="chapter-divider"></div>
+<section class="chapter" id="ep05">
+  <div class="chapter-header">
+    <div class="chapter-emoji">🎯</div>
+    <h2 class="chapter-title">第五集 激情岁月</h2>
+    <div class="chapter-country">法国</div>
+    <span class="chapter-period-badge">17-19世纪</span>
+    <div class="chapter-subtitle">大革命与启蒙之光</div>
+  </div>
+  <div class="chapter-body">
+
+    <p>法国国家档案馆成立于1790年，这里收藏着法国自7世纪以来的珍贵文物和档案资料。这是一本200多年前的记事簿，它的主人是当时的法国国王路易十六。国王的日记写得非常简洁，除了在出门打猎的日子里，记下猎物的数量之外，其他的时候，都只有简简单单的几个字。</p>
+
+    <p>“14日，星期二，无事”。这是路易十六对1789年7月14日的描述。显然这一天在国王看来十分平常，甚至有些平淡。因为，连经常进行的猎鹿游戏都没有，所以，无事可记。但是，路易十六认为无事的这一天，却成为一个改写法国历史的最重要的日子。</p>
+
+    <p>1789年7月14日，手持武器的巴黎市民正在进攻巴士底监狱。监狱里当时只关押着7个人，但是市民们却为此激战了一天，牺牲了98个人。因为巴士底狱被认为是专制王权的象征，摧毁它是推翻专制统治最具有象征意味的行动。</p>
+
+    <p>7月15日早晨，路易十六听到了大臣的汇报。他吃惊而困惑地问：“怎么，造反啦？”大臣回答说：“不，陛下，是一场革命。”</p>
+
+    <p>路易十六刚刚从睡梦中惊醒，革命已经开始了急风暴雨般的进程。法国的最高权力很快就从国王手中转移到国民议会那里。攻占巴士底狱之后仅仅20天，国民议会就宣布：废除一切封建特权。这意味着120多年前由国王路易十四建立起来的绝对君主制被宣告死亡。</p>
+
+    <p>法国为什么会爆发一场摧毁绝对君主制的革命？在过去的一个多世纪里，路易十四和他创建的制度究竟给法国带来了什么？</p>
+
+    <p>1661年，就在中国清朝的康熙皇帝登基的前一年，法国国王路易十四开始临朝亲政，后人在这两位东西方的君王身上发现了诸多相似：同样是幼年称帝、雄才大略，同样在半个多世纪的时间里掌握着高度集中的王权，并借此把自己的国家带到了一个鼎盛时期。</p>
+
+    <p>巴黎西南郊的凡尔赛宫，是人们遐想三百多年前法国盛世的最佳标本。这座富丽堂皇的宫殿，正是当年路易十四表演绝对王权的硕大舞台。</p>
+
+    <p>年轻的路易十四亲政后，第一个措施就是废除首相，一切国家事务的决定权都集中到他一个人手中，政府中一共只有六名由他本人亲自选定的大臣，大臣们每周开会讨论国家大事，但做决定的人永远只有一个——就是国王自己。</p>
+
+    <p>当路易十四说“朕即国家”时，他实际上是在说三件事。首先他代表国家，然后他统治国家，最后他是国家精神具体化的表现。跟当时的欧洲其他国家相比，这是一个非常大的优势。因为法国不仅有君主专制的政体，更有一套强大的国家机器，这套国家机器允许法国首先可以深入地发展经济，尤其是农村经济，同时建筑了很多要塞、城堡，能够更有效地进行一场战争。</p>
+
+    <p>然而，这位让法国第一次称霸欧洲的君主去世仅仅74年后，大革命就推翻了曾经给国家带来巨大荣耀的绝对君主制。这是为什么呢？</p>
+
+    <p>为了争夺欧洲的霸权，路易十四在亲政的54年间，打了31年的仗，旷日持久的战火逐渐掏空了法国的国库。于是，作为国家财政来源的税收逐渐成为矛盾的焦点。</p>
+
+    <p>当时法国社会被分为三个等级，贵族、教士和平民。在这三个等级之间矛盾是不可避免的。前两个等级，他们有优越的条件，不需要纳税，但却享受税金和其他的特权，第三等级，他们只有工作的权利，而且还要纳税。</p>
+
+    <p>特权阶层和第三等级的矛盾显而易见。在路易十四时代，因战争而不断增加的税收，则让这一矛盾愈演愈烈，君主专制的弊端日渐凸显。</p>
+
+    <p>正如一位法国学者所说，路易十四统治下的法国，没有一种机制能保证国家抵制不合法理的行动。路易十四统治末期，走向衰老的不只是他本人，还有绝对权力的整个系统。君主专制已经像君主本人一样筋疲力尽。</p>
+
+    <p>一个人表面上看死于感冒，实际上他早已有病，身体已经很虚弱，所以一得感冒就死了。法国当时实际上已经被很多矛盾所困扰。</p>
+
+    <p>1774年，路易十六继位。此时，东方的大清帝国正在安享乾隆年间的盛世，但欧洲大陆最西端的国王路易十六却没有这么好的运气，先祖留给他的难题要远远超过荣耀。</p>
+
+    <p>据说，路易十六温和内向、处事犹豫，最大的爱好是拆装铁锁，但是，这位锁匠国王却没能打开困住国家前进的枷锁。</p>
+
+    <p>在他登基14年后的一场天灾中，法国社会的矛盾被激化了。连续性的全国农业歉收，使得1789年成为整个18世纪中面包价格最贵的一年。市民们几乎要花掉全部收入才能勉强吃饱肚子，农民们却在承担比往年更重的赋税。</p>
+
+    <p>他们必须向封建领主付地租，或者向有土地的贵族和资产阶级纳租，有些资产阶级也拥有土地，因为在农村当时还存在一千多年的封建税制，另外一种皇家税，包括人头税，还有一种非常不得人心的盐税。</p>
+
+    <p>两百多年前的漫画，描绘出当时法国社会的景象：沉重的赋税全都压在第三等级身上。</p>
+
+    <p>与此同时，战争仍在继续。为了解决财政危机，路易十六尝试着对特权阶层征税，结果却引来强烈不满。这使得国王成为全体国民的对立者。</p>
+
+    <p>为了解决财政危机，1789年5月5日，路易十六被迫召开已经中断了175年的三级会议，但是，三个等级代表的愿望都落空了。愤怒的代表们组建了国民议会，提出制定宪法的要求。路易十六却强令解散国民议会，同时调动大批军队开赴巴黎。</p>
+
+    <p>国王与民众之间最后一次协商的机会丧失了。</p>
+
+    <p>革命以汪洋恣肆之态快速蔓延，民众不仅推翻了国王，而且开始以新的理想来设计国家的方向。</p>
+
+    <p>今天，在法国国家档案馆里，珍藏着一份记录了一百多年前法国革命理想的文件。这份文件，被历史学家们称为“新制度的诞生证书”。</p>
+
+    <p>这里收藏着法国最珍贵的文物，下面我将向你们介绍其中的一件----《人权和公民权宣言》，它的第一段这样写道：“组成国民议会之法国人代表认为，无视、遗忘或蔑视人权是公众不幸和政府腐败的唯一原因。”</p>
+
+    <p>1789年8月26日，法国大革命的纲领《人权和公民权宣言》正式通过。</p>
+
+    <p>宣言共17条，它庄严宣布：人人生而自由、平等，且始终如此；财产权神圣不可侵犯。</p>
+
+    <p>《人权宣言》从根本上否定了旧时代的王权、皇权和特权，并确立以人权和法制作为新的社会秩序的奠基石。1789年8月，从巴黎传出的自由、平等、博爱的声音响彻整个欧洲。</p>
+
+    <p>法国是以自由、平等、博爱这三大思想在全世界发挥影响的。人权在法兰西民族的全部文化遗产中占有重要地位，也载入了联合国的宪章和世界文化遗产。不论在什么情况下，人权都必须得到维护。</p>
+
+    <p>从君主专制到张扬人权这样大跨度的革命是怎样产生的呢？法国大革命的新理念又是从何而来？历史的奇异之处在于这些当时最民主和平等的思想，恰恰孕育在欧洲王权最专制的地方——法兰西。</p>
+
+    <p>巴黎，一个聚焦全球目光的舞台。这个属于全世界的文化、艺术之都，就诞生在掌握了绝对王权的路易十四手中。而他个人对艺术的喜好、支持和赞助，给这个城市注入了灵魂。</p>
+
+    <p>路易十四亲自创办了法兰西舞蹈学院、音乐学院、喜剧院、建筑学院和科学院。他本人从七岁开始就每天坚持芭蕾训练，并亲自扮演太阳神阿波罗，由此还获得了“太阳王”的美名。</p>
+
+    <p>这一时期的法国在建筑、绘画、戏剧、舞蹈等方面将古典主义艺术发展到了高峰，显示出极大的文化影响力。整个欧洲的宫廷和贵族都以会说法语为荣，所有的外交条约都用法文来撰写。</p>
+
+    <p>路易十四时代的法国社会在欧洲占优势，法国为欧洲各种事业在思想上发挥了榜样的作用。当时的专制政体和文化艺术发展之间不存在对立，两者之间是比较协调的。</p>
+
+    <p>从路易十四时代开始，法国的沙龙文化之风日渐兴盛。贵妇人家中宽敞、雅致的客厅，给艺术家和思想家们提供了讲坛和听众，刺激着他们的灵感和激情。</p>
+
+    <p>与此同时，刚刚在巴黎出现不久的咖啡馆则为市民们提供了各抒己见的场所。启蒙思想就这样在沙龙和咖啡馆里被不断地宣讲、辩论和传播着。</p>
+
+    <p>这些咖啡馆是大革命时期，人们的活动场所。当时人们的思想十分活跃，大家都希望改变那个旧世界。</p>
+
+    <p>这个盒子里的珍贵收藏，是两百多年前的一颗充满激情的心脏。它的主人伏尔泰说：“我的心脏在这里，但到处是我的精神。”</p>
+
+    <p>因为坚持不懈地批判宗教蒙昧主义，伏尔泰被公认为启蒙运动的领袖和导师。</p>
+
+    <p>他在文章中写了这样一段对话：“一些知名人士在讨论，谁是最伟大的人物——是恺撒、亚历山大、成吉思汗、还是克伦威尔？有人回答：毫无疑问是艾萨克·牛顿。非常正确，因为我们应该尊敬推崇的正是以真理的力量来统帅我们头脑的人，而不是依靠暴力来奴役人的人，是认识宇宙的人而不是歪曲宇宙的人。”</p>
+
+    <p>启蒙思想是个长期的国际性的发展过程，18世纪末在欧洲产生了重大影响，也可以说启蒙思想促使知识和天赋人权的传播，因此使人民以新的观念看待国家、政权机构、宗教生活。</p>
+
+    <p>伏尔泰和所有启蒙运动的思想家们，如同冲破重重黑暗的亮光，打破了欧洲中世纪的神学枷锁，开启了科学和理性之门。而其中最根本的一点，就是马克思所说的：“认识到自己是人。” 这也成为法国大革命爆发的内在动力。</p>
+
+    <p>伏尔泰去世后，他的棺木上刻了这样一行字：“他拓展了人类精神，他使人类懂得，精神应该是自由的。”</p>
+
+    <p>如果说伏尔泰是旧制度最有力的批判者，与他同年去世的另一位思想家卢梭，则描绘了想象中的新制度。</p>
+
+    <p>卢梭思想的核心内容是社会契约的思想，他认为人民大众有革命的权利，有义务去创造一个新的社会契约，这种社会契约不取决于财富，不取决于国王的意愿，而取决于广大人民的共同意愿。卢梭实际上是创立了法国大革命的基础，甚至可以说他通过阐明革命的意愿是高于传统的国王和宗教的意愿，从而给了人民革命的权利。</p>
+
+    <p>卢梭的棺木中伸出的一只手，握着一支火焰浓烈的火把。这支火把很快就点燃了巴黎乃至世界。</p>
+
+    <p>1789年，伏尔泰和卢梭去世11年后，法国大革命爆发。在启蒙运动声势最盛的这个国度，思想最终演变成行动。那么，这个在启蒙思想指引下产生的理想的社会制度，怎样才能变成现实？大革命后的法国，将走上怎样的一条发展道路？</p>
+
+    <p>1792年9月22日，法兰西第一共和国成立了，和君主制一起消亡的还有君主本人。四个月后，就在这个当时刚刚改名为革命广场的地方，路易十六身首异处。</p>
+
+    <p>面对革命，法国国民激情澎湃。他们编制了“共和历”以取代传统日历；街头到处都是激昂慷慨的演说家；人们不再使用“先生”一词，而是彼此称呼“公民”。但是，群众的激情渐渐地失控了。与此同时，害怕革命蔓延的欧洲各君主国组成了反法同盟，对法国开战。</p>
+
+    <p>一些偶然的事件，一些预想不到的事情导致了极端化，法国发生了与欧洲的战争，战争使革命走向了极端，使当时的形势发生了转折，这是始料不及的。</p>
+
+    <p>断头台酒吧，保存着巴黎唯一一座当年政府军队使用过的断头台，它曾经杀人如麻。当铡刀落下时，人们依然能感受到昔日的恐怖。</p>
+
+    <p>1793年春天开始，巴黎成了一座革命气息和恐怖气氛交织的城市。</p>
+
+    <p>凡是涉嫌叛变共和国的人都上了断头台。一项最高的记录是：38分钟内，断头台砍下了21个头颅。全国大约有4万人被处决。</p>
+
+    <p>这时的人们已经忘记了四年前颁布的《人权宣言》对自由的定义：“自由就是能够做任何无害于他人的事情。”</p>
+
+    <p>革命的行动背离了革命的理想，法国将往何处去？谁能够领导法兰西走出困境，恢复光荣？国王路易十六被处决12年之后，法国人再次选择了一位皇帝来领导国家。</p>
+
+    <p>1804年12月2日，巴黎圣母院举行了一个盛大的加冕典礼，拿破仑·波拿巴成为法兰西第一帝国的皇帝。这位皇帝是民众选举产生的。法国成年男子中，有357万人投了赞成票，反对的只有2569人。</p>
+
+    <p>法国人之所以接受拿破仑政府，他们认为拿破仑代表了一种能够控制社会的力量，能够建立一个强有力的国家。后来拿破仑又代表了一种征服欧洲的希望，法国人民之所以在初期支持拿破仑，是希望法国实现和平繁荣、并且征服欧洲。</p>
+
+    <p>在经历了长达十多年的革命、恐怖和动荡之后，人们开始强烈地渴望社会的安定，期盼着强有力的人物出现，结束国家的混乱和危机。在战场上节节胜利的拿破仑，让法国人看到了恢复秩序和权威的希望。更重要的是，拿破仑颁布《民法典》，宣誓效忠法律的行动，让已经饱受启蒙思想熏陶的法国人看到了延续理想的希望。</p>
+
+    <p>当他宣布登基的时候，他宣誓忠于1789年的革命原则，也就是说尊重人权、自由、平等，他的一个重要思想就是要通过这个民法，确立革命的原则。</p>
+
+    <p>这部1804年正式实施的《法国民法典》，是由拿破仑下令起草的.在围绕法典草案召开的102次讨论会中,正在领导战争的拿破仑亲自参加了97次。后人把这部沉淀了启蒙思想和大革命精神的民法典称为《拿破仑法典》。</p>
+
+    <p>在两个世纪后的今天，法国的现行法律仍基本遵循《拿破仑法典》。《法典》对德国、意大利、西班牙等国家也产生了重要影响。因为，拿破仑将它带到了自己征服的每一片国土上。</p>
+
+    <p>1811年，随着连续四次反法同盟的灰飞烟灭，整个欧洲都快要变成法国的了：拿破仑自己兼任着意大利国王、莱茵联邦的“保护人”和瑞士联邦的仲裁者。他的兄弟们分别担任了西部牙、葡萄牙、那不勒斯、荷兰和威斯特伐利亚的国王。统领波兰的是他手下的元帅；奥地利和普鲁士是他的战败国，庞大的沙俄也成了谦卑的小伙伴。</p>
+
+    <p>拿破仑把法国带到了自路易十四之后的又一个辉煌的顶峰。不同的是，在拿破仑时代，伴随帝国扩张的，是法国大革命思想在全欧洲的传播。</p>
+
+    <p>这些国家被拿破仑征服以后，他直接或间接地在这些国家确立了新的原则，即法国革命的原则、平等的原则并摧毁封建制度。</p>
+
+    <p>拿破仑把有史以来最大的荣耀带给了法国。在37岁生日的那天，他亲自为凯旋门奠下第一块基石。沉浸在胜利中的拿破仑不会料到：他本人并没有机会从凯旋门下凯旋。</p>
+
+    <p>从俄国冰冻的荒原开始，最后经由滑铁卢的惨败，当了11年皇帝的拿破仑在大西洋的一个孤岛上终结了自己短暂的辉煌。</p>
+
+    <p>拿破仑兵败的根源在于，自由和平等的大革命理念意味着一切民族压迫行为都失去了合法性。被占国的人民先是在拿破仑的指引下觉悟到这一点，然后在这位导师的侵略行为背叛了革命原则时转而反抗。</p>
+
+    <p>人民不爱武装的传教士。战败国人民也反对武装传教。</p>
+
+    <p>拿破仑以军事力量和民族压迫来传播自己的价值观念，让法国从称霸欧洲的顶峰，重重地跌落下来。人们不得不重新思考国家的未来。后来的一位法国政要从拿破仑身上得出了这样的结论：“这位伟大人物的一生，对于军人、统治者和政治活动家都是极有教益的，也包含着对于公民们的教训。它教导他们：决不应该让他们的国家听任一个人的权力去摆布。”</p>
+
+    <p>拿破仑留给法国一个虚幻的荣光和再次来临的动荡。巴黎的街道成为一次次起义、革命、政变的见证。法兰西的土地成了一个政治哲学的大实验场。1789年之后不到一百年的时间里，法国经历了四次大规模的革命，两个帝国，两个王朝，还有两个共和国。</p>
+
+    <p>动荡之中，大革命的思想原则始终未能真正巩固确立。法兰西将如何选择自己的道路？</p>
+
+    <p>历史给出了一个意味深长的答案。在反复的革命和复辟过程中形成的共和派与君主派，在相持了半个多世纪后，终于不再选择激烈的对抗。在双方的相互妥协下，1875年，法兰西第三共和国诞生了。此时的法国也刚刚完成了国家的工业化。</p>
+
+    <p>1870年到1913年这四十多年时间，法国的工业生产几乎翻了一番。应该说，这个时候它是在发展的，但是，它有一个问题。它同别的大国比起来，它的发展滞后，比较缓慢。再举同时期发展的就是德国和美国发展的例子，在同时期，德国的工业生产增长了4.6倍，而美国，增长了8.1倍。</p>
+
+    <p>八十多年的动荡，使法国在与欧美大国的竞争中处于相对落后的地位。正当它加紧追赶时，两次世界大战的爆发再次影响了它的发展。</p>
+
+    <p>当纳粹德国占领了整个法国时，法兰西彻底失去了往日的荣耀。</p>
+
+    <p>法国是否还能再次回到世界大国的舞台上？它将依靠什么力量实现国家的复兴？</p>
+
+    <p>那些为了解放牺牲在战场上的人，和那些鼓动者，以及那些指挥者，包括戴高乐将军，和他的一些部下，一些拥护他的人，我们一直为他们祈祷。</p>
+
+    <p>每一年的8月28日，在巴黎圣母院都要举行集会，纪念巴黎从纳粹统治下获得解放。</p>
+
+    <p>在法兰西面临亡国之际，历史选择了孤身一人在伦敦组织抵抗运动的戴高乐。戴高乐将他的抵抗运动命名为“自由法国”，他说：“法国抵抗运动的烈火不应熄灭，也不会熄灭”。</p>
+
+    <p>1944年，象征胜利的法国凯旋门，终于迎来了一次真正的凯旋。</p>
+
+    <p>在戴高乐的带领下，为了自由而战的法兰西民族不仅为战胜法西斯做出了应有的贡献，而且为战后法国的复兴铺就了道路。</p>
+
+    <p>戴高乐几乎是单独一人成功地赢得了法国的合法地位。他和罗斯福总统和丘吉尔首相一起参加了重要的国际会议，并使法国参加了柏林停战的签订，使法国恢复了像中国那样的大国地位，成为联合国安理会常任理事国。</p>
+
+    <p>作为法兰西第五共和国的总统，戴高乐决心恢复法兰西应有的光荣。他说：“没有了伟大，就没有了法国”。但是，历史已经清楚地表明：像路易十四和拿破仑那样的军事征服都不可能使法国获得长久稳定的大国地位。戴高乐说，进步是维护国家独立的唯一条件，一个经济衰弱的法国，不可能在世界上真正立足。正是在戴高乐时代，法国的经济全面复苏。</p>
+
+    <p>戴高乐这个信念，就是要把法国变成一个强大的大国，要发展经济，使法国在世界上占有它应有的地位。因此，他强调独立，所以，这样一个思想对他后来发展经济有非常重要的作用，就是他发展经济，搞他的工业体系，有他自己一套独立的工业体系，例如说，航空工业，他要搞独立的体系，他的核工业，他要搞独立的体系、机械制造，他也有独立的体系，所以，他整个体系是比较完整的。因此，戴高乐上台之后把当时的政局稳下来了。正好是遇到欧洲30年的黄金发展期，这个时候，法国的经济都是百分之五、六甚至到七的，这么个速度在发展。在这种情况下，戴高乐要求独立的思想，谋求大国地位的思想就越来越明显。</p>
+
+    <p>除了经济实力，更为世人所称道的是戴高乐带领战后法国，走出的一条独特的大国之路。</p>
+
+    <p>1959年，法国宣布接受殖民地阿尔及利亚的民族自决，由此开始告别殖民主义；</p>
+
+    <p>1963年，法国和联邦德国签订《法德友好条约》，从此与宿敌德国和解；</p>
+
+    <p>1964年，法国与新中国建交，成为第一个承认新中国的西方大国；</p>
+
+    <p>1966年，法国宣布退出北约军事组织，并限令美国在一年内撤除在法国领土上的驻军和基地。</p>
+
+    <p>坚持独立外交政策的法国，成为世界格局的制衡力量。</p>
+
+    <p>我想戴高乐将军对于各种政治体制是尊重的。……一个国家的体制应该适合那个国家和人民的情况。英国人的民主和法国人的民主是不同的，法国人和意大利人的民主也是不同的。</p>
+
+    <p>法兰西第五共和国向世界发出了不可忽视的声音。国家发展的独立自主，国与国之间互相尊重、和平共处，是自由和平等的原则在国际事务中的实践途径。</p>
+
+    <p>正是在这样的思想主导下，戴高乐实现了他心目中的伟大和光荣。直到今天，法国依然在国际舞台上发挥着重要的影响力。</p>
+
+    <p>也正是这样的一个法国，开始接近大革命提出的理想。经过两个多世纪的努力，它逐渐找到了一条通过践行启蒙思想的原则而成就大国地位的发展道路。</p>
+
+    <p>先贤祠，被称为法兰西思想和精神的圣地。从大革命爆发两年后的1791年起，这里成为了供奉法国伟人的地方。</p>
+
+    <p>两百多年来先后安葬在先贤祠的72人中，有思想家、作家、艺术家、科学家，其中仅有11人是政治家。是否能安葬于先贤祠，必须经过国民议会讨论，并由总统最终签署命令。</p>
+
+    <p>2002年，对于大仲马是否应该被安葬在先贤祠一事，法国人展开了激烈的争论。有人认为他只是一位通俗作家，而先贤祠中供奉的都是代表法兰西精神的伟人。希拉克总统说：“这是我们国家的大事”。最后，国民议会讨论通过，大仲马成为第72位安葬于先贤祠的人。</p>
+
+    <p>他们用笔谱写了法兰西的历史，并为它打上了印记，他们以激情和天才，捍卫了自由、平等、博爱，捍卫了共和国，他们是文化的火枪手。</p>
+
+    <p>这就是法国，对思想与文化的尊崇早已浸润了人们的灵魂。</p>
+
+    <p>一个懂得尊重思想的民族，才会诞生伟大的思想。一个拥有伟大思想的国家，才能拥有不断前行的力量。自由、平等、博爱，这是人类社会的美好理想。也许这是永远无法完全实现的愿望，但是人们可以在无尽的岁月中无限地接近它。</p>
+
+    <p>正是在这一追寻理想的过程中，法国以它卓尔不群的气质走出了自己的道路。</p>
+
+    <p>UID: 1 性别: 男 精华: 1 积分: 3987 帖子: 787 阅读权限: 200 注册: 2006-9-5 状态:</p>
+
+    <p>#6发表于 2007-2-21 11:33 PM  资料 主页 个人空间 短消息 德意志联邦共和国，欧洲中部最大的国家，这片土地饱受古典音乐的浸润滋养，散发着古典哲学的理性光芒。这里曾经是第二次工业革命的发祥地，以现代大学和科技发明闻名于世，也曾经是两次世界大战的策源地，以惊人的破坏力，伤害了世界，也伤害了自己。而这一切，都源于这个民族对长期分裂和战乱的集体记忆。统一和强大，成为德意志发展的最大动力。在近两百年来追求国家统一的曲折历程中，在这片一再让世人惊叹的土地上，曾经上演了怎样的悲喜剧？</p>
+
+  </div>
+</section>
+
+<div class="chapter-divider"></div>
+<section class="chapter" id="ep06">
+  <div class="chapter-header">
+    <div class="chapter-emoji">🦅</div>
+    <h2 class="chapter-title">第六集 帝国春秋</h2>
+    <div class="chapter-country">德国</div>
+    <span class="chapter-period-badge">19-20世纪</span>
+    <div class="chapter-subtitle">铁血统一与两度沉浮</div>
+  </div>
+  <div class="chapter-body">
+
+    <p>2005年10月3日，德国国庆日。柏林市没有举行大型的庆典，市民们自发地聚拢在勃兰登堡门前，用自己的方式来庆祝国家的生日。</p>
+
+    <p>勃兰登堡门，德国的国门，它见证了德国跌宕起伏的坎坷命运。</p>
+
+    <p>守护着这扇国家命运之门的女神，德国人称她为和平女神。</p>
+
+    <p>但是，两百年前，攻陷勃兰登堡门的征服者却从这里抢走了和平女神。1806年的10月27日，以征服者的身份进入勃兰登堡门的，是法兰西帝国的皇帝拿破仑·波拿巴。</p>
+
+    <p>拿破仑率领强大的法国军队飓风般地席卷了欧洲，轻而易举地征服了这片位于欧洲中部的土地。</p>
+
+    <p>和平女神被当作战利品从勃兰登堡门上拆下，运回了法国。</p>
+
+    <p>屈辱再一次降临，它唤醒了深藏在德意志人心灵中的沉痛记忆。</p>
+
+    <p>在过去的几百年间，这块被称为欧洲走廊的土地，一直就是整个欧洲的战场。德意志人经常成为环伺在周围的欧洲列强的雇佣军，在自己的土地上自相残杀。</p>
+
+    <p>1648年，在进行了争夺霸权的“三十年战争”之后，欧洲各国签署了《威斯特伐利亚和约》，最终以法律的形式确定了德意志的分裂局面，这一年，这片土地分裂为314个大大小小的邦国，虽然它们还共同拥有“德意志神圣罗马帝国”这样一个名称，但邦国各自为政，中央权力几乎不存在。</p>
+
+    <p>当拿破仑的军队在1806年悍然入侵时，这个所谓的帝国根本无力抵挡，帝国中两个最大的邦国：普鲁士和奥地利遭遇惨败，普鲁士还被迫割让了一半的国土，支付1.5亿法郎战争赔款。德意志神圣罗马帝国轰然解体。</p>
+
+    <p>当这片土地上连一个名义上的国家都不复存在时，人们想起了德意志诗人席勒的一声感叹：“德意志？它在哪里？我找不到那块地方。” 席勒的朋友歌德则干脆地说道，没有一个城市，甚至没有一块地方，使我们坚定地指出，这就是德国。如果我们在维也纳这样问，答案是，这里是奥地利；如果我们在柏林提出这个问题，答案是，这里是普鲁士。德意志在哪里？这个历史性的问题，拷问着每一颗德意志的心灵。</p>
+
+    <p>德意志的诗人们用诗句探寻民族的未来；德意志的音乐家们用音符抒发抗争的激情；德意志的哲学家们，用理念激发至高无上的国家崇拜。</p>
+
+    <p>德国19世纪历史的主要题目就是统一和自由，那时，德国还不是像法国和英国那样统一的民族国家。19世纪德意志统一的运动始终在追求建立一个民族国家和立宪国家。</p>
+
+    <p>1814年，拿破仑被欧洲各国组成的反法同盟击败，在英国和俄国主导下，由38个邦国组成的“德意志邦联”成立了，但各邦依然拥有着独立的主权。因为，欧洲列强们始终不愿意看到一个统一的德意志在欧洲的中部崛起。</p>
+
+    <p>战败后的法国交还了和平女神，但是，回到了勃兰登堡门的和平女神面对的依然是一个分裂的德意志。</p>
+
+    <p>历史之所以耐人寻味，也许就在于它的复杂和微妙。征服者拿破仑虽然加重了这片土地的屈辱，但是拿破仑却成为德意志统一的推动者。他用武力扫荡了这片土地上存在了几百年的封建秩序，并在所到之处广泛传播法国大革命所倡导的自由和平等的原则。</p>
+
+    <p>德意志人在法国大革命思想的引导下，开始寻求建立一个统一与自由的国家。</p>
+
+    <p>罗伊特林根是德国南部一座美丽安静的小城，两百多年来，小城一直享受着弗里德里希·李斯特带来的荣耀。在德国实现统一的过程中，李斯特被认为是最活跃和最具影响力的人物。</p>
+
+    <p>李斯特认为德国只有实现政治上的统一才能够与英国和法国相抗衡。这种统一不能靠革命来实现，而应该通过和平的方法来实现，而且李斯特非常清楚，这种统一不是一蹴而就的，应该通过渐进的方式来实现，也就是说，他认为应该先实现德国经济上的联盟。</p>
+
+    <p>在人们还习惯于用战争来解决国家问题的19世纪，李斯特的想法显然有些超前。从经济统一走向政治统一，这既是一个经济学家的独到眼光，更是一个大胆的设想。提出这个设想的现实原因是：德意志的经济发展受阻于分裂。</p>
+
+    <p>在汉堡的关税博物馆中，陈列着当年德意志各邦国使用的一些货币。最多的时候，这片土地上使用的货币种类达到过6000种。</p>
+
+    <p>除了混乱的货币，邦国之间还设立了重重关卡，收取繁重的关税，从柏林到瑞士，现在不过几个小时的车程，但在19世纪初，却要经过10个邦国，办10次手续，换10次货币，交10次关税，沿途缴纳的关税，甚至超过了所运货物的价值。</p>
+
+    <p>这些关税一方面严重的阻碍了内部贸易，另外一方面也阻碍着德国经济的发展和德国产品的竞争力。正是出于这一原因，李斯特认为如果当时落后的德国要发展，要达到当时发达工业国家的水平，就必须消除这些内部关税，为德国经济的发展和提高国际竞争力创造可能。</p>
+
+    <p>李斯特呼吁各邦国建立全德关税同盟，为此，他四处游说。但是很多小邦国都将他驱逐出境，德意志邦联的第二大邦国奥地利，称他为“最危险的煽动者”。因为，各个邦国都不想取消关税这一最重要的收入来源。</p>
+
+    <p>李斯特身体虚弱，在很长的时间里，他没有固定的职业和收入，也没有一个正式的助手。但这一切都没有阻止他的脚步。十多年的时间，李斯特几乎跑遍了所有邦国，最终，德意志邦联中最大的邦国普鲁士接受了李斯特的建议。</p>
+
+    <p>经济融合仿佛坚冰下的细流，缓缓汇聚。破冰的一天不可阻挡地到来了。</p>
+
+    <p>1834年1月1日零点，在德意志18个邦国的边界上，满载着货物的四轮马车，像潮水一般汹涌而过，几百年来第一次，无须在边界停下来交纳过境税。德意志关税同盟建立了。它的主导者是普鲁士。</p>
+
+    <p>建立关税同盟是生产力发展要求，它使商品、资本、劳动力得以自由流通，从而有利于统一的民族市场的建成。从长远来看，它也是为德国的统一创造了前提。普鲁士接受了李斯特的建议，成了建立关税同盟的主导者，实际上也就成了未来的德国统一的领导者，历史证明了这一点。</p>
+
+    <p>关税同盟建立了，李斯特依然贫困。1846年，在儿子病故的打击下，贫病交加的李斯特选择用自杀的方式，离开了他寄托着无限憧憬的德意志。李斯特带着遗憾离开，历史却没有给德意志留下遗憾。经过半个多世纪的努力，一个统一的德意志呼之欲出。</p>
+
+    <p>各个邦国已经陆续加入关税同盟，以普鲁士为中心的铁路网逐渐成为连通这片土地的强劲有力的动脉。到19世纪中期，关税同盟地区工业总产量已是欧洲第三，仅次于英国和法国。德意志经济统一的目标已经实现，政治统一的道路上也曙光初现。</p>
+
+    <p>1848年，在李斯特去世两年后，德意志的多个邦国爆发了推翻君主专制，建立君主立宪制的革命，革命在短时间内几乎全部取得成功。从政治上解决德意志的统一，是这场以资产阶级为主体的革命运动的首要任务。于是，各邦国派出代表，在法兰克福组成了全德意志议会，试图通过协商的方式，建立一个像美利坚合众国一样统一而自由的联邦国家。</p>
+
+    <p>但是，当议会还在无休止地辩论和争吵时，旧政权迅速集结反击，德意志各邦很快恢复了各自的君主专制，全德意志议会的议员们纷纷被各邦国招回。</p>
+
+    <p>1848年资产阶级民主革命的失败，造成了两个严重的后果：第一个后果就是德国的统一没有能够实现；第二个后果，专制制度依然保留着，所以说，德国失去了通过和平、民主的方式来实现德国统一的机会。</p>
+
+    <p>通过议会民主实现和平统一的方式失败了，德意志统一的道路将如何继续？谁将承担起这个历史的重任？</p>
+
+    <p>德国北部城市汉堡，坐落着奥托·冯·俾斯麦纪念馆。</p>
+
+    <p>纪念馆内，一幅珍贵的油画已经悬挂了120多年，它记载了一个国家历史性的时刻，也记载了一个人的历史性时刻。</p>
+
+    <p>这幅画是德皇送给俾斯麦的生日礼物，这幅画所展现的场景，是1871年1月18日，在巴黎凡尔赛宫镜厅所举行的德国皇帝登基仪式。皇帝希望能够在这幅画中突出他的个人形象，所以画师就给俾斯麦画上了白色的制服。</p>
+
+    <p>身着白色军服的俾斯麦不仅仅是油画中的第一主角，在德国统一的历史中，他的演出更是有声有色，以至于成为后发国家的首相们纷纷效仿的榜样。</p>
+
+    <p>被称为“东方俾斯麦”的大清帝国重臣李鸿章，曾经跋涉万里前来德国拜访他；日本明治维新时期的第一任内务卿大久保利通也曾自比为“东洋俾斯麦”。</p>
+
+    <p>受到如此推崇的俾斯麦，究竟是以什么样的方式，主导了德意志的统一。</p>
+
+    <p>1862年9月30日，刚刚被任命为普鲁士首相的俾斯麦走进议会，发表了一段强硬的讲演，他说：“当代的重大问题不是通过演说以及多数人的决议所能解决，而是不可避免地将通过一场严重斗争，一场只有通过铁与血才能解决的斗争来达到目的”，从此俾斯麦被世人称为“铁血宰相”。</p>
+
+    <p>当时，俾斯麦在他的讲话里强调：我们只有这样做才能够实现统一，就是通过增强军队的力量这一政策，利用军队的帮助而不是简单地通过议会当中的多数表决。</p>
+
+    <p>利用军队的帮助，是普鲁士长期以来形成的传统。历史上，普鲁士就曾因军队数量众多而被称为“和平时期的兵营”。俾斯麦认为，像1848年那样的议会民主方式无法实现国家统一。在他的主导下，普鲁士采取了近乎独裁的统治方式。议会多次被解散，国王成为普鲁士军队的最高统帅。但是，铁血宰相俾斯麦并不鲁莽，他清醒地知道，一个新生的德国必将对原有的大国形成冲击。欧洲政治地图正如一个棋局，俾斯麦要将列强当成一个个棋子，小心翼翼地反复掂量，在夹缝中寻找机会。</p>
+
+    <p>俾斯麦是一个非常聪明的人，具有眼光，他不是游戏者，不是赌徒，而是一个有知识的人，有历史感的人。</p>
+
+    <p>在要求力量平衡的欧洲各国中，俾斯麦进行了一场场淋漓尽致的外交表演。他通过各种方式保证英国的袖手旁观；他支持俄国镇压波兰起义，以换取俄国的沉默；他口头同意把卢森堡、比利时等土地并入法国，以换取法国的中立。</p>
+
+    <p>在俾斯麦看来，历史从来没有什么不变的原则，没有任何国家不可以结盟，也没有任何国家不会成为本国的敌人。</p>
+
+    <p>俾斯麦始终把普鲁士视作一个强大的国家，另外，他也一直在努力试探，这点非常重要，把政治理解为“可操作的艺术”。在此基础之上去获知欧洲其他大国会如何看待德国的统一。</p>
+
+    <p>在外交上用足了政治智慧之后，俾斯麦终于可以实践他的铁血誓言了。</p>
+
+    <p>1866年，普鲁士的枪口对准了奥地利，仅仅两年前他们还共同打败了北方强敌丹麦。对于这场战争，俾斯麦并没有必胜的把握，他带着毒药走向战场。最终，普鲁士取得巨大胜利，奥地利从此脱离德意志邦联。俾斯麦拍着桌子大叫，我把他们全都打败了，全部！</p>
+
+    <p>四年后，普法战争爆发。德军长驱直入，直抵巴黎郊外，法国皇帝兵败被俘。德国统一的最后一个障碍被扫除。</p>
+
+    <p>1871年1月18日，法国巴黎炮声隆隆，20公里外的凡尔赛宫镜厅却一片庄严肃穆。在这些为炫耀法国君主的风采而设置的镜子里，出现了众多普鲁士人的身影。</p>
+
+    <p>这一天，德意志帝国在法国的王宫里宣告了自己的诞生。这一年，距离拿破仑进入勃兰登堡门整整65年。</p>
+
+    <p>一个崭新的、统一的德意志民族国家出现了。经过近七十年的艰苦追求，德意志人建立起来的是怎样的一个国家？这个欧洲列强始终不愿意看到的国家将会给欧洲带来什么？</p>
+
+    <p>德国姗姗来迟，结果刚一亮相就令全世界大吃一惊。因为它在人口总量、国民生产总值、钢铁产量、煤产量以及铁路线里程等等方面，都远远超过了法国，在欧洲仅次于称霸了一个世纪之久的英国。德意志从濒临亡国的绝境发展成一个令人瞩目的强国，采取了种种的措施，这些措施当中，其中最为重要的一条，就是它高度地重视对国民素质的培养，并以此作为它国家振兴的基础。战胜法国并俘虏法国皇帝的元帅毛奇就曾经说过：“普鲁士的胜利早就在小学教师的讲台上决定了。”</p>
+
+    <p>才特尔镇位于德国最北部，临近丹麦。180年前，这里是普鲁士王国最偏远最落后的乡村。</p>
+
+    <p>今天的才特尔小学依然是小镇孩子们读书的地方，同时，它也是全德国最完整地保留了普鲁士时期原貌的小学博物馆。</p>
+
+    <p>这是一张1820年讲授自然课时所使用的挂图，当时的孩子们已经了解到，距离他们上万公里之遥的中国长城是什么样子。</p>
+
+    <p>孩子们也可以了解到在五大洲居住的不同人种和不同的生活环境；在小学实验室里，他们可以接触到最新的自然科学知识。这张课程表记录了当时给小学生们开设的课程：世界地理、自然、算术以及德语、书法、宗教和体操。</p>
+
+    <p>学生们上学几乎是免费的，主要是以实物的形式来支付，不上学却要受到处罚，学校里还保存着当年的罚款登记簿。</p>
+
+    <p>我们这里看到的是1845年6月份登记的才特尔镇学校，学生上个月缺课登记情况，比如第16号学生，名字叫做弗里德里希.旺肯，这个学生在5月份里面缺了13天的课，为此他父亲要付39个银币的罚款。</p>
+
+    <p>在普鲁士，受教育和服兵役一样被视为公民必须的义务，而国家则必须为它的公民提供受教育的机会。免费教育从19世纪中期就已开始，德意志统一前夕，适龄儿童入学率已经达到97.5%。</p>
+
+    <p>年轻一代从一开始就要学会不仅仅只为自己活着，而是为整个民族。</p>
+
+    <p>早在拿破仑的军队入侵的时候，普鲁士国王威廉三世就指出了德意志的出路。他说：“这个国家必须以精神的力量来弥补躯体的损失。正是由于穷困，所以要办教育。我从未听过一个国家办教育办穷了，办亡国了。”在普及全民教育的同时，普鲁士建立起教学与科研并重的现代大学。</p>
+
+    <p>当普鲁士还在向拿破仑支付巨额的战争赔款时，柏林洪堡大学诞生了。国王拿出了最后一点家底，并把豪华的王子宫捐献出来作为大学校舍。与此同时，他还接受了大学提出的一个要求，那就是：国家必须对教学和科研活动给予物质支持，但是不得干涉教育和学术活动。</p>
+
+    <p>同时拥有国家的保障和充分的自由，成就了德意志的科学家。在柏林洪堡大学主楼的长廊里，挂着许多黑白照片，他们都是在各个领域里取得了重要成就的本校教授，其中的29位拥有一个共同的身份：诺贝尔奖得主。</p>
+
+    <p>这些德国大学的科学家，都把自己视作“德意志科学家”。这一概念的意义，正如著名作曲家瓦格纳所说：科学家出于自我意志，献身于科学研究工作，参与这一工作，把自己所有的个人利益都置之度外。这一献身精神是德国崛起为世界大国的非常关键的一个原因。</p>
+
+    <p>在德国，教育、哲学和科学发挥着重要的作用。欧洲具有现代意义的大学出现在德国，成为许多其他欧洲国家的榜样，例如由洪堡创立的柏林大学。德国的现代化过程中，教育、科学、大学发挥了重要的作用，不同于美国、英国和法国的现代化进程。</p>
+
+    <p>德国的工业化进程落后于英国，但它以自己独特的方式走上了现代化道路。全民教育为德国培养了高素质的国民，大学给德国带来了创造和发明，智力成为这个国家最重要的资源。凭借这一资源，19世纪的德国引领了第二次工业革命，站在了世界科学技术发展的前沿。</p>
+
+    <p>电气时代的一批重要发明在德国诞生。从1851年到1900年，在重大科技革新和发明创造方面，德国取得的成果达到202项，超过英法两国的总和，居世界第二位。直到今天，德国依然是世界上最重要的科技大国之一。</p>
+
+    <p>在1871年统一后的四十多年时间里，德国经济出现了跨越式的发展。德国的煤炭和钢铁产量跃居欧洲第一；化工产品总产量跃居世界首位；到1910年，德国的工业总量超越了所有欧洲国家。</p>
+
+    <p>在科学和教育的基石之上，俾斯麦找到了后发国家赶超先进国家的发展模式：把国家视为推动经济发展的强大力量，由国家制定政策和法律引导经济运行的方向，用国家的力量建立起全世界最早的社会福利制度。这些举措，在某种程度上，克服了英国开创的自由市场经济的弊端，由此给一些后发国家在发展道路上，提供了一种新的选择。</p>
+
+    <p>当世人以惊羡的眼光审视急速崛起的德意志时，往往忽略了一点，那就是：支撑起所有这一切的，是德国统一后相对和平的发展环境。创造这一和平环境的，正是帝国的领航员俾斯麦。他为这个曾经被欧洲列强不断遏制的国家，争取了宝贵的发展机遇。</p>
+
+    <p>俾斯麦不同于其他同时代的政治家。虽然他当时同意建立一支强大的军队，但是却不同意把军队用来扩张国家的领土。也就是说，虽然俾斯麦希望德国成为一个位于欧洲中部的强国，但是它应该负责保证整个欧洲的和平，避免出现拿破仑时代的动荡，结果只是毁灭了各个国家，毒化了各国之间的关系。</p>
+
+    <p>但是，这位力主保持欧洲各国平衡的领航员渐渐老了。</p>
+
+    <p>作于1890年的这幅漫画，表现的是俾斯麦被迫辞职，威廉二世皇帝全面执掌德意志帝国的一幕。漫画记录的正是德国国家战略的转折点。</p>
+
+    <p>此刻，一个统一而强大的德意志，一个始终令欧洲大国担心的德意志，已经开始散发出令人不安的气息，担心正在成为现实。</p>
+
+    <p>威廉二世上台执政之后，他在很大程度上改变了俾斯麦的对内、对外政策。因为，德国在经济高速发展的过程当中，德国的容克地主和垄断资产阶级，相互渗透、融为一体，当时的德国不可能，或者说，不存在走向民主、议会道路的可能。还有一个局面呢，就是当时德国的工业发展、经济发展很快，它先进的工业和先进的科学技术，与普鲁士的军国主义非常紧密地结合起来，所以，这两个东西的紧密结合，就使得当时的德意志帝国，很快发展成为一个十分具有侵略性的帝国。所以，德皇威廉二世当时非常嚣张地叫嚷，所谓上帝就是安排我们来支配和统治所有的民族的。</p>
+
+    <p>年轻的皇帝威廉二世即位后所发的第一个圣谕就是《致我的军队》，他宣称：“我和军队是一体，我们天生互相帮助，不管上帝的意志是要给我们和平还是风暴，我们都将站在一起”， 普鲁士传统中固有的、在德国统一过程中被强化的军国主义，被威廉二世再次召了回来。德国开始了争霸世界的征程。</p>
+
+    <p>1913年，当德国全面超越英国，成为仅次于美国的世界第二经济强国时，德意志战车启动了。1914年，第一次世界大战爆发；1939年，第二次世界大战爆发。德国成为人类历史上两次世界大战的策源地。</p>
+
+    <p>在今天柏林市最繁华的商业中心，保留着一座被战火轰炸得遍体鳞伤的老教堂。</p>
+
+    <p>教堂前方矗立着一座钢铁雕塑，雕塑名为柏林。分裂与统一，德国历史中一再上演的剧情，无声地凝固在这座静默的雕塑中。</p>
+
+    <p>二战之后，德国被一分为二。历史仿佛回到了起点，那个沉重的命题再次摆在德国人面前：德意志，它在哪里？德国人必须再次做出回答。</p>
+
+    <p>由德国发起的两次世界大战，在人类文明史上写下了最黑暗、最惨痛的一页，无数生命和家园在战火的劫难中消亡，这是全世界都不会遗忘也不能遗忘的历史。而如何对待自己不堪回首的过去，是这个曾经失去理性的民族必须面对的一次考验。二战中被杀害的600万犹太民族的冤魂在等待，受到伤害的欧洲和世界在等待。</p>
+
+    <p>1970年的一个萧瑟冬日，刚刚上任的联邦德国总理勃兰特，来到了波兰华沙犹太人纪念碑前，二战中，波兰有250万犹太人在集中营里饱经痛苦、绝望的折磨，最终无助地死去。在冰凉的风中，勃兰特一步步走到死难者的墓碑前，在全世界的注视下，这位二战中反纳粹的英勇斗士，做出了一个令所有人震惊不已的动作：他跪倒在地。</p>
+
+    <p>一位记者写道：“不必这样做的他，替所有必须跪而没有跪的人跪下了。”</p>
+
+    <p>德国人诚恳地接受了自己历史上沉重的一面。他们讨论但是没有激烈争论，没有否定自己发动了第二次世界大战，没有推卸自己应该对犹太人大屠杀所负的责任，没有否认自己经受了12年的纳粹独裁统治。诚恳地回忆自己的错误，帮助德国人大大地减轻了民族复兴的困难。</p>
+
+    <p>跪下去的是勃兰特，站起来的是德意志。二战后，联邦德国开始陆续向遭受德国法西斯迫害的受害者及其遗属支付巨额赔款，教育部门则将法西斯暴行列为历史教科书的中心内容，强调“关键的任务是教育下一代”，要“将防止历史悲剧重演的职责视为己任”。</p>
+
+    <p>勇于承担历史责任的德国回到了欧洲的怀抱，也回到了世界舞台。</p>
+
+    <p>1990年10月3日，勃兰登堡门上的和平女神又一次见证了国家命运，分裂了41年的德国再次统一。这一天，被确定为德国的国庆日。</p>
+
+    <p>德国再次统一了，凭借的不再是铁与血，而与120年前相同的是，在和平的环境中，德国人再次创造了经济奇迹。经过一代人的努力，这个历经两次世界大战重创的国家，发展成为仅次于美国和日本的世界第三大经济强国。而作为欧盟的重要成员国，它也找到了通过振兴欧洲来壮大自己的强国之路。德意志，它在哪里？也许，近两个世纪执著的寻找已经有了答案。在这一漫长的寻找中，所经历的大悲大喜，不仅已成为德意志民族的集体记忆，而且也为已经崛起和正在崛起的大国，书写了一段不可忘记的历史。</p>
+
+    <p>UID: 1 性别: 男 精华: 1 积分: 3987 帖子: 787 阅读权限: 200 注册: 2006-9-5 状态:</p>
+
+    <p>#7发表于 2007-2-21 11:39 PM  资料 主页 个人空间 短消息 ［大国崛起］</p>
+
+  </div>
+</section>
+
+<div class="chapter-divider"></div>
+<section class="chapter" id="ep07">
+  <div class="chapter-header">
+    <div class="chapter-emoji">⛩️</div>
+    <h2 class="chapter-title">第七集 百年维新</h2>
+    <div class="chapter-country">日本</div>
+    <span class="chapter-period-badge">19-20世纪</span>
+    <div class="chapter-subtitle">脱亚入欧的抉择</div>
+  </div>
+  <div class="chapter-body">
+
+    <p>大约在150年前，位于太平洋西岸的岛国日本，在西方殖民者坚船利炮的胁迫下，遭遇了巨大的生存危机。出人意料的是，它将此作为自己弃旧图新、迎头赶上的历史机遇，并最终使自己成为东方世界第一个摆脱西方大国的欺凌、顺利实现现代化的国家，成为唯一一个挤入帝国列强行列，靠侵略扩张在自己的国土外建立过殖民地的亚洲国家。</p>
+
+    <p>今天，这个面积只有37万平方公里的岛国，依然是世界第二大经济强国。</p>
+
+    <p>从渴望主宰自身的命运到渴望成为世界的主角，究竟是什么在主导这个岛国如同海潮般激荡起落的命运呢？</p>
+
+    <p>历史的巨变常常在一些不太起眼的地方留下难以抹去的印记。</p>
+
+    <p>横须贺，位于东京湾入口，日本近代史就是从这里开始的。</p>
+
+    <p>2003年，这座依山傍水、清秀怡人的小城举行了一次盛大的纪念活动，被纪念的是一个叫佩理的美国将军。从这些轻松友好的笑脸上，人们很难想象，150年前，正是这位将军用武力迫使日本打开了自己的国门，让这个岛国走上了一段充斥着悲剧和奇迹、混杂着屈服和刚强的历史。</p>
+
+    <p>1853年7月8日，刚刚跻身于强国之列的美国，派出东印度舰队司令佩理率领四艘全副武装的黑色大船，闯入了横须贺港。</p>
+
+    <p>为了开辟太平洋航线和抢占东方市场，佩理代表美国总统提出了开港通商的要求。这位不久前在美国和墨西哥的海战中大获全胜的将军十分自负，他对前来交涉的日本使者说，你们最好不要抵抗，因为一旦开战，结局只有一个，那就是美国必胜。</p>
+
+    <p>面对冒着黑烟的蒸汽战舰和盛气凌人的美国将军，日本人会做出什么样的选择呢？</p>
+
+    <p>此时的日本，已经度过了两百多年闭关锁国的时光，但是，它对外面的世界并非一无所知。在唯一的窗口长崎，当时世界上两个最富强的国家，中国与荷兰被允许往来通商。17世纪的世界霸主荷兰，让这个两千年来一直以中国为师的岛国兴起了“兰学”。日本的士族阶层纷纷用荷兰语，来研讨欧洲近代的天文、地理、医学等新兴学科，并由此了解到西方世界的发展。</p>
+
+    <p>而13年前在鸦片战争中受到英国军舰攻击的邻国大清帝国的遭遇，从另一个角度给了日本统治者一个新的信号。</p>
+
+    <p>几千年来，日本几乎都在向中国学习，连中国都败给了对手，那么这样的对手,应该是非常强大的，这样的对手的出现，对日本来说也是一个冲击。</p>
+
+    <p>因此，当美国黑船压境时，尽管日本国内对选择开国还是开战有过争论，但最后还是做了很实际的考虑，日本人几乎是以欢迎的态度接受了佩理的要求。</p>
+
+    <p>佩理将军在展示武力之余，用电报机、钟表、望远镜、蒸汽机车和大炮向日本人展示了工业革命的成果。当一部小型蒸汽机车在专门搭建的轨道上开动起来的时候，围观的日本官员从飞转的车轮中真切地感受到了自己和大洋彼岸那个世界的差距。</p>
+
+    <p>当时幕府对于开国还是相当积极的，他们认为，按照当时的世界状况，日本如果自闭锁国是无法得到发展的，必须进入国际社会，并从中发展成为世界强国。</p>
+
+    <p>一天夜里，两个日本青年偷偷地爬上了美国黑船，用手比划着告诉佩理将军：他们想要随船到美国去，看看美国究竟为什么强大。这样做在当时的日本按律是要杀头的。</p>
+
+    <p>他们的举动让佩理非常惊讶，佩理在日记中写道：“这两个日本人的求学精神令我感动，如果日本人都像他们一样，日本一定会变得和美国一样强大。”</p>
+
+    <p>这两个渴望了解世界的青年人最终还是被送下了船。但随着国门的打开，越来越多的日本人关注起外面的世界。14年后，一个名叫涩泽荣一的年轻人获得了一次前往欧洲的机会。</p>
+
+    <p>1867年，27岁的涩泽荣一作为日本代表团的成员到了法国，参加巴黎万国博览会。</p>
+
+    <p>新奇的工业产品，取代了手工作坊的机械设备，西方的工业化程度让涩泽荣一大为震惊。他决定留下来，仔细考察欧洲各国的产业发展和经济制度。</p>
+
+    <p>涩泽荣一先是到了法国，后来又到了比利时，比利时的国王（利奥波德）二世在接见他们的时候讲，国家的强盛离不开工业，特别是钢铁的使用非常重要，欢迎日本到时能够购买和使用比利时的钢铁，涩泽荣一大为感慨，他说一个国家的国王在会见外国客人时，都不忘记推销本国的产品，可见工商业对西方国家是多么重要。</p>
+
+    <p>从小熟读《四书》、《五经》的涩泽荣一，和当时所有深受儒家文化影响的传统日本人一样，认为商人就是一幅惟利是图的形象。</p>
+
+    <p>比利时国王的一番话，让他固有的观念慢慢开始转变。</p>
+
+    <p>1868年11月，涩泽荣一带着全新的思想回到日本。此时的日本，已不是他离开时的那个国家。国家刚刚经历了一个重大的历史转折。</p>
+
+    <p>这一年，日本历史上第 124 位天皇——明治天皇，重新回到了国家的权力中心。</p>
+
+    <p>在日本神话中，据说是天照大神创造了日本，而天皇号称是天照大神的嫡系子孙，所以天皇拥有统治日本的法统，但是在实际历史上，从12世纪开始，大权一直旁落，旁落在拥有兵权的幕府将军手中，这种情况一直持续了600年，直到1868年，也就是黑船敲开日本国门的第15年。</p>
+
+    <p>美国黑船压境的傲慢和强势，凸现出幕府的软弱无能，来自外部的压力终于演变为内部变革的动力。最终，武士们以王政复古的名义推翻了幕府，扶持刚刚登基的明治天皇，建立起合法的新政府。14岁的明治天皇成为日本国的最高领袖。年轻的天皇所要领导的，是一个内忧外患、危机四伏的日本。</p>
+
+    <p>美国黑船叩开日本国门之后，迫使日本签订了历史上第一份不平等条约。此后不久，荷兰、俄国、英国和法国蜂拥而至，纷纷仿效，开始在这个岛国上争夺各自的利益。</p>
+
+    <p>和当时许多亚洲国家一样，开港之后的日本迅速成为西方商品的倾销市场和廉价原料的供应地，开港仅仅半年，日本黄金就外流了 100 万两，国内经济萧条，民怨四起。</p>
+
+    <p>年轻的新政府怎样才能带领日本走出濒临亡国的困境？</p>
+
+    <p>1868年4月15日，明治天皇颁布了《五条誓文》，这是一个推动国家变革，开启变法图强大幕的总纲领。从此，日本进入了一个被称为明治维新的时代。</p>
+
+    <p>明治维新可以说是日本实现现代化的一个出发点。</p>
+
+    <p>1868年11月回国的涩泽荣一，赶上了好时候。一年后，他进入明治政府的财政部门任职。在欧洲游历积累的经验和天生的理财能力，使涩泽荣一的仕途一路顺风。他直接参与了新政府的货币制度改革、废藩置县、发行公债等几乎所有重大政策的酝酿和制定。</p>
+
+    <p>就在政绩显著的涩泽荣一接连高升的时候，明治政府的一个重要举措，改变了日本，也改变了涩泽荣一的个人命运。</p>
+
+    <p>1871年，一支近百人的政府使节团从横滨港出发，前往欧美各国。使节团中包括49名明治高官，这个数字几乎是当时政府官员总数的一半。为了支撑这次庞大的出行，成立刚刚三年的明治政府拿出了当年财政收入的2％。</p>
+
+    <p>在一年零十个月的时间里，他们考察了欧美12个国家。写下了长达百卷的考察实录。政府投入之大，官员级别之高，出访时间之长，在日本乃至亚洲国家与西方世界交往的历史上，岩仓使节团的出访都可称得上是一次前所未有的行动。</p>
+
+    <p>日本的最高领导阶层，以岩仓为首的，访问欧美的这样一个代表团，最后用的是始惊、次醉、终狂三个词来概括，我觉得是非常准确的。始惊就是他们到了欧美，看到了西方发达的文物制度以后，那种吃惊的程度；次醉就是陶醉在西方这种先进的物质文明和精神文明之中；终狂就是下决心发疯似地学习西方一系列的文物制度，要使日本跟西方一样。</p>
+
+    <p>正是在德国，日本使节团似乎寻找到了自己国家的发展模式。刚刚完成国家统一的铁血宰相俾斯麦，在招待宴会上对他们说：如今世界各国，虽然都说要以礼仪相交，但那毕竟是表面文章，背地里实际上是以大欺小，以强凌弱。</p>
+
+    <p>这番话让日本人感同身受，他们不仅认同了俾斯麦的强权政治说，同时也醉心于德国的发展模式，那就是由国家来主导工业发展。</p>
+
+    <p>德国是当时欧洲发展最快的后发国家。几千年来，一直向强者学习的日本人，为自己找到了一个新的老师。</p>
+
+    <p>回国后主导日本工业化进程的，正是岩仓使节团的副团长、自称为“东洋俾斯麦”的大久保利通。</p>
+
+    <p>一百多年后的今天，大久保家族依然珍藏着大久保利通当年出访时从巴黎带回来的西式红皮椅子，还有他使用过的砚台和珍爱的中国紫砂茶壶。</p>
+
+    <p>这枚小小的印章，当年曾是大久保利通随身携带之物，诸多影响日本历史的政令都是用它来签发的。</p>
+
+    <p>回国后，大久保利通升任参议兼内务卿。这位掌握了明治政府实际大权的铁腕人物，带领日本开始了一段迫不及待的现代化急行军。</p>
+
+    <p>缫丝场是日本最早建立的官办工厂之一，政府从法国购置了缫丝设备，还重金聘请了法国技师。工厂就要开工了，却招不来工人。因为当时的很多日本人都认为，那些轰轰作响的机器会吸走人的精髓。</p>
+
+    <p>为了打消百姓的恐惧，明治政府想了一个办法：首先劝说士族高官的女儿进厂当女工。这些技术成熟的女工后来被派往全国各地，缫丝也成为日本最早进入国际市场的产品。</p>
+
+    <p>我认为穆斯林国家和中国都有一个特点，对引进外国技术抵触很强，明治维新的时候，日本帝国大学国立大学的许多学科和诸多领域，短时间内全部实行了西化。这里积极的一面是效率很高，为了尽快达到国际先进水平，一切从零开始完全实行西化。实际上也证明了这样做效率确实很高。</p>
+
+    <p>按照大久保利通的殖产兴业计划，政府直接从西方拿来了法国式的缫丝场、德国式的矿山冶炼厂，英国式的军工厂。除了购买机械，政府还聘请了大量国外技师。当时，一个外籍专家的月薪最高可以达到两千日元，是明治政府高官的三倍多。</p>
+
+    <p>据估算，当时明治政府财政支出的五分之一，都投入到了兴办企业当中。</p>
+
+    <p>在开办国营工厂的同时，大久保利通还大力扶持民间企业。</p>
+
+    <p>三菱是日本最著名的商标之一。今天的日本国内有一百多家三菱企业，海外还有数百家三菱的分支机构。</p>
+
+    <p>而在1870年，三菱还只是一个拥有三艘小船的默默无名的小公司。但是，它很快获得了明治政府委托经营的13艘轮船和海上军事运输业务；一年后，政府干脆将这13艘轮船送给了三菱，每年还拨给经营补偿费；此后，政府又购买了邮政轮船公司的18条轮船，无偿交给三菱经营。</p>
+
+    <p>日本政府把这些事业交给民间企业去发展，就是说最初由政府实施，然后卖给逐渐培育成熟的民营企业来继续发展。日本一直是采取这种方式发展的。在这一过程中，不仅仅是三菱，三井、住友等公司都是相继从政府买下官营企业来发展的。</p>
+
+    <p>在政府的扶植下，三菱很快羽翼丰满，1875 年，大久保利通要求刚刚成立五年的三菱公司开辟日本到上海的航线。结果，用了不到一年时间，美国太平洋邮船公司、英国的半岛和东方航海公司就被逐出了这条航线，三菱公司独家垄断了日本到上海的航运业务。</p>
+
+    <p>1873年，33岁的涩泽荣一已经成为主管国家预算的大藏少辅，在众人眼里，他的仕途可谓前程似锦。但是，涩泽荣一却做出了一件在当时看来不可思议的事情：他递交了辞呈，要弃官从商。</p>
+
+    <p>（明治）维新之前的日本，商人的地位实际上并不是很高，涩泽荣一他弃官从商，等于说开了一代风气之先，就说叫大家一下子认识到，其实，经商也是很有地位的，很有地位的人可以去经商。</p>
+
+    <p>辞官后的涩泽荣一做的第一件事，就是组织创办了日本第一家股份制公司银行，并由此开始了自己极具传奇色彩的企业家生涯。他的企业组织活动逐渐向海运、造船、铁路、纺织、啤酒、化学肥料、矿山等产业部门全面展开。到19世纪80年代，涩泽荣一成为日本工商业界最为引人注目的人物。</p>
+
+    <p>迅速向工业化迈进的日本，在学习先进技术的同时，也开始模仿西方的生活方式。公历取代了农历，元旦取代了春节；天皇带头吃起了牛肉，官员们穿上了燕尾服；理发馆的生意开始忙碌起来，男人们剪掉发髻，修剪成西式短发。有一首打油诗这样形容：“敲敲短发蓬松的天灵盖，文明开化的声音就响起来”。</p>
+
+    <p>同一千多年前模仿中国唐朝都城长安建造起奈良一样，如今的日本人又在东京的银座建起了西化一条街。这里仿照欧美街市，盖起两层楼的洋式砖瓦房，街道上电车穿梭，夜幕降临时煤气灯就会点燃。</p>
+
+    <p>日本看上去面目一新，明治维新似乎进行得十分顺利。就在这个时候，一件意外的事情发生了。</p>
+
+    <p>东京清水谷，幽静中显出几分荒凉。1878 年5 月 14 日早晨8点，掌握着明治政府实际权力的大久保利通像往常一样早早地出门，准备入宫开会。</p>
+
+    <p>几分钟后，一条消息传到宫中：49岁的大久保利通在清水谷被刺杀。</p>
+
+    <p>就在遇刺当天的凌晨，大久保利通还在和一位前来拜访的地方县令谈起他对日本未来改革的设想。</p>
+
+    <p>那么，到底是什么力量，结束了大久保利通对这场变革的主导权，为什么明治维新在推进到第11个年头的时候，会突然给整个社会甩出这个巨大的惊叹号？</p>
+
+    <p>大久保利通是一个意志非常坚决的人，总是拥有毅然决然的态度，是个不妥协的人物。</p>
+
+    <p>全国对大久保利通的反对还是相当有实力的，特别是在最后把大久保，士族把他刺杀以后，他的政权很快就过去了。</p>
+
+    <p>为了实现富国强兵、殖产兴业和文明开化三大维新目标，强硬的大久保利通采用简单的拿来主义方式推行改革，但政府在发展工业方面既缺乏经验又急欲求成，导致政府财政难以为继。而文明开化过程中的过火行为，使得日本的传统文化面临崩溃，甚至有人提出日本人应该改说英语，与西洋人通婚，以改良日本人种。这一切，不可避免地引发了现代文明与本土传统的激烈冲突。</p>
+
+    <p>与此同时，改革带来的不公平使本已存在的社会矛盾更加激化。1881年，政府以不到投资额三十分之一的低价，将北海道官产出售给个人。这一事件使民众对官商勾结的腐败行为极度不满，几乎酿成暴动。直到天皇出面罢免一批高官，才制止了事态的恶化。</p>
+
+    <p>大久保利通遇刺身亡之后，把改革的难题留给了继任者伊藤博文。</p>
+
+    <p>作为大久保利通一直以来的得力助手，伊藤博文将如何面对眼前的社会矛盾？他将选择什么样的方式继续明治维新的事业呢？</p>
+
+    <p>伊藤博文，大概在众多的（日本）领导人当中，可以说是思想最宏伟的吧，视野宽广，性格开放。</p>
+
+    <p>伊藤博文上任不久，就遇到了一件棘手的事情。明治政府曾明令禁止相扑这一日本的传统运动，理由是：近乎裸体的相扑手丑陋而愚昧。但是，一位名叫高砂的相扑高手开始挑战政府禁令，要在东京举办公开的相扑表演。</p>
+
+    <p>支持高砂的民众和前来干涉的警察相持不下。为了避免对抗升级，天皇不得不亲自举办并出席了一个相扑表演会，恢复了这项运动。</p>
+
+    <p>相扑手的挑战和民众的不满，让伊藤博文不得不仔细思考国家的发展方向和改革的方式。伊藤博文执政时的日本，由改革引起的矛盾已经突现在社会的政治生活当中。在西风东进中睁眼看世界的日本民众开始主张自己的权利。一场大规模的、持久的自由民权运动正在日本社会各阶层展开。</p>
+
+    <p>首先是以自由民权运动为中心，对政府提出了制定宪法的要求。正是由于自由民权运动的激化，使明治政府意识到必须制定宪法设立国会，否则政府本身很可能被推翻。</p>
+
+    <p>惯于顺应大势的伊藤博文也意识到，日本国立宪，已是大势所趋。他开始起草日本的第一部宪法。</p>
+
+    <p>十多年来的改革经验告诉他：简单的拿来主义已经不能推动日本社会的进一步变革。</p>
+
+    <p>此时，伊藤博文的朋友涩泽荣一已经在自己的商业王国里，对本国传统和现代文明的融合进行了有效的实践。</p>
+
+    <p>一生创办了500多家企业的涩泽荣一，被称为“日本的现代企业之父”，从投身实业的那一天起，他就把中国儒家经典《论语》当作自己的行动指南。他到处演讲，号召日本人做一手拿《论语》，一手拿算盘的企业家。涩泽荣一提出了义利合一的经商理念；伊藤博文则在《宪法》中结合进了本国的传统。</p>
+
+    <p>于是，一个看上去令人费解的现象出现了：在本意是为了保护民权事实上也确实写上了民权的《宪法》中，伊藤博文却加入了确立天皇绝对权力的条款。这是为什么呢？</p>
+
+    <p>不知什么原因，以天皇为中心的思想，有些近似宗教性了，绝大多数日本人认为，如果这个宗教没有了的话，日本就不是日本了，包括当时推动日本现代化进程的人也都这样认为，伊藤博文也当然会利用这种思想潮流。</p>
+
+    <p>1889年2 月 11 日，东京都降下漫天大雪，由伊藤博文起草的《大日本帝国宪法》颁布实施。《帝国宪法》在巩固明治维新成果的同时，借助日本传统中对天皇的尊崇，以法律的形式确认天皇神圣不可侵犯，并拥有统帅军队以及对外宣战等一切大权。</p>
+
+    <p>《帝国宪法》使得日本在政治上实行的是表面上的多党制，实际上的天皇制，由此决定了日本在崛起初期对外扩张、对内高压的军国主义走向。有历史学家认为，伊藤博文执政时期，在相扑这样的民族传统得到恢复的同时，日本传统文化中的糟粕，尤其是军国主义也随之被召回和强化了。</p>
+
+    <p>但在当时，伊藤博文却借此化解了日益尖锐的社会矛盾。《宪法》颁布之后，日本经济快速发展，极端西化的做法被慢慢遏制。于是，日本的社会生活中出现了这样一些场景：</p>
+
+    <p>西服流行的同时，和服被当作最华丽的礼服保留下来；酒吧多起来了，茶室依然是人们的精神净地；西洋歌剧开始唱响，能剧和歌舞伎在走向极致；当油画开始绚丽夺目时，日本的浮世绘也成为世界绘画的一大流派。</p>
+
+    <p>日本文化像洋葱头文化，这种形象，可以让我们非常清楚地看到日本文化的一种状况，它像洋葱头一样，剥开一片，剥开一片，最后想要找日本文化的核，没有，因为什么，因为它每一片里头都含有外来文化影响和它日本文化非常重要成分的一种结合、融合。</p>
+
+    <p>与此同时，日本也像德国那样，采用了一种有别于自由主义经济的发展模式，历史学家们称之为“统制主义经济模式”，就是在保留资本主义基本性质的前提下，改变经济运行的方法，使国家成为主导力量，从而让工业化以超出常规的速度腾飞起来。</p>
+
+    <p>到1910年的时候，日本 95%以上的男子，90% 以上的女子都接受过教育。日本和英国的铁路里程差距从明治维新初期的1000倍缩小为不到4倍。</p>
+
+    <p>日本看上去已经是一个工业国了，但是和西方工业强国相比，它显然还有相当的差距。如何用最快的方式实现赶超的目标？日本一直在寻找这样一条捷径。</p>
+
+    <p>早在明治政府刚刚成立五年的时候，日本就用武力逼迫邻国朝鲜开国并从中获利，这距离它被美国打开国门还不到20年。</p>
+
+    <p>明治的口号是“富国强兵”，明治政府成立后，首先做的第一件事，就是建立了现代军队，那是（明治维新的）目标。</p>
+
+    <p>19世纪末，日本著名的思想家福泽谕吉直截了当地为日本指出了这样一条便捷之路，“我国不可犹疑，与其坐待邻国之进步而与之共同复兴东亚，不如脱其行伍，而与西洋各文明国家共进退。”</p>
+
+    <p>所谓的西洋各“文明国”，当时正在全球争夺势力范围。历史上一直选择与强者为伍的日本，这一次选择了与西洋列强共进退，加入到武力掠夺的行列。当明治维新带来了国力的增长时，日本军国主义加快了对外扩张的步伐。</p>
+
+    <p>明治维新应该说到1889年，1890年前后维新阶段就已经结束了，后来它整个的国家战略就发生了改变，怎么改变呢，原来是通过改革来促发展，从1890年以后就变成了通过战争来促发展。</p>
+
+    <p>连年的对外侵略，日本侵占了朝鲜和中国的台湾，大量的资源和赔款流入日本国内。仅甲午战争后日本从中国掠去的赔款数额，就相当于它当年国家财政收入的4倍多，赔款中的一半以上都用于扩充海陆军军备。</p>
+
+    <p>几番得手之后，日本军国主义野心更加膨胀起来，终于发展到要建立“大东亚共荣圈”，独霸太平洋和印度洋的地步。在长达半个世纪的岁月里，日本扩张势力的战争一个接着一个。</p>
+
+    <p>九·一八事变    1931年日军侵占中国东北</p>
+
+    <p>七·七事变      1937年，日军挑起卢沟桥事变</p>
+
+    <p>偷袭珍珠港      1941年12月8日，太平洋战争爆发</p>
+
+    <p>1945年8月     美军在日本广岛和长崎投下原子弹</p>
+
+    <p>在原子弹爆炸的蘑菇云升空的那一刻，日本军国主义企图依靠武力称雄世界的迷梦破灭了，正如此前和此后所有迷信武力争霸的国家一样，侵略战争在给别的国家带来灾难的同时，也给了日本毁灭性的打击。从明治维新开始近八十年来积累的物质成果，在战火中几乎化为灰烬。</p>
+
+    <p>1945年8月15日  天皇向日本国民宣布日本战败（原声）</p>
+
+    <p>1945年9月2日   日本在美国战列舰“密苏里”号签署投降书</p>
+
+    <p>在战后的最初几年里，占领国美国每天要向日本提供100万美元的资助，每天要运来6000吨大米才能保证尽可能地少饿死人。</p>
+
+    <p>然而，没有人会预料到，在这样一片看似一无所有的废墟上，日本仅仅用了二十多年时间，就实现了经济的崛起。从1955年至1964年间，日本的国民生产总值年增长率始终保持在9%以上。从1965年到1970年，这一增长率更是超过了10%。对于这个奇迹般的速度，人们给出了各种各样的解释。而无论从哪个角度来分析，人们都无法忽视其中最根本的一个原因。</p>
+
+    <p>（日本）战败以后被炸为废墟，但是呢，它还是留下了明治维新以来百年发展的底子，像科学技术人才，还有一些学习西方的，搞工业化的一套东西，所以，它虽然物质上像楼房炸塌了，但是它这些，用现在的话就是软实力，还是保留下来了，所以，这是日本战后尽快经济腾飞的一个基础。</p>
+
+    <p>与此同时，战后的日本得到了《和平宪法》的护航。这部从1947年5月开始实施的新宪法规定：日本的主权属于国民，天皇只作为日本国的象征存在；日本永久放弃国家主权发动的战争，不保持陆海空军及其他战争力量，不承认国家的交战权。在《和平宪法》的框架下，明治维新打下的基础开始发挥作用。</p>
+
+    <p>这里曾经是日本的第一个火车站。1872年，日本的第一条铁路由英国人建成，明治天皇亲自前来参加通车典礼。七年之后，日本人开始自己设计和修建铁路。1964年，世界上第一条高速铁路出现在日本东京和大阪之间，它的行车时速是普通铁路的三倍，日本人把它叫做“新干线”。与新干线一起延伸的，还有一大批在战后借鉴了欧美企业制度成长起来的将触角伸展到全世界的跨国公司。正是它们，将日本带上了高速发展的轨道。</p>
+
+    <p>新干线诞生四年后的1968年，日本的国民生产总值达到1419亿美元。就在这一年，日本成为仅次于美国和苏联的世界第三大经济强国。而这一年，正是明治维新一百周年。无论从哪个角度讲，充满自信的日本民众都有理由认为，这是宣告日本重新崛起的最有象征意义的一个时间。</p>
+
+    <p>日本一百年的大国之路，的确有太多的事情需要总结。但无论怎样去总结，有一点是确切无疑的，在今天的世界，任何一个国家的崛起，可以称道的意义只是在于：对内，给它自己的人民带来幸福；对外，给世界带去和平和安全的福祉。</p>
+
+    <p>UID: 1 性别: 男 精华: 1 积分: 3987 帖子: 787 阅读权限: 200 注册: 2006-9-5 状态:</p>
+
+    <p>#8发表于 2007-2-21 11:42 PM  资料 主页 个人空间 短消息 ［大国崛起］</p>
+
+  </div>
+</section>
+
+<div class="chapter-divider"></div>
+<section class="chapter" id="ep08">
+  <div class="chapter-header">
+    <div class="chapter-emoji">❄️</div>
+    <h2 class="chapter-title">第八集 寻道图强</h2>
+    <div class="chapter-country">俄罗斯</div>
+    <span class="chapter-period-badge">17-20世纪</span>
+    <div class="chapter-subtitle">彼得大帝与帝国之路</div>
+  </div>
+  <div class="chapter-body">
+
+    <p>在亚欧大陆北部的这片广袤的土地上，有一个世界上国土面积最大的国家——俄罗斯联邦。几个世纪以来，生活在这片土地上的民族，在世界舞台上扮演了特殊的角色。</p>
+
+    <p>一方面，为了追赶欧洲强国的现代化步伐，它的一代君主曾以学生身份四处寻师问道；另一方面，它又凭借传统的君主统制和强大的军事力量，扩张成为地跨欧亚美三大洲的大帝国，并以欧洲事务仲裁者的身份逞雄一时。</p>
+
+    <p>从18世纪初开始，由沙皇主导的改革，使俄罗斯的大国之路起起伏伏，常常在灾难之后变得强大，随后又在强盛的巅峰遭遇挫折。</p>
+
+    <p>在寻找自己发展道路的两个世纪里，这片广袤的土地上曾经发生过怎样的故事呢？</p>
+
+    <p>从每年的10月起，俄罗斯开始进入了长达六个月的漫长冬季。1698年10月，莫斯科弥漫着比严寒更加肃杀的恐怖气氛。在不到一个月的时间里，1000多名谋反的射击军官兵，被车裂、枭首和绞刑处死。受刑的人们以一种殉道者的姿态面对最残酷的惩罚，他们手中举着蜡烛，大声地唱着赞美诗，在他们脸上表现出来的是愤怒，而不是对死亡的恐惧。</p>
+
+    <p>监刑的是沙皇彼得一世，俄国历史上赫赫有名的彼得大帝。</p>
+
+    <p>射击军为什么要反叛自己的君主呢？这与彼得一世做的一件看上去离经叛道的事情有关。</p>
+
+    <p>一年前，沙皇曾匿名前往西欧留学。</p>
+
+    <p>荷兰赞丹，今天这里是一处普通的欧洲小镇。三百多年前，这里却是欧洲最大的造船中心之一，这里建造的船只航行在世界的五大洋之上。</p>
+
+    <p>1697年8月，赞丹来了一群学习造船的俄国留学生。学生中有一个名为彼得的人，自称是个下士。这个身高两米多的下士，就是俄国的沙皇彼得一世。彼得一世和工匠们住在一起，吃粗茶淡饭，凿木头、造军舰、学驾船，由于手艺出色，他被师傅和工友们推荐为“优秀工匠”。除了荷兰，彼得一世还到了瑞典、普鲁士、奥地利、英国等国家，对周围的一切表现出异乎寻常的兴趣。</p>
+
+    <p>他在荷兰学习城市建设，在英国学习建筑学，他还获得了相应的证书。他和牛顿有过交往，与他讨论了科学方面的问题。他参观博物馆、音乐厅、各种文化艺术场所。</p>
+
+    <p>在世界历史上，还从来没有一个大国的君主能像彼得一世这样，远涉重洋去国外吸取先进的科学文化知识。但是，他的这一行动在俄罗斯激起了轩然大波。</p>
+
+    <p>俄罗斯民族就认为，自己的民族很独特、很伟大，自己的民族信仰东正教，也是非常独特的，所以他们就认为自己有非常独特的使命，这个使命是什么，很显然他不是拯救自己，也不是拯救周围的国家和民族，而是拯救整个世界。</p>
+
+    <p>俄罗斯人强烈的民族优越感与历史上一次特殊事件有着密切的关系。1472年，当时的莫斯科大公迎娶了东罗马帝国的末代公主，此后俄国的统治者们开始以罗马帝国的继承人自居。他们继承了罗马皇帝“双头鹰”的徽章。今天这个徽章被确定为俄罗斯的国徽。</p>
+
+    <p>这是我们从拜占庭最后一个皇帝的侄女那里继承来的，可能它象征着要注视整个世界。</p>
+
+    <p>东罗马帝国灭亡之后，1547年，莫斯科大公伊凡四世在克里姆林宫戴上了罗马皇帝使用过的王冠，成为俄国的第一个沙皇，在俄语中“沙皇”的意思就是“恺撒”。</p>
+
+    <p>16世纪初，一位俄国东正教的长老上书沙皇称：人类的历史就是三个罗马的历史，前两个罗马已经灭亡了，最终一切信奉基督教的王国将合并到沙皇的统治之下，莫斯科作为第三个罗马将永世长存。</p>
+
+    <p>就是说俄罗斯是一个独一无二的国家，俄罗斯也可以称为连接欧亚两大文明的桥梁，这也反映在俄罗斯的民族意识形态和它的独特作用上，理解这一点很重要。</p>
+
+    <p>在这种唯我独尊的信念支配下，俄国的沙皇们迅速地走上了领土扩张的道路。向东，沙皇俄国越过乌拉尔山侵入人烟稀少的西伯利亚；在南方，俄罗斯的军队与波兰和奥斯曼土耳其开战。到彼得一世登基的时候，俄国已经成为一个横跨欧亚大陆、领土面积居世界第一的大帝国。</p>
+
+    <p>但是，除了广袤的国土，俄国在各方面远远落后于当时的西欧国家。</p>
+
+    <p>此时，几乎控制了全球贸易的荷兰已经辉煌了近百年；通过海外贸易和掠夺积累了大量财富，并占有广阔市场的英国，正在孕育工业革命；法国在路易十四的强权领导下，已发展为17世纪中叶的欧陆首强。</p>
+
+    <p>而当时俄国的经济完全依赖于农业，全国只有几十个手工工场，商业几乎全部把持在外国人手中。教育由东正教会垄断，普通民众知识贫乏。即使在首都莫斯科，一百个人中间识字的也不超过三个。</p>
+
+    <p>俄罗斯和西欧的差距，激发了彼得一世留学的愿望。</p>
+
+    <p>作为一个君主，是第一次，俄国君主第一次访问欧洲，过去（俄罗斯）都是比较封闭的，他（彼得一世）是感觉到这个国家落后，要使俄罗斯上升到一个强国的地位，不光是要扩大领土，而且要有先进的科学技术，所以他埋名隐姓，组织一个大的使团去访问。</p>
+
+    <p>但是，当彼得一世真正迈出国门时，他没有想到，自己的臣民在心理上根本无法接受他的举动。他几乎是在一夜之间，将俄罗斯人在几个世纪中养成的民族优越感打得粉碎。承认自己落后于他人，对任何民族来说可能都是极为痛苦的。</p>
+
+    <p>因此就出现了这种说法，那个人不是彼得大帝，他被人替换了。他不是真正的沙皇，真正的沙皇已经被杀了。</p>
+
+    <p>1698年7月，正在威尼斯参观兵工厂的彼得一世接到国内密报，四个射击军军团造反了。造反的目的是迎立一位真正的沙皇，杀掉一切不中用的领主和外国人。彼得一世日夜兼程赶回莫斯科。他以最残酷的方式镇压了叛乱，亲手用马刀砍掉了一个士兵的脑袋。</p>
+
+    <p>暴乱平定之后，彼得一世发动了一场社会变革。他废除了俄罗斯的传统历法，以欧洲通用的公元纪年取而代之；他按照西欧的语言习惯改革了俄罗斯文字；他命令所有的俄罗斯人剪掉长长的胡子，要想保留胡子就得交重税；他强制推行欧洲的礼仪服饰，要求每一个体面人必须做一套“西装”。</p>
+
+    <p>为了“打开一扇通往欧洲的窗户”，1700年9月，彼得一世发动了对瑞典的战争，目的是从瑞典人手中夺取通往波罗的海的出海口，以便取得和欧洲的直接联系。</p>
+
+    <p>俄国动员了十倍于对手的兵力。但是，十万俄军却被八千瑞典士兵轻而易举地击溃了。</p>
+
+    <p>俄罗斯军队失去了所有的炮兵，军队也失去了指挥官，因为大部分的以雇佣兵为主体的俄罗斯军官都被俘了。俄罗斯军队当时没有任何抵抗能力，失去了整个的指挥官阶层。</p>
+
+    <p>建立一支强大的军队，成为战败后的彼得一世改革的重点。</p>
+
+    <p>陆军完全按照欧洲强国的模式重新编制和训练；海军开始组建；为了满足对装备和后勤物资的迫切需要，大量的工厂在乌拉尔山地区建立起来；军队需要合格的指挥官，彼得一世不仅向欧洲派出了数以千计的留学生，而且先后在俄国设立了数学与海洋学校、炮兵学院、工程学院，这些新式的学校完全按照兵营管理，为了监督学员，彼得下令由退役的士官手持鞭子守在课堂上。</p>
+
+    <p>1709年，在被瑞典军队打败了九年之后，俄罗斯军队再次与瑞典军队交锋。这一次他们取得了空前的胜利，俘虏了指挥作战的所有瑞典将军。瑞典国王侥幸逃脱之后，带着不到100人流亡土耳其。</p>
+
+    <p>战争的结果急剧地改变了俄国在欧洲的地位。法国的一位公爵写道：经常使欧洲北部国家感到害怕的瑞典，即使不说它已经被消灭了，它也是垮掉了，而另外一个迄今默默无闻，除了自己的近邻，从未影响过别国的国家非同小可地崛起了。</p>
+
+    <p>1713年，彼得一世做出了一个对俄罗斯历史产生深远影响的决定，他放弃了有着八百多年历史的俄罗斯古老都城——莫斯科，在从瑞典手中夺来的涅瓦河口，重新建立了一个崭新的首都——圣彼得堡。</p>
+
+    <p>这是一个穿着欧式服装，讲着欧洲语言的城市，同时还生活着很多外国人，彼得大帝希望看到这样的情景，希望看到这样的俄罗斯。好像在他开始书写俄罗斯历史前，俄罗斯历史就不存在。好像俄罗斯的历史就是一张白纸，他重新书写了历史，他重新绘制了在他之前的俄罗斯千年历史。我认为这是一场悲剧。</p>
+
+    <p>彼得一世不顾一切地推行着他的改革。俄国著名的思想家赫尔岑评论说：在他野兽般的巨掌中有俄罗斯的未来。彼得一世也认为自己的严酷无情正是为了国家的强盛，而且他觉得自己有理由对俄罗斯人形成精神感召。</p>
+
+    <p>从19岁开始，彼得一世以下士的身份在军中服役，靠着战功，而不是沙皇的身份获得了海军中将的军衔，在有生之年，他的个人用度从来没有超出一个海军中将的薪俸。他甚至到一个钢铁厂像普通工人那样劳动一天，用挣来的8块钱买了一双新鞋子。</p>
+
+    <p>在一次接见海外归来的留学生时，彼得伸出右手说：“你看，老弟，我是沙皇，但我手掌上有老茧，这些都是为了给你们示范”。</p>
+
+    <p>他把自己的一生都献给了这一切，他希望所有的人也能像他那样，但这是不可能的。这对人来讲是不能承受的，对他的支持者来讲也是不能够承受的，彼得最后是孤独的，人们不能承受彼得残暴、野蛮的要求。</p>
+
+    <p>用野蛮方式推动俄国文明进程的彼得一世没有意识到，他的改革正在将俄罗斯人推向忍耐的极限。彼得一世几乎强迫所有的臣民毫无保留地奉献一切。俄罗斯已经没有了自由人，不仅农奴，连贵族也必须从19岁开始一直到死都为政府服役。</p>
+
+    <p>他强加给俄国人的压力，甚至连自己的儿子也无法承受。1716年11月，太子阿列克谢叛逃了。彼得一世借助武力强迫太子回国之后，亲自参与了对太子的刑讯，当时在场的一位大臣做了这样的记录：“沙皇严厉地斥责了太子的罪恶阴谋。这时太子以一种完全出人意料的坚决口吻承认，他想煽起全俄起义的烽火，……他宣称他是古风旧习以及俄罗斯信仰的维护者，而且以此赢得了人民对他的同情和爱戴。”</p>
+
+    <p>彼得的儿子死因不明。有些人说他没有经受住拷打，所以死掉了，也有流传说他被窒息而死。不管怎样，彼得参与了拷打以及致他死亡的整个过程。</p>
+
+    <p>在太子死去的第二天，一位欧洲外交官惊奇地发现，彼得一世照常出席了一系列国务活动，仿佛什么也没有发生过。</p>
+
+    <p>1725年1月28日，彼得一世去世了。这一年，由他亲自创建的国家科学院正式成立。彼得一世留下了一个空前强大，但在精神上却失去平衡的俄罗斯帝国。他为俄罗斯打开了“面向欧洲的窗户”，将一个守旧的国家推上了改革的道路，但与此同时又在相当程度上割断了这个民族和自己历史的联系。</p>
+
+    <p>也许，如何处理传统和现代的关系，是后发国家都会面临的棘手的历史课题。毕竟，拥有悠久传统的国家在现代化的进程中，不可能割断历史，也不应该迷失自己的文化归属。</p>
+
+    <p>彼得大帝死后，俄国在37年间换了6位沙皇。这些沙皇中没有一个人有勇气和能力肩负起彼得一世开创的事业。帝国的首都重新迁回了莫斯科，彼得一世签署的法令大多数被废除了。俄国回到了彼得一世改革前的状态。</p>
+
+    <p>1762年，一位33岁的女皇登上了沙皇的宝座，史称叶卡捷琳娜二世。几乎是在一登基，这位年青的女性就宣称自己是彼得一世的继承者，俄国将重新回到彼得一世开创的道路上。叶卡捷琳娜二世为什么会做出这样的选择呢？</p>
+
+    <p>我觉得这个首先跟叶卡捷琳娜她自己的人生经历有关系，因为她是个德国人，她的家庭教师是个法国人，是一个接受西方当时启蒙思想教育的一个人物，所以应该说，叶卡捷琳娜二世从小，她就受过这样的影响，所以她从心里头还是认为西方的东西应该是比俄国先进的。</p>
+
+    <p>叶卡捷琳娜二世15岁时远嫁俄国，当她在宫廷舞会上第一次见到自己的丈夫时，就对婚姻失去了信心。她在回忆录中直言不讳地写道，“我心中预感到我们之间不会有任何幸福可言，只有政治雄心激励着我。我内心中有一种难以言传的力量，使我一刻也不怀疑我将自然而然地变成俄国女皇。”</p>
+
+    <p>作为一个外国人，叶卡捷琳娜如何赢得俄罗斯民心呢？</p>
+
+    <p>她首先将自己变成了一个纯正的俄国人。叶卡捷琳娜不顾父亲的强烈反对，放弃了原来的信仰皈依了东正教。为了学好俄语，她每天只睡几个小时，当睡意袭来时，她干脆光着脚站在冰凉的地板上。终于有一天，她晕倒在房间里，御医诊断为严重的肺炎。</p>
+
+    <p>叶卡捷琳娜的作为，让俄罗斯人深受感动，当她拖着病体，在皈依仪式上用略带日尔曼口音的俄语背诵了长达50页的祈祷文时，曾经一度反对她的大主教也不由自主地热泪盈眶。</p>
+
+    <p>叶卡捷琳娜二世的丈夫，彼得三世，他从小就在德意志长大，他甚至不会说俄语，处处蔑视俄罗斯人，蔑视俄国，而恰恰跟他相比呢，一个真正的日耳曼人，也就是叶卡捷琳娜，恰恰到了俄国之后，非常虔诚地皈依了东正教，认真地学习俄语，而且在俄国人面前，是一幅母仪天下的形象，因此说，她很快地就得到了俄国老百姓的承认。</p>
+
+    <p>这位来自德意志的女皇，融入到了俄罗斯的传统之中。她将给俄罗斯带来什么呢？</p>
+
+    <p>叶卡捷琳娜二世统治俄国的时候，启蒙运动正在风行欧洲大陆。法国的思想家伏尔泰、孟德斯鸠、狄德罗倡导的民主和法制观念，逐步深入到许多欧洲人的思想中。女皇以一种近乎崇拜的心态看待这些启蒙思想家。她给伏尔泰的信中说：“从17岁起，我能自由地支配我的时间以来，您的著作是我最好的师友。”</p>
+
+    <p>她是在俄国开始普及教育，然后我们也知道，就是俄国的文学，尤其是俄国的女性文学，实际上就是从叶卡捷琳娜开始的，我们如果要是写一部俄国女性文学史的话，那第一位女作家很可能就是叶卡捷琳娜本人，因为她自己出钱办了几个讽刺文学的杂志。所以这个人在文化方面对俄罗斯肯定是有贡献的，一般的人也认为，她是非常开明的一个君主。</p>
+
+    <p>为了筹措教育经费，叶卡捷琳娜二世放弃了皇室基金，这笔沙皇的个人经费大约占当时整个俄国国家支出的十三分之一。</p>
+
+    <p>斯莫尔尼宫现在是圣彼得堡市政府所在地，十月革命时这里曾经作为革命的指挥中心，它最初是叶卡捷琳娜二世开办的斯莫尔尼学院的校舍。斯莫尔尼学院是俄罗斯第一所女子学院。在叶卡捷琳娜二世看来，要使一个国家的公民变得理想而完善，就要依靠每一个人的第一个老师——母亲。</p>
+
+    <p>1775年，在每一个省会城市都建立了四年制的学校。而在各省的县城里面则建立了两年制的学校，在18世纪末，全国有两万多学生在这些学校里学习。</p>
+
+    <p>1767年，叶卡捷琳娜二世登基的第五个年头，她开始推行自己改革中最关键的一步，她要将欧洲的法制引入俄国。她花了两年时间亲笔起草了《法典起草指导书》，这部长达600页的《指导书》中，通篇浮现着启蒙运动所倡导的平等、自由、博爱的思想。她宣称：“我需要人人遵守法律，但不需要奴役。”也许是时代的变化，叶卡捷琳娜二世试图采用和彼得大帝不同的方式来推进改革。</p>
+
+    <p>1767年7月30日，来自全俄罗斯的564名立法委员会代表在克里姆林宫集会，新《法典》的起草工作由此开始。在此后一年多的时间里，这个委员会召开了200多次会议，但是新《法典》仍然没有制定出来。</p>
+
+    <p>因为俄罗斯的统治者并不愿意给占人口大多数的农奴以法律地位。在当时，农奴是可以像物品一样被买卖的。</p>
+
+    <p>要么卖单个的人，要么把一个家庭都卖掉，孩子被从父母的手里抢走，总之就像买卖牲口一样。比如说打牌输了，要么就是为了还债，或者就把农民当作行贿品，送给他人。</p>
+
+    <p>俄国农奴制的形成和巩固，与俄国劳动力资源稀缺有关。在彼得大帝时期，全国的人口不到1600万，而俄罗斯又拥有广阔的未开发的土地。农民不堪地主剥削时往往会选择逃走。由于人口的大量逃亡，莫斯科在历史上曾两度变为空城。为了维持统治，统治者只能用强迫的方式把农民像奴隶一样束缚在土地上。</p>
+
+    <p>标榜自由和人权、一心要改革的叶卡捷琳娜二世，在又一个路口上再次遭遇到传统和现代的矛盾，确切地说，是遭遇到农奴制和工业化的矛盾。她能不能往前走一步，废除掉农奴制呢？</p>
+
+    <p>要废除它，不可能。如果要在当时废除它，必定要危及沙皇的统治，危及叶卡捷琳娜二世本人的统治基础。</p>
+
+    <p>1768年12月，在没有取得任何成果的情况下，立法委员会宣布无限期休会。叶卡捷琳娜二世最重要的一项改革措施失败了。女皇和彼得大帝一样，没有改变俄国社会的实质。靠君主本人来推动的改革不可能用来推翻自己。所以，当叶卡捷琳娜二世听到法国革命的消息后，她公开指责启蒙思想是“法兰西的瘟疫”。</p>
+
+    <p>为了建立帝国，女皇把更多的人变成了农奴。和彼得大帝时代不同的是，女皇给了贵族们更多的自由，因为女皇需要他们的支持。</p>
+
+    <p>贵族也是人，他们也需要自由。叶卡捷琳娜给了他们这些自由，这是俄罗斯迈向自由的第一步，而这些在彼得时代，是完全被禁止和镇压的。</p>
+
+    <p>这位以彼得大帝继承者自居的女皇，和彼得大帝一样，采用对内专制、对外扩张的方式，追求俄罗斯的强大。在叶卡捷琳娜二世统治的34年时间里，俄罗斯帝国从土耳其手中夺得了通往黑海的入海口，三次瓜分波兰，18世纪80年代，叶卡捷琳娜宣布：北美洲的阿拉斯加和太平洋上的阿留申群岛归属俄国版图。俄国成为地跨欧、亚、美三洲的超级大帝国，女皇本人则成为俄国历史上第二个被称为“大帝”的君主。</p>
+
+    <p>她有一个大臣，一个非常有名的政治家和外交家，在叶卡特琳娜死后说过，我不知道这之后的欧洲将会怎么样，但是我知道，在叶卡特琳娜做女皇，而我作宰相时，我可以说没有俄罗斯的同意，欧洲的大炮不能发射任何一发炮弹。</p>
+
+    <p>叶卡捷琳娜二世去世后，席卷了整个欧洲的拿破仑军队在这个庞大的帝国遭遇败绩，俄国为整个欧洲挽回了败势。1814年，叶卡捷琳娜二世的孙子、被祖母寄予厚望的沙皇亚历山大一世骑着白马进入巴黎，被推举为欧洲神圣同盟的盟主，俄罗斯成为欧洲事务的仲裁者。</p>
+
+    <p>然而，由于农奴制带来的社会矛盾无法解决，俄罗斯的工业化进程受到严重阻碍。依靠武力扩张来维持大国地位的辉煌，只能是短暂的。</p>
+
+    <p>到19世纪中叶，英国已经完成了第一次工业革命，法国和德国也开始了工业化的急行军。在沙皇专制统治下的俄罗斯并没有意识到自己的危机。1856年俄国和英、法两国间进行的克里米亚战争的失败，使俄罗斯从主宰欧洲的顶点迅速跌落下来。</p>
+
+    <p>这两种制度的斗争，资本主义制度战胜农奴制度，尽管当时的俄国士兵非常勇敢地作战，但是，武器各方面，技术没法和船坚炮利的英法资本主义国家相比。</p>
+
+    <p>这是一场海战，英国法国使用的是铁甲舰，大口径的作战的炮，那么俄国呢，相当一部分使用的还是木帆船。</p>
+
+    <p>在克里米亚战争中，英法联军的步枪射程，是俄国步枪的三倍，他们的强大火力给一名28岁的俄国炮兵连长留下了深刻印象，他描述道：“……从四面八方传来子弹的呼啸声，炮弹就在不远的地方爆炸，震撼得我们全都感到恐惧。”</p>
+
+    <p>这位连长就是后来名满天下的作家和思想家——列夫·托尔斯泰伯爵。</p>
+
+    <p>克里米亚战争的失败，使俄国人又一次体会到自己同欧洲强国之间的差距。知识界、工商界甚至包括一些身居要职的官员，都纷纷起来指责影响工业化进程的封建农奴制度。在社会的巨大压力下，1860年，在俄罗斯施行了近五个世纪的农奴制被废除了。</p>
+
+    <p>农奴制的改革为俄国的工业发展提供了大量的劳动力和广阔的市场，就像列夫·托尔斯泰在长篇小说《复活》的开篇所写的那样：“一切都翻了个个儿，一切却又刚刚开始。”接下来，俄罗斯强国的道路该如何继续？</p>
+
+    <p>从战场返回后的第二年，托尔斯泰就急不可耐地前往欧洲，他希望在那里找到俄罗斯未来的出路。当时的整个欧洲似乎都在进行一场追赶英国的赛跑，工业化、资本主义制度几乎成为富国强兵的唯一秘诀。</p>
+
+    <p>但是，托尔斯泰此行看到的不仅是欧洲强国的发达，还有资本主义在原始积累阶段引发的各种社会矛盾，当时的欧洲各国正在接连爆发工人起义。托尔斯泰失望地发现：资本主义制度并没有消除社会的贫富差异，没有改变人压迫人的现实，没有给人带来更多的自由。</p>
+
+    <p>和托尔斯泰同样困惑的，还有许多一直在探讨国家发展道路的知识分子，无论是贵族出身还是平民出身，面对在强国之路上几度起伏的俄国，他们开始了新的思考和选择。</p>
+
+    <p>因为我们知道。在俄国文化史中间，或是在俄国思想史中间，实际上是一直有两大相互对立的倾向。我们把它叫做西方派，另一派叫做斯拉夫派。所谓的西方派，就认为呢，西欧的文明，就应该是俄罗斯文明的样板，西欧的一切都是好的，西欧的教育、西欧的社会、西欧的民主，都是我们应该借鉴的，就是走西欧人的路，这就是他们的，西方派的答案。另外一派叫斯拉夫派，这一派就认为，彼得改革之前的所谓的俄国的东西都是很好的，非常宁静，很和谐的村社制度，然而彼得的改革，使俄罗斯出现了一个整个民族的分裂，所以彼得实际上是俄罗斯民族的一个历史罪人。</p>
+
+    <p>正是在争论的过程中，俄国涌现了车尔尼雪夫斯基、别林斯基、普列汉诺夫、托尔斯泰等一大批思想和文化巨匠。他们的思考，开始跳出简单的传统和现代之争。正是因为他们的出现，俄罗斯民族摆脱了学生的地位，开始用自己的头脑来观察和思索外部的世界，并且可以毫不羞涩地用自己的语言向整个世界表达自己的观点。</p>
+
+    <p>19世纪后期的俄罗斯先进分子中，有的主张走君主立宪的道路；有的要完全按欧洲的模式改造俄国；有的提出刺杀沙皇并付诸了实践；有的则走向农村，去平分土地。别林斯基则表示：“社会主义对于我变成了新的理想”。</p>
+
+    <p>在各种思想选择和实践运动中，俄国走进了20世纪。1905年，当俄国在与日本的战争中失败后，资产阶级革命爆发，终于迫使沙皇成立了国家杜马，同时还任命总理大臣来主持改革。</p>
+
+    <p>托尔斯泰并没有在这种变化中看到希望。他给总理大臣写信说，只有“率先站在欧洲各民族的前列，促进人民消灭由来已久的、各民族共同的私有制的不公平现象”，才能让俄国尽快地发展起来。</p>
+
+    <p>他最基本的一个思想，就是应该走一个共同的，富裕的道路，农民村社的道路。大家没有私人财产，大家一块儿来走那种，互相一块儿协作，一块儿生活，这么一条道路。</p>
+
+    <p>但是，托尔斯泰向往的公平与和谐没有到来。仅仅两年之后，沙皇就解散了国家杜马。一切改革无从谈起，沙皇政府在社会的持续动荡中延续着它最后的时光。在过去近两个世纪中曾经将国家带向强盛、但却始终无法触及君主专制制度本身的沙皇改革走到了尽头，俄罗斯的发展需要新的力量来推动。</p>
+
+    <p>1910年10月29日，一生在为俄国寻找出路的托尔斯泰离家出走。</p>
+
+    <p>在一个乡村火车站中，他病倒了。八天后，82岁的托尔斯泰带着对俄罗斯未来的深深忧虑去世了。</p>
+
+    <p>托尔斯泰和所有关心国家命运的俄罗斯知识分子，他们的身上都体现出一种理想主义色彩。令人痛苦的历史和现实，使得他们将希望更多地寄托在未来。对于俄罗斯人来说，生活就像一条追寻理想的朝圣之路，他们肩负着强烈的使命感，关注人类生存的终极问题。</p>
+
+    <p>也许，正是这一切，使俄罗斯民族的命运具有了一种悲壮的色彩；也恰恰因为这一切，使俄罗斯民族成为了世界上最强大的民族之一。</p>
+
+    <p>和托尔斯泰同时代的俄国作家陀斯妥耶夫斯基曾说过：“真正伟大的民族永远不屑于在人类当中扮演一个次要角色，甚至也不屑于扮演头等角色，而一定要扮演独一无二的角色。”</p>
+
+    <p>托尔斯泰去世四年后，第一次世界大战爆发，沙皇俄国陷入战争泥潭，走到了崩溃的边缘。1917年11月7日，震动世界的十月革命爆发。以此为起点，这个占世界陆地面积近五分之一的国家，开始了一次对20世纪的历史产生深刻影响的伟大实践。</p>
+
+    <p>UID: 1 性别: 男 精华: 1 积分: 3987 帖子: 787 阅读权限: 200 注册: 2006-9-5 状态:</p>
+
+    <p>#9发表于 2007-2-21 11:44 PM  资料 主页 个人空间 短消息 ［大国崛起］</p>
+
+  </div>
+</section>
+
+<div class="chapter-divider"></div>
+<section class="chapter" id="ep09">
+  <div class="chapter-header">
+    <div class="chapter-emoji">⚡</div>
+    <h2 class="chapter-title">第九集 风云新途</h2>
+    <div class="chapter-country">苏联</div>
+    <span class="chapter-period-badge">1917-1991</span>
+    <div class="chapter-subtitle">红色帝国的崛起与解体</div>
+  </div>
+  <div class="chapter-body">
+
+    <p>冬天是莫斯科最具风情的季节。1924年1月21日，漫天的风雪席卷着这座城市的大街小巷，但这一天的莫斯科城没有风情，有的只是无尽的悲哀。</p>
+
+    <p>就在这一年中最寒冷的日子，数万名工人、农民、士兵排着长队，来向他们的领袖告别。苏维埃政权的缔造者——列宁，已经为这个新生的政权耗尽了最后一丝精力。</p>
+
+    <p>来自西伯利亚的狂风怒吼着，如同随风飞舞的雪花，每个吊唁者的脸上都充满了失落和彷徨，苏维埃的明天怎么办？谁来带领大家完成这段未竟的旅途?</p>
+
+    <p>俄罗斯高尔基文学院 院长 谢·叶辛：</p>
+
+    <p>俄罗斯人是非常适应非个性的社会生活，因此我们也就有了社会主义。当我们联合起来的时候，我们就非常强大。当我们为了一种思想或者围绕着一个人团结起来的时候，你明白我们非常需要英雄，为了这个英雄，我们可以战斗到最后。</p>
+
+    <p>俄罗斯是一个崇尚英雄、需要英雄，同时也是英雄辈出的民族。在历史上，政治家的个性气质曾决定性地影响了整个国家的命运。彼得大帝的改革，拉近了俄国和当时欧洲强国的距离；叶卡捷琳娜二世的改革，造就了一大批独立思考的俄罗斯知识分子；而列宁对革命的执著，则使这片土地勇敢地承担起为人类开拓新航道的历史重任。</p>
+
+    <p>在列宁登上历史舞台之前，俄国曾经出现过许多共产主义小组。其中，一个名叫维拉·扎苏里奇的女共产主义者给马克思写了一封信，在信中她问道：马克思提出的与大工业、工人阶级紧密联系的社会主义，是否可以在俄罗斯实现？马克思回答说，应该首先在欧洲发达国家实现。</p>
+
+    <p>当时，几乎所有的社会主义信仰者都认同：社会主义是工人阶级领导的自下而上的革命，应该首先在工业基础发达的英国、美国等老牌资本主义国家发轫，工业基础薄弱的俄罗斯还不具备这样的条件。</p>
+
+    <p>深刻了解俄国现实的列宁则认为： “如果沙皇制度由于有了13万贵族，这些在自己的地区、各自行使警察权的封建领主，便能维持几个世纪，为什么我们不能依靠拥有13万忠诚的活动分子的党，坚持几十年呢？”。</p>
+
+    <p>美国耶鲁大学 教授 伊曼纽尔·沃勒斯坦：</p>
+
+    <p>俄国大革命是不是必要呢？我不知道。但是它却发生了，因为这个国家崩溃了，那就是它为什么发生的原因。它发生了，不是因为列宁计划了，而是因为列宁抓住了提供给他的布尔什维克的机会，来做他想做的事情。</p>
+
+    <p>十月革命的胜利极大地鼓舞了布尔什维克改造旧世界、建立新世界的决心和信心，人们相信，在列宁的领导下，苏维埃俄国将走出一条完全不同的道路，人民将行使权力，所有人都有工作，再也不受剥削。然而，建立新社会却是一个艰难的过程。</p>
+
+    <p>十月革命四年后，在欧美发达国家的封锁和包围下生存下来，并刚刚平息了国内叛乱的苏维埃政权，遭遇了一场自下而上，突如其来的风暴。</p>
+
+    <p>这是画家弗·塞罗夫创作于1921年的一幅油画，它所反映的内容正是那场席卷全国的风暴。</p>
+
+    <p>1921年春，苏俄发生大面积的灾荒，三千多万老百姓挣扎在饥饿的边缘。由于在刚刚结束的保卫新政权的战争中，战时共产主义政策显现出极大的威力，苏维埃政权决定继续推行对农民余粮的无偿征集政策。然而，这个政策引起了农民的不满，一些富农甚至借机拿起了武器。连十月革命中布尔什维克的坚强堡垒——喀琅施塔得的水兵们，也支持农民的要求。</p>
+
+    <p>俄罗斯高尔基文学院院长 谢·叶辛：</p>
+
+    <p>当问题表现在要一碗粥、还是要理论的时候，人们通常会选择那碗粥。你吃饱了那你就会去唱歌，如果你肚子里没食，那你只有沉默。列宁实行了新经济政策，因为战争以后，要想发展经济，没有其他的路。</p>
+
+    <p>外部世界的封锁包围和军事压力，国内的粮食危机和政治叛乱，促使苏维埃政权采用新的方式来发展经济。只有这样，才能巩固政权，改善人民的生活水平。为此，列宁对党内的同志说：“我们在夺取政权后就知道，不存在将资本主义制度具体改造成社会主义制度的现成方法。我不知道哪位社会主义者处理过这些问题。我们必须根据实验做出判断。”</p>
+
+    <p>1921年3月，苏维埃政权开始实施新经济政策，并且首先从解决农民问题入手，变余粮无偿征集为市场买卖。</p>
+
+    <p>中国北京大学历史学系 教授 徐天新：</p>
+
+    <p>就是说呢，要对农民做让步，要允许农民能够个体地经营自己的经济，允许市场的存在，要利用资本主义的市场经济，来恢复生产、发展经济，为社会主义的建设准备条件。</p>
+
+    <p>俄罗斯世界历史研究所 所长 阿·奥·丘巴利扬：</p>
+
+    <p>当然了，这根本就不是完全的资本主义，新政策的主要内容涉及商业、减税、允许小型企业存在，这一切都是试图使经济复活。</p>
+
+    <p>在商业领域，新经济政策刚开始实行的是直接用工业品换农业品，但是，俄罗斯大婶们却更习惯于货币交易，不愿意进行物物交换。而且，工业品也迟迟到不了位。</p>
+
+    <p>于是，苏维埃政权宣布恢复国内自由贸易，重新建立银行系统。</p>
+
+    <p>今天，运营了85年的莫斯科国营百货商店，吸引着来自世界各地的游客。然而，八十多年前，这里却很难看到外国人。</p>
+
+    <p>当时的欧美等发达国家对俄国新生的苏维埃政权充满了恐惧，一心想把它扼杀在摇篮之中。美国不仅拒绝在外交上承认它，而且华盛顿的官员们对请求去苏联的旅游签证的回答竟然是：“我们不知道有这样的国家！”。在这样的敌视中，苏俄获得外国的资金和技术之难是可想而知的。</p>
+
+    <p>1921年8月，在莫斯科市民惊异的目光注视下，一位23岁的美国青年走进了克里姆林宫，他的名字叫阿曼德·哈默。</p>
+
+    <p>哈默的父亲是美国共产党的创始人之一，同父亲一样，哈默对新生的苏维埃政权充满关注，他为苏俄带来了大批急需的医疗设备 。</p>
+
+    <p>就在这个办公室里，年轻的美国商人怀着极大的热情，倾听列宁畅谈新经济政策，其中最让哈默感兴趣的是工业领域。</p>
+
+    <p>中国北京大学历史学系 教授 徐天新：</p>
+
+    <p>因为我们都知道，（苏联）国内战争打退了外国武装干涉，把外国资本家赶走了，那么现在胜利之后呢，列宁又同意外国资本家回到俄国，来经营一些当时苏联没有力量经营的一些项目。特别像在西伯利亚开发矿产，采伐森林等等。这个做法是非常英明的，非常有远见的。</p>
+
+    <p>10月28日，第一份给外国人特许权的合同在这里正式签署，哈默获得了一所石棉矿的特许经营权。同时，在列宁的支持下，哈默成为二、三十年代美苏贸易的核心人物。</p>
+
+    <p>他在美国企业界游说，联络了30多家美国大公司，组成美国联合公司，将美国的产品运到苏俄，换取苏俄的物产，美苏的易货贸易由此开始。</p>
+
+    <p>但是，苏俄并不想单纯从国外进口产品。列宁对哈默说：“我们真正需要的是美国的资本和技术，这样就可以让我们的车轮再次转动起来。”</p>
+
+    <p>嘎斯车是苏联时代的代表性符号之一。而最早在苏联生产“嘎斯”车的，是美国的汽车制造业大王亨利·福特。</p>
+
+    <p>福特原先把苏维埃看做“势不两立的敌人”，声称除非苏联的意识形态变得适合他的口味，否则他“不会运一个螺帽去那儿”。哈默劝他说：“要是这样，你会有太长的时间没法在那里做生意，那里可是一个巨大的市场。”</p>
+
+    <p>事后证明，福特对这笔与苏联的交易十分满意。</p>
+
+    <p>在高尔基市，福特与苏联建立了汽车联合企业，从1932年起，每年有十万辆嘎斯牌客车和卡车下线，在苏联的道路上奔跑。</p>
+
+    <p>新经济政策的实施，使苏联经济得到了恢复。列宁对此感到很欣慰，他说：“在战争结束的时候，俄国就像是一个被打得半死的人……而现在，谢天谢地，他居然能够拄着拐杖走动了！”</p>
+
+    <p>中国中央编译局 研究员 郑异凡：</p>
+
+    <p>这个结果是什么呢，结果就是，把市场，实际上就等于把商品、货币、市场机制引进到苏联的社会主义建设里面去，在马克思主义的发展史上，这是一个重大的突破。</p>
+
+    <p>1923年11月20日，列宁在苏维埃全会上说：“社会主义现在已经不是一个遥远的将来，或什么抽象的幻影，……新经济政策的俄国将变成社会主义的俄国。”</p>
+
+    <p>在这张桌子上，历史永远定格在1924年1月22日。列宁每天离开办公室前，都从这里撕下一页日历。但是那天，他已无力撕下这页日历。</p>
+
+    <p>苏联人失去了一位尊敬的兄长，一位和蔼的领袖，一个根据实践要求为俄罗斯谋划未来的舵手。</p>
+
+    <p>俄罗斯高尔基文学院院长 谢·叶辛：</p>
+
+    <p>列宁给了人类一种鲜明的典范，即人类还可以有另外一种生活方式。有可能在他去世之后，俄罗斯走上另外一条繁荣的生活道路。很遗憾，列宁所实施的这种实践活动最后还是没有继续进行下去。我认为，整个世界失去了一个面向未来的机会。</p>
+
+    <p>接下来领导苏维埃政权的，是以行事严峻果断为世人熟悉的斯大林。也许纯属巧合，列宁以发源于西伯利亚的大河——勒那河的名字作为自己的化名，而他的继任者则以一种硬度很强的金属——“钢”作为自己的姓氏。</p>
+
+    <p>正如这两个姓名的文字意义一样：列宁时代，国家的经济政策具有相当的弹性；而斯大林则以强硬的手段，加快了国家工业化的步伐。</p>
+
+    <p>美国耶鲁大学 教授 保罗·肯尼迪：</p>
+
+    <p>他们认为这个广大的国家，想要发展，必须集中所有的资源，必须限制资产阶级，限制资本主义体系，控制所有的资源，包括农业资源。</p>
+
+    <p>中国中共中央党校国际战略研究所 研究员 左凤荣：</p>
+
+    <p>斯大林就认为，我的工业化资金只能靠我自己内部来积累，内部来积累呢，那主要当然要来自于农业，所以，他就明确提出一个要贡税论，就是说要农民，除了他要交的粮食，应该交的国家任务之外，在工业品上，他要把工业品的价格定得更高一些，然后这样让农民买东西的时候付出更多的钱，就是说通过这样一个方式来积累工业化的资金。</p>
+
+    <p>以工农业“剪刀差”的方式来积累工业化资金，意味着此前为保护农民利益而推出的新经济政策将被舍弃。斯大林说：“我们所以采取新经济政策，就是因为它为社会主义服务，当它不再为社会主义服务的时候，我们就把它抛开”。</p>
+
+    <p>在斯大林看来，时过境迁，新经济政策不利于社会主义工业化的建设了，因为苏联需要的是速度。斯大林经常说：“延缓速度就是落后，落后者是要挨打的。”</p>
+
+    <p>20世纪20年代，西方各国从第一次世界大战中恢复过来，各个主要工业国家的工业生产总值都达到或超过一战前水平的1.5倍。一些欧美经济学家称资本主义已消灭了贫困，空前的繁荣让他们充满信心，并继续封锁苏联经济。</p>
+
+    <p>1927年，英国宣布断绝英苏关系，并废止1921年签订的英苏贸易协定。英国外交大臣张伯伦发起六国外长会议，提出要“和共产国际做斗争”。</p>
+
+    <p>孤零零的苏联看起来似乎不堪一击。虽然新经济政策取得一定的成效，但直到1928年，苏联的工业产值还不到德国的一半，美国的八分之一，全国只有不到三万辆拖拉机，99％的耕种要靠畜力和人力来完成。</p>
+
+    <p>俄罗斯《斯大林传》作者 尤里·茹可夫：</p>
+
+    <p>为了保证国家继续发展，必须采取新的、强有力的措施，因此，为了使国家不再成为一个农业国家，为了使国家不再从国外进口小到铅笔、大到飞机等商品，必须建立自己的工业。</p>
+
+    <p>这就是为什么要放弃新经济政策的原因。</p>
+
+    <p>而同样庞大的亚洲近邻——中国的境遇，也更加坚定了这个钢铁般的领袖优先发展重工业的意志。斯大林说：“没有重工业，那我们就不会有一切现代化国防武器，那时我们的地位就会和目前中国所处的地位多少相似：中国没有自己的重工业，没有自己的军事工业，现在只要谁高兴，谁就可以蹂躏它。”</p>
+
+    <p>1929年5月，苏维埃第五次代表大会在莫斯科大剧院举行，讨论的内容是国民经济发展的第一个五年计划。</p>
+
+    <p>剧院里灯火辉煌，主席台上挂着大幅的苏联地图。报告人每提到一项建设工程，在地图上相应的地点就会亮起一盏小灯。等到报告结束时，苏联地图上已经布满了五颜六色的灯光，一千多个迷人的亮点闪烁着。</p>
+
+    <p>俄罗斯《斯大林传》作者 尤里·茹可夫：</p>
+
+    <p>第一个五年计划，整个的制定过程将近五年，作为第一个五年计划，人们想把所有的各个方面都写进去，这样写的量就非常大，最后又想方设法减少它的内容，然后又增加了内容，最后的结果是通过了的第一个五年计划的总容量，足足有三本这么厚的书。</p>
+
+    <p>在世界历史上，还没有任何一个国家如此全面而细致地规划过自己的发展进程，这是苏联人的一个创造。在那个时代，所有的生产、运输、销售都由国家计划安排。国家计划力争精确，在列宁格勒生产的一粒纽扣售价1卢布，那么700公里外莫斯科的价格也是1卢布，而万里之外的海参崴仍然是1卢布。</p>
+
+    <p>对于苏联而言，它未来几十年的兴衰都和这种高度集中的指令性计划经济联系在了一起。</p>
+
+    <p>就在苏联人讨论第一个五年计划的这一年，一场人类历史上从未有过的经济危机爆发了。从1929年10月24日纽约股市的疯狂下跌开始，危机很快从美国蔓延到全球，袭击了几乎所有的资本主义国家。</p>
+
+    <p>美国哥伦比亚大学商学院 教授 约瑟夫·斯蒂格利茨：</p>
+
+    <p>这是一个全球的大萧条，之前有很多关于社会公平的考虑，只有少数人像今天这样富有，而大多数人却没有从经济繁荣中获得利益。那时候，美国社会的不公平程度很高，有意思的是我们又回到当时那种不公平的程度，历史惊人的相似。随着经济的崩溃，人们开始知道资本主义并不像他们想象的那样运作，应该有政府的作用。</p>
+
+    <p>在第一次世界大战中，欧美发达国家的损失是1700亿美元，而1929年到1933年这次全球经济危机造成的损失则到达了2500亿美元，危机震撼了整个资本主义世界，也充分暴露了自由市场经济的弊端。</p>
+
+    <p>而特立独行的苏联，却在第一个五年建设计划的指导下，获得突飞猛进的发展。这时，欧美的资本、技术和人才，开始转向苏联寻找出路。全球最大的移民国家——美国，也第一次出现向外移民的倾向，先后有10万美国人申请移居苏联。</p>
+
+    <p>中国中央编译局 研究员 郑异凡：</p>
+
+    <p>斯大林的公开言论里面，我没看到他说什么要用西方的技术，整个五年计划，或者五年计划以前，用粮食，从农民那里征收的大量的粮食，征收来干什么，就是用来出口，出口换汇，然后用这个去进口国外的技术。国外的这些设备进口了以后，当时国内不会运用，所以他当时讲技术决定一切的时候，就是说，我现在从国外买进了那么多设备，我这些设备得有人去掌握它。</p>
+
+    <p>拖拉机，在相当长的一段时间内是工业化的重要标志，因为，它解放的是最广大的农业生产力。</p>
+
+    <p>就在1929年，全球经济危机最严重的时刻，一个规模宏大的拖拉机厂在斯大林格勒破土动工了。十个月后，工厂建成投产。</p>
+
+    <p>这个奇迹般的速度，来自于计划经济体制的有效运作，也来自苏联对世界经济形势的判断和利用。</p>
+
+    <p>拖拉机厂的建设者，除了苏联人，还有美国人和德国人，先后在这里工作的美国工程师就有730名。斯大林后来告诉美国总统罗斯福，在苏联约有三分之二的大型企业是利用美国的技术建成的。1932年时，在苏联重工业部门工作的各国专家约有6800人。</p>
+
+    <p>与欧美国家的整体低迷形成鲜明对比的，不仅是苏联的工业化成就，还有苏联人民建设国家的巨大热情。</p>
+
+    <p>1935年9月2日，苏联《真理报》刊登了这样一则不大的简讯：“中伊尔敏诺的采煤工斯达汉诺夫同志为庆祝国际青年节21周年，创造了风镐劳动的全苏新纪录。在六小时一班的工作时间里，斯达汉诺夫开采了102吨煤，这是矿井一昼夜开采量的10%，挣了200卢布工资。”</p>
+
+    <p>这是一个令人吃惊的开采量，因为它超过了普通定额的13倍！但一周以后，斯达汉诺夫又刷新了自己的纪录，一个工作日采煤175吨。</p>
+
+    <p>此后，斯达汉诺夫不再是一名普通矿工的名字，他成为一面旗帜，引领了苏联工业化进程中一场轰轰烈烈的生产技术革新运动。在各行各业，无数个斯达汉诺夫的推动下，苏联第二个五年计划期间工业劳动率提高了82%，大大高于原计划的63%。</p>
+
+    <p>1932年，第一个五年计划完成，苏联从农业国变成工业国。</p>
+
+    <p>1937年，第二个五年计划完成，苏联的工业生产总值跃居欧洲第一，世界第二。</p>
+
+    <p>俄共中央主席 根纳季·安德烈耶维奇·久加诺夫：</p>
+
+    <p>俄罗斯在1929年时，不能生产一架飞机，不能生产一辆联合收割机，也不能生产一辆汽车，十年以后，到1941年时，我们已经拥有了最好的技术，这些都是当时世界上最好的。</p>
+
+    <p>人最宝贵的是生命，生命属于每个人只有一次，人的一生应该这样度过：当他回首往事的时候，不因虚度年华而悔恨，也不因为碌碌无为而羞愧；这样，在临死的时候他就能够说：“我的整个生命和全部精力都献给了世界上最壮丽的事业——为人类的解放而斗争”。</p>
+
+    <p>从1917年十月革命开始，这个占世界陆地总面积近五分之一的国家，在不到二十年的时间里发生了翻天覆地的变化。它以令人难以置信的速度，走完了欧美国家通常需要几十年、甚至上百年才能走完的工业化路程。</p>
+
+    <p>苏联的一枝独秀和它所采取的“计划”方式，引起了西方世界的极大兴趣。20世纪30年代，西方人士纷纷前往苏联取经。美国的一名记者从苏联回国后告诉国人：“我看到了未来，它行得通”。一时之间，“计划”成为最时髦的名词。</p>
+
+    <p>通过国家力量对经济生活进行宏观调控，其中最成功的就是美国总统罗斯福的新政，通过在自由市场经济中加入政府干预的手段，美国经济开始复苏。</p>
+
+    <p>俄罗斯《斯大林传》作者 尤里·茹可夫：</p>
+
+    <p>比如说英国的一个女作家阿加莎·克里斯汀，她就是《东方快车谋杀案》的作者，在这本书的开始部分，书里的主人公在车厢的过道上讨论俄罗斯的第一个五年计划，这是一个非常准确的对第一个五年计划的反映。</p>
+
+    <p>在当时，苏联的成功吸引了全世界的目光，成功的光芒掩盖了快速工业化背后的问题。</p>
+
+    <p>多发一个月的工资，提供一套带电话的技术人员的住房，配备一切必要的沙发家具，一个家庭疗养证，两个电影院里永久的专座，这些就是苏联工业化道路上的精神偶像——斯达汉诺夫获得的物质奖励。但成千上万忘我工作的建设者们并没有得到太多的回报，尤其是广大的农民们，每天都不得不去面对严重的物质匮乏。</p>
+
+    <p>中国北京大学历史学系 教授 徐天新：</p>
+
+    <p>斯大林的经济发展也存在着一些致命的弱点，首先是经济发展不均衡，重工业、军事工业有了突飞猛进的发展，但是轻工业、农业受到了很大的伤害，特别是农业。第二方面呢就是人民的生活没有能得到重大的改善，没有能够和工业发展同步得到改善，到斯大林逝世的时候，人均的粮食的产量、人均的肉类的产量，还没有达到沙皇时代的水平。</p>
+
+    <p>美国耶鲁大学 教授 保罗·肯尼迪：</p>
+
+    <p>我认为，我们不应该简单地吸取教训，认为任何计划都是危险的，任何长期考虑都是错误的。我认为应该吸取更加微妙的信号。就是说国家和地方政府擅长什么，不擅长什么。</p>
+
+    <p>不过，计划经济在当时的成功，使人们不可能像今天一样去反思它的弊端。更何况，当时的苏联，正面临越来越紧迫的战争威胁。</p>
+
+    <p>为了摆脱经济危机，德国、日本、意大利等国建立起法西斯专政。就在苏联完成第二个五年计划的1937年，中国已经开始了艰苦卓绝的全面抗日战争，而斯大林一直担忧的战火，最终也不可避免地侵入了这片广袤的土地。</p>
+
+    <p>这是莫斯科红场上的无名烈士墓，墓前的这簇火焰已燃烧了几十年，它象征着不屈的鲜血和顽强的灵魂。墓志铭上写道：“你们的名字无人知晓，你们的业绩万世永存”。陵墓下面掩埋着数千名在苏联卫国战争中牺牲的红军战士。</p>
+
+    <p>1939年，第二次世界大战爆发。</p>
+
+    <p>1941年6月22日凌晨３时，德国军队突袭苏联。一星期内，苏军损失兵力100万人以上，西部工业区全部沦陷。</p>
+
+    <p>希特勒微笑着声称要在莫斯科红场举行庆祝的仪式，但很快他就笑不出来了，德军不仅被全线扼止，而且开始遭遇反攻。</p>
+
+    <p>希特勒不明白，已经失去西部工业基地的苏联，为什么会越战越强？</p>
+
+    <p>俄罗斯《斯大林传》作者 尤里·茹可夫：</p>
+
+    <p>如果我们没有在库茨涅茨克、扎巴洛日等地建立钢铁联合体，如果我们没有在第二个五年计划期间，在斯大林格勒、哈尔科夫、车里亚宾斯克等地建拖拉机厂，我们就不可能将这些工厂直接建成坦克制造厂。</p>
+
+    <p>中国社会科学院世界历史研究所 研究员 闻一；</p>
+
+    <p>由于战争条件呢，采取了一种几乎是24小时工作制，就是机器不歇人休息，轮班倒制度，所以西伯利亚的工业也很快地发展起来了。</p>
+
+    <p>即使在最艰苦的1942年，苏联飞机产量仍达到两万架以上，比德军几乎超出一倍。</p>
+
+    <p>苏联巨大的工业能力压倒了纳粹德国，成为制胜的利剑。在战斗最激烈的时刻，斯大林格勒拖拉机厂的工人们驾驶着刚刚造好的坦克直接出厂，迎战德军。</p>
+
+    <p>1945年5月1日，世界反法西斯战争终于迎来了最后的胜利。</p>
+
+    <p>苏联红军攻克柏林，红旗插上了德国国会大厦的顶端。德军在苏德战场上共损失兵力1000万，占它在第二次世界大战中总伤亡人数的73%，苏联以2000万人的牺牲为代价，捍卫了正义，捍卫了和平。这是人类历史上最悲壮的一页，仅此一点，苏联就无愧于一个大国的称谓！</p>
+
+    <p>在德军败局已定的1945年2 月 ，当时世界上最有力量的三个国家——美国、苏联、英国的首脑罗斯福、斯大林、丘吉尔在雅尔塔会晤，一起商谈确立战后的世界格局。</p>
+
+    <p>这是世界对苏联强大的军事政治力量的承认，也是对苏联所承担的大国责任的尊敬。</p>
+
+    <p>在20世纪中叶的万里晴空之下，美国和苏联两个大国隔洋相望，共同主导了世界未来几十年的走向。</p>
+
+    <p>1957年，世界上第一颗人造地球卫星闯入了太空，它的身上镌刻着“苏联”的字样。</p>
+
+    <p>1961年4月12日，苏联宇航员加加林乘“东方”号飞船，第一次实现了人类进入太空的</p>
+
+    <p>梦想。从太空俯瞰地球，是人类文明的高度，也是苏联作为世界上第一个社会主义国家的高度。任时光流逝，这一高度将永载史册。</p>
+
+    <p>而能否超越这一高度，将取决于俄罗斯一代代领航者的视野是否足够高远。</p>
+
+    <p>这是一本被封存了五十年的书，它的作者是法国文学大师罗曼·罗兰。</p>
+
+    <p>1935年，罗曼·罗兰应高尔基的邀请访问苏联，在苏联他处于鲜花和欢呼之中。后来他写信给斯大林说：“我看到了一个强大的国家，整个国家在布尔什维克领导下跟千百种障碍做不断的斗争，在英勇而秩序井然的高潮中，正在建设一个新世界。”</p>
+
+    <p>中国中央编译局 研究员 郑异凡：</p>
+
+    <p>当时他们到那边去看了以后呢，确实也发现了，苏联存在着各种各样的问题，比如说，当时对斯大林的个人崇拜，还有当时的官僚主义的作风，还有广大农民和一般老百姓的贫困生活，还有国内他们，有意识地封锁国外的情况。</p>
+
+    <p>在日记中，罗曼·罗兰写道：“目前这些政策包含着某种消极的东西，这是不可避免的；我丝毫不怀疑，世界更美好的未来是与苏联的胜利连在一起的。”</p>
+
+    <p>出于对苏联的热爱，罗曼·罗兰决定这本日记五十年后再发表，他不想因为这本书造成对苏联的哪怕一点点伤害，他认为五十年后，苏联一定已经解决了这些问题。</p>
+
+    <p>1984年，罗曼·罗兰的《莫斯科日记》正式发表了。但是，苏联的领袖们并没有像罗曼·罗兰期待的那样，及时发现和纠正，包括高度计划经济体制在内的一些政策弊端，以至于积重难返，丧失了让社会主义制度自我完善的机会。</p>
+
+    <p>1991年，克里姆林宫的红旗悄然落下，红色的年轮在大国兴起的舞台上刻写了74圈。</p>
+
+    <p>苏联的迅速崛起是20世纪引人注目的大事。作为一次前无古人的伟大实践，它的经验和教训，都成为人类发展的宝贵财富。因为，对历史的判断，必须用大尺度来衡量，社会变革的完成可能需要几十年、上百年甚至更长。</p>
+
+    <p>对一个伟大的民族而言，挫折意味着新的出发。今天，俄罗斯已经走在了民族复兴的道路上。</p>
+
+    <p>UID: 1 性别: 男 精华: 1 积分: 3987 帖子: 787 阅读权限: 200 注册: 2006-9-5 状态:</p>
+
+    <p>#10发表于 2007-2-21 11:47 PM  资料 主页 个人空间 短消息 ［大国崛起］</p>
+
+  </div>
+</section>
+
+<div class="chapter-divider"></div>
+<section class="chapter" id="ep10">
+  <div class="chapter-header">
+    <div class="chapter-emoji">🗽</div>
+    <h2 class="chapter-title">第十集 新国新梦</h2>
+    <div class="chapter-country">美国（上）</div>
+    <span class="chapter-period-badge">18-19世纪</span>
+    <div class="chapter-subtitle">从殖民地到超级大国</div>
+  </div>
+  <div class="chapter-body">
+
+    <p>这里是美国东部弗吉尼亚州的一个小镇。今天，这座小镇已经成为反映美国殖民地时期的历史公园。走进小镇，仿佛跨越了时空隧道，教堂、学校、邮局、酒馆、商店、法院、公路，都完整保留了二百多年前北美殖民地时期的景象。安详、富有秩序的威廉斯堡为我们呈现了一幅真实的历史画卷。</p>
+
+    <p>18世纪时，威廉斯堡是弗吉尼亚殖民地总督府的所在地，总督府象征着大英帝国的统治和权威。不过，在这里，事关殖民地生存和生活的公共事务都要在一个叫殖民地议会的机构内进行商议。议员由当地不同职业、不同领域、不同阶层的人们选举产生。殖民地议会是殖民地人们解决现实问题、实行自我管理的重要标志。议会大厦成为唯一与总督府享有同样权威的建筑。</p>
+
+    <p>这样的殖民地和当时其他大国在亚洲、非洲和南美洲建立的殖民地有着天然区别。</p>
+
+    <p>美国哈佛大学历史学教授 伯纳德·贝林：</p>
+
+    <p>尽管英国政府是一个主权政府，享有相应的法律权利，英国的管理却是表面化的。在很大程度上，这些殖民地需要依赖于自我的管理。虽然会受到来自英国的监管，但他们还是相当自治的。</p>
+
+    <p>北美的英属殖民地为什么会有如此特殊的地位？而这套自我管理的运行体系又是如何形成的呢？历史学家们认为，其中的渊源来自于一艘从欧洲远道而来的移民船。</p>
+
+    <p>1620年，一百多名逃避宗教迫害的英国清教徒，乘坐一艘叫“五月花号”的船只，开始了前往美洲新大陆的航程。他们漂洋过海的目的，是要建立一个自由的宗教圣地。</p>
+
+    <p>美国哥伦比亚大学历史学教授 埃里克·方纳：</p>
+
+    <p>清教徒是英国国教的分裂者，他们成立了自己的教派，希望按照自己的方式实现宗教理想，而不是按照英国国教的方式。</p>
+
+    <p>茫茫大海上，“五月花号”的乘客在孤独的漂泊中，承受着波涛的凶险和疾病的痛苦。然而，更让人心潮难平的是，面对荒芜的新大陆，一切都是未知的。清教徒们将如何实现自己的理想，并以什么样的方式在陌生的土地上生存下去呢？</p>
+
+    <p>在“五月花号”即将登上北美大陆之前，船上41名成年男子在甲板上签订了一份契约，这就是《五月花号公约》。</p>
+
+    <p>公约规定，船上的人到达北美新大陆后，自愿结为一个民众自治团体，并制定和实施有益于团体利益的公正法律、法规、条例和宪章。全体成员保证遵守和服从。</p>
+
+    <p>《五月花号公约》，被历史学家确认为美国历史上第一份政治性契约文件。</p>
+
+    <p>美国哈佛大学历史学教授 伯纳德·贝林：</p>
+
+    <p>《五月花号公约》有很重要的象征意义，因为这可能是第一次，在没有任何监管之下，一群人聚集在一起，决定要形成属于自己的社会和政治性契约，并用他们所认为的公平法律来实行自我管理。</p>
+
+    <p>1620年11月21日，经过66天的航行，承载着欧洲文明而来的“五月花号”到达了马萨诸塞州的普利茅斯。船上的102名清教徒依照承诺，组成了普利茅斯殖民地自治团体。</p>
+
+    <p>今天，五月花号复制船静静地停泊在普利茅斯港湾，距它不远处，有一块刻着1620字样的石头，据史学家考证，这块石头是清教徒首次登上北美大陆的标志。</p>
+
+    <p>除了一批批怀揣好奇与梦想的清教徒，陆续来到北美大陆的，还有许多来自其他欧洲国家不同阶层、不同信仰的冒险者和从非洲贩卖来的黑人奴隶。新大陆渐渐地热闹起来。在北美阿巴拉契亚山脉东侧的大西洋沿岸，相继出现了属于大英帝国的13个殖民地。</p>
+
+    <p>中国社会科学院美国研究所原所长 资中筠：</p>
+
+    <p>他们在理论上，他还是英国的子民，还是承认英皇统治的，可是实际上他们要有什么事情，天高皇帝远，真正的天高皇帝远，谁也管不了他们，所以他们必须自己组织起来，就是自己互相帮助，慢慢形成一套管理的方式。</p>
+
+    <p>美国哈佛大学历史学教授 伯纳德·贝林：</p>
+
+    <p>在美国早期历史的前两个世纪中，（殖民地）自治一直存在，并且形成了一种不会出现在拉丁美洲的政治局面。在拉丁美洲，受西班牙和葡萄牙统治的美洲人，在这方面的情况非常不同，他们享有的自治很少。但是，英国人却不一样。其中一部分原因在于，英国人比较重视对于商业的控制，而不是对于领地的严格监管，这使得（北美殖民地）能够在英国一定程度的控制之下，同时形成自己的政府。虽然有一些法律必须经英国同意，他们还要遵守英王的某些规定，但是，总体来说，他们在很大程度上可以实行自治，尤其在一些重要的方面，比如税收。</p>
+
+    <p>自治使个人参与管理社会，对公共事务发表意见，享有独立的权利。</p>
+
+    <p>走在威廉斯堡的大街上，人们可以尽情想象两百多年前殖民地自治时期的生活景象。但是，新大陆上的生活，为什么没有在这种田园牧歌式的氛围中延续下去？是什么改变了这片新大陆的命运并最终在这里诞生出一个世界大国呢？</p>
+
+    <p>18世纪中叶，大英帝国进入扩张时期，他们先是打败了西班牙，又在北美与法国进行了七年的战争。连绵不断的战争，使大英帝国的财政入不敷出，于是决定在北美殖民地增加税收，以化解财政危机。</p>
+
+    <p>美国宾夕法尼亚州印第安纳大学历史学教授 王希：</p>
+
+    <p>英国人从1763年一直到1773、1774年，在差不多有十年的时间，每年变换着不同的花样向殖民地征税。那么在征税的过程当中，尤其是1765年开始征收印花税。殖民地对印花税非常反感。</p>
+
+    <p>美国布朗大学历史学教授 杰克·格林：</p>
+
+    <p>向北美殖民地征收的印花税是由英国议会通过的，而英国议会中并没有殖民地的代表，这就背离了《五月花号公约》中最根本的原则。</p>
+
+    <p>当大英帝国自行决定增加税赋之后，殖民地抗税事件屡屡发生，矛盾开始激化，大量英军被派驻到新大陆，他们可以随意选择驻地，甚至私闯民宅，贸易被切断，殖民地议会也受到了限制。</p>
+
+    <p>北美英属殖民地长期以来形成的社会运行传统受到空前挑战，新大陆人在何去何从的选择面前，彰显出捍卫理想、反抗压迫的斗争性格。</p>
+
+    <p>今天，在威廉斯堡，来自世界各地的游客都能够聆听到当年殖民地人民争取独立的声音。</p>
+
+    <p>美国国家开创者帕特里克·亨利的演讲模拟：</p>
+
+    <p>先生，如果能够善用自然之神赐予的力量，我们将丝毫不弱于敌人。我们有三百万为神圣自由而武装起来的民众，我们有幅员辽阔的国土，无论敌人派遣什么样的军队，我们都是不可战胜的。</p>
+
+    <p>1775年4月19日，新大陆东北部的一声枪响，划破了纯净的天空，改变了这片大陆的历史航道。这天，一支英国军队与北美殖民地马萨诸塞州列克星顿镇的民兵发生冲突，枪声让这场冲突上升为战争，史称“美国独立战争”。</p>
+
+    <p>1776年7月4日，13个英属殖民地联合签署了《独立宣言》，宣布脱离大英帝国的统治，组成美利坚合众国。这一天，被确立为美国的独立日。《独立宣言》称：“人人生而平等，造物主赋予他们一些不可剥夺的权利，其中包括生命权、自由权和追求幸福的权利。”</p>
+
+    <p>在那个距今二百多年前的时代里，殖民地联合起来挑战宗主国是破天荒的大事，宣布独立的北美13个英属殖民地，在欧洲的法兰西等国家的支持下，与大英帝国的战争一直艰苦地打了八年，才最终赢得了独立。</p>
+
+    <p>新大陆诞生了新国家。这个新国家诞生在一个怎样的世界中呢？</p>
+
+    <p>18世纪后期的世界霸主英国，正在掀起第一次工业革命的时代潮流。依靠君主权威创造繁荣的法兰西，开始酝酿着大革命的危机。德国则依然陷入四分五裂的痛苦之中。俄罗斯经历了由沙皇主导的君主改革，开始强大起来。中国人，正在享受以康乾盛世为标志的国家繁荣。</p>
+
+    <p>北美大陆上出现的这个新国家，在当时的世界舞台上似乎是微不足道的。在独立前的一百多年里，这13个英属殖民地的经济一直依附于大英帝国，无论是北部的工商业、中部的农业还是南部的种植业，都是在英国自由贸易的商业体系下发展起来的。离开了英国的扶持，这个经历战火的新国家将怎样生存下去？</p>
+
+    <p>严峻的挑战还不仅仅来自于经济领域。独立之后的美利坚合众国，在政权方面只设有国会，没有总统，没有最高法院，而国会本身也没有实际的执行权力。独立后的13个州实际上只是一个非常松散的联盟。</p>
+
+    <p>美国乔治·梅森纪念馆馆长 大卫·瑞斯：</p>
+
+    <p>一个残酷的现实是：他们不能进行贸易，没有统一的货币，无法制定外交政策，简直就是一场灾难。</p>
+
+    <p>战争换来的独立，并没有实现国家的稳定和繁荣。曾经担任大陆军总司令的乔治·华盛顿不得不向人们发出警告：“要么我们在一个领导之下成立联邦而结合为一个国家，要么我们就保持13个独立的主权国家，永远互相争吵。”</p>
+
+    <p>于是，在宣布独立11年后的1787年，来自各州的代表终于在费城坐在了一起。这间只有一百多平方米的独立厅，曾经签署过著名的《独立宣言》，如今，代表们要在这里协商新国家的未来。美国历史上有名的制宪会议开始了。</p>
+
+    <p>美国耶鲁大学法学教授 布鲁斯·阿克曼：</p>
+
+    <p>在1787年宪法中，关于成立国家政府的一个基本观点是：如果我们不联合起来，就会被欧洲列强所摧毁。我们需要一个中央政府。</p>
+
+    <p>参加制宪会议的55名代表几乎包括了所有的开国元勋，其中大部分人受过大学教育，他们中有农场主、商人、律师和银行家，乔治·华盛顿被选举为制宪会议主席。</p>
+
+    <p>八年的独立战争为华盛顿赢得了巨大的荣誉和威望。在人们的心目中，他已经成为这个新国家的象征。战争结束后，华盛顿坚决地辞去了大陆军总司令的职位，并拒绝了一些军官希望拥立他做国王的建议。</p>
+
+    <p>美国普林斯顿大学历史学教授 约翰·默瑞：</p>
+
+    <p>其中有一个人，好像出生在意大利，他寄给华盛顿一封信，表达了这样的想法。华盛顿的回复很有讽刺意味，他说，再也没有什么建议比让我成为国王，更令我觉得受到冒犯和谴责。每个人都知道，这个国家最重要的人物就是华盛顿，如果他不做国王，就不可能有国王。</p>
+
+    <p>华盛顿谢绝了所有的邀请，返回弗农山庄修剪花园，打理农庄，像从前一样过着农场主的生活。不愿当国王的华盛顿，不经意间为这个新国家预留下了一个非常广阔的发展空间，这一举动，也使他赢得了更多人的尊重。</p>
+
+    <p>在华盛顿的主持下，制宪会议一共开了116天，这是美国历史上最长的一次会议。来自各州的代表们对如何建立一个有权威的联邦政府、同时又能充分保障个人自由这一难题进行了激烈的争执和辩论。</p>
+
+    <p>面对代表们的唇枪舌剑，制宪会议主席华盛顿却几乎一言不发，因为他不希望由于自己的权威而影响到任何一方表达观点。但是，只要他的身影还继续在会场上出现，谈判就不会轻易终止。华盛顿的沉默和坚持成为一种无形的力量。</p>
+
+    <p>1787年9月17日，美国第一部成文宪法最终形成。</p>
+
+    <p>美国费城宪法中心历史学家 斯蒂夫·弗兰克：</p>
+
+    <p>我觉得任何一部成功的宪法必须要代表人民合理的愿望。我不认为美国人会觉得世界上只有一种成功的宪法模式。君主立宪制适用于英国，总统制适用于美国。重要的是，政体的形式必须能够体现遵从宪法规定的人们的真实愿望。</p>
+
+    <p>在宪法的确认和保障下，国家主权由州政府转移到联邦政府；同时，宪法规定由各州保留的自治权利，联邦政府不得干涉。1789年4月，华盛顿正式就任美国第一任总统。</p>
+
+    <p>联邦宪法的制定和实施，使一个真正意义上的美国诞生了。</p>
+
+    <p>也有人将这部宪法称为经济宪法，因为在宪法中界定了个人、州政府和联邦政府在经济运行中的分工，为美国的经济发展提供了法律的保障。</p>
+
+    <p>美国斯坦福大学胡佛研究所高级研究员 巴罗·温格斯特：</p>
+
+    <p>宪法对美国的经济发展非常重要，它把美国从一个殖民地，从受制于英国商业限制的经济体制，转变成一个可以保持经济长期发展的体制。在（原来的）《邦联条例》之下，州与州之间会产生贸易壁垒。这意味着，货物在州与州之间的流动会受到限制，从而影响公共市场的形成。而国家政府的一个重要特征是，它提供了一个公共市场。</p>
+
+    <p>从此，这个新国家不仅有了统一的政府，还有了统一的市场，统一的货币，统一的税收。在经济的运行上，则直接采用了英国的自由主义经济模式。为了改变当时美国经济明显落后于欧洲的状况，美国的联邦政府还从欧洲搬来了金融和财政制度，1791年2月，美国第一家全国性银行诞生，类似欧洲的证券市场、交易所和股份公司开始出现，并通过股份公司的筹资来修建起公路、运河和桥梁等基础设施。</p>
+
+    <p>这一时期，大量移民带着欧洲工业化进程的成果来到了美国。1789年，一个叫塞缪尔?施莱特的英国技术工人，不顾英国的禁令，偷渡到了美国，他靠自己的记忆复制出当时最先进的纺纱机，并创办了美国第一家近代棉纺织厂。不久，他的工厂发展为12家企业。由此美国早期的工业革命拉开了序幕。</p>
+
+    <p>在此后的六十多年时间里，美国由独立时的近300万人口，增加到了3000多万。爆炸式的移民增长，不仅在短时间内为开垦荒地提供了劳动力，也促成了跨越式的科学和技术引进。</p>
+
+    <p>中国社会科学院美国研究所原所长 资中筠：</p>
+
+    <p>欧洲发展到这个时期，美国拿过这个接力棒来，然后在一个得天独厚的这样一块大陆上头，相对说来没有历史包袱，然后这样发展起来。</p>
+
+    <p>拿过接力棒的美国，虽然工业革命起步稍晚，但其速度和力度却超过了欧洲。到1860年前后，美国的经济发展水平已超过大多数欧洲国家。不过，直到这一时期，联邦政府的权力依然还很脆弱。就在美国宪法诞生七十年之后，制宪会议上一个悬而未决的问题，险些肢解了这个国家。这一危机，使联邦政府面临了一次巨大的考验。</p>
+
+    <p>“我希望站在满是棉花的土地上，古老的时光难以忘怀</p>
+
+    <p>看吧看吧 尽情地看吧，迪克西的土地是我出生的地方……”</p>
+
+    <p>这是一首在美国非常流行的南方歌曲，歌名叫《迪克西的土地》。</p>
+
+    <p>《迪克西的土地》，歌颂的是美国的南部，这里土地肥沃、物产丰富，盛产有“白色黄金”之称的棉花。</p>
+
+    <p>在棉花丛中劳作的是那些从非洲贩来的黑人。黑白分明的劳动景象折射出美国政治的奇异之处。当时北方各州以发展工商业为主，实行的是自由资本主义制度，而南方各州却以种植业为主，保留了由农场主控制的黑人奴隶制度。南方的制度不仅与新大陆上人人平等的立国理念格格不入，而且阻碍了劳动力的自由流动，制约了国家工业化的进程。</p>
+
+    <p>那么，奴隶制为什么会在制宪会议上被保留下来呢？</p>
+
+    <p>美国布朗大学历史学教授 杰克·格林：</p>
+
+    <p>（当时）没有人触动奴隶制，人们知道如果废除奴隶制，很多州就不会承认联邦政府。所以，美国是一个自由和奴隶并存的联邦，美国不仅保护了自由，也保护了奴隶制。</p>
+
+    <p>1860年11月6日，反对奴隶制的亚伯拉罕·林肯在总统选举中获胜。南方部分州立刻强烈要求退出联邦国家，1861年，南方七个州宣布脱离联邦。刚刚成立84年的美利坚合众国走到了国家分裂的边缘。支持废除奴隶制的北方各州，与坚持蓄奴并脱离联邦的南方各州之间，爆发了一场历时四年的南北战争。</p>
+
+    <p>美国普林斯顿大学历史学教授 詹姆斯·麦佛森：</p>
+
+    <p>如果这个国家可以分裂为2个，就可以分裂成3个、4个、6个、12个，林肯政府发动战争的理由是，南方违背了国家的统一，违背了宪法和多数人统治（的原则）。</p>
+
+    <p>在美国首都华盛顿，林肯纪念堂和华盛顿纪念碑遥遥相望。有人说，是华盛顿创立了美国，是林肯拯救了美国。在美国历史上惟一的这次内战中，拥有经济和人口的优势，更拥有道义和价值观优势的北方取得了胜利。林肯解放了黑奴，也维护了国家的统一。</p>
+
+    <p>而南北战争对于美国日后成为一个世界大国的意义还不止于此。</p>
+
+    <p>美国普林斯顿大学历史学教授 詹姆斯·麦佛森：</p>
+
+    <p>内战之后，美国成为了单一的、联合的、强大的国家，这奠定了美国在20世纪成为世界第一强国的基础。如果美国在19世纪60年代的时候，分裂成了两个或者更多的国家，或者北方没有赢得胜利，这是根本不可能实现的。所以，这场战争对美国的未来产生了深远的影响。</p>
+
+    <p>美国宾夕法尼亚州印第安纳大学历史学教授 王希：</p>
+
+    <p>那么，这个内战的意义呢，我觉得首先使美国原来宪政机制中分裂的主权得到了统一。它为美国大工业化的发展，准备了条件。这个是一个先行，如果说，主权得不到统一，领土不能够得到统一，或者劳动力体制得不到统一的话，我觉得它后面的大工业化还会推迟，或者不会产生这么大的效果。</p>
+
+    <p>很多美国历史学者认为，南北战争是美国历史上的一道分水岭。联邦政府从此变得强大起来，美国的农业、工业以及整个国家都发生了重要的转变。</p>
+
+    <p>1862年，就在南北战争期间，美国总统林肯签署了著名的《宅地法》，法案规定：成年美国公民只需交纳10美元的登记费，就可在西部获得160英亩的土地，耕种五年后就能够拥有这片土地的产权。这项法律，点燃了美国人到西部去创造未来的巨大热情。此后，成千上万的美国人以及来自各地的移民，开始大规模地进入这片区域，开辟这里的土地。</p>
+
+    <p>已经推行了半个多世纪的西进运动，在政府强有力的推动下，出现了一个新的高潮，从而使美国的发展从东部沿海的狭长地带向更广阔的西部腹地延伸。</p>
+
+    <p>许多人对美国西部的了解，是由一个个穿行在高山、峡谷、荒漠的牛仔们的故事开始的。事实上，西部牛仔的浪漫和冒险并不能够涵盖西进运动的全部。那是一段历时近一个世纪、漫长而艰险的历程。到达西部的人们面对的是一无所有的荒漠。他们必须在这里学会生存，而且要一代代地生存下去。</p>
+
+    <p>美国布朗大学历史学教授 杰克·格林：</p>
+
+    <p>（西进）鼓励了冒险的精神，它为爱冒险的人提供了机会，为不爱冒险的人提供了创造新生活的可能，因为人们可以在属于自己的地方安顿下来，西进为美国社会的稳定、繁荣，提供了安全保障。</p>
+
+    <p>西进运动毫无疑问是美国历史上充满开拓、勇气与冒险精神的一页，很多历史学家认为，正是它，塑造了通过自我奋斗、实现个人梦想的美国精神。</p>
+
+    <p>19世纪末，经过开垦和耕种的大草原变成了沃土桑田，曾经荒无人烟的西部成为美国乃至世界的重要粮仓。</p>
+
+    <p>就在同一时期，美国的工业也正经历着革命性的飞跃。</p>
+
+    <p>这是一座用人名来命名的城市，它叫爱迪生市。今天这个城市平静而又安详，19世纪70年代末，著名的发明家爱迪生正是在这里开创了一个时代。</p>
+
+    <p>在这个新的时代里，电力逐渐取代蒸汽动力，成为经济发展的新能源，给美国的经济发展带来了强劲的动力。由电力使用引发的一系列技术革命，被称为第二次工业革命。</p>
+
+    <p>美国新泽西州爱迪生市门罗公园博物馆馆长 杰克·史丹利：</p>
+
+    <p>有人问,爱迪生先生，你是如何看待电的？爱迪生说，今晚，美国总统正在我的灯下阅读，医院正在电灯的照亮下进行手术，全世界有数百万的人在电灯下读书和生活，这非常重要。爱迪生就是这样想的，他为此而自豪。</p>
+
+    <p>让这位发明家引以为豪的还不止于此。据1922年美国国会统计，爱迪生使美国政府在50年内的税收增加了15亿美元。而1928年的一项调查则显示，全世界的资本用在与爱迪生发明有关的事业上的数目达到157.25亿美元。</p>
+
+    <p>爱迪生一生中共有一千多项发明，白炽灯只是其中之一。这些发明改变了人们的生活，并成为创造财富的源泉。而爱迪生本人也只是当时美国众多发明家中的一员，19世纪后半叶，各种各样的发明如雨后春笋般出现在美国。</p>
+
+    <p>仅1865年至1900年，被正式批准登记的发明专利就达到了64万多种。依靠强大的科技实力，美国很快在第二次工业革命中独占鳌头。</p>
+
+    <p>究竟是什么原因，使美国从照搬欧洲技术的学生，成长为一个有自主创新能力的国家？</p>
+
+    <p>美国加利福尼亚州伯克利大学经济学教授 钱颖一：</p>
+
+    <p>在美国出现这么多个人奋斗成功的企业家，不仅是企业家，也是各个行业的出类拔萃的人，不是偶然现象。它是有一系列的文化和制度的环境。</p>
+
+    <p>这里是距离华盛顿纪念碑两百多米的美国商务部，1802年，美国就是在这里成立了国家专利局，如今在美国商务部的大门口上还刻有林肯总统的一句话：“专利制度就是将利益的燃料添加到天才之火上。”</p>
+
+    <p>在1787年的制宪会议上，制宪代表们对事关美国政府在未来的公共政策进行了一系列激烈的辩论，然而，在通过第一条第八款时，代表们的意见却空前一致，它的内容是：“为促进科学和实用技艺的普及，对作家和发明家的著作和发明，在一定期限内给予专利权的保障。”对于专利的保护，在16世纪的英国就已经开始，但是，美国人第一次把专利权写入了宪法，用国家的根本大法来保护发明创造。</p>
+
+    <p>美国专利商标局公共事务办公室主任 理查德·莫斯比：</p>
+
+    <p>毫无疑问，这项由国家缔造者写入宪法的制度，激发了人们的动力。它不仅促使人们产生了从事发明的愿望，而且人们一旦这样去做，这项制度能够保障他们在市场上获得商业上的成功。这就是全部的理念。</p>
+
+    <p>早期的专利都是由华盛顿总统亲自签发生效的，《独立宣言》的起草者、美国第三任总统托马斯·杰斐逊曾经作为首任国务卿，成为美国第一名专利审查员。</p>
+
+    <p>联邦政府用专利制度保护了发明人的权益，同时也保护和激发了整个社会的创造热情。</p>
+
+    <p>美国专利商标局公共事务办公室主任 理查德·莫斯比：</p>
+
+    <p>知识产权，是大脑的产品，是一份无尽的资源。我们对这项资源的开发利用，与我们为那些伟大的发明家们所提供的知识产权保护是息息相关的。这也是美国能够在历史上，包括在21世纪的今天，取得世界经济强国地位的关键原因。</p>
+
+    <p>随着中央政府的力量日渐强大，美国经济在一套比较成熟的制度体系的保障下，实现了跳跃式发展。在以电气化为标志的第二次工业革命中，这个新兴的工业国家以重大科技发明为基础，在19世纪末迅速赶上并超过了在过去两个世纪里一直走在前面的欧洲强国。</p>
+
+    <p>此时，世界大国争霸的格局正在悄然发生变化。在欧洲，统一不久的德国超越英国和法国，成为欧洲首强；在亚洲，经历了20多年明治维新的日本，开始雄心勃勃地登上世界舞台。</p>
+
+    <p>而在美洲，一个新的大国正在成长中。</p>
+
+    <p>通过战争吞并和购买的方式，美国的领土已比建国时扩张了10倍，成为拥有45个州、7000多万人口的名副其实的大国。</p>
+
+    <p>1894年，美国的工业总产值跃居各大国之首，成为世界第一经济强国。这一年，距离这个新国家的诞生仅仅118年，距离这片新大陆被发现也才400年。400年来，它从欧洲汲取营养，发展自己；118年来，它创造了自己的发展模式。</p>
+
+    <p>历史走到了又一个世纪之交的节点上。在进入20世纪以后，这个年轻的国家，将如何选择自己的前进方向，又将在世界舞台上扮演什么样的角色呢</p>
+
+    <p>UID: 1 性别: 男 精华: 1 积分: 3987 帖子: 787 阅读权限: 200 注册: 2006-9-5 状态:</p>
+
+    <p>#11发表于 2007-2-21 11:51 PM  资料 主页 个人空间 短消息 ［大国崛起］</p>
+
+  </div>
+</section>
+
+<div class="chapter-divider"></div>
+<section class="chapter" id="ep11">
+  <div class="chapter-header">
+    <div class="chapter-emoji">🦅</div>
+    <h2 class="chapter-title">第十一集 危局新政</h2>
+    <div class="chapter-country">美国（下）</div>
+    <span class="chapter-period-badge">20世纪</span>
+    <div class="chapter-subtitle">大萧条与罗斯福新政</div>
+  </div>
+  <div class="chapter-body">
+
+    <p>在美国中部的南达科他州，有一座摩崖石刻人物雕像，人们称它为总统山。70多年前，美国人选择了 四位著名的总统作为本国的象征：创建国家的领袖乔治·华盛顿、起草了《独立宣言》的托马斯·杰斐逊、解放了黑奴的亚伯拉罕·林肯、还有20世纪的第一任美国总统——西奥多·罗斯福。</p>
+
+    <p>自从1894年成为世界第一经济强国之后，美国的经济一直保持着持续高速的发展。在这样的时期做总统，或许应该是一件爽快轻松的事情。但西奥多·罗斯福却从上任的第二年开始，实施了一系列政府监管经济的措施，这在一贯倡导自由竞争的美国历史上还从未有过。而且，政府监管的矛头首先指向的是垄断性的大公司和大财团。</p>
+
+    <p>美国哈佛大学经济学教授 罗伯特·巴罗:</p>
+
+    <p>西奥多·罗斯福尤其限制了托拉斯的发展趋势，打击了托拉斯。他是现代反托拉斯立法的先行者。</p>
+
+    <p>数年间，美国的几十家托拉斯先后被起诉，其中部分企业被迫拆解。美国最先形成的托拉斯集团——标准石油公司更是首当其冲。西奥多·罗斯福总统为什么要这样做呢？这又将给美国的发展带来什么呢？</p>
+
+    <p>约翰·洛克菲勒出生于纽约州西部一个农场，16岁时当上了会计，由于向老板提出的加薪要求没有得到满足，他愤而辞职，创办了一家商行。</p>
+
+    <p>当美国东北部的宾夕法尼亚州发现了石油之后，敏锐的洛克菲勒很快看准了炼油业的前途。1870年，他创建了标准石油公司。1879年，标准石油托拉斯诞生。从标准石油公司的创立到遍及全美的石油工业大托拉斯的形成，洛克菲勒仅仅用了十年的时间。</p>
+
+    <p>[attach]1694[/attach]</p>
+
+    <p>美国洛克菲勒档案中心历史学家 肯尼斯·罗斯:</p>
+
+    <p>标准石油公司的市场规模很大，它的单位成本，以每加仑计量的单位成本相对较低，所以具有竞争优势。由于采购量很大，标准石油公司还能够控制石油生产商，决定采购价格。而在与运输石油的铁路公司打交道时，标准石油公司可以保证其他竞争对手无法达到的运输量，因此能够和铁路公司讨价还价，拿到它愿意支付的运费标准。</p>
+
+    <p>在相继完成对炼油区、运输线和产油地的三步控制之后，洛克菲勒雄心勃勃地向垄断全美石油工业的霸主地位挺进。他说：“当红色的蔷薇含苞待放时，唯有剪去四周的枝叶，才能在日后一枝独秀，绽放成艳丽的花朵。”</p>
+
+    <p>洛克菲勒的石油托拉斯连续吞并了美国近百家石油企业。到1890年，这位石油大王已经掌握了全美90％的石油提炼。</p>
+
+    <p>美国阿利根尼大学历史学教授 保拉·苏科勒:</p>
+
+    <p>美国政府对大公司的行为，睁一只眼，闭一只眼，允许他们越来越大。因为政府觉得这样做，对于公司是有利的，对于国家是有利的。</p>
+
+    <p>美国在建国后的一百多年中，一直奉行由英国传承而来的私有经济和自由竞争，也就是由市场规律这只看不见的手左右经济运行，任由企业自由发展、优胜劣汰，而政府并不对经济生活加以干预。优势企业通过联合、并购、重组等手段，可以同时控制生产、市场和价格，以追逐高额、稳定的利润。</p>
+
+    <p>19世纪末，像标准石油公司这样富可敌国的大企业和大财团，在各个行业纷纷出现。人们把他们叫做钢铁大王、石油大王、牛肉大王、电讯大王、铁路大王、金融大王。当时，美国铁路总利润的85%被7个垄断集团控制，钢铁产量的65%由摩根钢铁公司掌握。国家财富的60%掌握在占美国人口2%的富人手中。</p>
+
+    <p>美国加利福尼亚州伯克利大学经济学教授 钱颖一 ：</p>
+
+    <p>19世纪的后半期，美国的经济，政府的干预和监管比较少，但是，那个时候也正是美国高速发展的时期，所谓高速发展，就是它的GDP的增长速度非常之快，也正是那个时期，美国开始超过英国成为世界第一大经济强国。恰恰是在那个时期，很多的矛盾暴露出来，比如竞争的无序、垄断，以及欺诈、腐败等等。</p>
+
+    <p>这就是西奥多·罗斯福就职时面临的现实。在垄断经济资源的托拉斯给美国带来繁荣风光的背后，是日益扩大的社会矛盾和危机。</p>
+
+    <p>宾夕法尼亚州的匹兹堡，曾经是美国的钢铁之城。很长一段时期，匹兹堡的繁荣是通过空气中灰尘的浓度来衡量的。</p>
+
+    <p>繁荣的背后，美国社会出现了严重的两极分化和各种罪恶。</p>
+
+    <p>当时，美国是工业化国家中工伤致死率最高的国家。工人们每周工作六天，每天工作12到16小时，每天的工钱只有两美元。这样的生活连孩子也不能幸免，美国大约有两百万名童工加入到劳工的队伍中，最小的只有四岁。</p>
+
+    <p>然而，与辛苦劳作相伴随的，却是矿难、火灾的不断发生。纽约曼哈顿一家服装厂发生火灾时，平日为限制工人外出而紧锁的工厂大门，挡住了工人们逃生的唯一希望，最终造成146名工人死亡。</p>
+
+    <p>中国社会科学研究院美国研究所原所长 资中筠：</p>
+
+    <p>在资本主义发展到一定程度的时候，各种各样的坏事都出来了，而且工人的劳动条件非常不好，矿难不断发生，特别是像煤矿爆炸这一类的事情，还有油田的这种工作条件之糟糕。美国城市各种各样的弊病就出来了。</p>
+
+    <p>自由市场经济如同没有笼头的野马一样狂奔了一个世纪之后，灾难开始出现了。垄断的形成是自由竞争的结果。它在聚拢大量经济资源的同时，也造成了尖锐的社会问题。它损害了工人利益和社会公平，也阻碍了中小企业的自由发展。一大批中小企业由于无法在垄断企业的阴影下生存，纷纷破产倒闭，城市贫困人口大量增加。</p>
+
+    <p>尽管美国在此之前已经出台了世界上第一部反垄断法——《谢尔曼反托拉斯法》，但是，这部法律自颁布以来，一直没有依据它判定过任何案例。</p>
+
+    <p>美国阿利根尼大学历史学教授 保拉·苏科勒：</p>
+
+    <p>19世纪末期，一批以中产阶级为主的美国人开始思考，如何使大多数美国人从国家高速增长的工业化进程中获益。他们希望能够改善政府管理，消除城市腐败，为工人谋求福利而不是仅仅对他们进行管理。</p>
+
+    <p>一些抨击企业垄断、财政腐败、食品掺假的文章陆续出现，消除社会丑恶现象、建立合理的市场秩序的努力，在20世纪初逐渐形成了一股热忱的社会运动。这场运动一直持续到20世纪的20年代，被历史学家们称为美国的“进步运动”。</p>
+
+    <p>阿利根尼大学位于宾夕法尼亚州的西北部，是进步运动时期著名的记者埃达·塔贝尔的母校。这所学校完整地保存着关于塔贝尔的资料。</p>
+
+    <p>塔贝尔自幼生长在宾夕法尼亚州的炼油区，父亲是炼油区的一个小生产商。当石油大王洛克菲勒打击竞争对手的时候，塔贝尔亲眼目睹了她的父亲和其他的小生产商们如何遭受排挤，最终倾家荡产，被赶出了这个行业。</p>
+
+    <p>此后，塔贝尔开始调查和揭露那些掩藏在财富背后的社会黑幕。她连续两年发表了长篇系列报道《标准石油公司的历史》，详细描述了这位石油大亨怎样依靠残酷的手段积累财富、建立起垄断帝国。这个系列报道后来被编订成书，在美国畅销一时。</p>
+
+    <p>在进步运动时期，像塔贝尔这样揭露社会弊端的人士又被称作“扒粪者”。</p>
+
+    <p>中国社会科学研究院美国研究所原所长 资中筠：</p>
+
+    <p>扒粪者，就是要把这些臭不可闻的事情扒出来，让它晒晒太阳，见见天日。等于说当时的新闻专门揭丑，把当时最暗无天日的事情揭露出来曝光。</p>
+
+    <p>塔贝尔向强大的石油帝国发起的挑战引起了社会的广泛共鸣。一时间，一大批进步人士纷纷通过报纸、电影、广播乃至漫画，向美国政府和美国社会提出了同一个疑问：我们到底需要什么样的经济发展和社会进步？</p>
+
+    <p>我们是维护自由的政府，没有人在它之上，也没有人在它之下，我们必须根据每个人的价值，（公正地）对待他。</p>
+
+    <p>上任不久的西奥多·罗斯福总统，不得不面对这些疑问。来自经济领域的尖锐矛盾和进步人士的质疑，意味着社会对政府的角色提出了新的挑战。面对强大的社会压力，西奥多·罗斯福接纳了进步运动。他把自己视为社会公民的管家，开始向垄断资本开战了。</p>
+
+    <p>美国阿利根尼大学历史学教授 保拉·苏科勒：</p>
+
+    <p>西奥多·罗斯福总统是被迫整顿经济的，他一开始并不愿意这么做，但公众的压力太大了，他不得不采取行动。总统宣布，标准石油公司要为此付出代价。标准石油公司是其他垄断者的榜样，所以，政府在1911年开始拿标准石油公司开刀了。</p>
+
+    <p>1911年，美国最高法院判定标准石油公司垄断违法，妨碍了自由竞争，并下令解散标准石油公司。这个曾经辉煌一时石油帝国被迫拆分成若干个小公司。今天的埃克森石油公司、美孚石油公司都是由当年标准石油公司拆分后的小公司发展而来的。</p>
+
+    <p>石油大王洛克菲勒不明白：为什么自己会受到这样的打击？在当时的条件下，洛克菲勒也许真的不清楚自己辛辛苦苦才经营壮大的标准石油公司，到底给社会带来怎样的伤害。</p>
+
+    <p>美国加利福尼亚州伯克利大学经济学教授 钱颖一：</p>
+
+    <p>垄断非常不能被人接受，就是破坏了机会的平等。因为，一个垄断企业在市场中，因为他已经进入的这种优势，占据了一个非常有利的强势地位，这样就隐含地排除了，很多人想进入这个领域的权利。因此，在这一点上来讲，机会的平等大大降低。所以，这使人们感到非常不可接受。特别是在美国，自由的选择以及平等的机会，被认为是至高无上的，哪怕牺牲一些效率，也要保证机会的平等。</p>
+
+    <p>从西奥多·罗斯福任职开始，美国政府先后对40多家公司提起诉讼。牛肉托拉斯、石油托拉斯和烟草托拉斯在司法部的起诉之下被迫解散。政府通过宪法对垄断进行限制的原则也由此被确立起来。西奥多·罗斯福设立了公司管理局，专门处理反托拉斯诉讼。此后，反托拉斯的行动被正式纳入到美国政府制度化的长久政策之中。</p>
+
+    <p>在解决垄断问题的同时，西奥多·罗斯福也在着手解决劳资矛盾。他甚至把劳资双方请到了白宫来商议，在美国历史上这还是第一次。同时，一些州政府也陆续出台了旨在保护工人权益的法律条文，明确了工伤赔偿标准和工人的劳动时间。有的州政府，还对与公众生活相关的企业进行管制，建立了公开的听证会制度。</p>
+
+    <p>就在美国政府对经济生活的管理见出成效的时候，国际舞台也给美国的经济发展带来了机遇。1914年，人类历史上的第一次世界大战爆发了。来自欧洲的军火和钢铁方面的订单使美国的工业生产更加活跃起来。美国由战前的债务国变成了欧洲的债权国，拥有了世界40%的财富。在这次战争中，美国和英国、法国等国家一道成为了战胜国。</p>
+
+    <p>1919年，美国总统伍德罗?威尔逊怀揣着处理战后事宜的计划登上了欧洲大陆，他希望能够主宰在巴黎召开的和平会议。然而，其他战胜国拒绝了威尔逊的基本设想，美国试图构建战后国际秩序的努力无果而终。</p>
+
+    <p>不过，美国进退自如的政治地理优势却再次显现。它重新把重点放回到美洲大陆，专心打理自己的事务。</p>
+
+    <p>20世纪初期，在美国和进步运动同时展开的，还有一个又一个的科技发明和体制创新。</p>
+
+    <p>1903年，莱特兄弟制造了4缸12马力的汽油发动机飞机。人类历史上第一架动力飞机诞生了。</p>
+
+    <p>1913年，美国政府主导的巴拿马运河正式凿通，两大水域之间的最后屏障随着一声爆炸而土崩瓦解，大西洋和太平洋从此联为一体。</p>
+
+    <p>1927年，美国影片《爵士歌手》第一次成功使用了电影技术的新系统，电影产业开始进入有声时代。</p>
+
+    <p>在这期间，美国人在工业领域最富革命性的创造，是“福特式生产方式”的出现。</p>
+
+    <p>福特在年轻的时候，就是一个远近闻名的聪明技师。当工人们在固定的架子上，装配整车的时候，一旁观看的亨利·福特突然有了一个灵感：与其让工人围着车子走来走去，为什么不让车子像流水一样，从工人面前缓缓通过呢？1913年8月一个炎热的早晨，当工人们第一次把零件安装在缓缓移动的汽车车身上时，标准化、流水线和科学管理融为一体的现代大规模生产就此开始了。犹如第一次工业革命时期诞生了现代意义的工厂，福特的这一创造成为人类生产方式变革进程中的又一个里程碑。</p>
+
+    <p>福特建立了当时世界上最大的新工厂。每一天，都有大量的煤，铁，砂子和橡胶从流水线的一头运进去，有2500辆T型车从另一头运出来。在这座大工厂里，有多达八万人在这里工作。</p>
+
+    <p>1924年，第一千万辆T型汽车正式下线，售价从最初的800美元降到了290美元。汽车开始进入美国的千家万户。</p>
+
+    <p>福特的生产方式很快在其他制造领域被广泛应用，劳动生产率的空前提高使美国的经济实现了飞跃。</p>
+
+    <p>美国人的生活方式极大地改变了。产业化的电影世界在制造明星的同时，也创造着美国的梦想；走进千家万户的无线电收音机在改变信息传播方式的同时，也促进着企业的广告宣传；而汽车的普及更使美国成为一个安装在飞轮上的国家。</p>
+
+    <p>这就是20世纪20年代的美国，一切似乎都有可能，天空一片蔚蓝。人们觉得好日子才刚刚开始。</p>
+
+    <p>随着经济的腾飞，将近20年的进步运动结束了，政府对经济的干预力度也减弱了。在1928年当选为美国总统的胡佛是一位自由市场经济的坚定支持者，他在竞选时的口号十分鼓舞人心。他说：“如果我当选，将使美国人家家锅里有一只鸡，家家有一辆汽车”。</p>
+
+    <p>20年代的美国，享受着经济增长带来的无尽繁荣。看看纽约证券交易所吧，所有的股票都在一路飞涨，美好的未来还需要证明吗？</p>
+
+    <p>然而，胡佛的话音落下不久，纽约证券交易所爆发了一场空前的灾难。</p>
+
+    <p>1929年10月24日，有人忽然卖掉手中被高估的股票，惊惶和疯狂的抛售如同多米诺骨牌一样一发而不可收。一天之内，股市崩盘，超过300亿的市值蒸发殆尽。</p>
+
+    <p>美国哥伦比亚大学商学院教授 约瑟夫·斯蒂格利茨：</p>
+
+    <p>股市的崩溃，意味着人们对于投资的信心没有了，人们的财富转瞬消失，所以，投资和消费都开始下降。</p>
+
+    <p>股市的崩溃只是经济大规模衰退的一个信号。随之而来的，是800个银行破产，900万个存款账户消失。人们的生活积蓄在瞬间化为乌有。短短两年多的时间里，美国的经济危机使14万家企业倒闭，全国有四分之一的人失业。在大大小小的城市中，饥民们排成长队，只为等候免费的面包和一点点汤。</p>
+
+    <p>1929年，美国的国民生产总值是1040亿美元，到1932年只剩下580亿美元了，美国损失了一半的财富。高速增长的经济像一辆飞驰的战车戛然而止，空前的繁荣演变为空前的危机。危机不仅席卷了美国，而且蔓延到整个西方世界，英国、德国等欧洲国家都先后陷入了大萧条之中。</p>
+
+    <p>关于这场危机的原因，经济学家们至今众说纷纭。然而，它却无疑是对放任自由的市场经济提出的最严峻的一次挑战。</p>
+
+    <p>绝望像阴云一样笼罩了整个美国。一些看不到出路的人甚至从纽约刚刚建成的华盛顿桥上跳了下去。当时，美国和世界各大媒体都不得不用这两个字来形容30年代初的形势，那就是“恐惧”。</p>
+
+    <p>美国芝加哥大学经济学教授 罗伯特·福格尔：</p>
+
+    <p>我们经历了一场可怕的大萧条，造成了极大的焦虑，很多人的亲戚朋友都失业了，（那时）很多人还不习惯依靠政府的帮助。</p>
+
+    <p>那么，这样一场空前的危机如何才能被化解呢？</p>
+
+    <p>信奉自由主义经济模式的胡佛政府认为，坚持了一百多年的自由市场既然能带来空前的繁荣，那么它也会在自我调节中克服这场危机。然而，胡佛政府的期待落空了，大萧条还在一天天地延续，国家徘徊在动荡的边缘，1700多万人失业，近200万人流浪在全国各地。</p>
+
+    <p>1932年，纽约州州长富兰克林·罗斯福，成为了民主党的总统候选人。30年前开始推动进步运动的西奥多·罗斯福总统，是他的远房叔叔。</p>
+
+    <blockquote>罗斯福：你能说出我竞选的口号吗？</blockquote>
+
+    <p>富兰克林·罗斯福唤起了人们对生活的希望，笑容和自信为他赢得了大选，成为美国第32任总统。在宣誓就职的那一天，有近十万人冒着严寒来聆听他的演讲。</p>
+
+    <p>富兰克林·罗斯福就职典礼（原声）：</p>
+
+    <p>我们这个伟大的国家将会一如既往地坚持下去……我们唯一恐惧的是恐惧本身。</p>
+
+    <p>美国富兰克林·罗斯福总统图书博物馆历史学家 鲍勃·克拉克</p>
+
+    <p>1933年3月4日，（富兰克林·罗斯福）发表的演讲是为了激励整个国家，表达他对人们的信心，同时也让人们对他抱有信心，并相信他的判断。在那次演讲中，最著名的一句话是：“我们唯一恐惧的是恐惧本身”。他告诉美国人民要抛弃恐惧，齐心协力帮助国家走出大萧条。</p>
+
+    <p>就任总统后，富兰克林·罗斯福利用广播这种特殊的方式向美国人民倾诉美国面临的困难，以及政府将如何帮助人们。每到此时，都有成千上万的人在家里、在炉火边、在收音机旁，等待聆听总统的声音。人们习惯地将它称为“炉边谈话”。</p>
+
+    <p>美国富兰克林·罗斯福总统图书博物馆历史学家 鲍勃·克拉克：</p>
+
+    <p>在他执政的12年里，大约进行了35次的炉边谈话。炉边谈话通常在周日晚上进行，因为人们在周末不用上班，都会在家里。每逢此时，人们就会聚集在收音机旁。</p>
+
+    <p>得到了人们的支持和信任，渡过危机还需要强有力的手段和行之有效的办法。富兰克林·罗斯福会以什么样的方法帮助美国人再次过上幸福的日子呢？</p>
+
+    <p>就在西方世界遭遇经济危机的时候，新生国家苏联却是风景那边独好。他们创造了一种新的经济社会管理模式，人们称之为计划经济。从1928年到1932年，也就是西方资本主义世界大萧条的那几年，苏联实施了第一个五年建设计划，从农业国一跃成为工业国，整个社会一派欣欣向荣。</p>
+
+    <p>苏联五年建设计划的成功引起了西方政治家和经济学家的高度关注。一直认为政府管得越少越好的美国人，也尝试着以新的眼光看待政府和经济发展的关系，并且重新关注起30年前西奥多·罗斯福总统用政府干预的手段来化解社会危机的经验。</p>
+
+    <p>这一时期的不少经济学家们也从自由主义经济呈现的问题中看到了市场的失灵，对此，英国经济学家凯恩斯提出的对策是：要用政府这只“看得见的手”参与国家经济，用国家的力量推动经济的运转。凯恩斯还专门给美国总统富兰克林·罗斯福写了一封信，表达了自己的观点。在信中他对罗斯福说：您已经成为各国力求在现行制度范围内运用明智试验以纠正我们社会弊病的人们的委托人。</p>
+
+    <p>美国哥伦比亚大学商学院教授 约瑟夫·斯蒂格利茨：</p>
+
+    <p>随着经济的崩溃，人们开始知道资本主义并不像他们想象的那样运作，政府应该发挥作用。正是基于这种原因，凯恩斯的观点才变得非常重要。胡佛总统的许多顾问建议缩减政府的规模，减少政府开支，通过削减开支来修复预算。但是凯恩斯的说法正好相反，他说应该实施积极的政府干预，增加政府支出。</p>
+
+    <p>1933年3月9日，在宣誓就职总统后的第五天，美国历史上最大规模的一次政府干预经济的行动开始了，富兰克林·罗斯福称之为“新政”。</p>
+
+    <p>他迅速制定了一系列有效的法规和政策。诸如，通过紧急银行法来整顿银行秩序；签署紧急救济法，并成立紧急救助署关注在贫困中挣扎的人们；签署农业调整法，以帮助恢复农产品价格；通过全国工业复兴法为经济恢复注入资金。</p>
+
+    <p>哥伦比亚大学商学院教授 约瑟夫·斯蒂格利茨：</p>
+
+    <p>他意识到政府应该采取行动，那是一个非常时期，需要非常的措施。所以，他实施了一系列的政府工程，比如修建公路，以此来满足美国人真正的需要。但是同时，他所做的这些也激励了经济的发展。</p>
+
+    <p>1933年，田纳西河流域管理局成立。在国家的组织下，利用政府的投资，这一流域建造起20座新水坝，改建了5座原有水坝。</p>
+
+    <p>田纳西河流经的7个州从此再没有洪水泛滥，航运、电力、林业种植和农业生产大幅提高。更为重要的是，大量的公共工程为人们创造了数以百万的工作机会，以工代赈，缓解了经济危机带来的社会压力。</p>
+
+    <p>新政期间，美国还建立起养老和失业等方面的社会保障体系，整个美国就像经历了一场由总统推动的社会革命。在美国人的记忆中，这是政府第一次如此广泛、如此深刻地影响了他们的生活。</p>
+
+    <p>美国哥伦比亚大学历史学教授 埃里克·方纳：</p>
+
+    <p>富兰克林·罗斯福让联邦政府，通过社会保障体系、最低工资法律、福利法律、政府雇用以及其他措施，承担起保障美国人民经济安全的责任，支持人们获得经济上的自由。</p>
+
+    <p>在一次演讲中，富兰克林·罗斯福向公众提出了公民应该享有“免于匮乏的自由”，因为真正自由的人，必须有基本的经济保障。罗斯福的提出的这一自由，意味着摆脱贫穷不再是个人的行为，也就是说，政府应该承担起保障人们免于贫困的责任。</p>
+
+    <p>中国社会科学研究院美国研究所原所长 资中筠：</p>
+
+    <p>过去政府保证的基本人权是说，你可以自由地去争取你自己的幸福，至于争取得来，争取不来，政府管不了了，竞争的结果是，你失败了、你破产了、你没饭了，这些不是政府要管的事情。现在把政府的职能转变过来了，在经济上的保障，就是说，不饿死人也是政府的职能了，这个最低的保障就是，无匮乏的自由变成了基本的人权。这一点，我觉得在美国的观念上是一个很大的革命。</p>
+
+    <p>1936年，经济有了恢复的迹象。拥有希望的感觉和对于未来的期待又开始回到美国人心中。富兰克林·罗斯福成为了美国历史上最杰出的总统之一。后人专门为他建造了一个纪念公园。今天，来自美国各地的老人可以自由自在地和这些大萧条期间生活窘迫的老人的雕塑，合影留念。</p>
+
+    <p>我们正在努力奋斗，挽救一个伟大的、宝贵的政府。</p>
+
+    <p>美国加利福尼亚州伯克利大学经济学教授 钱颖一 ：</p>
+
+    <p>罗斯福其实影响是非常大的，在某种意义上，有人说，他挽救了市场经济。就是说，市场经济不是没有毛病，出了一些毛病，在30年代的时候，那么，他引进了一些新政，然后使市场经济又回到了一个比较健康发展的轨道。</p>
+
+    <p>富兰克林·罗斯福的“新政”开创了市场经济的新模式。在这种模式中，市场规律这只“看不见的手”和政府干预这只“看得见的手”联合起来，共同影响经济，市场的作用和政府的作用同时得以发挥。</p>
+
+    <p>在美国经济走向好转的时候，国际舞台却是战云密布。</p>
+
+    <p>为了扩张领土，掠夺资源，亚洲的日本在1937年发动了全面侵华战争，欧洲的德国在1939年入侵波兰。相隔20多年后，人类历史上的第二次世界大战爆发了。</p>
+
+    <p>美国的选择同第一次世界大战如出一辙。先是保持中立，然后被迫参战，加入到苏联、中国、英国和法国等国家组成的反法西斯阵营。作为第一经济和军事强国，美国的加入对反法西斯战争的胜利无疑是举足轻重的。</p>
+
+    <p>1945年4月，美国历史上唯一一位连任了四届的总统富兰克林·罗斯福去世了。五个月后，第二次世界大战结束。</p>
+
+    <p>新任总统杜鲁门宣称：美国已经获得了世界的领导地位。</p>
+
+    <p>两次世界大战，不仅重创了新兴大国德国和日本，同时也使传统大国英国和法国失去了对世界格局的支配权。当时的世界，除了美国和苏联，其他工业化国家都风光不再。美国在战后的工业总产值占到了世界总量的一半以上，并且在全世界范围内建立了以美元为中心的国际金融体系，同时，它还向世界50个国家和地区派驻了军队。</p>
+
+    <p>第二次世界大战成为美国历史新的转折点。独一无二的综合实力，使美国摆脱了第一次世界大战后企图安排世界秩序却无果而终的尴尬，开始按照有利于自己的方式主导国际秩序，并最终在20世纪后期，成为一个超级大国。</p>
+
+    <p>UID: 1 性别: 男 精华: 1 积分: 3987 帖子: 787 阅读权限: 200 注册: 2006-9-5 状态:</p>
+
+    <p>#12发表于 2007-2-21 11:54 PM  资料 主页 个人空间 短消息 ［大国崛起］</p>
+
+  </div>
+</section>
+
+<div class="chapter-divider"></div>
+<section class="chapter" id="ep12">
+  <div class="chapter-header">
+    <div class="chapter-emoji">📖</div>
+    <h2 class="chapter-title">第十二集 大道行思</h2>
+    <div class="chapter-country">结语</div>
+    <span class="chapter-period-badge">纵观五百年</span>
+    <div class="chapter-subtitle">大国兴衰的历史启示</div>
+  </div>
+  <div class="chapter-body">
+
+    <p>本集片名：              第十二集   大道行思</p>
+
+    <p>1492年10月12日，这一天，大西洋强劲的信风将哥伦布的船队送上了梦寐以求的新大陆，也就此吹开了隔绝各个大陆的无形屏障。从这一天起，来自欧洲的航海家们，用新航线连接起一个完整的“世界”。正是他们，用激情划破了海面幽蓝的平静，满载着贸易货物和火炮利器，在追求财富的雄心鼓荡下，启动了大国的旅程。</p>
+
+    <p>从此，大国、强国的兴衰，将不再是封闭舞台上自我演绎的故事。相互的注视、融合和冲突，影响着所有剧情的走向。世界性大国出现了。那些拥有强大凝聚力的国家，最先把机会抢到手里。</p>
+
+    <p>葡萄牙和西班牙最早地形成了民族国家，这对于国家发展来说是非常重要的。因为中世纪的欧洲它是非常分散的。无论是政治、经济、社会各个方面都是分裂的。可是民族国家形成之后，就形成了一个统一的力量，在这样一个统一的力量的支持下国家就可以发展，而且很快就会变得强大。</p>
+
+    <p>就像你把你的双手放在一起，就会变得更强大，这就是力量，而别的国家没有。因为他们失去了一些手指。</p>
+
+    <p>当海洋注定要成为孕育大国的摇篮时，历史首先记住了葡萄牙的恩里克王子和西班牙的伊莎贝尔女王。</p>
+
+    <p>是恩里克王子以国家名义来支持航海家们对未知世界的探索，使葡萄牙的航海大发现不再是个人的孤立冒险，而成为了有计划有组织的国家战略。</p>
+
+    <p>当怀揣着航海计划的哥伦布同西班牙王室讨价还价时，伊莎贝尔女王在谈判中接受了这个普通百姓的利益要求。为了资助哥伦布的远航，女王甚至卖掉了自己王冠上的珠宝。但是，她由此赢回了更加辉煌的王冠，那是世界霸主的桂冠。</p>
+
+    <p>近代世界历史的大幕，就这样从海洋上拉开了。但是，民族国家和海洋优势，是大国崛起的决定性因素吗？在葡萄牙和西班牙之后，为什么恰恰是荷兰、英国、法国、德国、日本、俄罗斯和美国成为了世界性的大国呢？人们能揭开沉淀已久的大国之谜吗？</p>
+
+    <p>单一的因素一定是错误的，一定是各种因素的综合造成了大国的崛起。</p>
+
+    <p>俄罗斯莫斯科国立国际关系学院  阿列克谢·沃斯克列先斯基</p>
+
+    <p>必须在世界经济中占有重要的地位，很明显，经济脆弱的国家，不可能成为大国。</p>
+
+    <p>国家强大必须经济发达，政治稳定，特别是民众与领导者之间要相互信任，互相尊重。</p>
+
+    <p>一个强国仅仅物质力量强大还不够，它还应该具有吸引力。</p>
+
+    <p>必须要具有一定的规模，一定的能力，一定的军事实力，一定的内部凝聚力。</p>
+
+    <p>所有的以前的国家，崛起中的大国，都是因为它内部的国家制度的健全。所谓的一个国家外部的崛起，实际上是它内部力量的一个外延。</p>
+
+    <p>在采访中我们发现：直到今天，大国之谜依然是一个难解的题目，各国的学者提供的答案也是众说纷纭。一个有意思的现象是，上百位接受采访的国内外专家在谈论这个话题时，都十分看重思想文化的影响力，在大国崛起中的作用。</p>
+
+    <p>英国首相丘吉尔有这样一句名言：我宁愿失去一个印度，也不肯失去一个莎士比亚。在成为大国的过程中，戏剧家莎士比亚的作品提升了英国的人文精神，科学家牛顿的力学定律开启了英国工业革命的大门，经济学家亚当·斯密的《国富论》为英国提供了一个新的经济秩序。他们的名字，十分醒目地写在英国走过的大国之路上。</p>
+
+    <p>在法兰西思想与精神的圣地先贤祠，正门上铭刻着这样一句话：“献给伟人，祖国感谢他们。”这里安葬了72位法国历史人物，其中只有11名政治家，其余大多是思想家、作家、艺术家和科学家。多少年来，法兰西共和国一直以其卓尔不群的文化影响力，向世界发出自己的声音，其根源也许就在于此。</p>
+
+    <p>一个国家要崛起，它思想得创新吧，对吧。如果全是老思想，国家能崛起吗？崛起不了。思想如果都束缚住了，能创新吗？创新不了。所以文化的作用在这里出现了。</p>
+
+    <p>我们可以说文化因素很重要，比如说国民教育水平很好，这非常重要。</p>
+
+    <p>一种文化对世界的影响，取决于产生这种文化的强盛经济。</p>
+
+    <p>大国之谜，当然还有另外的答案，那就是体制创新。17世纪时，面积只相当于两个半北京的荷兰，凭借一系列现代金融和商业制度的创立，缔造了一个称霸全球的商业帝国。他们成立了世界上最早的联合股份公司来聚集资本，垄断了当时全球贸易的一半；他们建起了世界上第一个股票交易所，比纽约的证券交易早了三百年，资本市场就此诞生；他们还率先创办现代银行，并发明了我们沿用至今的信用体系。</p>
+
+    <p>继荷兰之后，英国通过推行自由贸易，建立起全球市场，并逐步确立起自由市场经济模式；当这种模式的弊端，引发社会危机的时候，美国在20世纪30年代，又加入了政府干预的手段。从此，“看得见的手”和“看不见的手”交相作用，改变了人们对传统的市场经济模式的认识。有历史学家认为，近五百年来，真正意义上拥有过世界霸权的只有三个国家：荷兰、英国和美国。这三个国家对市场经济进行了接力棒式的创新和发展。学者们还认为，英美两国为经济发展提供了相应的制度保障。</p>
+
+    <p>英国最早地确立了现代的国家制度。比如说我们现在熟悉的内阁制、君主立宪制、两党制、政府对议会负责等等这样的一套政治制度，在英国都是最早地确立。这样的政治制度能够使得这个国家长治久安，长久地保持一种稳定的状态，所以对经济发展是有利的。</p>
+
+    <p>欧洲移民到了美国以后，等于是在一个新大陆上建立了一个崭新的国家。这样的一个国家，它有一个至高无上的《宪法》，在《宪法》下面有一套很完整的法制体系，通过这个权力制衡，相对来说呢，就推动了社会生产力的发展。</p>
+
+    <p>大国之谜之所以难解，还在于各国的发展模式，从来都无法简单地复制和模仿，而必须寻找到一条适合自己的道路。对于后发国家来说，他们成为大国的谜底又在哪里呢？</p>
+
+    <p>1697年，一批俄国青年来到了荷兰赞丹镇的一家造船厂做学徒，学徒中最出色的是一个身高两米，自称彼得·米哈伊洛夫的人，师傅和工友们都推荐他为“优秀工匠”。这个人就是俄国沙皇彼得。彼得大帝的这番举动，拉开了俄罗斯强国的序幕。这位雄心勃勃的沙皇把首都从莫斯科迁到了圣彼得堡，他要缩短的不仅是与欧洲的空间距离，还有国家实力的差距。</p>
+
+    <p>打开视野，向发达国家学习，无疑是后发国家走上强盛之路的开端。学习的目的是赶超。在历史上，像俄罗斯一样实施赶超战略的后发国家，还有德国和日本。他们构建的社会体制，他们所走过的现代化道路，和率先实现工业化的国家，有着明显的区别。</p>
+
+    <p>由国家来推动经济建设，像德国、日本、苏联，还有其它一些20世纪的国家那样，可以说是后起的工业化国家的一个共同特点。因为这些国家大都是刚刚经历了国家重建，相对于社会力量，国家的力量比较强大。</p>
+
+    <p>德国的现代化在很大程度上是从上而下由国家发起和实现的。美国和英国却主要是由社会来推动的，动力来自于社会。</p>
+
+    <p>现代化的过程，它是一个入流的过程。所以后发国家要起来，它得要入流，你不入流你就要落后。那么这个入流的过程当中，它必须要国家来主导。</p>
+
+    <p>成为大国的原因，或许是一个无法穷尽的话题。大国之谜，无疑是一个多解的答案。在不同的时期，只有那些根据自己的国情和时代的需要做出了正确战略判断的国家，才能获得历史的青睐。</p>
+
+    <p>但历史的胸怀并不像人们想象的那样慷慨，它总是让那些在第一时间适合它的规则，并拥有那个时期的核心竞争力的国家，来充当世界的主角。</p>
+
+    <p>今天，当我们环视世界，不难发现：二战结束六十年了，战前的大国，依然是当今世界最为活跃的强国。</p>
+
+    <p>因为，在绝大多数国家还没有完成现代化的时候，这些国家已率先走过这段历程。</p>
+
+    <p>日本实现了现代化，从另一方面证明了现代化不是西欧独有的，而是具有普遍意义的。</p>
+
+    <p>要成为一个现代化的强国，必须要走过一条漫长的道路，必须有一个经济与政治现代化的过程。</p>
+
+    <p>一个国家的崛起，就是崛起成为一个现代国家，也就是实现现代化，近五百年的历史已经充分证明了这一点，尤其是大国。</p>
+
+    <p>大国崛起以后，将会演绎出什么样的故事呢？</p>
+
+    <p>1494年，在没有人准确地知道这个世界究竟有多大的时候，当时的两个海上强国葡萄牙和西班牙，就用一纸契约，像切西瓜一样把地球一分两半。从那以后，与大国崛起相伴随的，总是殖民地的扩张、划分和掠夺。</p>
+
+    <p>这个世界有时像黑白照片那样对比鲜明：大自然慷慨地赐予了非洲的热带和亚热带地区丰富的资源，但那里的人们却过着贫困的生活。早期大国对殖民地的剥夺是惊人的。虽然，大国也给殖民地带去了一些现代文明，但当地人却付出了极高的代价，他们不仅失去了自己的经济资源，也失去了国家的政治尊严，那就是民族的独立和平等。</p>
+
+    <p>大国称霸的故事虽然丰富多彩，却从来都缺少美好和顺利的故事线索。因为它造成的麻烦总比解决的问题要多得多。它固然拥有让世界刮目相看的荣耀，同时也面临着如何保持和扩大利益的烦恼。</p>
+
+    <p>怎么维持一个大国的过程，这是相当艰苦的，那么怎么维持这个大国，每个时代都不太一样。</p>
+
+    <blockquote>第一强国对其他国家说：这不仅是我们的利益，也是你们的利益。不摇晃梯子，不掀翻桌子，只要维持现状就好。</blockquote>
+
+    <p>所有的大国都试图建立符合自己利益的世界秩序，所以它们总是为世界秩序出谋划策。实际上，那些正在崛起的国家想要打破这种秩序，因为他们试图取代以前的大国。</p>
+
+    <p>于是，战争，大国之间的战争，似乎成为历史上打破和重建世界格局的必由之路。</p>
+
+    <p>但迄今为止，还没有新兴大国直接打败霸权国的先例。德国的兴衰，就是历史留给所有大国的一个深刻思考。</p>
+
+    <p>为了保护自己的利益，欧洲列强在几个世纪中以各种方式阻止德意志统一，令这片欧洲中部的土地饱受分裂的屈辱。1871年，奋发图强半个多世纪的德国终于统一。当这个新兴的大国遵循欧洲大国均势原则的时候，它在和平的环境中获得了快速的发展，成为欧洲第一经济强国；但是，当它试图为自己争取阳光下的地盘而发动战车后，则一败涂地。</p>
+
+    <p>历史的教训是：一意逞雄的国家，等于是放弃了从容崛起的主动，最后的结果并不美好。历史的教训还在于：所有企图靠战争来征服、压迫和掠夺其他国家的大国，其结局总是和他们的愿望相反。</p>
+
+    <p>西班牙试过，但是失败了；法国试过，拿破仑试图创立世界帝国，也失败了。德国试过，特别是希特勒试过了，却输给了美国。</p>
+
+    <p>或许这也是一个结论。也就是说，今天任何一个大国都不应该再试图建立殖民统治。</p>
+
+    <p>学者们喜欢用这样的语言来形容德国：这是一个奇妙的国家，它要么考问世界，要么拷打世界。当它用思想来考问世界时，它是伟大的；当它用战争来拷打世界时，便有了上个世纪的两次世界大战。</p>
+
+    <p>1970年的一天，德国人开始考问世界了。</p>
+
+    <p>这是人们已经熟悉的镜头。时任联邦德国总理的勃兰特向二战中被纳粹德国屠杀的犹太人谢罪。世界舆论评价说，跪下去的是勃兰特的双腿，站起来的是整个德意志民族的精神。</p>
+
+    <p>在这一跪一站之间，人们走到了真理的门槛前，开始做出新的选择。</p>
+
+    <p>历史一再证明：没有永远的霸权国家。大国的兴衰交替，是不可避免的历史法则。历史也同样告诉我们：从大国崛起到持续强大，然后转入衰退，是一出需要耐着性子观看的历史长剧。</p>
+
+    <p>英国首相丘吉尔在回忆录里这样描述自己参加雅尔塔会议时的心情：“我的一边坐着巨大的俄国熊，另一边坐着巨大的北美野牛。中间坐着的是一头可怜的英国小毛驴。”</p>
+
+    <p>认清我们在世界上的地位是重要的。我想，只要做这样的改变，我们就在做出正确的调整来适应旧帝国的消失。你可以完全不对旧帝国加以赞扬。</p>
+
+    <p>20世纪见证了英帝国全球霸权的衰落，日不落帝国的昔日风光已经不再。但是，英国作为大国的历史并没有落幕，今天，人们依然能看到它在世界舞台上绝非是可有可无的演出。</p>
+
+    <p>五百年争霸的历史一去不返了，无论是曾经的帝国，还是今天渴望强大的新兴力量，都必须更加理智地在21世纪寻找新的大国之路。</p>
+
+    <p>1955年，一位名叫盛田昭夫的日本商人来到美国拓展市场。美国一家大公司决定向他订购10万台小型收音机，条件是必须换上美国公司的商标出售。10万台的订单对于刚刚起步的商人来说是个极大的诱惑。但盛田昭夫却坚持使用自己的商标，放弃了这宗生意。因为他看重的不是一笔买卖，而是公司的品牌。盛田昭夫所坚持的品牌就是今天的“索尼”。</p>
+
+    <p>没有人知道，如果不是盛田昭夫的坚持，索尼的命运会怎样；但有一点是可以肯定的：日本在战后崛起为一个仅次于美国的经济大国，正是靠了一批像索尼这样的跨国公司。</p>
+
+    <p>如果说，六十年前的大国多以军事力量作为崛起的杠杆，那么，今天则是以综合国力作为崛起的标志。</p>
+
+    <p>如果说，六十年前的霸权国家想要的是帝国，那么，今天的大国所要的则是市场。</p>
+
+    <p>而占领市场的秘诀就是拥有这个时代最核心的竞争力，那就是科技创新的能力。</p>
+
+    <p>从长远来看，一个只能够提供廉价产品的国家不能成为强国。只有这个国家内部具有强大的创新能力，能够自主研发新产品，也就是说，它具有强大的人力资源，只有这样，它的发展才是可持续的。</p>
+
+    <p>在20世纪80年代，许多人认为美国要衰落了。他们看到美国钢铁工业和重工业的衰落，说美国要完蛋了。但是他们没有看到美国在新兴的信息技术企业中的激烈竞争。所以美国实质上在第三次工业革命，也就是信息革命是处于领导地位的。</p>
+
+    <p>1945年9月6日，在二战刚刚结束、日本正式投降后的第四天，当时的美国总统杜鲁门就提出了“21点战后复兴计划”，明确指出：“没有一个国家可以在当今世界上维持领袖地位，除非它充分开发了它的科学技术资源。”</p>
+
+    <p>五个月后，世界上第一台计算机在美国宾夕法尼亚大学诞生。这台重达30吨、占地160平方米的计算机，实际功能还不如今天的一些袖珍计算器，但它的诞生，却象征着第三次工业革命即将来临，美国率先占领了信息时代的制高点。这是美国在20世纪后期成为全球唯一一个超级大国的重要原因。今天，它在科研和开发上的投入仍居世界首位，相当于其他最富裕的西方七国的总和。</p>
+
+    <p>使美国保持创新活力的，还有它的四千多所大学和70%的高等教育入学率。正如一位学者所说：“凡不曾培养出真正受到良好教育公民的国家不能称其为泱泱大国”，美国所拥有的全世界最庞大的高等教育系统，使它获得了信息时代的核心竞争力。</p>
+
+    <p>而当今的世界，经过二战后六十年的发展，以信息化为特征的新时代正在全面到来。</p>
+
+    <p>简而言之，我们面对的是一个比一百年前更相互牵连、相互依赖的世界。</p>
+
+    <p>世界变得越来越小，因为通讯和交通越来越方便。没有国家可以孤立存在。</p>
+
+    <p>在一个紧密相连的经济环境和社会中，国家利益和全球利益之间差别不大。</p>
+
+    <p>这包括全球气候变化，传染病的传播，非典，艾滋病，或跨国恐怖主义。</p>
+
+    <p>我们应当了解，在我们生活的这个世界上，我们每一个人应该考虑到其他人的存在。</p>
+
+    <p>这样的舞台，使各国的命运你中有我，我中有你。任何国家都不可能成为世界经济海洋中的孤岛。</p>
+
+    <p>发生在1997年的东南亚金融危机，就是一个至今提起来还心有余悸的例证。</p>
+
+    <p>这场金融危机不仅损害了一些发展中国家，使有的国家在一夜之间经济倒退十年，同时也波及了日本、韩国等发达国家，最后，连被人们视为罪魁祸首的美国索罗斯基金也不能置身事外，它很快由赢家变成了输家，一度损失了20多亿美元。</p>
+
+    <p>在20世纪就要结束的时候，世界舞台的规则就是这样的奇妙。</p>
+
+    <p>在经济全球化的背景下，还闪耀着另外一个智慧的选择——这就是区域一体化的合作。这种选择，既有经济利益的驱动，也有政治、安全和战略因素的考量。</p>
+
+    <p>我们发现很多国家聚在一起，建立地区组织，一旦一个地区组织建立，别的地区为了保护自己的利益，也必须建立自己的地区组织。</p>
+
+    <p>地区化与全球化一样，应该是一个积极的进程，因为它给相对较弱的国家提供了在地区组织范围内弥补全球化带来的不足。</p>
+
+    <p>战后欧洲的合作与发展，是一个让人心动的选项。合作是从法国和德国这两个欧洲中西部面积最大的国家开始的。这是两个宿怨深厚的邻居，在二战以前的1100多年中，他们一共打了200多场战争，平均5年就开战一次。</p>
+
+    <p>为防止德国进攻，法国从1930年开始修建马奇诺防线，边境上的这座炮楼距离德国只有10公里。历史给这两个持续对抗了几个世纪的国家两败俱伤的惨痛教训，也启迪了它们相逢一笑泯恩仇的政治智慧。</p>
+
+    <p>1945年之后，德法两国都毫无疑问地认识到：两国之间的对抗，不仅仅削弱了自己，而且还削弱了欧洲。</p>
+
+    <p>从20世纪60年代开始两国就逐步开始和解了，70到80年代两国关系逐步改善。</p>
+
+    <p>二战后，联邦德国首任总理阿登纳和法兰西第五共和国首任总统戴高乐，成功化解了两个国家几百年来的仇恨，共同开启了欧洲历史崭新的一页。</p>
+
+    <p>由法国和德国作为发动机带动起来的“欧盟”组织，由于形成了统一的市场、统一的货币，组建了共同的议会乃至军事力量，一个超强的地区联合体便横空出世了。</p>
+
+    <p>人们意识到，“欧盟式”的和平发展，为新兴力量的大国之路提供了生动的历史注脚。</p>
+
+    <p>欧盟现在试图通过走与以往传统的强国不同的发展道路，成为国际政治中的一名活跃分子，即把多个国家组合在一起。也就是说，世界政治将会认识到这种互相依赖的模式。</p>
+
+    <p>也许通过学习过去一个世纪里得出的经验，欧洲正在共识、默许和接受的基础上，率先创立一个超越国家的机构。我认为从长远的方向来看，有可能世界也会这样组织起来。</p>
+
+    <p>历史进入了一个新的千年。当全球市场把世界紧紧连结在一起，大国之间的互动、合作和依存关系开始增强，具有历史眼光和战略智慧的国家开始做出理性的判断：无论是崛起为大国还是维持大国地位，已不可能再走那种依靠战争打破原有国际体系，依靠集团对抗来争夺霸权的老路。如果沿用传统大国的思维方式来构造今天的世界，如果以不切实际的征服幻想来鲁莽从事，都将是一种时代的错位。</p>
+
+    <p>和平与发展，已经成为当今世界的基本主题。沿着这条新路，人们开始表达新的愿望，寻求新的答案：当今世界，究竟什么样的国家，才称得上是大国？怎样才能成为一个大国？</p>
+
+    <p>一个国家的体制应该适合那个国家和人民的情况。英国人的民主和法国人的民主是不同的，法国人和意大利人的民主也是不同的。</p>
+
+    <p>强国还应该是那些能为自己的公民提供更好的发展条件的国家。</p>
+
+    <p>我们只可以解释部分的原因，但是不能完全做到。最终可能是文化。</p>
+
+    <p>正如一位历史学家形容的，人类历史的前进方式，开始的时候，好像是在地上爬，然后是站起来走。到近代的五百年，就好像是在跑。而这最后的一百年，无疑是在飞。</p>
+
+    <p>在这样一个急剧变革的时代里，大国应该以什么样的方式来维护自己的利益？对我们共存的这个世界，大国担负着怎样的责任？人们心目中理想的大国，到底是什么样？</p>
+
+    <p>那意味着承担领导责任，在气候不稳定时要稳定气候。那意味着，处理贫困问题。</p>
+
+    <p>要乐于和其它国家分享其决策，通过说服而不是强迫来执行。</p>
+
+    <p>一个具有伟大文化传统和智慧的文明大国的崛起，对我们全球是有好处的。</p>
+
+    <p>我认为一个大国必须具备两方面，就是物质的和精神的。</p>
+
+    <p>一个理想的世界大国应该在更广的角度追求自己的国家利益，要成功地做到这一点，应该将其有吸引力的软实力和硬实力相结合。</p>
+
+    <p>或许，关于理想的大国，永远不会有一个固定和统一的答案。</p>
+
+    <p>可以说这些是人们的愿望，却反映了当今世界的实际。</p>
+
+    <p>也可以说这是人们的思考，却已越来越接近真理。正是这些思考，成为人类在20世纪取得的具有关键意义的成就。这些成就发出的光芒，无疑将照亮新老大国未来的行程！</p>
+
+    <p>五百年前，因为海洋，人类搭建起真正的世界舞台，大小强弱的国家都在这个舞台上表演了自己的角色。</p>
+
+    <p>五百年后，因为天空，人类进一步拓展了这个舞台的空间。当人们足不出户就可以同步知晓天下事的时候，世界变小了。</p>
+
+    <p>世界也变大了。1961年，一个叫加加林的苏联人离开了地球，第一次在太空中飘荡行走。一个月以后，美国的阿连·小谢泼德也上了太空。他在太空飞行时不断说的一句话是：地球外面的世界真美好。</p>
+
+    <p>从地球仰望天空，是那样地遥远清澄，偶尔飘过的云彩，会遮住人们的视线。云彩的上面，将会是什么呢？是人类和平与发展的温床，还是未来大国竞争的疆场？</p>
+
+    <p>或许，并不是所有的人都已经放弃陈旧的思维模式和全球对峙时代的种种偏见；或许，在未来的五百年，乃至更长的时间里，世界的发展仍将经受各种考验。我们不知道21世纪的变化将把大国带向何方，但有一点是可以肯定的：建立永久和平、共同繁荣的和谐世界，将是人类共同努力的方向。</p>
+
+  </div>
+</section>
+
+<div class="chapter-divider"></div>
+<footer class="footer">
+  <p>大国崛起 - 历史小白友好版</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;">内容来源于同名纪录片解说词，仅供学习参考</p>
+</footer>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Side nav active state
+const sections = document.querySelectorAll('.chapter, .guide-section, .timeline-section, .hero');
+const navItems = document.querySelectorAll('.nav-item');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navItems.forEach(item => {
+        item.classList.toggle('active', item.dataset.target === id);
+      });
+    }
+  });
+}, { threshold: 0.2, rootMargin: '-10% 0px -70% 0px' });
+
+sections.forEach(s => { if (s.id) observer.observe(s); });
+
+// Back to top
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('visible', window.scrollY > 600);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "儿童汉字启蒙学习",
+  "short_name": "汉字启蒙",
+  "description": "趣味学习，快乐成长 - 儿童汉字启蒙学习系统",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FF9A56",
+  "theme_color": "#FF8C42",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%23FF8C42' width='512' height='512' rx='100'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='300' fill='white'>📚</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "games"],
+  "lang": "zh-CN"
+}

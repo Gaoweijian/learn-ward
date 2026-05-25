@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《牛津通识：资本主义》·零基础小白逐章解读</title>
+<style>
+  /* ===== 基础重置 ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ===== 全局变量 ===== */
+  :root {
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --text: #2d3340;
+    --text-light: #5a6378;
+    --accent: #3b6ef6;
+    --accent-light: #ebf0fe;
+    --warn: #e07b39;
+    --warn-light: #fff4ec;
+    --green: #2a9d5c;
+    --green-light: #e8f7ef;
+    --red: #c0392b;
+    --red-light: #fdecea;
+    --border: #e2e6ef;
+    --radius: 14px;
+    --shadow: 0 2px 12px rgba(59,110,246,0.07);
+  }
+
+  /* ===== 页面布局 ===== */
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ===== 顶部横幅 ===== */
+  .hero {
+    background: linear-gradient(135deg, #1a2f6e 0%, #3b6ef6 60%, #6b9fff 100%);
+    color: #fff;
+    padding: 56px 24px 48px;
+    text-align: center;
+  }
+  .hero .tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(22px, 5vw, 36px);
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 14px;
+  }
+  .hero p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.82);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* ===== 主体容器 ===== */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 36px 16px 80px;
+  }
+
+  /* ===== 通用卡片 ===== */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 32px;
+    margin-bottom: 28px;
+  }
+
+  /* ===== 区块标题 ===== */
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .emoji { font-size: 22px; }
+
+  /* ===== 热身站 ===== */
+  .warmup-section { border-left: 4px solid var(--accent); }
+  .def-box {
+    background: var(--accent-light);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 14px;
+  }
+  .def-box .label {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .def-box p { font-size: 15px; }
+
+  /* ===== 对比表格 ===== */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .compare-table th {
+    background: var(--accent);
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .compare-table th:first-child { border-radius: 8px 0 0 0; }
+  .compare-table th:last-child  { border-radius: 0 8px 0 0; }
+  .compare-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .compare-table tr:nth-child(even) td { background: #f4f6fb; }
+  .compare-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  .compare-table tr:last-child td:last-child  { border-radius: 0 0 8px 0; }
+
+  .tip-box {
+    background: var(--warn-light);
+    border-left: 4px solid var(--warn);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 14px;
+    margin-top: 16px;
+  }
+  .tip-box strong { color: var(--warn); }
+
+  /* ===== 章节卡片 ===== */
+  .chapter-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .chapter-header {
+    padding: 22px 28px 18px;
+    background: linear-gradient(90deg, #f0f4ff 0%, #f7f8fa 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  .chapter-num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .chapter-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .chapter-question {
+    font-size: 14px;
+    color: var(--text-light);
+    background: white;
+    border-radius: 8px;
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+  }
+  .chapter-body { padding: 24px 28px; }
+
+  /* ===== 子模块标签 ===== */
+  .block-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 24px 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .block-label::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 14px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  /* ===== 核心概念 ===== */
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+    margin-top: 10px;
+  }
+  .concept-item {
+    background: #f7f9ff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .concept-item .name {
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+    font-size: 15px;
+  }
+  .concept-item .desc { font-size: 13px; color: var(--text-light); }
+
+  /* ===== 段落 ===== */
+  .story-block p {
+    margin-bottom: 12px;
+    font-size: 15px;
+  }
+  .story-block p:last-child { margin-bottom: 0; }
+
+  /* ===== 优缺点 ===== */
+  .pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  @media (max-width: 500px) { .pros-cons { grid-template-columns: 1fr; } }
+  .pros { background: var(--green-light); border-radius: 10px; padding: 14px 16px; }
+  .cons { background: var(--red-light);   border-radius: 10px; padding: 14px 16px; }
+  .pros .pc-title { color: var(--green); font-weight: 700; margin-bottom: 8px; font-size: 14px; }
+  .cons .pc-title { color: var(--red);   font-weight: 700; margin-bottom: 8px; font-size: 14px; }
+  .pros ul, .cons ul { list-style: none; padding: 0; }
+  .pros li, .cons li { font-size: 14px; margin-bottom: 6px; display: flex; gap: 8px; }
+
+  /* ===== 对比块 ===== */
+  .vs-block {
+    background: #f5f3ff;
+    border-left: 4px solid #7c5cfc;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  .vs-block strong { color: #5b3fc8; }
+
+  /* ===== 今天的例子 ===== */
+  .today-example {
+    background: var(--warn-light);
+    border-radius: 10px;
+    padding: 16px 18px;
+    font-size: 14px;
+    margin-top: 10px;
+    border: 1px dashed var(--warn);
+  }
+  .today-example .ex-title {
+    font-weight: 700;
+    color: var(--warn);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ===== 三问收尾 ===== */
+  .qa-section .card { border-left: 4px solid var(--green); }
+  .qa-item { margin-bottom: 28px; }
+  .qa-item:last-child { margin-bottom: 0; }
+  .qa-q {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+  }
+  .qa-q .qnum {
+    background: var(--green);
+    color: #fff;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; flex-shrink: 0; margin-top: 1px;
+  }
+  .qa-a { font-size: 15px; color: var(--text-light); padding-left: 36px; }
+
+  /* ===== 小词典（粘性侧边 / 底部折叠） ===== */
+  .dict-bar {
+    position: fixed;
+    right: 16px;
+    bottom: 30px;
+    z-index: 100;
+  }
+  .dict-toggle {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(59,110,246,0.35);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+  }
+  .dict-toggle:hover { background: #2856d6; }
+  .dict-panel {
+    display: none;
+    position: fixed;
+    right: 16px;
+    bottom: 80px;
+    width: 300px;
+    max-height: 460px;
+    overflow-y: auto;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.14);
+    padding: 20px;
+    z-index: 101;
+  }
+  .dict-panel.open { display: block; }
+  .dict-panel h3 {
+    font-size: 15px;
+    color: var(--accent);
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+  }
+  .dict-item { margin-bottom: 14px; }
+  .dict-item .dterm {
+    font-weight: 700;
+    color: var(--text);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .dict-item .dterm .arrow { font-size: 11px; transition: transform 0.2s; }
+  .dict-item .ddef {
+    display: none;
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 5px;
+    padding: 8px 12px;
+    background: var(--accent-light);
+    border-radius: 6px;
+  }
+  .dict-item.expanded .arrow { transform: rotate(90deg); }
+  .dict-item.expanded .ddef { display: block; }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 600px) {
+    .card { padding: 20px 16px; }
+    .chapter-header { padding: 16px 18px 14px; }
+    .chapter-body { padding: 16px 18px; }
+    .dict-panel { right: 8px; width: calc(100vw - 16px); }
+    .dict-bar { right: 8px; }
+  }
+
+  /* ===== 目录 ===== */
+  .toc {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+  .toc h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .toc-list { list-style: none; }
+  .toc-list li {
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .toc-list a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .toc-list a:hover { color: #1a42c4; text-decoration: underline; }
+  .toc-badge {
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 12px;
+    padding: 2px 10px;
+    flex-shrink: 0;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 20px 0;
+  }
+
+  .note {
+    font-size: 13px;
+    color: var(--text-light);
+    background: #f0f4fb;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 24px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== 顶部横幅 ===== -->
+<div class="hero">
+  <div class="tag">📚 牛津通识系列 · 小白版解读</div>
+  <h1>《牛津通识：资本主义》<br>零基础小白逐章解读</h1>
+  <p>作者：詹姆斯·富尔彻 | 译者：张罗、陆赟<br>用大白话 + 生活例子，把这本书讲给从没接触过经济学的你</p>
+</div>
+
+<!-- ===== 主内容区 ===== -->
+<div class="container">
+
+  <!-- 注释 -->
+  <div class="note">
+    📌 本解读严格基于原书（牛津大学出版社，詹姆斯·富尔彻著），按章节顺序整理，并以"小白友好"方式重新讲述。适合完全不了解经济学的读者。
+  </div>
+
+  <!-- ===== 目录 ===== -->
+  <div class="toc">
+    <h2>📋 快速导航</h2>
+    <ul class="toc-list">
+      <li><span class="toc-badge">热身</span><a href="#warmup">小白热身站：先搞懂两个基本概念</a></li>
+      <li><span class="toc-badge">第1章</span><a href="#ch1">什么是资本主义？</a></li>
+      <li><span class="toc-badge">第2章</span><a href="#ch2">资本主义源自何方？</a></li>
+      <li><span class="toc-badge">第3章</span><a href="#ch3">我们如何走到今天？</a></li>
+      <li><span class="toc-badge">第4章</span><a href="#ch4">全球各地的资本主义都一样吗？</a></li>
+      <li><span class="toc-badge">第5章</span><a href="#ch5">资本主义是否已经全球化？</a></li>
+      <li><span class="toc-badge">第6章</span><a href="#ch6">危机？何种危机？</a></li>
+      <li><span class="toc-badge">结尾</span><a href="#qa">读完这本书，你应该能回答的3个问题</a></li>
+    </ul>
+  </div>
+
+  <!-- ===== 小白热身站 ===== -->
+  <div class="card warmup-section" id="warmup">
+    <div class="section-title"><span class="emoji">🌱</span> 小白热身站：先搞懂两个基本概念</div>
+
+    <div class="def-box">
+      <div class="label">📌 一句话定义：资本主义</div>
+      <p>资本主义是一种经济制度，其中<strong>工厂、机器、土地等主要生产资料归私人所有</strong>，人们为了赚钱而生产商品，价格由市场竞争来决定。</p>
+    </div>
+
+    <div class="def-box">
+      <div class="label">📌 一句话定义：社会主义（对比用）</div>
+      <p>社会主义主张<strong>主要生产资料归全社会或集体所有</strong>，生产目的是满足人的需求而不是赚利润，更强调平等分配。</p>
+    </div>
+
+    <p style="margin: 16px 0 10px; font-weight: 600; font-size: 15px;">一眼看懂：资本主义 vs 社会主义（理想型）对比表</p>
+    <div style="overflow-x: auto;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>维度</th>
+            <th>资本主义</th>
+            <th>社会主义（理想型）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>谁拥有工厂/公司</td>
+            <td>私人老板、股东</td>
+            <td>国家、集体、全社会</td>
+          </tr>
+          <tr>
+            <td>生产为了什么</td>
+            <td>赚取利润</td>
+            <td>满足人们的需求</td>
+          </tr>
+          <tr>
+            <td>价格怎么定</td>
+            <td>市场供求决定</td>
+            <td>政府或计划决定</td>
+          </tr>
+          <tr>
+            <td>典型例子</td>
+            <td>美国、现代中国（混合型）</td>
+            <td>传统计划经济（如改革开放前的中国）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip-box">
+      <strong>⚠️ 重要提醒：</strong>现实中没有"纯资本主义"或"纯社会主义"，大多数国家都是<strong>混合经济</strong>（既有市场也有政府调控）。读完这本书你会明白为什么——因为两种极端都出现过严重的问题！
+    </div>
+  </div>
+
+  <!-- ===== 第一章 ===== -->
+  <div class="chapter-card" id="ch1">
+    <div class="chapter-header">
+      <div class="chapter-num">第一章</div>
+      <div class="chapter-title">什么是资本主义？</div>
+      <div class="chapter-question">📌 这一章要回答：资本主义到底是什么东西？它有哪几张"面孔"？</div>
+    </div>
+    <div class="chapter-body">
+
+      <!-- 核心概念 -->
+      <div class="block-label">💡 核心概念（大白话版）</div>
+      <div class="concept-grid">
+        <div class="concept-item">
+          <div class="name">资本</div>
+          <div class="desc">不是说"钱就是资本"，而是<strong>用来生更多钱的钱</strong>。你开面馆买的锅碗灶台，能帮你赚钱，那就是资本。你存在银行不动的钱，那只是钱，不是资本。</div>
+        </div>
+        <div class="concept-item">
+          <div class="name">雇佣劳动</div>
+          <div class="desc">你把自己的时间和力气卖给老板，老板给你工资。你不是老板的"奴隶"，可以辞职，但如果不工作就没饭吃——这就是资本主义下"自由"又"不自由"的劳动关系。</div>
+        </div>
+        <div class="concept-item">
+          <div class="name">市场</div>
+          <div class="desc">买家和卖家碰面、讨价还价、成交的地方。不只是菜市场——股票市场、劳动力市场（招聘）、外汇市场都是市场。资本主义下，几乎一切都通过市场流转。</div>
+        </div>
+      </div>
+
+      <!-- 它怎么运作 -->
+      <div class="block-label">🔄 它怎么运作：资本主义的三张面孔</div>
+      <div class="story-block">
+        <p>书里讲了三个真实故事，代表资本主义的三种形态：</p>
+        <p><strong>① 商业资本主义（400年前）</strong>——1601年，英国东印度公司派船去印尼买胡椒。回来一卖，投资人赚了95%的利润！但下一次航行船沉了，血本无归。你可以这样想象：这就像你凑钱开了家"外卖代购平台"，把廉价农村土鸡蛋卖到上海。赚钱的关键是垄断和稀缺，而不是努力生产。</p>
+        <p><strong>② 工业资本主义（工业革命时代）</strong>——两个苏格兰人在1795年开了家纺纱厂，初始资本不到2000英镑，到1820年已经成了曼彻斯特最大的棉纱企业。他们雇了1500名工人，其中很多是7岁儿童，每天工作13小时！你可以这样想象：这就像今天的富士康——老板拥有厂房和机器，工人用自己的劳动赚取工资，而老板从中赚取利润。</p>
+        <p><strong>③ 金融资本主义（现代）</strong>——1995年，巴林银行交易员尼克·李森在新加坡靠"期货"（一种复杂的金融工具）豪赌日本股市，最终亏损了4.7亿英镑，把一家有200年历史的老银行玩倒闭了。你可以这样想象：这就像有人用100万借来的钱在股市里炒股，涨了大赚，跌了血亏——风险和财富一起放大。</p>
+      </div>
+
+      <!-- 好坏 -->
+      <div class="block-label">⚖️ 好处与坏处</div>
+      <div class="pros-cons">
+        <div class="pros">
+          <div class="pc-title">✅ 优点</div>
+          <ul>
+            <li><span>✅</span>竞争推动技术创新，商品价格下降</li>
+            <li><span>✅</span>资本可以灵活流向最赚钱的地方，效率高</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="pc-title">❌ 缺点</div>
+          <ul>
+            <li><span>❌</span>工人处于弱势，工资可能被无限压低</li>
+            <li><span>❌</span>金融投机造成泡沫，泡沫破裂危害所有人</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 社会主义对比 -->
+      <div class="block-label">🔀 社会主义者会怎么看？</div>
+      <div class="vs-block">
+        <strong>社会主义者会说：</strong>工人用劳动创造了财富，凭什么大部分利润被老板拿走？童工做13小时才几个铜板，这不叫"自由雇佣"，这叫剥削！应该把工厂的所有权收归社会，让所有工人共享成果。马克思把工人叫做"工资奴隶"，就是这个意思。
+      </div>
+
+      <!-- 今天的例子 -->
+      <div class="today-example">
+        <div class="ex-title">📱 今天的例子</div>
+        外卖平台算不算资本主义？当然算！美团、饿了么拥有平台（资本），外卖骑手用劳动换取工资（雇佣劳动），价格由市场竞争决定（市场）。骑手每接一单，平台抽成——这就是典型的资本主义运作方式。骑手的劳动创造了价值，但大部分剩余价值（利润）归了平台股东。
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 第二章 ===== -->
+  <div class="chapter-card" id="ch2">
+    <div class="chapter-header">
+      <div class="chapter-num">第二章</div>
+      <div class="chapter-title">资本主义源自何方？</div>
+      <div class="chapter-question">📌 这一章要回答：资本主义是从哪儿冒出来的？为什么偏偏是欧洲，而不是中国或印度？</div>
+    </div>
+    <div class="chapter-body">
+
+      <div class="block-label">💡 核心概念（大白话版）</div>
+      <div class="concept-grid">
+        <div class="concept-item">
+          <div class="name">圈地运动</div>
+          <div class="desc">15世纪英国，贵族把原来大家公用的土地用栅栏围起来，变成自己的私产，把住在上面的农民赶走。这听起来很残忍——但它是资本主义农业的起点，因为土地从此可以买卖，变成资本了。</div>
+        </div>
+        <div class="concept-item">
+          <div class="name">封建制度</div>
+          <div class="desc">欧洲中世纪的社会结构。国王→贵族→骑士→农奴，层层控制。农奴绑在土地上，没有自由，得给领主白干活。资本主义出现，需要先打破这个制度——让农民"自由"去工厂打工。</div>
+        </div>
+        <div class="concept-item">
+          <div class="name">新教伦理</div>
+          <div class="desc">德国社会学家韦伯提出：新教徒（尤其是清教徒）相信"勤劳工作是侍奉上帝"，鼓励攒钱，反对享乐挥霍。这种思想恰好和资本积累的逻辑一拍即合——有人认为这推动了资本主义发展。</div>
+        </div>
+      </div>
+
+      <div class="block-label">🔄 它怎么运作：资本主义为什么在欧洲诞生？</div>
+      <div class="story-block">
+        <p>书里的核心论断是：资本主义不是某个天才突然发明的，而是一系列历史条件共同"孵化"出来的。</p>
+        <p><strong>第一步：英国的土地革命</strong>——英国从16世纪开始，圈地运动把农民赶离土地，土地变成商品。失去土地的农民怎么活？只能去城里打工，成为工厂的廉价劳动力。这是工业资本主义的第一块砖。</p>
+        <p><strong>第二步：市场关系渗透农村</strong>——农民不再自给自足，要买东西就得挣钱，这就创造了消费需求，反过来刺激了工业生产。想象一下：以前农民自己织布，现在他们买布——于是织布厂有了生意。</p>
+        <p><strong>第三步：欧洲的特殊结构</strong>——欧洲没有像中国那样的统一大帝国。欧洲是一堆小国家竞争，谁能发展经济谁就强大。这种竞争环境鼓励商业创新。而中国历代皇帝用官僚体制管控商人，商人赚的钱往往被税收榨干，很难积累成资本。</p>
+        <p><strong>第四步：金融创新从意大利开始</strong>——12世纪的热那亚商人发明了汇票（一种金融工具），让"钱在纸上飞"成为可能，极大降低了贸易风险。随后阿姆斯特丹成立了股票交易所，这些创新最终传到了英国，为工业革命提供了资金工具。</p>
+      </div>
+
+      <div class="block-label">⚖️ 好处与坏处</div>
+      <div class="pros-cons">
+        <div class="pros">
+          <div class="pc-title">✅ 优点</div>
+          <ul>
+            <li><span>✅</span>打破封建束缚，农民获得人身自由</li>
+            <li><span>✅</span>商业网络覆盖欧洲，带来财富增长</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="pc-title">❌ 缺点</div>
+          <ul>
+            <li><span>❌</span>圈地运动让大批农民流离失所，无家可归</li>
+            <li><span>❌</span>殖民掠夺成为资本积累的重要来源，造成他国苦难</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vs-block">
+        <strong>社会主义者会说：</strong>资本主义的"起点"本身就不公平——靠圈地、殖民、剥削工人积累起来的第一桶金，根本就不是什么自由竞争的产物。马克思管这叫"原始积累"，一段充满暴力和剥夺的历史。
+      </div>
+
+      <div class="today-example">
+        <div class="ex-title">🏙️ 今天的例子</div>
+        中国改革开放后大量农民进城打工，和英国圈地运动后农民涌入纺纱厂，逻辑几乎一模一样——农村人口从土地释放出来，成为城市工厂的劳动力，推动了工业化。只不过中国是政府主导的、更快速的版本。这也是为什么有人说"中国走了一段资本主义的路"，但路程更短、政府控制更多。
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 第三章 ===== -->
+  <div class="chapter-card" id="ch3">
+    <div class="chapter-header">
+      <div class="chapter-num">第三章</div>
+      <div class="chapter-title">我们如何走到今天？</div>
+      <div class="chapter-question">📌 这一章要回答：资本主义从乱糟糟的工业革命，到今天政府管、工会闹、又到撒切尔改革，经历了哪三次大变身？</div>
+    </div>
+    <div class="chapter-body">
+
+      <div class="block-label">💡 核心概念（大白话版）</div>
+      <div class="concept-grid">
+        <div class="concept-item">
+          <div class="name">无序型资本主义</div>
+          <div class="desc">18世纪工业革命初期，政府基本不管，老板爱怎么干怎么干。7岁孩子进工厂、一天干13小时、工资低到活不下去——没有最坏，只有更坏。</div>
+        </div>
+        <div class="concept-item">
+          <div class="name">管控型资本主义</div>
+          <div class="desc">从19世纪后期到20世纪70年代，政府开始管：立劳动法、建福利制度、搞国有化、工会保护工人权益。用老百姓的话说：有了"五险一金"，有了免费医疗、最低工资。</div>
+        </div>
+        <div class="concept-item">
+          <div class="name">重新市场化的资本主义</div>
+          <div class="desc">1980年代撒切尔夫人（英国）和里根（美国）推动的改革：卖掉国有企业、削减福利、打压工会、让市场"自由"。这就是现在我们生活的经济背景。</div>
+        </div>
+      </div>
+
+      <div class="block-label">🔄 三个阶段，像换衣服一样</div>
+      <div class="story-block">
+        <p><strong>第一阶段：乱——无序型资本主义（18世纪至19世纪初）</strong></p>
+        <p>你可以这样想象：那时候的资本主义像个没人管的孩子。工厂随便招童工，工资随便给，废水随便排，政府的态度是"市场自己调节，别来烦我"。工人自发组织工会抵抗，但政府帮着老板镇压。</p>
+
+        <p><strong>第二阶段：管——管控型资本主义（19世纪后期至20世纪70年代）</strong></p>
+        <p>经历了太多的罢工、暴动、两次世界大战，政府意识到：资本主义如果不加管控会崩溃。于是工党（英国）和社会民主党（欧洲）上台，建立了：免费医疗（英国NHS）、养老金、失业救济、公共住房、国有铁路电力……到1979年，英国有1/3家庭住在政府提供的公房里！这就是"福利国家"。</p>
+
+        <p><strong>第三阶段：放——重新市场化的资本主义（1980年代至今）</strong></p>
+        <p>到了70年代，问题来了：管控太多、工会太强、效率低下、政府财政压力大。撒切尔夫人出手了：卖掉国有企业、限制工会、引入市场竞争……这就是"新自由主义"。中国改革开放也有这个逻辑——让市场发挥更大作用。但代价是：贫富差距扩大，工作更不稳定，养老金越来越难以保障。</p>
+      </div>
+
+      <div class="block-label">⚖️ 好处与坏处</div>
+      <div class="pros-cons">
+        <div class="pros">
+          <div class="pc-title">✅ 重新市场化的好处</div>
+          <ul>
+            <li><span>✅</span>消费品更多选择，价格更低</li>
+            <li><span>✅</span>经济效率提升，创新加速</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="pc-title">❌ 重新市场化的代价</div>
+          <ul>
+            <li><span>❌</span>贫富差距扩大，底层越来越难</li>
+            <li><span>❌</span>工作越来越不稳定，未来更难预测</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vs-block">
+        <strong>社会主义者会说：</strong>"管控型资本主义"时期的英国，其实已经非常接近社会民主主义了——免费医疗、公共住房、工会保护……这说明政府是可以管住资本主义的。撒切尔的改革是开了历史的倒车。
+      </div>
+
+      <div class="today-example">
+        <div class="ex-title">💰 今天的例子</div>
+        你爸妈的养老金和资本主义有什么关系？养老金制度（无论是中国的社保，还是英国的国家养老金）是"管控型资本主义"时代的产物——是工人通过斗争，迫使国家建立的保障制度。现在各地"延迟退休"的讨论，恰好是"重新市场化"逻辑的体现：政府财政压力大，试图缩减福利开支。
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 第四章 ===== -->
+  <div class="chapter-card" id="ch4">
+    <div class="chapter-header">
+      <div class="chapter-num">第四章</div>
+      <div class="chapter-title">全球各地的资本主义都一样吗？</div>
+      <div class="chapter-question">📌 这一章要回答：美国、瑞典、日本都是资本主义国家，但为什么感觉完全不一样？</div>
+    </div>
+    <div class="chapter-body">
+
+      <div class="block-label">💡 核心概念（大白话版）</div>
+      <div class="concept-grid">
+        <div class="concept-item">
+          <div class="name">统合主义</div>
+          <div class="desc">政府、工会、大老板三方坐下来谈判，一起商量工资和经济政策。瑞典最典型。就像三个室友共同决定家里怎么花钱，不是谁说了算。</div>
+        </div>
+        <div class="concept-item">
+          <div class="name">公司型资本主义</div>
+          <div class="desc">美国模式。不是工会和政府谈判，而是大公司主导一切。股东利益最大化，高管薪酬天文数字，工会很弱——这就是美国的"商业工会主义"。</div>
+        </div>
+        <div class="concept-item">
+          <div class="name">财阀</div>
+          <div class="desc">日本的超级大企业集团（三菱、三井、住友……）。一个财阀涵盖银行、工厂、商贸，家族控股。政府和财阀紧密合作，国家引导工业发展——日本战后经济奇迹的秘密。</div>
+        </div>
+      </div>
+
+      <div class="block-label">🔄 三种不同的资本主义</div>
+      <div class="story-block">
+        <p><strong>🇸🇪 瑞典模式：高福利 + 高税收 + 强工会</strong></p>
+        <p>瑞典工会有80%的工人加入（对比英国只有30%！）。工会、雇主、政府三方谈判，协商出一个"大家都能接受"的工资方案。高税收支撑极其完善的福利体系：免费医疗、带薪育儿假、慷慨的失业救济……瑞典证明：福利和经济增长可以并存，资本主义可以更"人道"。</p>
+        <p><strong>🇺🇸 美国模式：个人主义 + 市场至上 + 弱福利</strong></p>
+        <p>在美国，你的医疗保险主要靠公司或自己买，没有工作就没有医保。工会很弱（2001年工会覆盖率只有13%）。贫富差距巨大：富人可以大把赚钱，穷人只能靠自己。美国人相信"努力就能成功"，但数据显示贫困人口从2500万增长到3500万。</p>
+        <p><strong>🇯🇵 日本模式：终身雇佣 + 国家引导 + 公司大家庭</strong></p>
+        <p>日本公司提供终身雇佣——你一进公司就是"家里人"，不会随便被开除，公司提供住房、宿舍、甚至娱乐设施。但代价是：你要拼命工作，不能有太多个人想法。政府通过"通商产业省"引导企业进入高科技领域，这是日本电子产业崛起的关键。</p>
+      </div>
+
+      <div class="block-label">⚖️ 好处与坏处</div>
+      <div class="pros-cons">
+        <div class="pros">
+          <div class="pc-title">✅ 多样化的好处</div>
+          <ul>
+            <li><span>✅</span>说明资本主义不是"只有一种"，可以选择更公平的版本</li>
+            <li><span>✅</span>不同国家可以互相学习最佳实践</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="pc-title">❌ 多样化的挑战</div>
+          <ul>
+            <li><span>❌</span>全球化压力让各国向低福利、低工资看齐</li>
+            <li><span>❌</span>日本模式的终身雇佣制让女性、合同工被边缘化</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vs-block">
+        <strong>一个重要结论：</strong>全球化之后，所有国家的资本主义都在靠拢，但并没有"变成一样"——瑞典今天依然比美国有更好的福利。作者强调：资本主义有多种形态，不要以为"市场化是唯一的路"。
+      </div>
+
+      <div class="today-example">
+        <div class="ex-title">🏢 今天的例子</div>
+        中国的资本主义属于哪种？大概是"国家引导型"——更接近日本模式，但政府力量更强。国有企业、五年计划、政府引导新能源/芯片等产业……和纯美国式的市场自由完全不同。这也是中美经济摩擦的根本分歧之一：中国不接受"让市场完全决定一切"。
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 第五章 ===== -->
+  <div class="chapter-card" id="ch5">
+    <div class="chapter-header">
+      <div class="chapter-num">第五章</div>
+      <div class="chapter-title">资本主义是否已经全球化？</div>
+      <div class="chapter-question">📌 这一章要回答："全球化"究竟是真的在让世界连成一体，还是一个美化过的神话？</div>
+    </div>
+    <div class="chapter-body">
+
+      <div class="block-label">💡 核心概念（大白话版）</div>
+      <div class="concept-grid">
+        <div class="concept-item">
+          <div class="name">跨国公司</div>
+          <div class="desc">在好几个国家同时经营的大公司，比如耐克、苹果、丰田。总部在美国，工厂在越南，销售在全球。本质是把工厂放到工资最低的地方——这就是"全球化"最赤裸的逻辑。</div>
+        </div>
+        <div class="concept-item">
+          <div class="name">金融衍生品</div>
+          <div class="desc">一种复杂金融工具，价值"衍生"自其他东西（股票、石油、货币）。期货、期权都是衍生品。普通人理解：就是你拿一张"下个月可以低价买苹果"的票据在市场上卖……但放大到万亿规模就会引发危机。</div>
+        </div>
+        <div class="concept-item">
+          <div class="name">全球化的神话</div>
+          <div class="desc">我们以为资本在全球自由流动，但实际上大部分资金只在北美、欧洲、日本之间流动。非洲得到的外国投资，比芬兰（500万人）还少。"全球化"其实是富国的全球化。</div>
+        </div>
+      </div>
+
+      <div class="block-label">🔄 它怎么运作：四个真实故事</div>
+      <div class="story-block">
+        <p><strong>① 墨西哥"边境加工厂"</strong>——美资工厂在墨美边境大批设立，工人（主要是年轻女性）工资极低，没有工会保护。工厂老板开车从美国家里来上班，工人坐大巴从棚户区来。这就是"全球化"让资本进一步剥削廉价劳动力的真相。</p>
+        <p><strong>② 印度呼叫中心</strong>——英国银行把电话客服转移到印度，因为印度有受过教育的、说英语的劳动力，工资只有英国的几分之一。印度小哥甚至要接受"英国口音训练"。这就是数字时代的"全球劳动力套利"。</p>
+        <p><strong>③ 苏联解体：资本主义赢了</strong>——1989年，前苏联的国家社会主义开始崩溃。俄罗斯接受了"休克疗法"——一夜之间私有化，结果造成4500万人陷入贫困！而中国采取"渐进式"改革，效果好得多。这证明：不是所有路径的资本主义转型都一样。</p>
+        <p><strong>④ 资本流动的真相</strong>——全球资金每天交易量高达1.5万亿美元，但大部分是投机性的（炒汇率、炒期货），和实体经济关系不大。1997年亚洲金融危机就是"热钱"突然撤出造成的——一下子把泰铢、印尼盾都打崩了。</p>
+      </div>
+
+      <div class="block-label">⚖️ 好处与坏处</div>
+      <div class="pros-cons">
+        <div class="pros">
+          <div class="pc-title">✅ 全球化的好处</div>
+          <ul>
+            <li><span>✅</span>发展中国家获得就业机会和外汇</li>
+            <li><span>✅</span>消费者买到更便宜的商品</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="pc-title">❌ 全球化的代价</div>
+          <ul>
+            <li><span>❌</span>工人竞争更惨烈，工资被压低</li>
+            <li><span>❌</span>国际间财富差距越来越大（最富与最穷国家差距从1820年的3倍扩大到1992年的72倍！）</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vs-block">
+        <strong>作者的结论：</strong>资本主义的"全球化"有四大神话——①不是新鲜事；②资本并非真的全球流动；③跨国公司仍是"本国公司"；④全球化让世界更分裂而不是更统一。用"全球化"这个词，要小心被忽悠。
+      </div>
+
+      <div class="today-example">
+        <div class="ex-title">📦 今天的例子</div>
+        你买的"美国苹果手机"，是在中国工厂（富士康）由工人组装，用的是日本屏幕、韩国芯片……这就是全球价值链。但利润的大部分归了苹果（在美国），工人的工资非常低。这就是全球化下资本与劳动力不平等分工的缩影。
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 第六章 ===== -->
+  <div class="chapter-card" id="ch6">
+    <div class="chapter-header">
+      <div class="chapter-num">第六章</div>
+      <div class="chapter-title">危机？何种危机？</div>
+      <div class="chapter-question">📌 这一章要回答：资本主义为什么总是出危机？危机是偶然事故，还是资本主义内置的"Bug"？</div>
+    </div>
+    <div class="chapter-body">
+
+      <div class="block-label">💡 核心概念（大白话版）</div>
+      <div class="concept-grid">
+        <div class="concept-item">
+          <div class="name">经济泡沫</div>
+          <div class="desc">资产价格（股票、房子、郁金香）脱离实际价值，被炒到离谱的高价，最终必然崩盘。就像往气球里吹气，看起来越来越大，但总有一针戳破的时候。</div>
+        </div>
+        <div class="concept-item">
+          <div class="name">过度生产</div>
+          <div class="desc">工厂生产的商品比大家能买的多。为什么会这样？因为竞争逼着所有厂家拼命扩产，但工人工资被压低，买不起自己生产的东西。最终产品卖不出去，工厂关门，工人失业，需求更低——恶性循环。</div>
+        </div>
+        <div class="concept-item">
+          <div class="name">凯恩斯主义</div>
+          <div class="desc">经济学家凯恩斯的药方：经济萧条时，政府应该花大钱（修路建桥、发福利），人为制造需求，拉动经济走出低谷。二战后很多国家用了这个方法，效果不错——直到70年代遭遇新问题。</div>
+        </div>
+      </div>
+
+      <div class="block-label">🔄 危机怎么发生：从郁金香到次贷危机</div>
+      <div class="story-block">
+        <p><strong>1636年荷兰郁金香泡沫</strong>——17世纪荷兰人疯狂炒郁金香球茎，一株稀有郁金香的价格相当于"两车小麦+四车黑麦+四头肥牛+八头猪+一张床"……然后价格突然崩了，一文不值。普通工匠押上全部积蓄，赔得倾家荡产。你可以这样想象：这就是比特币2021年的翻版，只不过那时候炒的是花。</p>
+        <p><strong>1929年大萧条</strong>——华尔街股市崩盘，美国工业生产减少1/3，超过1/4劳动力失业。没有社会保障的工人完全没有收入，需求暴跌，工厂关门，更多失业，更少消费……螺旋式下降，几乎把整个资本主义经济体系摧毁。二战的军费开支意外治好了这次萧条。</p>
+        <p><strong>1997年亚洲金融危机</strong>——国际热钱突然从泰国撤出，泰铢崩盘，危机像多米诺骨牌倒遍整个东南亚，扩散到俄罗斯、巴西。这说明：全球化让危机传播更快，没有哪个国家能独善其身。</p>
+        <p><strong>危机是资本主义的"常态"</strong>——作者的核心观点：危机不是意外事故，而是资本主义的内置功能。生产与消费的分离、竞争造成的过度生产、金融投机造成的泡沫，这些矛盾永远存在，危机注定周期性发生。</p>
+      </div>
+
+      <div class="block-label">⚖️ 好处与坏处</div>
+      <div class="pros-cons">
+        <div class="pros">
+          <div class="pc-title">✅ 危机也有"正面"作用？</div>
+          <ul>
+            <li><span>✅</span>淘汰低效企业，为高效企业让路</li>
+            <li><span>✅</span>危机后往往带来制度改革，如大萧条后建立了更多社会保障</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="pc-title">❌ 危机的真实代价</div>
+          <ul>
+            <li><span>❌</span>每次危机都是普通工人最受苦：失业、降薪、失去家园</li>
+            <li><span>❌</span>金融危机中，富人往往能套现离场，穷人没有出路</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vs-block">
+        <strong>社会主义者会说：</strong>马克思早在19世纪就预言了这一切——资本主义必然产生周期性危机，因为工人创造的价值被老板拿走了，买不起自己生产的东西，市场必然过剩崩溃。这是资本主义的"基因缺陷"，打补丁（凯恩斯主义）只是拖延，不是根治。
+      </div>
+
+      <div class="today-example">
+        <div class="ex-title">🏠 今天的例子</div>
+        中国房价会不会崩？这是个典型的"泡沫讨论"。房价脱离普通家庭收入水平（北京平均房价是年收入的几十倍），这和荷兰郁金香、美国次贷危机的逻辑一样：价格由预期推动，不由基本需求支撑。恒大危机已经是一个信号。作者会说：危机不是"会不会"的问题，而是"什么时候"的问题——因为泡沫总会破。
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 读完这本书能回答的3问 ===== -->
+  <div class="card qa-section" id="qa">
+    <div class="section-title"><span class="emoji">🎓</span> 读完这本书，你应该能回答的3个问题</div>
+
+    <div class="qa-item">
+      <div class="qa-q">
+        <div class="qnum">1</div>
+        <div>资本主义和社会主义最根本的区别是什么？</div>
+      </div>
+      <div class="qa-a">
+        <p>最根本的区别在于<strong>生产资料的所有权</strong>。</p>
+        <p>资本主义：工厂、机器、土地归私人所有，为了赚利润而生产，价格由市场决定。</p>
+        <p>社会主义（理想型）：生产资料归全社会/集体所有，为了满足人的需求而生产，价格由计划决定。</p>
+        <p>但书里强调：现实中两者都不"纯粹"。瑞典是高福利的资本主义国家，中国是市场经济为主体但有大量国有企业的混合经济——很难用非此即彼的标签来定义。</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="qa-item">
+      <div class="qa-q">
+        <div class="qnum">2</div>
+        <div>为什么几乎所有国家都不是纯资本主义？</div>
+      </div>
+      <div class="qa-a">
+        <p>因为"纯资本主义"实践证明会造成严重问题：</p>
+        <p>① 无序型资本主义时代（18-19世纪）的惨状——童工、极端贫困、社会动荡——迫使政府介入管控。</p>
+        <p>② 市场会失灵——垄断、过度生产、金融泡沫，仅靠市场无法自我修复。</p>
+        <p>③ 社会稳定需要政府兜底——失业救济、医疗、教育，没有这些保障，社会就会爆发革命（历史上已经发生过多次）。</p>
+        <p>所以所有现实中的资本主义国家都是"混合经济"：既有市场，也有政府管控和福利制度。只不过配比不同——美国市场多一点，瑞典政府多一点。</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="qa-item">
+      <div class="qa-q">
+        <div class="qnum">3</div>
+        <div>资本主义未来会消亡吗？为什么有人这样说？</div>
+      </div>
+      <div class="qa-a">
+        <p>作者的答案是：<strong>在可预见的未来，不会。</strong></p>
+        <p>理由：① 社会主义替代方案（苏联模式）已经崩溃；② 资本主义有很强的自我修复能力，每次危机后都能通过改革继续运作；③ 没有一个可信的替代体系能在保持现有生产和消费水平的情况下替代资本主义。</p>
+        <p>但有人担心：① 资本主义的危机周期越来越频繁、破坏越来越大（2008年金融危机）；② 气候变化是资本主义无法用市场解决的生态危机；③ 贫富差距扩大正在动摇社会稳定的基础（"占领华尔街"等运动）。</p>
+        <p>作者建议：与其寄望资本主义消亡，不如<strong>在资本主义内部推动改革</strong>——正如从"无序型"演变为"管控型"一样。历史表明，资本主义是可以被管控和改造的，关键是政治力量的博弈。</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end container -->
+
+<!-- ===== 小词典浮动按钮 ===== -->
+<div class="dict-bar">
+  <button class="dict-toggle" onclick="toggleDict()" id="dictBtn">
+    📖 小词典
+  </button>
+  <div class="dict-panel" id="dictPanel">
+    <h3>📖 本书常用术语（点击展开解释）</h3>
+
+    <div class="dict-item" onclick="toggleDef(this)">
+      <div class="dterm"><span class="arrow">▶</span> 资本</div>
+      <div class="ddef">用来生钱的钱（或资产）。你的锅碗瓢盆能帮你开饭馆赚钱，那就是资本。存着不动的钱不是资本。</div>
+    </div>
+
+    <div class="dict-item" onclick="toggleDef(this)">
+      <div class="dterm"><span class="arrow">▶</span> 私有制</div>
+      <div class="ddef">工厂、土地、机器归私人（老板/股东）所有，而不是归国家或全社会所有。资本主义的核心制度基础。</div>
+    </div>
+
+    <div class="dict-item" onclick="toggleDef(this)">
+      <div class="dterm"><span class="arrow">▶</span> 市场</div>
+      <div class="ddef">买家和卖家交易的地方和机制。不只是菜市场——招聘市场（劳动力市场）、股市、外汇市场都是市场。资本主义下，几乎一切通过市场配置。</div>
+    </div>
+
+    <div class="dict-item" onclick="toggleDef(this)">
+      <div class="dterm"><span class="arrow">▶</span> 利润</div>
+      <div class="ddef">收入减去成本剩下的钱。你卖炒鸡蛋收20元，成本5元，利润15元。资本主义的驱动力就是追求利润最大化。</div>
+    </div>
+
+    <div class="dict-item" onclick="toggleDef(this)">
+      <div class="dterm"><span class="arrow">▶</span> 商品</div>
+      <div class="ddef">拿来卖的东西。不只是超市里的物品——你的劳动力（工作时间）也是商品，你把它卖给老板换取工资。</div>
+    </div>
+
+    <div class="dict-item" onclick="toggleDef(this)">
+      <div class="dterm"><span class="arrow">▶</span> 劳动力</div>
+      <div class="ddef">你工作的能力——体力、技能、时间。在资本主义下，劳动力是一种商品，工人在劳动力市场上"销售"自己。</div>
+    </div>
+
+    <div class="dict-item" onclick="toggleDef(this)">
+      <div class="dterm"><span class="arrow">▶</span> 剥削</div>
+      <div class="ddef">马克思的概念：工人创造的价值大于他们获得的工资，差额被老板拿走了。工人每天创造价值100元，但只拿到60元工资，剩下40元是"剩余价值"，归老板。</div>
+    </div>
+
+    <div class="dict-item" onclick="toggleDef(this)">
+      <div class="dterm"><span class="arrow">▶</span> 不平等</div>
+      <div class="ddef">社会上财富和收入的分配差距。资本主义天然产生不平等：资本所有者的收入增长往往快于工人工资增长。</div>
+    </div>
+
+    <div class="dict-item" onclick="toggleDef(this)">
+      <div class="dterm"><span class="arrow">▶</span> 全球化</div>
+      <div class="ddef">商品、资本、劳动力在全球范围内流动。工厂搬到工资最低的国家、资金在世界各地炒来炒去，这都是全球化的表现。但书里指出这其实是"富国的全球化"。</div>
+    </div>
+
+    <div class="dict-item" onclick="toggleDef(this)">
+      <div class="dterm"><span class="arrow">▶</span> 混合经济</div>
+      <div class="ddef">既有市场机制，也有政府管控的经济体系。现实中所有国家都是混合经济，区别只是政府管多管少。中国是政府管较多的混合经济，美国是政府管较少的混合经济。</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleDict() {
+    var panel = document.getElementById('dictPanel');
+    panel.classList.toggle('open');
+  }
+  function toggleDef(el) {
+    el.classList.toggle('expanded');
+  }
+  // 点击外部关闭
+  document.addEventListener('click', function(e) {
+    var bar = document.querySelector('.dict-bar');
+    if (!bar.contains(e.target)) {
+      document.getElementById('dictPanel').classList.remove('open');
+    }
+  });
+</script>
+
+</body>
+</html>

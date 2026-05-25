@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《马克思、恩格斯论历史科学》· 零基础小白逐章解读</title>
+    <style>
+        :root {
+            --bg-color: #FAFAFA;
+            --card-bg: #FFFFFF;
+            --text-primary: #333333;
+            --text-secondary: #555555;
+            --accent-blue: #4A90D4;
+            --accent-green: #6B9E78;
+            --border-light: #E8E8E8;
+            --shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 页面标题 */
+        .page-header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 16px;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .page-header .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* 阅读前必看区块 */
+        .pre-read {
+            background: linear-gradient(135deg, #E8F4F8 0%, #F0F7F4 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .pre-read h2 {
+            color: var(--accent-blue);
+            margin-bottom: 24px;
+            font-size: 1.4rem;
+        }
+
+        .pre-read .intro-item {
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+        }
+
+        .pre-read .intro-item h3 {
+            color: var(--accent-green);
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        /* 小白救急词典 */
+        .dictionary {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 320px;
+        }
+
+        .dictionary-toggle {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 24px;
+            cursor: pointer;
+            font-size: 15px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .dictionary-toggle:hover {
+            background: #3A7A8A;
+            transform: translateY(-2px);
+        }
+
+        .dictionary-content {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .dictionary.open .dictionary-content {
+            display: block;
+        }
+
+        .dictionary-term {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .dictionary-term:last-child {
+            border-bottom: none;
+        }
+
+        .dictionary-term strong {
+            color: var(--accent-blue);
+        }
+
+        /* 章节卡片 */
+        .chapter-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .chapter-number {
+            display: inline-block;
+            background: var(--accent-blue);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .chapter-title {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--accent-green);
+            padding-bottom: 12px;
+        }
+
+        .section-block {
+            background: #F8F9FA;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .section-block h4 {
+            color: var(--accent-blue);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-block h4::before {
+            content: "●";
+            color: var(--accent-green);
+        }
+
+        .section-block p {
+            color: var(--text-secondary);
+        }
+
+        .analogy-box {
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFF5D6 100%);
+            border-left: 3px solid #E6A23C;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .analogy-box .icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+
+        .example-box {
+            background: #F0F9F4;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-top: 16px;
+        }
+
+        .example-box h5 {
+            color: var(--accent-green);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #E8F4F8;
+            color: var(--accent-blue);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            margin-right: 6px;
+        }
+
+        .conclusion-section {
+            background: linear-gradient(135deg, #E8F4F8 0%, #F0F7F4 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+        }
+
+        .conclusion-section h2 {
+            color: var(--accent-blue);
+            margin-bottom: 24px;
+        }
+
+        .qa-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .qa-item .question {
+            color: var(--accent-green);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .qa-item .answer {
+            color: var(--text-secondary);
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 16px;
+            }
+
+            .page-header {
+                padding: 40px 16px;
+            }
+
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .chapter-card {
+                padding: 24px 20px;
+            }
+
+            .dictionary {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+        }
+
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .nav-anchor {
+            display: inline-block;
+            margin-right: 12px;
+            padding: 4px 12px;
+            background: var(--border-light);
+            border-radius: 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .nav-anchor:hover {
+            background: var(--accent-blue);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 页面标题 -->
+        <header class="page-header">
+            <h1>📚 《马克思、恩格斯论历史科学》</h1>
+            <p class="subtitle">零基础小白逐章解读 · 像听故事一样读经典</p>
+            <div style="margin-top: 16px;">
+                <a href="#chapter1" class="nav-anchor">第1章</a>
+                <a href="#chapter2" class="nav-anchor">第2章</a>
+                <a href="#chapter3" class="nav-anchor">第3章</a>
+                <a href="#chapter4" class="nav-anchor">第4章</a>
+                <a href="#chapter5" class="nav-anchor">第5章</a>
+                <a href="#chapter6" class="nav-anchor">第6章</a>
+                <a href="#chapter7" class="nav-anchor">第7章</a>
+                <a href="#conclusion" class="nav-anchor">读后问答</a>
+            </div>
+        </header>
+
+        <!-- 阅读前必看 -->
+        <section class="pre-read">
+            <h2>📖 阅读前必看</h2>
+
+            <div class="intro-item">
+                <h3>🔹 马恩是谁？</h3>
+                <p>卡尔·马克思（1818-1883）和弗里德里希·恩格斯（1820-1895），是生活在19世纪欧洲的两位思想家。他们目睹了工业革命带来的巨变——工厂兴起、工人贫困、贫富分化，于是开始思考：<strong>人类社会为什么会变成现在这样？未来又会往哪里去？</strong></p>
+            </div>
+
+            <div class="intro-item">
+                <h3>🔹 这本书是干什么的？</h3>
+                <p>这本书是马克思、恩格斯文章的<strong>选编合集</strong>，主题是"历史科学"。别误会，这里的"历史科学"不是研究恐龙化石或者古代皇帝，而是指——<strong>用科学的方法，研究人类社会为什么变化、怎么变化、会往哪里去</strong>。他们想找出一套解释人类社会发展规律的理论。</p>
+            </div>
+
+            <div class="intro-item">
+                <h3>🔹 最核心的3个前置概念（小白版）</h3>
+                <div style="background: white; padding: 16px; border-radius: 8px; margin-top: 12px;">
+                    <p><strong>1. 生产力</strong>：人类制造东西的能力（工具、技术、工厂等）。想象一下从"手挖土豆"到"挖掘机挖土豆"，这就是生产力的进步。</p>
+                    <p style="margin-top: 12px;"><strong>2. 生产关系</strong>：人和人在生产中形成的关系（比如老板和员工、地主和农民）。谁拥有工具？谁干活？谁拿大头？这些关系就是生产关系。</p>
+                    <p style="margin-top: 12px;"><strong>3. 经济基础决定上层建筑</strong>：简单说就是"怎么吃饭决定了你怎么想、怎么管"。例子：</p>
+                    <ul style="margin-left: 20px; margin-top: 8px; color: var(--text-secondary);">
+                        <li>捕猎采集社会 → 大家一起干活、不分你我</li>
+                        <li>农耕社会 → 出现土地私有、地主和农民</li>
+                        <li>工业社会 → 工厂主（老板）和雇佣工人</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="intro-item">
+                <h3>🔹 资本主义 vs 社会主义（一句话版）</h3>
+                <div style="background: white; padding: 16px; border-radius: 8px; margin-top: 12px;">
+                    <p><strong>资本主义</strong>：工厂、土地、机器等主要归私人（老板）所有。工人出卖劳动力换取工资。核心逻辑：市场竞争、自由买卖、追求利润。</p>
+                    <p style="margin-top: 12px;"><strong>社会主义</strong>：主要生产资料归全社会或集体共同拥有。核心逻辑：更强调平等、合作、满足大家的基本需求。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第1章 -->
+        <article class="chapter-card" id="chapter1">
+            <span class="chapter-number">第1章</span>
+            <h2 class="chapter-title">一、物质生产是历史的基础</h2>
+
+            <div class="section-block">
+                <h4>原文在说什么（人话版）</h4>
+                <p>这一章在回答一个最根本的问题：<strong>人类历史的"底层代码"是什么？</strong></p>
+                <p style="margin-top: 8px;">马克思恩格斯认为，人类要活下去，首先得吃饭、穿衣、有房子住。而要生产这些生存必需品，就必须使用工具、耕种土地、建立工厂。这些"物质生产活动"才是推动人类历史前进的<strong>真正动力</strong>，而不是什么伟人的想法、或者神灵的意志。</p>
+            </div>
+
+            <div class="analogy-box">
+                <span class="icon">💡</span>
+                <strong>大白话翻译：</strong>想象一下，人类社会就像一栋大楼。<strong>物质生产就是地基</strong>，没有地基，楼就塌了。皇帝的思想、宗教的教义、文学艺术……这些都是"楼上"的东西。地基变了，上面的房子也得跟着变。
+            </div>
+
+            <div class="section-block">
+                <h4>和资本主义/社会主义的关系</h4>
+                <p><span class="tag">历史地基</span>这一章是全书的基础理论，不直接谈资本主义或社会主义。但它是后面所有讨论的"地基"——<strong>理解了物质生产的重要性，才能理解为什么不同社会有不同的制度</strong>。</p>
+            </div>
+
+            <div class="example-box">
+                <h5>🏠 生活中的例子</h5>
+                <p>想想为什么现在的外卖这么发达？因为有智能手机（技术工具）、有大量骑手（劳动力）、有平台公司（组织形式）。这就是一套<strong>现代物质生产能力</strong>。没有这些基础设施，外卖APP再花哨也没用。</p>
+            </div>
+        </article>
+
+        <!-- 第2章 -->
+        <article class="chapter-card" id="chapter2">
+            <span class="chapter-number">第2章</span>
+            <h2 class="chapter-title">二、社会存在与社会意识</h2>
+
+            <div class="section-block">
+                <h4>原文在说什么（人话版）</h4>
+                <p>这一章在讨论一个有趣的问题：<strong>是我们的思想决定社会怎么运行？还是社会怎么运行决定了我们想什么？</strong></p>
+                <p style="margin-top: 8px;">马克思恩格斯的观点很明确：是<strong>社会存在决定社会意识</strong>。什么意思？就是说——你生活在一个什么样的社会里（怎么生产、怎么分配），决定了你有什么样的想法、观念、价值观。而不是反过来。</p>
+            </div>
+
+            <div class="analogy-box">
+                <span class="icon">💡</span>
+                <strong>大白话翻译：</strong>想象你出生在农村种地家庭，你大概率会觉得"勤俭持家"很重要；如果你出生在城市商人家庭，你可能更看重"投资眼光"和"商业机会"。不是谁对谁错，而是<strong>你的生活环境塑造了你的想法</strong>。
+            </div>
+
+            <div class="section-block">
+                <h4>和资本主义/社会主义的关系</h4>
+                <p><span class="tag">资本主义批判</span>资本主义社会会诞生"金钱至上""个人主义"的价值观；社会主义社会更强调"集体利益""按劳分配"。这些不是偶然的，而是<strong>各自的经济基础决定的</strong>。</p>
+            </div>
+
+            <div class="example-box">
+                <h5>🏠 生活中的例子</h5>
+                <p>为什么现在很多人觉得"买房子"是人生大事？因为在当前的社会结构里，有房子意味着安全感和资产积累。但这种想法在游牧社会或者50年前的中国农村，可能完全不存在。不同社会，不同观念。</p>
+            </div>
+        </article>
+
+        <!-- 第3章 -->
+        <article class="chapter-card" id="chapter3">
+            <span class="chapter-number">第3章</span>
+            <h2 class="chapter-title">三、生产力和生产关系的矛盾运动</h2>
+
+            <div class="section-block">
+                <h4>原文在说什么（人话版）</h4>
+                <p>这一章是全书最核心的理论之一！马克思恩格斯发现了一个规律：<strong>生产力和生产关系之间会发生矛盾</strong>。</p>
+                <p style="margin-top: 8px;">当生产力发展了（比如发明了新机器），原有的生产关系可能就"跟不上"了。就像你用智能手机了，但公司还用打卡机管理你——这就产生了矛盾。这个矛盾积累到一定程度，<strong>就会引发社会变革</strong>。</p>
+            </div>
+
+            <div class="analogy-box">
+                <span class="icon">💡</span>
+                <strong>大白话翻译：</strong>把社会想象成一辆汽车。<strong>生产力是发动机</strong>（越来越强），<strong>生产关系是方向盘和轮胎</strong>。发动机升级了，但方向盘还是老式的，车就容易出问题。开不动了怎么办？要么改装方向盘，要么换新车——<strong>这就是社会变革</strong>。
+            </div>
+
+            <div class="section-block">
+                <h4>和资本主义/社会主义的关系</h4>
+                <p><span class="tag">资本主义分析</span>马克思认为，资本主义也会有这种矛盾：<strong>资本家（拥有生产资料的人）为了竞争不断提高机器和技术水平，但同时压榨工人</strong>。机器越来越强，工人越来越苦，这种矛盾最终会导致工人反抗，推动社会变革。</p>
+            </div>
+
+            <div class="example-box">
+                <h5>🏠 生活中的例子</h5>
+                <p>想想流水线工人和AI技术的关系：工厂引进机器人（生产力提升），但普通工人的工作被取代了。这就产生了矛盾——生产力进步了，但很多人的生计反而成了问题。这种矛盾在历史上反复出现。</p>
+            </div>
+        </article>
+
+        <!-- 第4章 -->
+        <article class="chapter-card" id="chapter4">
+            <span class="chapter-number">第4章</span>
+            <h2 class="chapter-title">四、经济基础和上层建筑</h2>
+
+            <div class="section-block">
+                <h4>原文在说什么（人话版）</h4>
+                <p>这一章进一步深化了"经济基础决定上层建筑"的思想。</p>
+                <p style="margin-top: 8px;"><strong>经济基础</strong>：就是前面说的生产力+生产关系，也就是"怎么生产、怎么分配"这个底层结构。</p>
+                <p style="margin-top: 8px;"><strong>上层建筑</strong>：在基础上"长出来"的东西，包括法律、制度、政府、军队、文化、教育、宗教、艺术……等等。</p>
+            </div>
+
+            <div class="analogy-box">
+                <span class="icon">💡</span>
+                <strong>大白话翻译：</strong>把社会想象成一棵树。<strong>经济基础是树根和树干</strong>（怎么吸收养分、怎么生长），<strong>上层建筑是树枝、树叶、花果</strong>（政府、法律、文化）。如果树根变了（比如土壤变了），整棵树迟早会变——新叶子、新果实、甚至整棵树倒下重长。
+            </div>
+
+            <div class="section-block">
+                <h4>和资本主义/社会主义的关系</h4>
+                <p><span class="tag">制度分析</span>资本主义的上层建筑（法律强调私有财产神圣不可侵犯、政治由资产阶级主导）是为资本主义经济基础服务的。社会主义则要建立<strong>为全社会服务</strong>的上层建筑——政府代表人民、法律保障公平。</p>
+            </div>
+
+            <div class="example-box">
+                <h5>🏠 生活中的例子</h5>
+                <p>为什么很多国家有"劳动法"保护工人权益？因为随着工业发展，工人阶层壮大了，工人运动兴起了。这些压力改变了政治格局，最终让法律也跟着变了。这就是<strong>经济基础变化 → 上层建筑跟着调整</strong>的典型案例。</p>
+            </div>
+        </article>
+
+        <!-- 第5章 -->
+        <article class="chapter-card" id="chapter5">
+            <span class="chapter-number">第5章</span>
+            <h2 class="chapter-title">五、人民群众在历史中的作用</h2>
+
+            <div class="section-block">
+                <h4>原文在说什么（人话版）</h4>
+                <p>这一章回应了一个常见误解：历史是"英雄人物"创造的——是秦始皇、华盛顿、拿破仑这些大人物决定了历史走向。</p>
+                <p style="margin-top: 8px;">马克思恩格斯说：不对！<strong>真正创造历史的是广大人民群众</strong>。不是皇帝发明的印刷术，而是无数工匠改进印刷技术；不是将军赢得的战争，而是无数士兵和后勤人员支撑的战争。</p>
+            </div>
+
+            <div class="analogy-box">
+                <span class="icon">💡</span>
+                <strong>大白话翻译：</strong>想象一部电影上映了，大家都说是"导演的功劳"。但如果没有演员、摄像、灯光、场务、发行……电影能出来吗？<strong>英雄人物是导演，但人民群众是整个剧组</strong>——没有剧组，再牛的导演也只能对着空气拍。
+            </div>
+
+            <div class="section-block">
+                <h4>和资本主义/社会主义的关系</h4>
+                <p><span class="tag">社会主义理论</span>既然历史是人民群众创造的，那么<strong>社会主义就应该是人民群众自己的事业</strong>。工人、农民、知识分子……这些普通人联合起来，才能改变不合理的社会制度。这为社会主义革命和建设提供了理论依据。</p>
+            </div>
+
+            <div class="example-box">
+                <h5>🏠 生活中的例子</h5>
+                <p>想想改革开放：政策是领导人制定的，但真正改变中国的是——无数下海经商的个体户、南下打工的农民工、创业的民营企业家。历史书会写领导人，但历史是由这些普通人共同书写的。</p>
+            </div>
+        </article>
+
+        <!-- 第6章 -->
+        <article class="chapter-card" id="chapter6">
+            <span class="chapter-number">第6章</span>
+            <h2 class="chapter-title">六、历史的阶段性和社会形态的演进</h2>
+
+            <div class="section-block">
+                <h4>原文在说什么（人话版）</h4>
+                <p>这一章梳理了人类历史的发展阶段。马克思恩格斯认为，人类社会不是乱糟糟一团，而是有<strong>规律地向前发展</strong>，会经历不同的社会形态。</p>
+                <p style="margin-top: 8px;">典型的发展阶段：原始社会 → 奴隶社会 → 封建社会 → 资本主义社会 → 共产主义社会（社会主义是初级阶段）。每个阶段都有其特定的<strong>经济基础和上层建筑</strong>。</p>
+            </div>
+
+            <div class="analogy-box">
+                <span class="icon">💡</span>
+                <strong>大白话翻译：</strong>把人类历史想象成一个人的成长：<strong>幼儿期（原始社会）</strong>→<strong>童年期（奴隶社会）</strong>→<strong>少年期（封建社会）</strong>→<strong>青年期（资本主义）</strong>→<strong>成年期（共产主义）</strong>。每个年龄段有每个年龄段的特征和任务，不会倒回去，也不会跳过某个阶段。
+            </div>
+
+            <div class="section-block">
+                <h4>和资本主义/社会主义的关系</h4>
+                <p><span class="tag">历史必然性</span>马克思认为资本主义必然被社会主义取代，就像封建社会必然被资本主义取代一样。这不是谁"喜欢不喜欢"的问题，而是<strong>历史发展的客观规律</strong>——生产力发展到一定程度，旧的生产关系就容纳不下了。</p>
+            </div>
+
+            <div class="example-box">
+                <h5>🏠 生活中的例子</h5>
+                <p>想想手机的发展：大哥大时代 → 诺基亚时代 → 智能手机时代。每个时代都有自己的"霸主"和"规则"。当智能手机时代来临，诺基亚不管多努力，都无法阻止被淘汰——这就是<strong>时代更替的规律</strong>。</p>
+            </div>
+        </article>
+
+        <!-- 第7章 -->
+        <article class="chapter-card" id="chapter7">
+            <span class="chapter-number">第7章</span>
+            <h2 class="chapter-title">七、批判旧世界，创造新世界</h2>
+
+            <div class="section-block">
+                <h4>原文在说什么（人话版）</h4>
+                <p>这一章是全书的"行动纲领"——马克思恩格斯不仅解释世界，还要<strong>改变世界</strong>。</p>
+                <p style="margin-top: 8px;">他们认为，<strong>光认识规律不够，还得用规律来指导实践</strong>。认识到资本主义的矛盾，就要想办法解决；认识到人民群众的力量，就要组织起来改变不合理的制度。</p>
+            </div>
+
+            <div class="analogy-box">
+                <span class="icon">💡</span>
+                <strong>大白话翻译：</strong>医生发现了病因（认识疾病），还得开药方、做手术（改变病情）。马克思恩格斯的工作就是：<strong>诊断社会疾病 + 开出革命药方</strong>。他们认为工人阶级是"治愈"资本主义病症的"主刀医生"。
+            </div>
+
+            <div class="section-block">
+                <h4>和资本主义/社会主义的关系</h4>
+                <p><span class="tag">革命理论</span>这一章直接指向<strong>社会主义革命的实践</strong>。马克思恩格斯认为，无产阶级（工人阶级）要组织起来，通过革命或改革，打碎旧的生产关系，建立新的社会主义制度。</p>
+            </div>
+
+            <div class="example-box">
+                <h5>🏠 生活中的例子</h5>
+                <p>想想现代的消费者权益保护运动：有人发现了商家欺诈的问题（认识问题），然后组织起来维权、起诉、曝光（改变现状）。马克思恩格斯的思路类似——<strong>发现问题，解决问题，让世界变得更好</strong>。</p>
+            </div>
+        </article>
+
+        <!-- 读后问答 -->
+        <section class="conclusion-section" id="conclusion">
+            <h2>🎯 读完这本书，能回答这3个问题吗？</h2>
+
+            <div class="qa-item">
+                <div class="question">❓ 问题1：为什么人类社会的制度会变？</div>
+                <div class="answer"><strong>答：</strong>因为生产力（工具、技术）在不断发展。当生产力进步了，原有的生产关系（谁拥有工具、谁干活、谁分配）就可能"落后"了。这种矛盾积累到一定程度，就会引发社会变革，形成新的制度。简单说：<strong>技术进步 → 利益格局重组 → 制度更新</strong>。</div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">❓ 问题2：资本主义必然会被取代吗？</div>
+                <div class="answer"><strong>答：</strong>按照马克思恩格斯的理论，是的。他们认为资本主义内部存在根本矛盾——<strong>资本家追求利润最大化，工人被压榨，贫富差距越来越大</strong>。这种矛盾最终会导致工人阶级觉醒和反抗，推动社会向社会主义过渡。但这需要条件成熟，是一个历史过程。</div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">❓ 问题3：历史有方向吗？</div>
+                <div class="answer"><strong>答：</strong>马克思恩格斯认为有。他们相信人类历史总的趋势是<strong>向前发展的</strong>——从低级社会形态走向高级社会形态，最终实现共产主义（每个人自由发展是一切人自由发展的条件）。当然，这个过程不是线性的，会有曲折、倒退，但方向是明确的。</div>
+            </div>
+
+            <div style="text-align: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-light);">
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                    📖 本解读旨在帮助零基础读者理解历史唯物主义的基本概念<br>
+                    如需深入学习，请阅读原著及专业学术著作
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- 小白救急词典 -->
+    <div class="dictionary" id="dictionary">
+        <button class="dictionary-toggle" onclick="toggleDictionary()">
+            📖 小白救急词典
+        </button>
+        <div class="dictionary-content">
+            <h4 style="color: var(--accent-blue); margin-bottom: 16px; font-size: 1rem;">点击词语查看简单解释</h4>
+
+            <details class="dictionary-term">
+                <summary><strong>生产力</strong></summary>
+                <p style="margin-top: 8px; color: var(--text-secondary);">人类改造自然、创造物质财富的能力，包括工具、技术、劳动者的技能等。可以理解为"人类干活的能力"。</p>
+            </details>
+
+            <details class="dictionary-term">
+                <summary><strong>生产关系</strong></summary>
+                <p style="margin-top: 8px; color: var(--text-secondary);">人们在物质生产过程中形成的社会关系，包括生产资料归谁所有、人在生产中的地位和相互关系、产品如何分配等。简单说就是"干活时的社会关系"。</p>
+            </details>
+
+            <details class="dictionary-term">
+                <summary><strong>经济基础</strong></summary>
+                <p style="margin-top: 8px; color: var(--text-secondary);">社会发展一定阶段上的生产力与生产关系的总和。相当于社会的"底层结构"。</p>
+            </details>
+
+            <details class="dictionary-term">
+                <summary><strong>上层建筑</strong></summary>
+                <p style="margin-top: 8px; color: var(--text-secondary);">建立在经济基础之上的政治法律制度、设施，以及相应的社会意识形态（法律、政治、道德、艺术、宗教等）。相当于社会的"上层结构"。</p>
+            </details>
+
+            <details class="dictionary-term">
+                <summary><strong>资产阶级</strong></summary>
+                <p style="margin-top: 8px; color: var(--text-secondary);">就是靠占有工厂、资本赚钱的那个阶层，比如大老板、投资人。在资本主义社会里，他们拥有生产资料，雇佣工人干活。</p>
+            </details>
+
+            <details class="dictionary-term">
+                <summary><strong>无产阶级</strong></summary>
+                <p style="margin-top: 8px; color: var(--text-secondary);">不占有生产资料，只能靠出卖劳动力换取工资的阶层，比如工厂工人、公司职员。简单说就是"靠干活吃饭的人"。</p>
+            </details>
+
+            <details class="dictionary-term">
+                <summary><strong>社会形态</strong></summary>
+                <p style="margin-top: 8px; color: var(--text-secondary);">人类历史发展的不同阶段，如原始社会、奴隶社会、封建社会、资本主义社会、共产主义社会。每个阶段有特定的经济基础和上层建筑。</p>
+            </details>
+
+            <details class="dictionary-term">
+                <summary><strong>历史唯物主义</strong></summary>
+                <p style="margin-top: 8px; color: var(--text-secondary);">马克思恩格斯的核心历史观，认为社会发展的根本原因是物质资料的生产方式，社会存在决定社会意识，人民群众是历史的创造者。</p>
+            </details>
+        </div>
+    </div>
+
+    <script>
+        function toggleDictionary() {
+            const dictionary = document.getElementById('dictionary');
+            dictionary.classList.toggle('open');
+        }
+
+        // 页面加载时显示提示
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📖 《马克思、恩格斯论历史科学》小白解读已加载完成');
+        });
+    </script>
+</body>
+</html>

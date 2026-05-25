@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《马克思、恩格斯论历史科学》小白解读</title>
+    <style>
+        :root {
+            --primary: #2D5A7B;
+            --primary-light: #4A7A9B;
+            --secondary: #6B8E7B;
+            --accent: #C4956A;
+            --bg: #F8F6F3;
+            --card-bg: #FFFFFF;
+            --text: #333333;
+            --text-light: #666666;
+            --border: #E0DDD8;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --analogy-bg: #FFF9F0;
+            --example-bg: #F0F7FF;
+            --warning-bg: #FFF0F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text);
+            background: var(--bg);
+            padding-bottom: 80px;
+        }
+
+        /* 顶部导航 */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            z-index: 100;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .top-nav h1 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 20px 20px;
+        }
+
+        /* 封面 */
+        .cover {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px var(--shadow);
+        }
+
+        .cover h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .cover .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .cover .meta {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* 引言 */
+        .intro {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .intro h2 {
+            color: var(--primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .intro p {
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        /* 必读部分 */
+        .must-read {
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFFDF5 100%);
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .must-read h2 {
+            color: var(--accent);
+            font-size: 24px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .must-read-item {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .must-read-item h3 {
+            color: var(--primary);
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .must-read-item h3 .num {
+            background: var(--primary);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .concept-box {
+            background: var(--analogy-bg);
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .concept-box h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .concept-box p {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            font-weight: 500;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        /* 章节卡片 */
+        .chapter-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 25px var(--shadow);
+            overflow: hidden;
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 25px 30px;
+        }
+
+        .chapter-header h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .chapter-header .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .chapter-content {
+            padding: 30px;
+        }
+
+        /* 子章节 */
+        .section-block {
+            margin-bottom: 30px;
+        }
+
+        .section-block h3 {
+            color: var(--primary);
+            font-size: 19px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .section-block p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        /* 类比框 */
+        .analogy-box {
+            background: var(--analogy-bg);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .analogy-box::before {
+            content: "💡 通俗类比";
+            display: block;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .analogy-box p {
+            margin: 0;
+            color: var(--text);
+        }
+
+        /* 例子框 */
+        .example-box {
+            background: var(--example-bg);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        .example-box::before {
+            content: "📖 现实例子";
+            display: block;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .example-box p {
+            margin: 0;
+            color: var(--text);
+        }
+
+        /* 原文引用 */
+        .quote-block {
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .quote-block cite {
+            display: block;
+            text-align: right;
+            font-style: normal;
+            font-size: 14px;
+            color: var(--text-light);
+            margin-top: 10px;
+        }
+
+        /* 要点列表 */
+        .key-points {
+            background: linear-gradient(135deg, #f0f9f0 0%, #f5fbf5 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .key-points h4 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-points li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .key-points li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* 资本主义vs社会主义对比 */
+        .vs-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .vs-section h3 {
+            text-align: center;
+            color: var(--primary);
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+
+        .vs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .vs-box {
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .vs-box.capitalism {
+            background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
+            border: 2px solid #e57373;
+        }
+
+        .vs-box.socialism {
+            background: linear-gradient(135deg, #f0f9f0 0%, #e8f5e8 100%);
+            border: 2px solid #81c784;
+        }
+
+        .vs-box h4 {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .vs-box.capitalism h4 {
+            color: #c62828;
+        }
+
+        .vs-box.socialism h4 {
+            color: #2e7d32;
+        }
+
+        .vs-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .vs-box li {
+            padding: 6px 0;
+            font-size: 15px;
+        }
+
+        /* 结论部分 */
+        .conclusion {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            margin-top: 40px;
+        }
+
+        .conclusion h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .qa-item {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .qa-item h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .qa-item h3 span {
+            background: white;
+            color: var(--primary);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .qa-item p {
+            padding-left: 10px;
+            opacity: 0.95;
+            line-height: 1.7;
+        }
+
+        /* 浮动词典按钮 */
+        .dict-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+
+        .dict-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        /* 词典面板 */
+        .dict-panel {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            width: 350px;
+            max-height: 60vh;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            z-index: 200;
+        }
+
+        .dict-panel.show {
+            display: block;
+        }
+
+        .dict-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dict-header button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .dict-content {
+            max-height: calc(60vh - 60px);
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        details {
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 12px 15px;
+            background: #f5f5f5;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        details[open] summary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .dict-content p {
+            padding: 15px;
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+
+            .cover h1 {
+                font-size: 26px;
+            }
+
+            .container {
+                padding: 70px 15px 15px;
+            }
+
+            .vs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dict-panel {
+                right: 15px;
+                left: 15px;
+                width: auto;
+            }
+
+            .dict-btn {
+                right: 15px;
+                bottom: 20px;
+            }
+
+            .comparison-table {
+                font-size: 14px;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px;
+            }
+        }
+
+        /* 滚动条美化 */
+        .dict-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .dict-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .dict-content::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <h1>📚 马克思恩格斯论历史科学 · 小白解读</h1>
+    </nav>
+
+    <div class="container">
+        <!-- 封面 -->
+        <div class="cover">
+            <h1>《马克思、恩格斯论历史科学》</h1>
+            <p class="subtitle">一部关于如何科学认识和研究人类历史的经典著作</p>
+            <p class="meta">编选：黎澍、蒋大椿 | 1987年出版</p>
+        </div>
+
+        <!-- 编者说明 -->
+        <div class="intro">
+            <h2>📖 编者说明</h2>
+            <p>发展马克思主义理论，应以坚持马克思主义科学的基本原理为前提。坚持和发展，都必须学习。学习马克思主义理论应以马克思和恩格斯的论著为主要根据。</p>
+            <p>本书即是为了便于读者对马克思主义历史理论有正确的理解而编辑的。读者如遇有疑难，希望查阅原著，加以核对，以求准确理解。同时读者还宜注意原作者是在什么时间、什么场合、为着什么事情而讲这些话的，从而正确地加以体味，不能视为教条。</p>
+        </div>
+
+        <!-- 必读部分 -->
+        <div class="must-read">
+            <h2>📋 读书前必读：理解这本书的四个前提</h2>
+
+            <div class="must-read-item">
+                <h3><span class="num">1</span> 马克思和恩格斯是谁？</h3>
+                <div class="concept-box">
+                    <h4>👤 人物简介</h4>
+                    <p><strong>卡尔·马克思</strong>（1818-1883）：德国哲学家、经济学家、社会学家，共产主义的奠基人。他和恩格斯共同创立了马克思主义。</p>
+                    <p><strong>弗里德里希·恩格斯</strong>（1820-1895）：德国思想家、作家，马克思的挚友和合作者。两人相识40年，共同工作，共同创立了改变世界的理论。</p>
+                </div>
+                <div class="analogy-box">
+                    <p>打个比方：如果马恩是两位学霸，那么他们研究出的"唯物史观"就像是一套<strong>解谜工具</strong>，能帮我们看清人类社会这台复杂机器是怎么运转的。</p>
+                </div>
+            </div>
+
+            <div class="must-read-item">
+                <h3><span class="num">2</span> 什么是"历史科学"？</h3>
+                <div class="concept-box">
+                    <h4>🔬 核心概念</h4>
+                    <p>这本书不是讲具体的历史事件（比如"秦始皇统一六国"），而是讲<strong>研究历史的方法论</strong>——怎样科学地理解人类社会发展变化的规律。</p>
+                    <p>简单说：这门"历史科学"告诉我们：<strong>用什么方法去研究历史，才能不被表面现象迷惑，才能发现真正的规律？</strong></p>
+                </div>
+                <div class="example-box">
+                    <p>比如：你看到农民起义就说是"皇帝太坏"，但历史科学会追问：是什么样的经济条件让农民不得不起义？当时的土地制度、税收制度是什么？这样才能找到真正的原因。</p>
+                </div>
+            </div>
+
+            <div class="must-read-item">
+                <h3><span class="num">3</span> 三个核心概念（必须理解！）</h3>
+                
+                <div class="concept-box">
+                    <h4>🏭 生产力（物质力量）</h4>
+                    <p>就是人类改造自然、创造物质财富的能力。包括：劳动工具、劳动者、劳动对象。比如：古代用锄头种地，现代用拖拉机——这就是生产力的进步。</p>
+                </div>
+
+                <div class="concept-box">
+                    <h4>🤝 生产关系（人与人的关系）</h4>
+                    <p>人们在进行生产时形成的关系，比如谁拥有生产工具、谁干活谁分红。包括：所有制关系、分配关系、人在生产中的地位。</p>
+                </div>
+
+                <div class="concept-box">
+                    <h4>🏛️ 经济基础与上层建筑</h4>
+                    <p><strong>经济基础</strong>：生产关系的总和（就像大楼的地基）</p>
+                    <p><strong>上层建筑</strong>：建立在经济基础之上的政治、法律、制度、观念（就像建在地基上的大楼）</p>
+                    <p>马克思的核心观点：<strong>经济基础决定上层建筑</strong>——地基变了，大楼也会变。</p>
+                </div>
+            </div>
+
+            <div class="must-read-item">
+                <h3><span class="num">4</span> 资本主义 vs 社会主义：本质区别</h3>
+                <div class="vs-section" style="box-shadow: none; padding: 0; margin: 0;">
+                    <div class="vs-grid">
+                        <div class="vs-box capitalism">
+                            <h4>🏭 资本主义</h4>
+                            <ul>
+                                <li>生产资料私人占有</li>
+                                <li>追求利润最大化</li>
+                                <li>资本家与工人对立</li>
+                                <li>经济危机周期性爆发</li>
+                                <li>"市场决定一切"</li>
+                            </ul>
+                        </div>
+                        <div class="vs-box socialism">
+                            <h4>🏛️ 社会主义</h4>
+                            <ul>
+                                <li>生产资料公有制</li>
+                                <li>满足人民需要</li>
+                                <li>消除阶级对立</li>
+                                <li>计划调配资源</li>
+                                <li>"按劳分配"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="example-box" style="margin-top: 15px;">
+                    <p>马克思认为：资本主义就像一个生命体，有诞生、成长、老化的过程。当它"老化"到无法容纳生产力发展时，就会被社会主义取代——这是历史规律，不是谁的主观愿望。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 正文部分 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <h2>第一部分：唯物史观与历史科学</h2>
+                <p class="subtitle">核心问题：什么是正确的历史观？怎样研究历史才是科学的？</p>
+            </div>
+            <div class="chapter-content">
+                <div class="section-block">
+                    <h3>一、唯物主义历史观的基本原理</h3>
+                    
+                    <p>马克思和恩格斯发现：过去的历史学家总是从<strong>思想、观念、英雄人物</strong>出发去解释历史——认为是"伟大人物的思想改变了世界"。</p>
+                    
+                    <p>但马恩认为这是本末倒置！他们提出：</p>
+
+                    <div class="concept-box">
+                        <h4>💡 核心公式</h4>
+                        <p><strong>不是人们的意识决定人们的存在，而是人们的社会存在决定人们的意识。</strong></p>
+                    </div>
+
+                    <div class="analogy-box">
+                        <p>想象一下：为什么古人不玩手机？因为没有手机这种"社会存在"。为什么现代人都用手机？因为生产力发展了，出现了智能手机。<strong>不是我们"想"怎么生活，而是我们"能"怎么生活决定了我们的思想。</strong></p>
+                    </div>
+
+                    <p>马克思在《政治经济学批判》序言中提出了著名的<strong>"唯物史观基本公式"</strong>：</p>
+
+                    <div class="quote-block">
+                        <p>物质生活的生产方式制约着整个社会生活、政治生活和精神生活的过程。不是人们的意识决定人们的存在，相反，是人们的社会存在决定人们的意识。</p>
+                        <cite>—— 马克思《〈政治经济学批判〉序言》(1859)</cite>
+                    </div>
+
+                    <div class="key-points">
+                        <h4>📌 唯物史观的核心要点</h4>
+                        <ul>
+                            <li><strong>生产力</strong>发展到一定阶段 → 与现存<strong>生产关系</strong>发生矛盾 → 矛盾激化引发<strong>社会革命</strong></li>
+                            <li>经济基础变了 → 上层建筑（法律、政治、意识形态）也会<strong>或快或慢</strong>地变革</li>
+                            <li>社会发展有<strong>客观规律</strong>，不是英雄人物随心所欲创造的</li>
+                        </ul>
+                    </div>
+
+                    <div class="example-box">
+                        <p><strong>历史例子</strong>：为什么欧洲能产生资本主义？</p>
+                        <p>马恩分析：因为生产力发展了（手工工场、远洋贸易）→ 产生了新兴资产阶级（有钱但没地位）→ 资产阶级需要政治权力 → 爆发革命推翻封建制度。这就是"经济基础决定上层建筑"！</p>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>二、唯物史观让历史成为科学</h3>
+                    
+                    <p>恩格斯指出：<strong>以前的历史理论只是描述历史，而唯物史观能解释历史为什么这样发展。</strong></p>
+
+                    <div class="comparison-table">
+                        <tr>
+                            <th>传统历史观</th>
+                            <th>唯物史观</th>
+                        </tr>
+                        <tr>
+                            <td>从思想、观念出发</td>
+                            <td>从物质生产、经济基础出发</td>
+                        </tr>
+                        <tr>
+                            <td>英雄史观（伟人创造历史）</td>
+                            <td>群众史观（人民创造历史）</td>
+                        </tr>
+                        <tr>
+                            <td>历史是偶然事件的堆积</td>
+                            <td>历史有内在规律</td>
+                        </tr>
+                        <tr>
+                            <td>只能描述，不能预测</td>
+                            <td>能揭示发展趋势</td>
+                        </tr>
+                    </div>
+
+                    <div class="analogy-box">
+                        <p>传统历史观就像：看到病人发烧就说是"着了凉"；唯物史观则是：找到发烧背后的病毒、细菌、感染机制。科学的历史观不是就事论事，而是<strong>找规律、找原因、找规律背后的原因</strong>！</p>
+                    </div>
+
+                    <div class="quote-block">
+                        <p>这种历史观和唯心主义历史观不同，它不是在每个时代中寻找某种范畴，而是始终站在现实历史的基础上，不是从观念出发来解释实践，而是从物质实践出发来解释观念的东西。</p>
+                        <cite>—— 马克思、恩格斯《费尔巴哈》(1845-1846)</cite>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>三、历史研究与现实的关系</h3>
+                    
+                    <p>马恩特别强调：<strong>研究历史不是为了书斋里的学问，而是为了指导现实斗争！</strong></p>
+
+                    <div class="key-points">
+                        <h4>📌 为什么历史研究很重要？</h4>
+                        <ul>
+                            <li>不懂历史规律 → 就不能理解现实问题</li>
+                            <li>不理解现实 → 就没有成功的政策</li>
+                            <li>历史给现实斗争提供<strong>理论武器</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="example-box">
+                        <p><strong>恩格斯说</strong>：1848年革命失败后，很多人垂头丧气。但马恩通过研究历史，发现每次大危机后都会有新的革命高潮——果然1852年又爆发了新的运动。</p>
+                        <p><strong>结论</strong>：只有懂得历史规律，才能在斗争中保持信心和方向！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第二部分 -->
+        <div class="chapter-card">
+            <div class="chapter-header" style="background: linear-gradient(135deg, #4A7A6B 0%, #5A9A8B 100%);">
+                <h2>第二部分：历史研究中的辩证法</h2>
+                <p class="subtitle">核心问题：历史是怎样发展的？有什么规律？</p>
+            </div>
+            <div class="chapter-content">
+                <div class="section-block">
+                    <h3>一、人类社会发展是服从规律的自然历史过程</h3>
+                    
+                    <p>马恩认为：人类社会和自然界一样，<strong>有客观规律可循</strong>，不是杂乱无章的。</p>
+
+                    <div class="concept-box">
+                        <h4>🌱 社会形态的演进</h4>
+                        <p>原始社会 → 奴隶社会 → 封建社会 → 资本主义社会 → 共产主义社会</p>
+                        <p>这五个阶段不是马克思凭空想象，而是从人类历史发展中<strong>归纳总结</strong>出来的规律。</p>
+                    </div>
+
+                    <div class="analogy-box">
+                        <p>就像一个人从婴儿到童年、少年、青年、中年、老年的发展，社会也有它的"人生阶段"。每个阶段都有特定的生产方式和社会结构。</p>
+                    </div>
+
+                    <div class="quote-block">
+                        <p>资本主义社会是最后一个对抗形式……在资产阶级社会的胎胞里发展的生产力，同时又创造着解决这种对抗的物质条件。</p>
+                        <cite>—— 恩格斯《卡尔·马克思〈政治经济学批判〉》(1859)</cite>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>二、人们是自己历史的创造者</h3>
+                    
+                    <p>这里要特别注意：<strong>承认客观规律不等于"命定论"！</strong></p>
+
+                    <div class="concept-box">
+                        <h4>⚖️ 辩证关系</h4>
+                        <p><strong>一方面</strong>：历史发展有客观规律，不以人的意志为转移</p>
+                        <p><strong>另一方面</strong>：人是历史的主体，不是被动地被历史摆布</p>
+                        <p><strong>关键点</strong>：人创造环境，同样环境也创造人</p>
+                    </div>
+
+                    <div class="example-box">
+                        <p><strong>具体例子</strong>：</p>
+                        <p>• 改革开放前，商品匮乏的环境让人们习惯了"凭票供应"的思维</p>
+                        <p>• 改革开放后，市场经济发展让人们有了竞争意识和创业精神</p>
+                        <p>→ <strong>不是人天生就怎样，而是环境塑造人；同样，人也能通过实践改变环境</strong></p>
+                    </div>
+
+                    <div class="quote-block">
+                        <p>历史并不是作为"产生于精神的精神"消融在"自我意识"中，历史的每一阶段都遇到有一定的物质结果、一定数量的生产力总和……人创造环境，同样环境也创造人。</p>
+                        <cite>—— 马克思、恩格斯《费尔巴哈》(1845-1846)</cite>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>三、历史发展是充满矛盾的运动</h3>
+                    
+                    <p>恩格斯深刻指出：<strong>矛盾是历史发展的动力！</strong></p>
+
+                    <div class="key-points">
+                        <h4>🔄 矛盾的普遍性</h4>
+                        <ul>
+                            <li>社会内部永远存在矛盾</li>
+                            <li>矛盾推动社会发展</li>
+                            <li>旧矛盾解决 → 新矛盾产生 → 螺旋上升</li>
+                        </ul>
+                    </div>
+
+                    <div class="analogy-box">
+                        <p>想象骑自行车：如果左右两边完全平衡，车子反而会倒。正是"不平衡"让自行车前进。<strong>社会的矛盾就像这种"不平衡"，正是推动历史前进的动力！</strong></p>
+                    </div>
+
+                    <div class="example-box">
+                        <p><strong>资本主义社会的矛盾</strong>：</p>
+                        <p>• 生产社会化（很多人一起生产）vs 生产资料私有（工厂归老板）</p>
+                        <p>• 生产力越来越发达 vs 工人越来越相对贫困</p>
+                        <p>• 不断扩大生产 vs 市场相对缩小（经济危机）</p>
+                        <p>→ 这些矛盾无法在资本主义框架内解决 → 必须有新制度来替代</p>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>四、历史运动中的量变与质变</h3>
+                    
+                    <p>恩格斯用辩证法分析：<strong>历史发展不是直线上升的，而是量变积累→质变飞跃的螺旋式上升</strong></p>
+
+                    <div class="concept-box">
+                        <h4>📈 量变与质变</h4>
+                        <p><strong>量变</strong>：逐渐的、缓慢的变化，不改变事物的根本性质</p>
+                        <p><strong>质变</strong>：突然的、根本性的变化，是新旧事物的分界线</p>
+                    </div>
+
+                    <div class="analogy-box">
+                        <p>水加热到99℃还是水（量变），但到100℃就变成水蒸气了（质变）！社会变革也是这样——平时的改良是量变，革命是质变。</p>
+                    </div>
+
+                    <div class="example-box">
+                        <p><strong>历史例子</strong>：资本主义萌芽</p>
+                        <p>• 13-14世纪：少量商品交换（量变）</p>
+                        <p>• 16世纪：手工工场出现（量变加剧）</p>
+                        <p>• 17-18世纪：资产阶级革命 → 质变！封建社会→资本主义社会</p>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>五、历史发展的螺旋形式</h3>
+                    
+                    <p>恩格斯提出了著名的"历史发展螺旋"理论：<strong>历史发展看似重复，但每一次都达到更高水平</strong></p>
+
+                    <div class="analogy-box">
+                        <p>想象爬螺旋楼梯：你每转一圈似乎都回到原来的"高度"，但实际上你已经上升了一层。<strong>历史也是这样：革命失败→再革命→再失败→最终胜利，看似原地打转，实则步步高升！</strong></p>
+                    </div>
+
+                    <div class="quote-block">
+                        <p>历史的发展就象是螺旋上升的运动……每一循环都进到更高一级的程度。</p>
+                        <cite>—— 恩格斯</cite>
+                    </div>
+
+                    <div class="example-box">
+                        <p><strong>1848年革命</strong>：欧洲革命浪潮，但最终失败</p>
+                        <p><strong>1871年巴黎公社</strong>：无产阶级第一次建立自己的政权，虽然失败但意义重大</p>
+                        <p><strong>1917年十月革命</strong>：第一次成功建立社会主义国家！</p>
+                        <p>→ 螺旋上升的典型案例！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第三部分 -->
+        <div class="chapter-card">
+            <div class="chapter-header" style="background: linear-gradient(135deg, #7B5A9A 0%, #9A7ABA 100%);">
+                <h2>第三部分：历史研究方法论</h2>
+                <p class="subtitle">核心问题：具体怎样研究历史才是科学的？</p>
+            </div>
+            <div class="chapter-content">
+                <div class="section-block">
+                    <h3>一、必须充分准确地占有资料</h3>
+                    
+                    <p>马克思说：<strong>研究必须从事实出发，而不是从概念出发！</strong></p>
+
+                    <div class="key-points">
+                        <h4>📚 资料收集原则</h4>
+                        <ul>
+                            <li>占有第一手资料（原始文献、档案）</li>
+                            <li>广泛收集，互相印证</li>
+                            <li>去伪存真，辨别真伪</li>
+                            <li>从资料中归纳规律，不是用规律去套资料</li>
+                        </ul>
+                    </div>
+
+                    <div class="example-box">
+                        <p><strong>马克思研究资本主义</strong>：他阅读了几十年、各国的经济学著作，收集了工厂报告、政府统计、议会记录等各种资料，花了40年才写出《资本论》。</p>
+                    </div>
+
+                    <div class="quote-block">
+                        <p>必须重新研究全部历史，必须详细研究各种社会形态存在的条件，然后设法从这些条件中找出相应的政治、私法、美学、哲学、宗教等等的观点。</p>
+                        <cite>—— 恩格斯《致康·施米特》(1890)</cite>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>二、立足整体，系统研究</h3>
+                    
+                    <p>恩格斯强调：<strong>要看到局部，更要看到整体</strong></p>
+
+                    <div class="concept-box">
+                        <h4>🔍 系统思维</h4>
+                        <p>社会是一个有机整体，各部分相互联系、相互影响。不能孤立地研究一个方面，要看到它和其他方面的关系。</p>
+                    </div>
+
+                    <div class="analogy-box">
+                        <p>比如研究"房价"：只看到开发商黑心（道德批判）不够，要系统看：土地政策、货币政策、人口流动、税收制度、国际资本……<strong>头痛医头、脚痛医脚解决不了问题</strong>。</p>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>三、从社会诸因素的相互作用中分析</h3>
+                    
+                    <p>马恩不是"经济决定论者"！他们认为：<strong>经济是根本，但不是唯一因素</strong></p>
+
+                    <div class="concept-box">
+                        <h4>⚖️ 多元互动</h4>
+                        <p><strong>经济基础</strong>（根本）</p>
+                        <p>　↑ ↓</p>
+                        <p><strong>政治、法律</strong>（对经济有反作用）</p>
+                        <p>　↑ ↓</p>
+                        <p><strong>意识形态</strong>（哲学、宗教、艺术）</p>
+                    </div>
+
+                    <div class="quote-block">
+                        <p>经济状况是基础，但是对历史斗争的进程发生影响并且在许多情况下主要是决定着这一斗争的形式的，还有上层建筑的各种因素……这里表现出这一切因素间的交互作用。</p>
+                        <cite>—— 恩格斯《致约·布洛赫》(1890)</cite>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>四、用历史的观点考察问题</h3>
+                    
+                    <p><strong>核心方法论：把问题放回它产生的历史环境中去理解！</strong></p>
+
+                    <div class="example-box">
+                        <p><strong>不要用今天的标准苛求古人</strong>：</p>
+                        <p>• 批评古代皇帝"专制"——但在当时生产力条件下，统一国家是历史进步</p>
+                        <p>• 批评奴隶制"残忍"——但恩格斯说，相比于把战俘杀掉，奴隶制是一种历史进步</p>
+                        <p>→ <strong>要从历史条件出发理解历史现象，而不是站在今天道德制高点批判一切</strong></p>
+                    </div>
+
+                    <div class="quote-block">
+                        <p>判断历史的功绩，不是根据历史活动家没有提供现代所要求的东西，而是根据他们比他们的前辈提供了新的东西。</p>
+                        <cite>—— 列宁《评经济浪漫主义》(1897)</cite>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>五、从现实出发，逆向考察历史</h3>
+                    
+                    <p>马恩提出：<strong>从现实的矛盾出发，去追溯历史根源</strong></p>
+
+                    <div class="analogy-box">
+                        <p>就像医生看病：先看到症状（现实问题）→ 再追溯病因（历史根源）。<strong>研究历史不是漫无目的地翻旧账，而是为了解决现实问题！</strong></p>
+                    </div>
+
+                    <div class="example-box">
+                        <p><strong>马克思研究资本主义</strong>：先看到资本主义的矛盾（贫富分化、经济危机）→ 追溯这些矛盾是怎么来的 → 发现根源在于资本主义制度本身 → 得出必须变革制度的结论。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第四部分 -->
+        <div class="chapter-card">
+            <div class="chapter-header" style="background: linear-gradient(135deg, #9A6A5A 0%, #BA8A7A 100%);">
+                <h2>第四部分：科学研究的态度与道路</h2>
+                <p class="subtitle">核心问题：做历史研究应该有什么态度？</p>
+            </div>
+            <div class="chapter-content">
+                <div class="section-block">
+                    <h3>一、科学愈是毫无顾忌和大公无私，就愈加符合工人阶级的利益</h3>
+                    
+                    <p>恩格斯指出：<strong>唯物史观的科学性与革命性是内在统一的</strong></p>
+
+                    <div class="concept-box">
+                        <h4>⚖️ 科学性与革命性的统一</h4>
+                        <p><strong>科学性</strong>：实事求是，不搞虚假的辩护</p>
+                        <p><strong>革命性</strong>：揭示真相，为被压迫者服务</p>
+                        <p>→ <strong>真相本身就有革命力量！</strong></p>
+                    </div>
+
+                    <div class="quote-block">
+                        <p>科学愈是毫无顾忌和大公无私，它就愈加符合于工人的利益和愿望。</p>
+                        <cite>—— 恩格斯《路德维希·费尔巴哈和德国古典哲学的终结》(1886)</cite>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>二、反对教条主义，活学活用理论</h3>
+                    
+                    <p>恩格斯警告：<strong>把马克思主义当教条是最大的危险！</strong></p>
+
+                    <div class="key-points">
+                        <h4>⚠️ 教条主义的危害</h4>
+                        <ul>
+                            <li>把理论变成"套语"、"标签"</li>
+                            <li>不顾具体历史条件生搬硬套</li>
+                            <li>阉割了马克思主义的灵魂——辩证法</li>
+                        </ul>
+                    </div>
+
+                    <div class="analogy-box">
+                        <p>马克思主义是"指南针"，不是"地图"。指南针告诉你方向，但路怎么走要根据具体情况。<strong>拿着地图（教条）走路的人，永远到不了地图上没有的地方！</strong></p>
+                    </div>
+
+                    <div class="quote-block">
+                        <p>我们的理论是发展的理论，而不是必须背得烂熟并机械地加以重复的教条。</p>
+                        <cite>—— 恩格斯《致弗·凯利—威士涅威茨基夫人》(1887)</cite>
+                    </div>
+
+                    <div class="example-box">
+                        <p><strong>列宁的发展</strong>：</p>
+                        <p>• 马克思恩格斯：社会主义革命需要多国同时胜利</p>
+                        <p>• 列宁：根据帝国主义时代的新情况，提出社会主义可以在一国首先胜利</p>
+                        <p>→ <strong>这不是"修正"马克思主义，而是根据新情况发展马克思主义！</strong></p>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>三、要有严格认真的科学态度</h3>
+                    
+                    <div class="key-points">
+                        <h4>📋 科学家的品质</h4>
+                        <ul>
+                            <li>忠于科学，敢于承认真理</li>
+                            <li>坚持真理，不怕得罪人</li>
+                            <li>用辩证态度对待研究成果</li>
+                            <li>严格认真，有责任心</li>
+                            <li>刻苦学习，系统钻研</li>
+                        </ul>
+                    </div>
+
+                    <div class="quote-block">
+                        <p>在那里我对我的所有原稿都是逐行逐字地推敲、删减和润色的……我这样做与其说是出于爱护原稿……不如说是为了对自己没有很好地表达原意而感到恼怒。</p>
+                        <cite>—— 恩格斯谈自己的写作态度</cite>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>四、不要用情绪代替科学分析</h3>
+                    
+                    <p>恩格斯警告：<strong>义愤填膺不能代替科学论证！</strong></p>
+
+                    <div class="concept-box">
+                        <h4>🎭 情感 vs 理性</h4>
+                        <p>愤怒、义愤可以激发斗争精神，但在科学分析中必须<strong>用事实和逻辑说话</strong></p>
+                    </div>
+
+                    <div class="quote-block">
+                        <p>愤怒出诗人①，愤怒在描写这些弊病或者在抨击那些替统治阶级否认或美化这些弊病的和谐派的时候，是完全恰当的，可是愤怒一用到上面这种场合，它所能证明的东西是多么的少。</p>
+                        <cite>—— 恩格斯《反杜林论》(1876-1878)</cite>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 结论部分 -->
+        <div class="conclusion">
+            <h2>🎯 读完这本书，你能回答这3个问题了吗？</h2>
+
+            <div class="qa-item">
+                <h3><span>Q1</span> 为什么说"不是意识决定存在，而是存在决定意识"？</h3>
+                <p><strong>参考答案</strong>：因为人们吃什么、穿什么、用什么工具生产，决定了他们怎么思考、有什么观念。比如古代人相信"君权神授"，因为那时候生产力落后，人们依赖"天子"来组织农业生产；但当工业革命后，工商业发展起来了，资产阶级需要平等竞争环境，就开始宣传"人人平等"了。<strong>是生产力的变化（存在）带来了观念的变化，而不是观念创造了社会。</strong></p>
+            </div>
+
+            <div class="qa-item">
+                <h3><span>Q2</span> 历史发展有没有规律？人能不能"创造"历史？</h3>
+                <p><strong>参考答案</strong>：历史有客观规律（生产力决定生产关系），但人不是被动等待的。<strong>人创造环境，环境也创造人</strong>。人们可以在认识规律的基础上，发挥主观能动性，推动历史前进。就像游泳：水流有方向（规律），但人会游泳可以顺流更快，也可以逆流挑战。<strong>英雄人物之所以伟大，是因为他们顺应了历史潮流，带领人民创造了新的历史条件。</strong></p>
+            </div>
+
+            <div class="qa-item">
+                <h3><span>Q3</span> 为什么不能把马克思主义当教条？</h3>
+                <p><strong>参考答案</strong>：因为马克思主义是"发展的理论"，不是"僵化的公式"。<strong>理论是指南针，具体路怎么走要看实际情况</strong>。恩格斯说，如果把理论当教条"剪裁历史事实"，就会变成"自己的对立物"。马克思自己也是这样做的：他早期说社会主义革命要多国同时胜利，但列宁根据帝国主义时代的新情况，发展出"一国胜利论"。<strong>真正的马克思主义者是根据实际情况运用和发展理论，而不是背诵条文。</strong></p>
+            </div>
+        </div>
+
+        <!-- 附加说明 -->
+        <div style="margin-top: 30px; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 4px 20px var(--shadow);">
+            <h3 style="color: var(--primary); margin-bottom: 15px;">📚 参考说明</h3>
+            <p style="font-size: 15px; color: var(--text-light);">本解读基于《马克思、恩格斯论历史科学》（黎澍、蒋大椿主编，1987年出版）一书的内容编写。所有引文均来自原书，解读仅供学习参考。建议读者阅读原著以获得更准确、完整的理解。</p>
+            <p style="font-size: 15px; color: var(--text-light); margin-top: 10px;"><strong>原书引用来源</strong>：《马克思恩格斯选集》第1-4卷、《马克思恩格斯全集》第1、7、19、21、27、35、36、37、38卷等。</p>
+        </div>
+    </div>
+
+    <!-- 浮动词典按钮 -->
+    <button class="dict-btn" onclick="toggleDictionary()">📖 词典</button>
+
+    <!-- 词典面板 -->
+    <div class="dict-panel" id="dictPanel">
+        <div class="dict-header">
+            <span>📚 核心概念词典</span>
+            <button onclick="toggleDictionary()">×</button>
+        </div>
+        <div class="dict-content">
+            <details>
+                <summary>生产力</summary>
+                <p>人类改造自然、创造物质财富的能力。包括劳动者、劳动工具、劳动对象三个要素。生产力的发展是社会进步的根本动力。</p>
+            </details>
+            <details>
+                <summary>生产关系</summary>
+                <p>人们在生产过程中形成的社会关系，包括生产资料所有制形式、人们在生产中的地位和关系、产品分配形式。</p>
+            </details>
+            <details>
+                <summary>经济基础</summary>
+                <p>一定社会生产关系的总和，即该社会的"地基"。包括生产资料所有制、人在生产中的地位、产品分配方式。</p>
+            </details>
+            <details>
+                <summary>上层建筑</summary>
+                <p>建立在经济基础之上的政治法律制度、设施（政府、军队、法律等）和意识形态（哲学、宗教、艺术等）。</p>
+            </details>
+            <details>
+                <summary>社会形态</summary>
+                <p>一定社会在经济基础和上层建筑统一体。原始社会、奴隶社会、封建社会、资本主义社会、共产主义社会是不同的社会形态。</p>
+            </details>
+            <details>
+                <summary>阶级斗争</summary>
+                <p>对立阶级之间的斗争。是阶级社会发展的直接动力。奴隶主vs奴隶、地主vs农民、资本家vs工人之间的矛盾运动推动社会发展。</p>
+            </details>
+            <details>
+                <summary>唯物史观</summary>
+                <p>马克思恩格斯创立的历史观，认为社会发展的根本原因是物质资料的生产方式，社会存在决定社会意识。</p>
+            </details>
+            <details>
+                <summary>辩证法</summary>
+                <p>关于普遍联系和永恒发展的科学。认为事物都是相互联系、不断发展的，矛盾是发展的动力量变质变是发展的形式。</p>
+            </details>
+            <details>
+                <summary>社会革命</summary>
+                <p>社会形态的根本变革。是旧的生产关系、上层建筑被新的生产关系、上层建筑取代的过程。是历史发展的飞跃。</p>
+            </details>
+            <details>
+                <summary>历史唯物主义</summary>
+                <p>唯物史观的正式名称。马克思把辩证唯物主义推广到社会历史领域，形成的认识社会、研究历史的科学方法。</p>
+            </details>
+        </div>
+    </div>
+
+    <script>
+        function toggleDictionary() {
+            const panel = document.getElementById('dictPanel');
+            panel.classList.toggle('show');
+        }
+
+        // 点击外部关闭词典
+        document.addEventListener('click', function(event) {
+            const panel = document.getElementById('dictPanel');
+            const btn = document.querySelector('.dict-btn');
+            if (!panel.contains(event.target) && !btn.contains(event.target)) {
+                panel.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
