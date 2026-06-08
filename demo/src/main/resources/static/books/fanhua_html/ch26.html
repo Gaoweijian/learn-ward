@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第二十六章 — 繁花导读</title>
+<style>
+:root {
+  --bg: #faf8f3;
+  --bg2: #f0ebe0;
+  --card: #fff;
+  --text: #2c2415;
+  --text2: #5a4a35;
+  --accent: #8b2c2c;
+  --accent2: #c4793a;
+  --gold: #b8902a;
+  --green: #3a6b3a;
+  --border: #d4c5a9;
+  --shadow: rgba(139,44,44,0.12);
+  --font-serif: 'Georgia','SimSun','宋体',serif;
+  --font-sans: 'PingFang SC','Microsoft YaHei',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);line-height:1.85;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent2);text-decoration:underline}
+
+/* ===== HEADER ===== */
+.site-header {
+  background: linear-gradient(135deg, #f5f0e1 0%, #e8dcc5 60%, #dcc8a8 100%);
+  color: #4a3b2c;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+}
+.header-inner{max-width:1100px;margin:0 auto;padding:10px 20px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.header-title{font-family:var(--font-serif);font-size:22px;font-weight:bold;
+  letter-spacing:3px;color:#f5e6d3;text-shadow:1px 1px 3px rgba(0,0,0,0.5)}
+.header-sub{font-size:12px;color:#c9a882;letter-spacing:1px}
+.header-nav{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.header-nav a{color:#f5e6d3;font-size:13px;padding:4px 10px;
+  border:1px solid rgba(245,230,211,0.3);border-radius:3px;transition:all 0.2s}
+.header-nav a:hover{background:rgba(255,255,255,0.15);text-decoration:none}
+
+/* ===== LAYOUT ===== */
+.main-wrap{max-width:1100px;margin:0 auto;padding:24px 16px;display:grid;
+  grid-template-columns:240px 1fr;gap:24px}
+@media(max-width:768px){.main-wrap{grid-template-columns:1fr}}
+
+/* ===== SIDEBAR ===== */
+.sidebar{position:sticky;top:70px;height:calc(100vh - 80px);overflow-y:auto;
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:16px 0;box-shadow:0 2px 8px var(--shadow)}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.sidebar-title{padding:0 16px 10px;font-size:13px;font-weight:bold;
+  color:var(--accent);letter-spacing:2px;border-bottom:1px solid var(--border)}
+.sidebar-section{padding:8px 0}
+.sidebar-era{padding:4px 16px;font-size:11px;font-weight:bold;color:var(--gold);
+  letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+.sidebar a{display:block;padding:5px 16px;font-size:13px;color:var(--text2);
+  border-left:3px solid transparent;transition:all 0.2s;line-height:1.4}
+.sidebar a:hover,.sidebar a.active{color:var(--accent);
+  border-left-color:var(--accent);background:#fdf0e8;text-decoration:none}
+
+/* ===== CONTENT ===== */
+.content{min-width:0}
+.page-hero{background:linear-gradient(135deg,#2c1810,#5a2020);
+  color:#f5e6d3;border-radius:10px;padding:28px 32px;margin-bottom:24px;
+  position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;right:-20px;top:-20px;
+  width:150px;height:150px;background:rgba(255,255,255,0.04);
+  border-radius:50%}
+.page-hero-num{font-size:48px;font-family:var(--font-serif);opacity:0.25;
+  position:absolute;right:32px;bottom:10px;line-height:1}
+.hero-badge{display:inline-block;padding:3px 10px;border-radius:12px;
+  font-size:12px;font-weight:bold;margin-bottom:8px;letter-spacing:1px}
+.badge-60{background:#4a5568;color:#e2e8f0}
+.badge-70{background:#744210;color:#fefcbf}
+.badge-80{background:#2d6a2d;color:#c6f6d5}
+.badge-90{background:#c05621;color:#feebcb}
+.badge-both{background:linear-gradient(90deg,#4a5568,#c05621);color:#fff}
+.hero-title{font-family:var(--font-serif);font-size:28px;font-weight:bold;
+  letter-spacing:2px;margin-bottom:6px}
+.hero-sub{font-size:14px;color:#c9a882;line-height:1.6}
+
+/* ===== CHAPTER OVERVIEW ===== */
+.overview-box{background:var(--card);border:1px solid var(--border);
+  border-radius:8px;padding:20px 24px;margin-bottom:20px;
+  border-left:4px solid var(--accent)}
+.overview-box h3{font-size:14px;font-weight:bold;color:var(--accent);
+  margin-bottom:10px;letter-spacing:1px}
+.overview-box p{color:var(--text2);font-size:14px;line-height:1.8}
+
+/* ===== TABS ===== */
+.tabs{display:flex;gap:0;margin-bottom:0;border-bottom:2px solid var(--border);flex-wrap:wrap}
+.tab-btn{padding:9px 18px;background:transparent;border:none;cursor:pointer;
+  font-size:13px;color:var(--text2);border-bottom:2px solid transparent;
+  margin-bottom:-2px;font-family:var(--font-sans);transition:all 0.2s;font-weight:500}
+.tab-btn:hover{color:var(--accent)}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:bold}
+.tab-panel{display:none;padding:20px 0}
+.tab-panel.active{display:block}
+
+/* ===== SCENE CARD ===== */
+.scene-card{background:var(--card);border:1px solid var(--border);
+  border-radius:8px;margin-bottom:16px;overflow:hidden;
+  box-shadow:0 1px 4px var(--shadow)}
+.scene-header{padding:12px 18px;background:var(--bg2);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px}
+.scene-num{width:26px;height:26px;background:var(--accent);color:#fff;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:bold;flex-shrink:0}
+.scene-title{font-weight:bold;font-size:15px;color:var(--text)}
+.scene-body{padding:16px 18px}
+
+/* ===== PART BOXES ===== */
+.part-box{margin-bottom:14px;border-radius:6px;overflow:hidden}
+.part-label{font-size:11px;font-weight:bold;letter-spacing:2px;
+  padding:5px 12px;display:flex;align-items:center;gap:6px}
+.part-content{padding:12px 14px;font-size:14px;line-height:1.85}
+
+.part-plot .part-label{background:#f0f4ff;color:#2d5a9e;border-left:3px solid #2d5a9e}
+.part-plot .part-content{background:#f8faff;border-left:3px solid #cfd8f0}
+
+.part-original .part-label{background:#fef9f0;color:#7a4a10;border-left:3px solid #c4793a}
+.part-original .part-content{background:#fffaf4;border-left:3px solid #e8d4b0;
+  font-family:var(--font-serif);font-size:13.5px;color:#5a3a15}
+
+.part-dialog .part-label{background:#f0fff4;color:#276749;border-left:3px solid #38a169}
+.part-dialog .part-content{background:#f8fffa;border-left:3px solid #c6f6d5}
+.dialect-row{display:flex;gap:8px;padding:4px 0;border-bottom:1px dashed #d4edda;font-size:13.5px}
+.dialect-row:last-child{border-bottom:none}
+.dialect-sh{color:#5a3a15;font-family:var(--font-serif);flex:1;min-width:0}
+.dialect-std{color:#276749;flex:1;min-width:0}
+.dialect-arrow{color:#aaa;font-size:12px;padding-top:2px}
+
+.part-tell .part-label{background:#fdf5ff;color:#6b21a8;border-left:3px solid #9333ea}
+.part-tell .part-content{background:#fdf8ff;border-left:3px solid #e9d5ff}
+
+.part-analysis .part-label{background:#fff7ed;color:#92400e;border-left:3px solid #d97706}
+.part-analysis .part-content{background:#fffbf5;border-left:3px solid #fde68a}
+
+.part-buxiang .part-label{background:#fef2f2;color:#991b1b;border-left:3px solid #dc2626}
+.part-buxiang .part-content{background:#fff8f8;border-left:3px solid #fecaca;
+  font-style:italic}
+
+.part-ask .part-label{background:#f0fdf4;color:#166534;border-left:3px solid #16a34a}
+.part-ask .part-content{background:#f8fff9;border-left:3px solid #bbf7d0}
+.qa-item{margin-bottom:10px;font-size:13.5px}
+.qa-q{color:#166534;font-weight:bold;margin-bottom:3px}
+.qa-a{color:#374151;padding-left:12px;border-left:2px solid #bbf7d0;line-height:1.7}
+
+/* ===== CHARACTERS TABLE ===== */
+.chars-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:12px}
+.chars-table th{background:var(--accent);color:#fff;padding:8px 12px;text-align:left;font-weight:bold}
+.chars-table td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.chars-table tr:hover td{background:#fdf0e8}
+.char-tag{display:inline-block;padding:2px 7px;border-radius:10px;font-size:11px;
+  margin:2px;font-weight:bold}
+.tag-main{background:#fee2e2;color:#991b1b}
+.tag-side{background:#dbeafe;color:#1e40af}
+.tag-era60{background:#f3f4f6;color:#374151}
+.tag-era90{background:#fef3c7;color:#92400e}
+
+/* ===== TIMELINE ===== */
+.timeline{position:relative;padding-left:24px;margin-top:12px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;
+  width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:16px}
+.tl-dot{position:absolute;left:-20px;top:4px;width:12px;height:12px;
+  border-radius:50%;border:2px solid var(--accent);background:var(--card)}
+.tl-year{font-size:11px;font-weight:bold;color:var(--accent);margin-bottom:2px}
+.tl-text{font-size:13.5px;color:var(--text2);line-height:1.7}
+
+/* ===== INDEX PAGE ===== */
+.index-hero{background:linear-gradient(135deg,#1a0a05 0%,#3d1515 50%,#6b2d0a 100%);
+  color:#f5e6d3;padding:48px 40px;text-align:center;border-radius:12px;
+  margin-bottom:32px;position:relative;overflow:hidden}
+.index-hero::after{content:'繁花';position:absolute;font-size:200px;
+  font-family:var(--font-serif);opacity:0.04;right:-20px;bottom:-40px;line-height:1}
+.index-hero h1{font-family:var(--font-serif);font-size:42px;letter-spacing:8px;
+  margin-bottom:10px;text-shadow:2px 2px 8px rgba(0,0,0,0.5)}
+.index-hero p{font-size:16px;color:#c9a882;letter-spacing:2px;margin-bottom:6px}
+.index-hero .author{font-size:18px;color:#e8c98a;letter-spacing:4px;margin-top:12px;
+  font-family:var(--font-serif)}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+@media(max-width:600px){.intro-grid{grid-template-columns:1fr}}
+.intro-card{background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:18px 20px;border-top:3px solid var(--accent)}
+.intro-card h3{color:var(--accent);font-size:15px;font-weight:bold;margin-bottom:8px;
+  letter-spacing:1px}
+.intro-card p{font-size:13.5px;color:var(--text2);line-height:1.75}
+.chapter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.ch-card{background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:14px 16px;transition:all 0.25s;cursor:pointer;
+  border-left:4px solid transparent}
+.ch-card:hover{transform:translateY(-2px);box-shadow:0 4px 14px var(--shadow);
+  border-left-color:var(--accent);text-decoration:none}
+.ch-card-num{font-size:11px;font-weight:bold;color:var(--gold);margin-bottom:4px;
+  letter-spacing:1px}
+.ch-card-title{font-size:14px;font-weight:bold;color:var(--text);margin-bottom:6px}
+.ch-card-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.era-badge{display:inline-block;font-size:10px;padding:2px 6px;border-radius:8px;
+  font-weight:bold;margin-top:6px}
+
+/* ===== PREV/NEXT NAV ===== */
+.chapter-nav{display:flex;gap:12px;margin-top:28px;padding-top:20px;
+  border-top:1px solid var(--border)}
+.nav-btn{flex:1;padding:12px 16px;background:var(--card);border:1px solid var(--border);
+  border-radius:8px;text-align:center;transition:all 0.2s;font-size:13px}
+.nav-btn:hover{background:var(--accent);color:#fff;text-decoration:none;
+  border-color:var(--accent)}
+.nav-btn small{display:block;font-size:11px;color:var(--text2);margin-bottom:3px}
+.nav-btn:hover small{color:rgba(255,255,255,0.7)}
+.nav-label{font-weight:bold}
+
+/* ===== BACK TO TOP ===== */
+.back-top{position:fixed;right:20px;bottom:24px;background:var(--accent);
+  color:#fff;border:none;width:40px;height:40px;border-radius:50%;
+  font-size:18px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.3);
+  display:none;z-index:200;transition:all 0.2s}
+.back-top:hover{transform:scale(1.1)}
+
+/* ===== MISC ===== */
+.divider{text-align:center;color:var(--border);margin:20px 0;
+  font-size:18px;letter-spacing:8px}
+.highlight{background:#fff3cd;padding:2px 4px;border-radius:2px}
+.note{background:#e8f4ff;border-left:3px solid #3b82f6;padding:8px 12px;
+  font-size:13px;color:#1e40af;margin:10px 0;border-radius:0 4px 4px 0}
+blockquote{border-left:3px solid var(--accent2);padding:8px 14px;
+  background:#fdf8f0;margin:10px 0;font-style:italic;font-size:13.5px;
+  color:var(--text2);border-radius:0 4px 4px 0}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <div>
+      <div class="header-title">《繁花》说书人导读</div>
+      <div class="header-sub">金宇澄 · 茅盾文学奖 2015</div>
+    </div>
+    <nav class="header-nav">
+      <a href="index.html">目录首页</a>
+      <a href="characters.html">人物关系</a>
+    </nav>
+  </div>
+</header>
+<div class="main-wrap">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-title">📖 导航</div>
+    <div class="sidebar-section"><a href="ch25.html">← 第二十五章</a></div><div class="sidebar-section"><a href="#ch26-1">  1. 梅瑞婚姻危机，李李表白</a><a href="#ch26-2">  2. 梅瑞婚姻危机，李李表白</a><a href="#ch26-3">  3. 梅瑞婚姻危机，李李表白</a><a href="#ch26-4">  4. 梅瑞婚姻危机，李李表白</a></div><div class="sidebar-section"><a href="ch27.html">第二十七章 →</a></div><div class="sidebar-section"><a href="index.html">↩ 返回目录</a></div>
+  </aside>
+  <main class="content">
+    <div class="page-hero">
+  <span class="hero-badge badge-90">90年代</span>
+  <div class="hero-title">第二十六章</div>
+  <div class="hero-sub">梅瑞婚姻危机，李李表白</div>
+</div><div class="tab-wrap">
+<div class="tabs">
+  <button class="tab-btn active" data-tab="guide">&#128214; 章节导读</button>
+  <button class="tab-btn" data-tab="original">&#128220; 原文精选</button>
+  <button class="tab-btn" data-tab="timeline">&#128336; 时间线</button>
+  <button class="tab-btn" data-tab="analysis">&#128269; 深度解析</button>
+</div><div class="tab-panel active" data-panel="guide"><div class="scene-card" id="ch26-1">
+  <div class="scene-header">
+    <div class="scene-num">1</div>
+    <div class="scene-title">1. 梅瑞婚姻危机，李李表白</div>
+  </div>
+  <div class="scene-body"><div class="part-box part-plot">
+  <div class="part-label"> 🎬 一句话说情节</div>
+  <div class="part-content">一</div>
+</div><div class="part-box part-original">
+  <div class="part-label"> 📜 原文</div>
+  <div class="part-content">“一”<br><br>“这段时间，阿宝清早离开南昌路，李李通常未醒，行人稀少。阿宝走到瑞金路口，一般是吃一碗面，看一张早报，慢慢逛到公司上班。有一天中午，阿宝与李李打电话，无人接听。午后再拨，无人接听。接下来，两个客户上门，谈到四点结束，阿宝拨通了李李的电话。李李说，电话真多。阿宝说，夜里一道吃饭。李李笑说，为啥。阿宝说，我现在主动了。李李说，不相信。阿宝说，真的。李李说，是因为，最近跟我来往多，不要有负担，不要摆到心里，不要紧的。阿宝说，我是真心的。李李说，虚情假意。阿宝说，真心实意。李李说，好了，大家能做好朋友，我已经满足了。阿宝说，我当真了。李李说，我现在太忙，夜里还有几桌朋友，再讲好吧。两个人挂了电话。到了夜里九点，十点，阿宝再次与李李通电话，关机。想起李李靠近门框的背影，阿宝稍感失落。半夜一点，李李来电话说，不好意思，吵醒了吧。阿宝说，我现在就来。李李说，电话里讲吧。阿宝打哈欠说，讲啥呢。李李说，看一个男人是真心，还是假意，有啥办法吧。阿宝说，我是真心的。李李说，不要瞎缠了，是我最近，确实有情况了。阿宝说，情况就是我。李李笑说，山歌准备一直唱呀。阿宝不响。李李说，房间里太冷了。阿宝说，我马上过来。李李说，要么，现在去云南路，吃热气羊肉。阿宝说，好呀。李李说，有事体商量。阿宝说，好。”<br><br>“二”<br><br>“半小时后，阿宝走进云南路一家热气羊肉店，叫了两斤加饭酒，一盆羊肉，一客羊肝，其他是蛋饺，菠菜等等。李李进来了，面色苍白，嘴唇干燥。阿宝一指菜单说，浑身发冷，现在可以补一补，来一盆羊腰子。”<br><br>“李李轻声说，要死了，这几趟夜里，阿宝已经这副样子了，我已经吓了，再补，我哪能办，不许吃这种龌龊东西。铜暖锅冒出热气，两个人吃了几筷羊肉，两盅加饭酒。李李说，总算热了。李李摸了摸阿宝的手，笑笑。李李的手冰冷，雪白，新做方头指甲，时髦牛奶白。阿宝说，玫瑰金手表，眼生的。李李不悦说，讲赤金，红金可以吧，不许提别的字。阿宝说，透明机ｊ芷：，天文星座镶钻，１８Ｋ的分量，厉害。李李拉拢袖口说，吃酒。阿宝说，男人送的。李李说，眼光真是毒。阿宝说，准备结婚了。”</div>
+</div><div class="part-box part-tell">
+  <div class="part-label"> 💬 普通话讲述</div>
+  <div class="part-content"><b>梅瑞婚姻危机，李李表白</b> - 第二十六章的关键段落。金宇澄以克制笔法书写，人物命运在平淡日常中展开，细节中见深意。</div>
+</div><div class="part-box part-dialect">
+  <div class="part-label"> 🗣 沪语时刻</div>
+  <div class="part-content"><div class="dialect-row"><span class="dialect-sh">"这段时间，阿宝清早离开南昌路，李李通常未醒，行人稀少。阿宝走到瑞金路口，一般是吃"</span><span class="dialect-arrow">→</span><span class="dialect-std">这段时间，阿宝清早离开南昌路，李李通常未醒，行人稀少。阿宝走到瑞金路口，一般是吃</span></div><div class="dialect-row"><span class="dialect-sh">"是伐？"</span><span class="dialect-arrow">→</span><span class="dialect-std">是吗？</span></div></div>
+</div><div class="part-box part-buzhong">
+  <div class="part-label"> 🔇 "不响"解读</div>
+  <div class="part-content">梅瑞婚姻危机，李李表白场景中，人物不响。沉默是金宇澄最常用的修辞——不响不是无话可说，而是一切尽在不言中。</div>
+</div><div class="part-box part-ask">
+  <div class="part-label"> ❓ 小白问答</div>
+  <div class="part-content"><div class="qa-item"><div class="qa-q">Q: 这段说了什么？</div><div class="qa-a">第二十六章的重要场景，揭示人物关系和时代背景。</div></div><div class="qa-item"><div class="qa-q">Q: 和全书什么关系？</div><div class="qa-a">体现了《繁花》双线叙事的独特美学。</div></div></div>
+</div></div>
+</div><div class="scene-card" id="ch26-2">
+  <div class="scene-header">
+    <div class="scene-num">2</div>
+    <div class="scene-title">2. 梅瑞婚姻危机，李李表白</div>
+  </div>
+  <div class="scene-body"><div class="part-box part-plot">
+  <div class="part-label"> 🎬 一句话说情节</div>
+  <div class="part-content">半小时后，阿宝走进云南路一家热气羊肉店，叫了两斤加饭酒，一盆羊肉，一客羊肝，其他是蛋饺，菠菜等等。李李进来了，面色苍白，嘴唇干燥。阿宝一指菜单说，浑身发冷，现在可以补一补，来一盆羊腰子。</div>
+</div><div class="part-box part-original">
+  <div class="part-label"> 📜 原文</div>
+  <div class="part-content">“李李说，有个男人，一直跟我谈，见一次面，送一次礼物。阿宝说，真好。”<br><br>“李李说，缠了我大半年，我不表态。阿宝说，难怪李李到常熟，一直假痴假呆，原来，心里有人了。李李不响。阿宝说，徐总只能调头，转攻汪小姐，全场紧逼盯人，最后犯规，判罚十二码，一球进账。李李看周围说，少讲下作咸话。阿宝说，无所谓的，此地，就是乱话三千的地方，尽管讲。”<br><br>“阿宝看看四周，夜半更深，隆冬腊月的店堂，温暖，狭窄，油腻，随意。旁边一桌，一对男女讲个不停，女人是基层妇女，刺青眉毛，桃花眼，满头塑料卷发筒，一身细花棉咽衣，脚穿蚌壳棉鞋，男人戴一条阔板金项链，头颈发红，肩胛落满头皮屑，拇指留长指甲，一面讲，一面剔指甲，发出哔哔之音，皮鞋上污泥点点，靠墙摆了四只黄酒空瓶，香烟头直接落地，脚一踏，遍地一次性筷子，纸巾，菜皮，只有空中的钢炭气，是遥远除夕的记忆。李李说，讲起我来，男人不断，其实只是谈谈，不可能发展到跟阿宝的关系。阿宝不响。李李说，就算我再想结婚，也轮不到徐总，以后，阿宝不许再开这种玩笑。阿宝说，我答应。李李说，我几个男朋友，香港人比较急色，台湾男人气量小，骨子里看不起大陆人。阿宝说，新加坡人呢。李李说，讲起来，新加坡缺少文化，香港与上海，据说已经是文化沙漠了，盯了我半年的男人，就是新加坡人。阿宝不响。李李说，自称是大家族后代，态度斯文，开初呢，只是托我介绍上海女朋友，想跟上海女人结婚。阿宝说，女人到上海，就是上海女人呀。李李说，我就介绍了北方秦小姐，新加坡人斯文，秦小姐也斯文，而且是个脚色，初到上海做业务，嘴唇厚，胸部挺，表面像医生，知识分子，走知识分子路线。阿宝说，啥路线，没听说过。李李说，戴一副老老实实的眼镜，打扮朴素，脚穿布底鞋，像小学老师，跑到公司，港区码头办事体，一副根本不懂生意门道的文静样子，比如借打一只电话，无意讲一两句英文诗，日本俳句，其实，电话是空号，弄得一批办公室男人，怜香惜玉，手把手帮忙，前呼后拥，动足脑筋指导辅导，帮写条子，帮打电话，帮办各种业务。阿宝说，灵的。李李说，某种女人，确实喜欢搞这一套，有一类，是广种薄收，见人就嗲，另一种是用内功，单装文静，表面上不响，冰清玉洁，其实最能引动男人心，走到哪里，身边几个男人，个个花痴一般，最后呢，引郎上墙奴抽梯，达到了目的，女人一走了之，男人停到墙头上面，尴尬，一般情况，混这只生意的圈子，吃这碗业务饭的普通女人，多数已经是本色五花肉，就是一身肉夹气，三头六臂，八面玲珑，乃武乃文，荤素全吃，嗳，这个秦小姐，是一副知识分子死腔，摆到生意场上，另有一功，钞票赚到翻转。阿宝说，上次去常熟，看不出这位秦小姐，有多少知识腔嘛。李李说，啊呀，人家现在发达了，改穿套装了，不需要装了，装，总是吃力的，讲到当初，新加坡男人要找上海女朋友，我为啥选秦小姐，这个女人，本就托我介绍对象，见面这天，秦小姐仍旧是打知识分子牌，但这天用力过度，几乎就像老毛的翻译，短头发，黑框眼镜，真要命，新加坡男人一吓，我也一吓，当面不便多响，事后，新加坡男人来电话讲，看见这位女干部，就想到了运动。我讲，新加坡人，还懂运动。”<br><br>“新加坡人笑笑讲，相貌是登样的，但这身打扮，不是真正上海味道。我讲，七十年代的女人味道呀，黑边眼镜，短发一刀平，或者前发齐眉，后发平肩，白衬衫，两用罩衫，灰卡其裤子，布底鞋。新加坡人讲，现在眼光看，基本是中性打扮，也看不到身段，表情太严肃，我喜欢古早时期的上海女人，甜糯一点，总可以吧。我讲，这就是调衣裳了，翻行头，是方便的。秦小姐当然也懂了，拖了我去选旗袍，我的意思是，西式面料旗袍，比较别致，秦小姐，偏要阴丹士林，预备再添一件马甲，戴一条红围巾，或者白纱巾。我讲，这不对了，根本不合适，想做林道静，江姐一路，人家是吓的，新加坡男人，毕竟大资产阶级买办出身，枕边人，如果是这副进步女人打扮，又不拍电视剧，等于让江姐“和平演变”，精神受刑罚，不恭敬的。秦小姐讲，现在的时髦，往往以苦为乐。我冷笑一声说，干脆讲以凹适凸，因势利导，对立统一。这天两个人，讲来讲去，挑来拣去，秦小姐最后选定，蓝印花布旗袍，配蓝印花布手包，檀香折扇，珍珠项链，头发烫一个花卷老式大波浪，镜前一立，稍有点做作，不伦不类，第二次见了面，谈得还算热络，新加坡男人问秦小姐，为啥不讲上海话。”<br><br>“秦小姐讲，我爸爸，是南下上海大干部，我姆妈，上海大资本家后代，只是我从小，习惯北方话，讲上海话，难免会夹生，讲普通话应该标准，或者，我讲一讲上海干部子弟的“塑料普通话”，杨浦上海话，复旦上海话，华师大上海话，可以吧。新加坡人笑笑不响。秦小姐说，外部的世界，上海包括香港，多少肤浅无趣，文风趋于浅薄，学风趋于市侩，大上海，摆不稳一张严肃的写字台，已经是文化沙漠了。新加坡男人说，照秦小姐的讲法，中国有文化的地方，到底是哪里。秦小姐想了想讲，也就是沙漠了。新加坡人说，沙漠里，拍过一部电影，《阿拉伯的劳伦斯》，大陆以前拍过《沙漠追匪记》，对不对。秦小姐一呆，笑了笑讲，我跟一个南洋青年走进沙漠，就感觉到一种真正的自由，越是落后的地方，文化越是高。新加坡人讲，这就听不懂了，秦小姐已经有男朋友了。”</div>
+</div><div class="part-box part-tell">
+  <div class="part-label"> 💬 普通话讲述</div>
+  <div class="part-content"><b>梅瑞婚姻危机，李李表白</b> - 第二十六章的关键段落。金宇澄以克制笔法书写，人物命运在平淡日常中展开，细节中见深意。</div>
+</div><div class="part-box part-dialect">
+  <div class="part-label"> 🗣 沪语时刻</div>
+  <div class="part-content"><div class="dialect-row"><span class="dialect-sh">"李李轻声说，要死了，这几趟夜里，阿宝已经这副样子了，我已经吓了，再补，我哪能办，"</span><span class="dialect-arrow">→</span><span class="dialect-std">李李轻声说，要死了，这几趟夜里，阿宝已经这副样子了，我已经吓了，再补，我哪能办，</span></div><div class="dialect-row"><span class="dialect-sh">"是伐？"</span><span class="dialect-arrow">→</span><span class="dialect-std">是吗？</span></div></div>
+</div><div class="part-box part-buzhong">
+  <div class="part-label"> 🔇 "不响"解读</div>
+  <div class="part-content">梅瑞婚姻危机，李李表白场景中，人物不响。沉默是金宇澄最常用的修辞——不响不是无话可说，而是一切尽在不言中。</div>
+</div><div class="part-box part-ask">
+  <div class="part-label"> ❓ 小白问答</div>
+  <div class="part-content"><div class="qa-item"><div class="qa-q">Q: 这段说了什么？</div><div class="qa-a">第二十六章的重要场景，揭示人物关系和时代背景。</div></div><div class="qa-item"><div class="qa-q">Q: 和全书什么关系？</div><div class="qa-a">体现了《繁花》双线叙事的独特美学。</div></div></div>
+</div></div>
+</div><div class="scene-card" id="ch26-3">
+  <div class="scene-header">
+    <div class="scene-num">3</div>
+    <div class="scene-title">3. 梅瑞婚姻危机，李李表白</div>
+  </div>
+  <div class="scene-body"><div class="part-box part-plot">
+  <div class="part-label"> 🎬 一句话说情节</div>
+  <div class="part-content">李李说，缠了我大半年，我不表态。阿宝说，难怪李李到常熟，一直假痴假呆，原来，心里有人了。李李不响。阿宝说，徐总只能调头，转攻汪小姐，全场紧逼盯人，最后犯规，判罚十二码，一球进账。李李看周围说，少讲下作咸话。阿宝说，无所谓的，此地，就是乱话三千的地方，尽管讲。</div>
+</div><div class="part-box part-original">
+  <div class="part-label"> 📜 原文</div>
+  <div class="part-content">“秦小姐说，我梦里的南洋青年，近在眼前，我宁愿去做三毛，体验真正的沙漠人生。新加坡男人不响。秦小姐讲，上海，已经完结了，恢复不到三十年代，亭子间的风景了，也只留了我这一支，文艺女贵族的独苗。”<br><br>“新加坡人笑笑不响。秦小姐忽然轻声唱，沙漠有了我／永远不寂寞／开满了青春的花朵／我在高声唱／你在轻声和／陶醉在沙漠里的小爱河。”<br><br>“新加坡人笑笑不响。到了夜里八点半，秦小姐翘起兰花指头，一摇檀香扇讲，我回去了。新加坡人看看手表。秦小姐说，上海规矩人家，三层楼上的大小姐，到了夜里八点整，是一定要转去的，我姆妈要急的。新加坡男人不响。当时，我旁边轻讲一句北方话说，装逼犯，继续装。秦小姐一吓，花容变色，檀香折扇啪一记落到地上。阿宝说，装得确实像一个女知识分子，讲得出这番文艺腔，翻过几本理论书。李李闷笑。阿宝说，后来呢。李李说，新加坡人送客出门，回来对我讲，这也太三十年代加三毛了，骨子里做戏嘛，是戏剧学院的讲师对吧。我听了，只能肚皮里笑笑。秦小姐，实在是弄过头了。”<br><br>“此刻，两个人已经吃了一瓶多黄酒，阿宝说，李李跟秦小姐，真可以到戏文系里开课。李李说，我讨厌做戏。阿宝说，做人，也就是做戏，多少要做一点。李李说，比较讨厌。阿宝说，会做戏的人，如果心理素质好，台风好，台词好，戏可以做得长，连续剧五十集，一百集做下去，心理素质，面皮，腔调，是真本事，其实，人再懒惰，也不得不做戏，跑龙套，做丫鬟，扫地端痰盂，因为气性大，脾气坏，台上寿命就短。李李不响。此刻，老板娘拎了铜吊，朝暖锅里加水。阿宝说，跟新加坡男人，是做了戏，还是做了其他。李李说，啥叫其他，我不懂。阿宝说，已经谈了半年，多数，是做过了。李李说，下作，一讲就不入调，我要是随便的女人，早就是“公共汽车”了，我为啥开饭店，至少要去东莞发展，我真可以做一个中国最伟大，最有人情味道的妈咪，开一家兄弟姐妹真正开心的夜总会，我可以为此拼命，实现理想。阿宝说，好了，算我讲错。李李说，我跟新加坡人讲一个故事，以前有个荷兰男人，到上海急于结婚，像新加坡男人一样，委托我介绍上海女朋友，当时我介绍了章小姐。阿宝说，我记得，一道去常熟，真正上海小姐。李李说，新加坡男人一听，又是上海小姐，精神吊足。我讲，这个故事，差不多是“上海传奇一号”。”<br><br>“新加坡人眼睛发亮。我笑笑讲，当时我约了荷兰人，到“贵都”大堂碰头，荷兰地方的人，据说祖宗是海盗，因此粗相，打扮随便，见面这天，赤膊穿一件蓝衣裳，等于劳动工作服，过去讲上海的瘪三，赤膊戴领带，赤脚穿皮鞋，这位仁兄，领带也省略了，松开两粒纽子，胸毛蜡蜡黄，不戴手表，袖口里一蓬黄毛。章小姐懂英文，谈了三四句，拔脚就走，事后，章小姐怨天怨地，一肚皮不高兴。我解释讲，男方有的是钞票，婚后，章小姐完全可以全盘改造，有啥怨的。章小姐讲，这种粗坯，手里银两再多，我也不要，感觉实在太差了。我不响。两个人就谈其他，想不到身旁小保姆，全部听进。第二天，小保姆寻到我店里，自报家门，已经吃了五年上海自来水，跟上海女人，应该毫无区别。我笑笑，发觉小姑娘的眉眼，还算周正，皮肤也光生。我讲，好极，有本事，自家可以寻上去。”</div>
+</div><div class="part-box part-tell">
+  <div class="part-label"> 💬 普通话讲述</div>
+  <div class="part-content"><b>梅瑞婚姻危机，李李表白</b> - 第二十六章的关键段落。金宇澄以克制笔法书写，人物命运在平淡日常中展开，细节中见深意。</div>
+</div><div class="part-box part-dialect">
+  <div class="part-label"> 🗣 沪语时刻</div>
+  <div class="part-content"><div class="dialect-row"><span class="dialect-sh">"阿宝看看四周，夜半更深，隆冬腊月的店堂，温暖，狭窄，油腻，随意。旁边一桌，一对男"</span><span class="dialect-arrow">→</span><span class="dialect-std">阿宝看看四周，夜半更深，隆冬腊月的店堂，温暖，狭窄，油腻，随意。旁边一桌，一对男</span></div><div class="dialect-row"><span class="dialect-sh">"是伐？"</span><span class="dialect-arrow">→</span><span class="dialect-std">是吗？</span></div></div>
+</div><div class="part-box part-buzhong">
+  <div class="part-label"> 🔇 "不响"解读</div>
+  <div class="part-content">梅瑞婚姻危机，李李表白场景中，人物不响。沉默是金宇澄最常用的修辞——不响不是无话可说，而是一切尽在不言中。</div>
+</div><div class="part-box part-ask">
+  <div class="part-label"> ❓ 小白问答</div>
+  <div class="part-content"><div class="qa-item"><div class="qa-q">Q: 这段说了什么？</div><div class="qa-a">第二十六章的重要场景，揭示人物关系和时代背景。</div></div><div class="qa-item"><div class="qa-q">Q: 和全书什么关系？</div><div class="qa-a">体现了《繁花》双线叙事的独特美学。</div></div></div>
+</div></div>
+</div><div class="scene-card" id="ch26-4">
+  <div class="scene-header">
+    <div class="scene-num">4</div>
+    <div class="scene-title">4. 梅瑞婚姻危机，李李表白</div>
+  </div>
+  <div class="scene-body"><div class="part-box part-plot">
+  <div class="part-label"> 🎬 一句话说情节</div>
+  <div class="part-content">秦小姐讲，我爸爸，是南下上海大干部，我姆妈，上海大资本家后代，只是我从小，习惯北方话，讲上海话，难免会夹生，讲普通话应该标准，或者，我讲一讲上海干部子弟的“塑料普通话”，杨浦上海话，复旦上海话，华师大上海话，可以吧。新加坡人笑笑不响。秦小姐说，外部的世界，上海包括香港，多少肤浅无趣，文风趋于浅薄，学...</div>
+</div><div class="part-box part-original">
+  <div class="part-label"> 📜 原文</div>
+  <div class="part-content">“小保姆讲，姐姐抬举我了，以前，我学过一点英文，可以带一本英文字典过去。我讲，好的，有冲势，厉害。小保姆讲，这只黄毛的旅馆，是波特曼，还是希尔顿。我讲，如果住这种高档酒店，等于颠倒众生，后面就有一长串戴胸罩的大闸蟹，日夜值班，跟班，早夜轮班，翻班，还轮得到小妹吧。小保姆说，这个阿国人，究竟是住啦里呢。我讲，阿国，啦里，上海发音不准嘛．当心外国人听出来。小保姆说．姐姐．阿国男人．多数赣头戆脑，听不出来的。我笑笑讲，狠的，真想去搭讪，地址是福建路，靠苏州河一家青年旅馆，报我名字。小保姆说，好的，我记下来了。我讲，两个人碰头攀谈，态度上，要自然活泼。小保姆说，姐姐觉得，我打扮式样不大自然，不活泼，要么我不戴胸罩，穿一双拖鞋。我讲，中国哪里一个女人，不戴胸罩会好看。小保姆不响。我讲，胸部不管大小，进了胸罩店，帘子一拉，店里的女人就讲，要我帮忙吧，为啥呢，帮客户两面一拨，两面一推。小保姆咯咯咯笑说，是的是的，试胸罩阶段，这种女人，手就伸进来了，抄到两面胳肢窝里帮忙，一推，一托，集中到胸口，正常呀。李李说，我是不肯的，最方便的办法，是身体弯下来，所有内容，全部集中到前面了，我意思是，这种胸型，可以不戴胸罩出门吧，热昏头了。小保姆说，穿拖鞋呢，可以吧。李李说，啥地方听来的，好好一个小姑娘，为啥要做小婊子。保姆一吓。我讲，茂名南路酒吧门口去看看，夜里九点钟敲过，这种穿拖鞋打扮的小婊子，就出来了，玻璃门一拉，嘴巴里嗨，嗨嗳，嗯哼，专搭外国人。小保姆讲，这副样子呀，这我到底，啦能办呢。我讲，非常便当，章小姐平常样子，记得吧。小保姆讲，当然记得。我讲，好办了，去的这天夜里，借一套章小姐的行头，可以吧。小保姆说，不需要借的，我开橱门，拣一套就可以，章姐姐不晓得。我讲，做人，就是做戏，电视剧看过吧。小保姆嘴巴张大。我讲，见了外国人，就自我介绍，是章小姐的妹妹，先要想一想，章小姐日常用啥香水，做啥工作，讲啥内容，平时发嗲的样子。小保姆笑笑讲，啊呀呀，章姐姐跟男朋友打电话，一发嗲，床上就滚倒。我讲，蛮好，原来章小姐有男朋友了，还要我来介绍。小保姆说，要死，讲穿帮了。我讲，外国黄毛，对章小姐印象，是可以的。小保姆讲，好的，我就承认，是章小姐妹妹。我讲，聪明。小保姆讲，衣裳备好，我请三个钟头假，乘２１路电车，到福建路下来。我讲，机会永远属于有准备的女人。小保姆点头讲，晓得。我对小保姆讲，这个荷兰人，据说欢喜吃马路饭摊的宫保辣酱，高庄馒头，馒头夹辣酱，经济实惠，一般夜里，八点半钟吃饭，基本不出门了。小保姆讲，这样子嘛，我就买一客辣酱，两只馒头，两瓶青岛啤酒，八点半去。”<br><br>“我讲，随便，买廿只芝麻汤团，买一碗豆腐花，两斤崇明老白酒，不关我事体。小保姆咯咯咯穷笑说，姐姐真会讲戏话。我讲，想要提高生活质量，关键阶段，就要看勇气，豁得出，还是豁不出，但就算是豁出去，也不是小婊子的豁，自家仔细去想。小保姆讲，姐姐教我。我讲，再教下去，我要吃人参了，好自为之。小保姆说，亲姐姐，我完全明白了。我讲，好的，胆大心细。小保姆点点头，落了一滴眼泪。我讲，这种小旅馆，集体房间，地方小，如果两个人搭上关系，有感觉了，比较谈得来，就可以大大方方，坐到门口，街沿石上面，吃吃讲讲谈谈，男女真功夫，主要是讲，谈，两个中国人坐马路吃馒头，再吃辣酱，基本就是花痴，神经病，盲流分子，闲散人员，马路瘪三，全国通缉要犯，但是跟一个外国男人坐马路，勾肩搭背，绝对就算浪漫，登样的，等于是外滩风景懂吧，外国情调，巴黎情调，因此，要做优质女人，先要懂得不怕难为情，样样事体，要大大方方，身边有了外国人，等于有了后台撑腰，是既有面子，又有夹里的派头。小保姆点头。我讲，这桩事体，最后到底有啥后果，引起非礼，下身受伤，引发强奸，还是一拍两散，老死不相往来，姐姐心中无底，只能自家把握了，我不开保险公司。小保姆讲，姐姐放心，我嫡亲的好姐姐，不管我走红运，还是走霉运，无论如何，我会报答的，我对亲姐姐，好姐姐，一定会负责到底的，现在讲定，将来，我负责帮姐姐养老送终。李李讲到此地，摇摇头说，小保姆，就是小保姆，唉，当时新加坡人听了，跟现在阿宝表情一样，一声不响。我叹气，我讲，对于这种乡下姑娘，我有啥可以讲呢，只能暗叫一声佛菩萨保佑，南无阿弥陀佛，揭谛揭谛波罗揭谛波罗僧揭谛，我两眼提白，彻底买账。”<br><br>“台面上，两瓶半黄酒已经人胃。阿宝叫一声老板娘。铜吊再次伸过来，对准暖锅冲自来水，嗤嗤作响。李李说，看见这个老板娘了。阿宝说，啊。李李说，下一趟，阿宝来“至真园”吃饭，不许再叫我老板娘。”<br><br>“阿宝笑笑。李李说。我一进饭店．东也叫我老板娘．西也叫我老板娘．真宝说，啊。李李说，下一趟，阿宝来“至真园”吃饭，不许再叫我老板娘。”<br><br>“阿宝笑笑。李李说，我一进饭店，东也叫我老板娘，西也叫我老板娘，真是胸闷，好像，我已经是老板的老婆，已经有了男人。阿宝笑笑。李李说，老板娘，上海要多少有多少，看见冲水女人这副龌龊样子，有啥感想。阿宝说，啊。李李说，屁股像法兰盘，拖了一双踏扁后跟的破皮鞋。”</div>
+</div><div class="part-box part-tell">
+  <div class="part-label"> 💬 普通话讲述</div>
+  <div class="part-content"><b>梅瑞婚姻危机，李李表白</b> - 第二十六章的关键段落。金宇澄以克制笔法书写，人物命运在平淡日常中展开，细节中见深意。</div>
+</div><div class="part-box part-dialect">
+  <div class="part-label"> 🗣 沪语时刻</div>
+  <div class="part-content"><div class="dialect-row"><span class="dialect-sh">"秦小姐说，我梦里的南洋青年，近在眼前，我宁愿去做三毛，体验真正的沙漠人生。新加坡"</span><span class="dialect-arrow">→</span><span class="dialect-std">秦小姐说，我梦里的南洋青年，近在眼前，我宁愿去做三毛，体验真正的沙漠人生。新加坡</span></div><div class="dialect-row"><span class="dialect-sh">"是伐？"</span><span class="dialect-arrow">→</span><span class="dialect-std">是吗？</span></div></div>
+</div><div class="part-box part-buzhong">
+  <div class="part-label"> 🔇 "不响"解读</div>
+  <div class="part-content">梅瑞婚姻危机，李李表白场景中，人物不响。沉默是金宇澄最常用的修辞——不响不是无话可说，而是一切尽在不言中。</div>
+</div><div class="part-box part-ask">
+  <div class="part-label"> ❓ 小白问答</div>
+  <div class="part-content"><div class="qa-item"><div class="qa-q">Q: 这段说了什么？</div><div class="qa-a">第二十六章的重要场景，揭示人物关系和时代背景。</div></div><div class="qa-item"><div class="qa-q">Q: 和全书什么关系？</div><div class="qa-a">体现了《繁花》双线叙事的独特美学。</div></div></div>
+</div></div>
+</div></div><div class="tab-panel" data-panel="original"><div class="part-box part-original"><div class="part-label">📜 第二十六章原文节选</div><div class="part-content"><p style="margin-bottom:14px;line-height:2.1">一</p><p style="margin-bottom:14px;line-height:2.1">这段时间，阿宝清早离开南昌路，李李通常未醒，行人稀少。阿宝走到瑞金路口，一般是吃一碗面，看一张早报，慢慢逛到公司上班。有一天中午，阿宝与李李打电话，无人接听。午后再拨，无人接听。接下来，两个客户上门，谈到四点结束，阿宝拨通了李李的电话。李李说，电话真多。阿宝说，夜里一道吃饭。李李笑说，为啥。阿宝说，我现在主动了。李李说，不相信。阿宝说，真的。李李说，是因为，最近跟我来往多，不要有负担，不要摆到心里，不要紧的。阿宝说，我是真心的。李李说，虚情假意。阿宝说，真心实意。李李说，好了，大家能做好朋友，我已经满足了。阿宝说，我当真了。李李说，我现在太忙，夜里还有几桌朋友，再讲好吧。两个人挂了电话。到了夜里九点，十点，阿宝再次与李李通电话，关机。想起李李靠近门框的背影，阿宝稍感失落。半夜一点，李李来电话说，不好意思，吵醒了吧。阿宝说，我现在就来。李李说，电话里讲吧。阿宝打哈欠说，讲啥呢。李李说，看一个男人是真心，还是假意，有啥办法吧。阿宝说，我是真心的。李李说，不要瞎缠了，是我最近，确实有情况了。阿宝说，情况就是我。李李笑说，山歌准备一直唱呀。阿宝不响。李李说，房间里太冷了。阿宝说，我马上过来。李李说，要么，现在去云南路，吃热气羊肉。阿宝说，好呀。李李说，有事体商量。阿宝说，好。</p><p style="margin-bottom:14px;line-height:2.1">二</p><p style="margin-bottom:14px;line-height:2.1">半小时后，阿宝走进云南路一家热气羊肉店，叫了两斤加饭酒，一盆羊肉，一客羊肝，其他是蛋饺，菠菜等等。李李进来了，面色苍白，嘴唇干燥。阿宝一指菜单说，浑身发冷，现在可以补一补，来一盆羊腰子。</p><p style="margin-bottom:14px;line-height:2.1">李李轻声说，要死了，这几趟夜里，阿宝已经这副样子了，我已经吓了，再补，我哪能办，不许吃这种龌龊东西。铜暖锅冒出热气，两个人吃了几筷羊肉，两盅加饭酒。李李说，总算热了。李李摸了摸阿宝的手，笑笑。李李的手冰冷，雪白，新做方头指甲，时髦牛奶白。阿宝说，玫瑰金手表，眼生的。李李不悦说，讲赤金，红金可以吧，不许提别的字。阿宝说，透明机ｊ芷：，天文星座镶钻，１８Ｋ的分量，厉害。李李拉拢袖口说，吃酒。阿宝说，男人送的。李李说，眼光真是毒。阿宝说，准备结婚了。</p><p style="margin-bottom:14px;line-height:2.1">李李说，有个男人，一直跟我谈，见一次面，送一次礼物。阿宝说，真好。</p><p style="margin-bottom:14px;line-height:2.1">李李说，缠了我大半年，我不表态。阿宝说，难怪李李到常熟，一直假痴假呆，原来，心里有人了。李李不响。阿宝说，徐总只能调头，转攻汪小姐，全场紧逼盯人，最后犯规，判罚十二码，一球进账。李李看周围说，少讲下作咸话。阿宝说，无所谓的，此地，就是乱话三千的地方，尽管讲。</p><p style="margin-bottom:14px;line-height:2.1">阿宝看看四周，夜半更深，隆冬腊月的店堂，温暖，狭窄，油腻，随意。旁边一桌，一对男女讲个不停，女人是基层妇女，刺青眉毛，桃花眼，满头塑料卷发筒，一身细花棉咽衣，脚穿蚌壳棉鞋，男人戴一条阔板金项链，头颈发红，肩胛落满头皮屑，拇指留长指甲，一面讲，一面剔指甲，发出哔哔之音，皮鞋上污泥点点，靠墙摆了四只黄酒空瓶，香烟头直接落地，脚一踏，遍地一次性筷子，纸巾，菜皮，只有空中的钢炭气，是遥远除夕的记忆。李李说，讲起我来，男人不断，其实只是谈谈，不可能发展到跟阿宝的关系。阿宝不响。李李说，就算我再想结婚，也轮不到徐总，以后，阿宝不许再开这种玩笑。阿宝说，我答应。李李说，我几个男朋友，香港人比较急色，台湾男人气量小，骨子里看不起大陆人。阿宝说，新加坡人呢。李李说，讲起来，新加坡缺少文化，香港与上海，据说已经是文化沙漠了，盯了我半年的男人，就是新加坡人。阿宝不响。李李说，自称是大家族后代，态度斯文，开初呢，只是托我介绍上海女朋友，想跟上海女人结婚。阿宝说，女人到上海，就是上海女人呀。李李说，我就介绍了北方秦小姐，新加坡人斯文，秦小姐也斯文，而且是个脚色，初到上海做业务，嘴唇厚，胸部挺，表面像医生，知识分子，走知识分子路线。阿宝说，啥路线，没听说过。李李说，戴一副老老实实的眼镜，打扮朴素，脚穿布底鞋，像小学老师，跑到公司，港区码头办事体，一副根本不懂生意门道的文静样子，比如借打一只电话，无意讲一两句英文诗，日本俳句，其实，电话是空号，弄得一批办公室男人，怜香惜玉，手把手帮忙，前呼后拥，动足脑筋指导辅导，帮写条子，帮打电话，帮办各种业务。阿宝说，灵的。李李说，某种女人，确实喜欢搞这一套，有一类，是广种薄收，见人就嗲，另一种是用内功，单装文静，表面上不响，冰清玉洁，其实最能引动男人心，走到哪里，身边几个男人，个个花痴一般，最后呢，引郎上墙奴抽梯，达到了目的，女人一走了之，男人停到墙头上面，尴尬，一般情况，混这只生意的圈子，吃这碗业务饭的普通女人，多数已经是本色五花肉，就是一身肉夹气，三头六臂，八面玲珑，乃武乃文，荤素全吃，嗳，这个秦小姐，是一副知识分子死腔，摆到生意场上，另有一功，钞票赚到翻转。阿宝说，上次去常熟，看不出这位秦小姐，有多少知识腔嘛。李李说，啊呀，人家现在发达了，改穿套装了，不需要装了，装，总是吃力的，讲到当初，新加坡男人要找上海女朋友，我为啥选秦小姐，这个女人，本就托我介绍对象，见面这天，秦小姐仍旧是打知识分子牌，但这天用力过度，几乎就像老毛的翻译，短头发，黑框眼镜，真要命，新加坡男人一吓，我也一吓，当面不便多响，事后，新加坡男人来电话讲，看见这位女干部，就想到了运动。我讲，新加坡人，还懂运动。</p><p style="margin-bottom:14px;line-height:2.1">新加坡人笑笑讲，相貌是登样的，但这身打扮，不是真正上海味道。我讲，七十年代的女人味道呀，黑边眼镜，短发一刀平，或者前发齐眉，后发平肩，白衬衫，两用罩衫，灰卡其裤子，布底鞋。新加坡人讲，现在眼光看，基本是中性打扮，也看不到身段，表情太严肃，我喜欢古早时期的上海女人，甜糯一点，总可以吧。我讲，这就是调衣裳了，翻行头，是方便的。秦小姐当然也懂了，拖了我去选旗袍，我的意思是，西式面料旗袍，比较别致，秦小姐，偏要阴丹士林，预备再添一件马甲，戴一条红围巾，或者白纱巾。我讲，这不对了，根本不合适，想做林道静，江姐一路，人家是吓的，新加坡男人，毕竟大资产阶级买办出身，枕边人，如果是这副进步女人打扮，又不拍电视剧，等于让江姐“和平演变”，精神受刑罚，不恭敬的。秦小姐讲，现在的时髦，往往以苦为乐。我冷笑一声说，干脆讲以凹适凸，因势利导，对立统一。这天两个人，讲来讲去，挑来拣去，秦小姐最后选定，蓝印花布旗袍，配蓝印花布手包，檀香折扇，珍珠项链，头发烫一个花卷老式大波浪，镜前一立，稍有点做作，不伦不类，第二次见了面，谈得还算热络，新加坡男人问秦小姐，为啥不讲上海话。</p><p style="margin-bottom:14px;line-height:2.1">秦小姐讲，我爸爸，是南下上海大干部，我姆妈，上海大资本家后代，只是我从小，习惯北方话，讲上海话，难免会夹生，讲普通话应该标准，或者，我讲一讲上海干部子弟的“塑料普通话”，杨浦上海话，复旦上海话，华师大上海话，可以吧。新加坡人笑笑不响。秦小姐说，外部的世界，上海包括香港，多少肤浅无趣，文风趋于浅薄，学风趋于市侩，大上海，摆不稳一张严肃的写字台，已经是文化沙漠了。新加坡男人说，照秦小姐的讲法，中国有文化的地方，到底是哪里。秦小姐想了想讲，也就是沙漠了。新加坡人说，沙漠里，拍过一部电影，《阿拉伯的劳伦斯》，大陆以前拍过《沙漠追匪记》，对不对。秦小姐一呆，笑了笑讲，我跟一个南洋青年走进沙漠，就感觉到一种真正的自由，越是落后的地方，文化越是高。新加坡人讲，这就听不懂了，秦小姐已经有男朋友了。</p><p style="margin-bottom:14px;line-height:2.1">秦小姐说，我梦里的南洋青年，近在眼前，我宁愿去做三毛，体验真正的沙漠人生。新加坡男人不响。秦小姐讲，上海，已经完结了，恢复不到三十年代，亭子间的风景了，也只留了我这一支，文艺女贵族的独苗。</p><p style="margin-bottom:14px;line-height:2.1">新加坡人笑笑不响。秦小姐忽然轻声唱，沙漠有了我／永远不寂寞／开满了青春的花朵／我在高声唱／你在轻声和／陶醉在沙漠里的小爱河。</p></div></div></div><div class="tab-panel" data-panel="timeline"><div class="part-box part-plot"><div class="part-label">🕐 第二十六章时间线</div><div class="part-content"><div style="border-left:3px solid var(--gold);padding-left:16px"><div style="margin-bottom:18px"><span class="era-badge badge-90">90年代</span><div style="font-weight:bold;margin:6px 0;font-size:14px">4. 梅瑞婚姻危机，李李表白</div></div><div style="margin-bottom:18px"><span class="era-badge badge-90">90年代</span><div style="font-weight:bold;margin:6px 0;font-size:14px">4. 梅瑞婚姻危机，李李表白</div></div><div style="margin-bottom:18px"><span class="era-badge badge-90">90年代</span><div style="font-weight:bold;margin:6px 0;font-size:14px">4. 梅瑞婚姻危机，李李表白</div></div><div style="margin-bottom:18px"><span class="era-badge badge-90">90年代</span><div style="font-weight:bold;margin:6px 0;font-size:14px">4. 梅瑞婚姻危机，李李表白</div></div></div></div></div></div><div class="tab-panel" data-panel="analysis"><div class="part-box part-tell"><div class="part-label">🔍深度解析</div><div class="part-content"><h4 style="margin-bottom:10px;color:var(--accent)">第二十六章：梅瑞婚姻危机，李李表白</h4><p style="margin-bottom:12px">第二十六章：梅瑞婚姻危机，李李表白。金宇澄以独特的上海叙事风格，书写这段岁月的波澜与暗涌。</p><div class="note">📌本章属于90年代故事线，与另一时间线交替推进，构成全书复调叙事。</div><p style="margin-top:12px"><b>阅读建议：</b>注意每一处"不响"——那些沉默藏着最丰富的情感信息。</p></div></div></div></div><div class="chapter-nav"><a href="ch25.html" class="nav-btn"><small>上一章</small><span class="nav-label">← 第二十五章</span></a><a href="ch27.html" class="nav-btn" style="text-align:right"><small>下一章</small><span class="nav-label">第二十七章 →</span></a></div>
+  </main>
+</div>
+<button class="back-top" onclick="window.scrollTo(0,0)" title="回到顶部" style="display:none">↑</button>
+<script>
+// Tabs
+function initTabs(){
+  document.querySelectorAll('.tabs').forEach(tabs=>{
+    tabs.querySelectorAll('.tab-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const panel = btn.dataset.tab;
+        tabs.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const wrap = tabs.closest('.tab-wrap')||tabs.parentElement;
+        wrap.querySelectorAll('.tab-panel').forEach(p=>{
+          p.classList.toggle('active', p.dataset.panel===panel);
+        });
+      });
+    });
+  });
+}
+
+// Back to top
+window.addEventListener('scroll',()=>{
+  const btn=document.querySelector('.back-top');
+  if(btn) btn.style.display=window.scrollY>400?'flex':'none';
+});
+
+// Sidebar active
+function updateSidebarActive(){
+  const sections = document.querySelectorAll('.scene-card[id]');
+  const links = document.querySelectorAll('.sidebar a[href*="#"]');
+  let active = null;
+  sections.forEach(s=>{
+    if(s.getBoundingClientRect().top < 120) active=s.id;
+  });
+  links.forEach(l=>{
+    l.classList.toggle('active', l.hash==='#'+active);
+  });
+}
+window.addEventListener('scroll', updateSidebarActive);
+
+document.addEventListener('DOMContentLoaded',()=>{
+  initTabs();
+  updateSidebarActive();
+});
+</script>
+</body>
+</html>

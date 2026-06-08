@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日语五十音测验 · 平假名 & 片假名</title>
+<style>
+  :root {
+    --bg: #fdf7f0;
+    --card: #fff;
+    --primary: #c0392b;
+    --accent: #e67e22;
+    --green: #27ae60;
+    --blue: #2980b9;
+    --red: #e74c3c;
+    --border: #e8d5c4;
+    --text: #333;
+    --text2: #888;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Sans", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+    background: linear-gradient(135deg, #fdf7f0 0%, #fef9f5 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: var(--text);
+  }
+
+  .container { max-width: 900px; margin: 0 auto; }
+
+  /* 标题 */
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 4px;
+    letter-spacing: 2px;
+  }
+  .header .sub {
+    color: var(--text2);
+    font-size: 0.9rem;
+  }
+
+  /* 控制栏 */
+  .controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+    background: var(--card);
+    border-radius: 14px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    align-items: center;
+  }
+  .controls label {
+    font-size: 0.85rem;
+    color: var(--text2);
+    white-space: nowrap;
+  }
+  .controls select {
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+    background: #fff;
+    color: var(--text);
+    cursor: pointer;
+    outline: none;
+  }
+  .controls select:focus { border-color: var(--accent); }
+  .btn {
+    border: none;
+    border-radius: 10px;
+    padding: 9px 20px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: #cf6d17; }
+  .btn-outline {
+    background: #fff;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+  }
+  .btn-outline:hover { background: #fdf0e0; }
+  .btn-green {
+    background: var(--green);
+    color: #fff;
+  }
+  .btn-green:hover { background: #1e8e4e; }
+  .btn-red {
+    background: var(--red);
+    color: #fff;
+  }
+  .btn-red:hover { background: #c0392b; }
+
+  /* 统计 */
+  #stats {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .stat-box {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 8px 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    text-align: center;
+    min-width: 80px;
+  }
+  .stat-box .num { font-size: 1.5rem; font-weight: bold; }
+  .stat-box .lbl { font-size: 0.72rem; color: var(--text2); }
+  .stat-box.correct .num { color: var(--green); }
+  .stat-box.wrong .num { color: var(--red); }
+  .stat-box.total .num { color: var(--blue); }
+  .stat-box.remain .num { color: var(--accent); }
+
+  /* 进度条 */
+  #progress-wrap {
+    max-width: 700px;
+    margin: 0 auto 20px;
+    background: #eee;
+    border-radius: 99px;
+    height: 6px;
+    overflow: hidden;
+  }
+  #progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--primary));
+    border-radius: 99px;
+    transition: width 0.4s;
+    width: 0%;
+  }
+
+  /* 题目区域 */
+  #quiz-area {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .q-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 28px 26px;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.07);
+    border-left: 5px solid var(--accent);
+    text-align: center;
+  }
+  .q-card.correct-flash { border-left-color: var(--green); }
+  .q-card.wrong-flash   { border-left-color: var(--red); }
+
+  .q-label {
+    font-size: 0.78rem;
+    color: var(--text2);
+    margin-bottom: 4px;
+  }
+  .q-big {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #222;
+    margin: 8px 0 10px;
+    line-height: 1.3;
+    font-family: "Hiragino Mincho", "Noto Serif CJK SC", "MS Mincho", serif;
+  }
+  .q-hint {
+    font-size: 0.82rem;
+    color: var(--text2);
+    margin-bottom: 16px;
+  }
+
+  /* 选项 */
+  .opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+  .opt-btn {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 10px;
+    font-size: 1.05rem;
+    cursor: pointer;
+    background: #fafafa;
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .opt-btn:hover:not(:disabled) {
+    background: #fdf0e0;
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .opt-btn.correct-ans {
+    background: #e8f8f0 !important;
+    border-color: var(--green) !important;
+    color: #1a7a40;
+    font-weight: bold;
+  }
+  .opt-btn.wrong-ans {
+    background: #fdecea !important;
+    border-color: var(--red) !important;
+    color: #c0392b;
+  }
+  .opt-btn:disabled { cursor: default; }
+
+  /* 填空 */
+  .fill-row {
+    display: flex;
+    gap: 10px;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .fill-input {
+    flex: 1;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 1.1rem;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: "Hiragino Mincho", "Noto Serif CJK SC", "MS Mincho", serif;
+  }
+  .fill-input:focus { border-color: var(--accent); }
+  .fill-input.correct-ans {
+    background: #e8f8f0;
+    border-color: var(--green);
+    color: #1a7a40;
+    font-weight: bold;
+  }
+  .fill-input.wrong-ans {
+    background: #fdecea;
+    border-color: var(--red);
+    color: #c0392b;
+  }
+  .fill-submit {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .fill-submit:hover:not(:disabled) { background: #cf6d17; }
+  .fill-submit:disabled { background: #ccc; cursor: default; }
+
+  /* 反馈 */
+  .feedback {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    padding: 6px 12px;
+    display: none;
+    text-align: center;
+  }
+  .feedback.show { display: block; }
+  .feedback.ok { background: #e8f8f0; color: #1a7a40; }
+  .feedback.ng { background: #fdecea; color: #c0392b; }
+
+  /* 快捷键提示 */
+  .hint-row {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.78rem;
+    color: #bbb;
+  }
+
+  /* 下一题 */
+  #next-btn {
+    display: block;
+    margin: 20px auto 0;
+    padding: 12px 36px;
+    font-size: 1rem;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  #next-btn:hover { background: #1f6ca3; }
+  #next-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+  /* 结果页 */
+  #result-panel {
+    display: none;
+    max-width: 480px;
+    margin: 30px auto;
+    background: var(--card);
+    border-radius: 18px;
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+  }
+  #result-panel h2 { font-size: 1.8rem; margin-bottom: 10px; color: var(--primary); }
+  #result-panel .score-big {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--accent);
+    margin: 10px 0;
+  }
+  #result-panel .grade { font-size: 1.2rem; margin-bottom: 8px; color: #555; }
+  #result-panel .detail {
+    font-size: 0.9rem;
+    color: var(--text2);
+    margin-bottom: 20px;
+  }
+  .wrong-list {
+    text-align: left;
+    max-width: 360px;
+    margin: 0 auto 20px;
+    font-size: 0.85rem;
+    color: var(--red);
+    max-height: 160px;
+    overflow-y: auto;
+    background: #fef5f5;
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: none;
+  }
+  .wrong-list.show { display: block; }
+  .wrong-list .wrong-item {
+    display: inline-block;
+    background: #ffeaea;
+    border-radius: 6px;
+    padding: 2px 8px;
+    margin: 3px 4px;
+    border: 1px solid #fcc;
+  }
+
+  /* 参考表 */
+  #ref-panel {
+    display: none;
+    max-width: 900px;
+    margin: 20px auto;
+  }
+  #ref-panel.show { display: block; }
+  .ref-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-bottom: 18px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+  .ref-table th {
+    background: #fdf0e0;
+    padding: 8px 6px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .ref-table td {
+    padding: 6px 5px;
+    text-align: center;
+    border-bottom: 1px solid #f5f0eb;
+  }
+  .ref-table tr:last-child td { border-bottom: none; }
+  .ref-char {
+    font-size: 1.35rem;
+    font-family: "Hiragino Mincho", "Noto Serif CJK SC", "MS Mincho", serif;
+    color: #222;
+  }
+  .ref-romaji { font-size: 0.78rem; color: #999; }
+  .ref-title {
+    font-size: 1rem;
+    color: var(--primary);
+    margin: 16px 0 8px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .ref-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .ref-cell {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 6px;
+    text-align: center;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .ref-cell .hira {
+    font-size: 1.6rem;
+    font-family: "Hiragino Mincho", "Noto Serif CJK SC", "MS Mincho", serif;
+    color: #c0392b;
+    display: block;
+  }
+  .ref-cell .kata {
+    font-size: 1.6rem;
+    font-family: "Hiragino Mincho", "Noto Serif CJK SC", "MS Mincho", serif;
+    color: #2980b9;
+    display: block;
+  }
+  .ref-cell .rom {
+    font-size: 0.72rem;
+    color: #999;
+    margin-top: 2px;
+  }
+
+  /* 表格行 */
+  .row-label {
+    font-weight: bold;
+    color: var(--accent);
+    font-size: 0.82rem;
+    min-width: 36px;
+  }
+  .table-wrap { overflow-x: auto; }
+
+  @media (max-width: 600px) {
+    .opts { grid-template-columns: 1fr; }
+    .q-big { font-size: 2.5rem; }
+    .controls { padding: 12px 10px; gap: 8px; }
+    .controls select { padding: 5px 6px; font-size: 0.8rem; }
+    .btn { padding: 7px 14px; font-size: 0.85rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- 标题 -->
+<div class="header">
+  <h1>🎌 日语五十音测验</h1>
+  <div class="sub">平假名 & 片假名 · 反复练习 · 直到满分</div>
+</div>
+
+<!-- 控制栏 -->
+<div class="controls">
+  <label>模式：</label>
+  <select id="sel-mode" onchange="onModeChange()">
+    <option value="hira2roma" selected>平假名 → 罗马音</option>
+    <option value="kata2roma">片假名 → 罗马音</option>
+    <option value="roma2hira">罗马音 → 平假名</option>
+    <option value="roma2kata">罗马音 → 片假名</option>
+    <option value="mix">混合模式</option>
+  </select>
+  <label>题型：</label>
+  <select id="sel-type" onchange="onModeChange()">
+    <option value="choice" selected>选择（4选1）</option>
+    <option value="fill">输入</option>
+  </select>
+  <label>范围：</label>
+  <select id="sel-range" onchange="onModeChange()">
+    <option value="all" selected>全部（清音+浊音）</option>
+    <option value="seion">仅清音（46音）</option>
+    <option value="dakuon">仅浊音/半濁音</option>
+    <option value="a-row">あ行</option>
+    <option value="ka-row">か行</option>
+    <option value="sa-row">さ行</option>
+    <option value="ta-row">た行</option>
+    <option value="na-row">な行</option>
+    <option value="ha-row">は行</option>
+    <option value="ma-row">ま行</option>
+    <option value="ya-row">や行</option>
+    <option value="ra-row">ら行</option>
+    <option value="wa-row">わ行</option>
+  </select>
+  <label>题数：</label>
+  <select id="sel-count" onchange="onModeChange()">
+    <option value="20">20题</option>
+    <option value="40" selected>40题</option>
+    <option value="60">60题</option>
+    <option value="all">全部</option>
+  </select>
+  <button class="btn btn-primary" onclick="startQuiz()">🔄 开始新测验</button>
+  <button class="btn btn-outline" onclick="toggleRef()">📖 参考表</button>
+</div>
+
+<!-- 统计 -->
+<div id="stats">
+  <div class="stat-box total"><div class="num" id="s-total">0</div><div class="lbl">已答</div></div>
+  <div class="stat-box correct"><div class="num" id="s-correct">0</div><div class="lbl">正确</div></div>
+  <div class="stat-box wrong"><div class="num" id="s-wrong">0</div><div class="lbl">错误</div></div>
+  <div class="stat-box remain"><div class="num" id="s-remain">0</div><div class="lbl">剩余</div></div>
+</div>
+<div id="progress-wrap"><div id="progress-bar"></div></div>
+
+<!-- 题目区域 -->
+<div id="quiz-area"></div>
+<div style="text-align:center">
+  <button id="next-btn" disabled onclick="nextQuestion()">下一题 ▶</button>
+</div>
+
+<!-- 结果面板 -->
+<div id="result-panel">
+  <h2>🎉 测验完成！</h2>
+  <div class="score-big" id="score-text"></div>
+  <div class="grade" id="grade-text"></div>
+  <div class="detail" id="time-text"></div>
+  <div class="wrong-list" id="wrong-list"></div>
+  <button class="btn btn-green" onclick="retryWrong()" id="retry-btn" style="margin-right:8px;display:none">🔁 只练错题</button>
+  <button class="btn btn-primary" onclick="startQuiz()">再来一次</button>
+</div>
+
+<!-- 参考表 -->
+<div id="ref-panel">
+  <div class="ref-title">📖 五十音参考表（点击格子可听读音提示）</div>
+
+  <!-- 清音 -->
+  <div class="ref-title" style="font-size:0.9rem;color:#c0392b">● 平假名（清音）</div>
+  <div class="table-wrap">
+    <table class="ref-table">
+      <tr><th></th><th>あ段 a</th><th>い段 i</th><th>う段 u</th><th>え段 e</th><th>お段 o</th></tr>
+      <tr><td class="row-label">あ行</td><td><span class="ref-char">あ</span><br><span class="ref-romaji">a</span></td><td><span class="ref-char">い</span><br><span class="ref-romaji">i</span></td><td><span class="ref-char">う</span><br><span class="ref-romaji">u</span></td><td><span class="ref-char">え</span><br><span class="ref-romaji">e</span></td><td><span class="ref-char">お</span><br><span class="ref-romaji">o</span></td></tr>
+      <tr><td class="row-label">か行</td><td><span class="ref-char">か</span><br><span class="ref-romaji">ka</span></td><td><span class="ref-char">き</span><br><span class="ref-romaji">ki</span></td><td><span class="ref-char">く</span><br><span class="ref-romaji">ku</span></td><td><span class="ref-char">け</span><br><span class="ref-romaji">ke</span></td><td><span class="ref-char">こ</span><br><span class="ref-romaji">ko</span></td></tr>
+      <tr><td class="row-label">さ行</td><td><span class="ref-char">さ</span><br><span class="ref-romaji">sa</span></td><td><span class="ref-char">し</span><br><span class="ref-romaji">shi</span></td><td><span class="ref-char">す</span><br><span class="ref-romaji">su</span></td><td><span class="ref-char">せ</span><br><span class="ref-romaji">se</span></td><td><span class="ref-char">そ</span><br><span class="ref-romaji">so</span></td></tr>
+      <tr><td class="row-label">た行</td><td><span class="ref-char">た</span><br><span class="ref-romaji">ta</span></td><td><span class="ref-char">ち</span><br><span class="ref-romaji">chi</span></td><td><span class="ref-char">つ</span><br><span class="ref-romaji">tsu</span></td><td><span class="ref-char">て</span><br><span class="ref-romaji">te</span></td><td><span class="ref-char">と</span><br><span class="ref-romaji">to</span></td></tr>
+      <tr><td class="row-label">な行</td><td><span class="ref-char">な</span><br><span class="ref-romaji">na</span></td><td><span class="ref-char">に</span><br><span class="ref-romaji">ni</span></td><td><span class="ref-char">ぬ</span><br><span class="ref-romaji">nu</span></td><td><span class="ref-char">ね</span><br><span class="ref-romaji">ne</span></td><td><span class="ref-char">の</span><br><span class="ref-romaji">no</span></td></tr>
+      <tr><td class="row-label">は行</td><td><span class="ref-char">は</span><br><span class="ref-romaji">ha</span></td><td><span class="ref-char">ひ</span><br><span class="ref-romaji">hi</span></td><td><span class="ref-char">ふ</span><br><span class="ref-romaji">fu</span></td><td><span class="ref-char">へ</span><br><span class="ref-romaji">he</span></td><td><span class="ref-char">ほ</span><br><span class="ref-romaji">ho</span></td></tr>
+      <tr><td class="row-label">ま行</td><td><span class="ref-char">ま</span><br><span class="ref-romaji">ma</span></td><td><span class="ref-char">み</span><br><span class="ref-romaji">mi</span></td><td><span class="ref-char">む</span><br><span class="ref-romaji">mu</span></td><td><span class="ref-char">め</span><br><span class="ref-romaji">me</span></td><td><span class="ref-char">も</span><br><span class="ref-romaji">mo</span></td></tr>
+      <tr><td class="row-label">や行</td><td><span class="ref-char">や</span><br><span class="ref-romaji">ya</span></td><td></td><td><span class="ref-char">ゆ</span><br><span class="ref-romaji">yu</span></td><td></td><td><span class="ref-char">よ</span><br><span class="ref-romaji">yo</span></td></tr>
+      <tr><td class="row-label">ら行</td><td><span class="ref-char">ら</span><br><span class="ref-romaji">ra</span></td><td><span class="ref-char">り</span><br><span class="ref-romaji">ri</span></td><td><span class="ref-char">る</span><br><span class="ref-romaji">ru</span></td><td><span class="ref-char">れ</span><br><span class="ref-romaji">re</span></td><td><span class="ref-char">ろ</span><br><span class="ref-romaji">ro</span></td></tr>
+      <tr><td class="row-label">わ行</td><td><span class="ref-char">わ</span><br><span class="ref-romaji">wa</span></td><td></td><td></td><td></td><td><span class="ref-char">を</span><br><span class="ref-romaji">wo/o</span></td></tr>
+      <tr><td class="row-label">ん</td><td colspan="5"><span class="ref-char">ん</span> <span class="ref-romaji">n</span></td></tr>
+    </table>
+  </div>
+
+  <!-- 片假名清音 -->
+  <div class="ref-title" style="font-size:0.9rem;color:#2980b9">● 片假名（清音）</div>
+  <div class="table-wrap">
+    <table class="ref-table">
+      <tr><th></th><th>ア段 a</th><th>イ段 i</th><th>ウ段 u</th><th>エ段 e</th><th>オ段 o</th></tr>
+      <tr><td class="row-label">ア行</td><td><span class="ref-char">ア</span><br><span class="ref-romaji">a</span></td><td><span class="ref-char">イ</span><br><span class="ref-romaji">i</span></td><td><span class="ref-char">ウ</span><br><span class="ref-romaji">u</span></td><td><span class="ref-char">エ</span><br><span class="ref-romaji">e</span></td><td><span class="ref-char">オ</span><br><span class="ref-romaji">o</span></td></tr>
+      <tr><td class="row-label">カ行</td><td><span class="ref-char">カ</span><br><span class="ref-romaji">ka</span></td><td><span class="ref-char">キ</span><br><span class="ref-romaji">ki</span></td><td><span class="ref-char">ク</span><br><span class="ref-romaji">ku</span></td><td><span class="ref-char">ケ</span><br><span class="ref-romaji">ke</span></td><td><span class="ref-char">コ</span><br><span class="ref-romaji">ko</span></td></tr>
+      <tr><td class="row-label">サ行</td><td><span class="ref-char">サ</span><br><span class="ref-romaji">sa</span></td><td><span class="ref-char">シ</span><br><span class="ref-romaji">shi</span></td><td><span class="ref-char">ス</span><br><span class="ref-romaji">su</span></td><td><span class="ref-char">セ</span><br><span class="ref-romaji">se</span></td><td><span class="ref-char">ソ</span><br><span class="ref-romaji">so</span></td></tr>
+      <tr><td class="row-label">タ行</td><td><span class="ref-char">タ</span><br><span class="ref-romaji">ta</span></td><td><span class="ref-char">チ</span><br><span class="ref-romaji">chi</span></td><td><span class="ref-char">ツ</span><br><span class="ref-romaji">tsu</span></td><td><span class="ref-char">テ</span><br><span class="ref-romaji">te</span></td><td><span class="ref-char">ト</span><br><span class="ref-romaji">to</span></td></tr>
+      <tr><td class="row-label">ナ行</td><td><span class="ref-char">ナ</span><br><span class="ref-romaji">na</span></td><td><span class="ref-char">ニ</span><br><span class="ref-romaji">ni</span></td><td><span class="ref-char">ヌ</span><br><span class="ref-romaji">nu</span></td><td><span class="ref-char">ネ</span><br><span class="ref-romaji">ne</span></td><td><span class="ref-char">ノ</span><br><span class="ref-romaji">no</span></td></tr>
+      <tr><td class="row-label">ハ行</td><td><span class="ref-char">ハ</span><br><span class="ref-romaji">ha</span></td><td><span class="ref-char">ヒ</span><br><span class="ref-romaji">hi</span></td><td><span class="ref-char">フ</span><br><span class="ref-romaji">fu</span></td><td><span class="ref-char">ヘ</span><br><span class="ref-romaji">he</span></td><td><span class="ref-char">ホ</span><br><span class="ref-romaji">ho</span></td></tr>
+      <tr><td class="row-label">マ行</td><td><span class="ref-char">マ</span><br><span class="ref-romaji">ma</span></td><td><span class="ref-char">ミ</span><br><span class="ref-romaji">mi</span></td><td><span class="ref-char">ム</span><br><span class="ref-romaji">mu</span></td><td><span class="ref-char">メ</span><br><span class="ref-romaji">me</span></td><td><span class="ref-char">モ</span><br><span class="ref-romaji">mo</span></td></tr>
+      <tr><td class="row-label">ヤ行</td><td><span class="ref-char">ヤ</span><br><span class="ref-romaji">ya</span></td><td></td><td><span class="ref-char">ユ</span><br><span class="ref-romaji">yu</span></td><td></td><td><span class="ref-char">ヨ</span><br><span class="ref-romaji">yo</span></td></tr>
+      <tr><td class="row-label">ラ行</td><td><span class="ref-char">ラ</span><br><span class="ref-romaji">ra</span></td><td><span class="ref-char">リ</span><br><span class="ref-romaji">ri</span></td><td><span class="ref-char">ル</span><br><span class="ref-romaji">ru</span></td><td><span class="ref-char">レ</span><br><span class="ref-romaji">re</span></td><td><span class="ref-char">ロ</span><br><span class="ref-romaji">ro</span></td></tr>
+      <tr><td class="row-label">ワ行</td><td><span class="ref-char">ワ</span><br><span class="ref-romaji">wa</span></td><td></td><td></td><td></td><td><span class="ref-char">ヲ</span><br><span class="ref-romaji">wo/o</span></td></tr>
+      <tr><td class="row-label">ン</td><td colspan="5"><span class="ref-char">ン</span> <span class="ref-romaji">n</span></td></tr>
+    </table>
+  </div>
+
+  <!-- 浊音 / 半濁音 -->
+  <div class="ref-title" style="font-size:0.9rem">● 濁音 & 半濁音</div>
+  <div class="table-wrap">
+    <table class="ref-table">
+      <tr><th></th><th>あ段 a</th><th>い段 i</th><th>う段 u</th><th>え段 e</th><th>お段 o</th></tr>
+      <tr><td class="row-label">が行 g</td>
+        <td><span class="ref-char">が</span>/<span class="ref-char" style="color:#2980b9">ガ</span><br><span class="ref-romaji">ga</span></td>
+        <td><span class="ref-char">ぎ</span>/<span class="ref-char" style="color:#2980b9">ギ</span><br><span class="ref-romaji">gi</span></td>
+        <td><span class="ref-char">ぐ</span>/<span class="ref-char" style="color:#2980b9">グ</span><br><span class="ref-romaji">gu</span></td>
+        <td><span class="ref-char">げ</span>/<span class="ref-char" style="color:#2980b9">ゲ</span><br><span class="ref-romaji">ge</span></td>
+        <td><span class="ref-char">ご</span>/<span class="ref-char" style="color:#2980b9">ゴ</span><br><span class="ref-romaji">go</span></td></tr>
+      <tr><td class="row-label">ざ行 z</td>
+        <td><span class="ref-char">ざ</span>/<span class="ref-char" style="color:#2980b9">ザ</span><br><span class="ref-romaji">za</span></td>
+        <td><span class="ref-char">じ</span>/<span class="ref-char" style="color:#2980b9">ジ</span><br><span class="ref-romaji">ji</span></td>
+        <td><span class="ref-char">ず</span>/<span class="ref-char" style="color:#2980b9">ズ</span><br><span class="ref-romaji">zu</span></td>
+        <td><span class="ref-char">ぜ</span>/<span class="ref-char" style="color:#2980b9">ゼ</span><br><span class="ref-romaji">ze</span></td>
+        <td><span class="ref-char">ぞ</span>/<span class="ref-char" style="color:#2980b9">ゾ</span><br><span class="ref-romaji">zo</span></td></tr>
+      <tr><td class="row-label">だ行 d</td>
+        <td><span class="ref-char">だ</span>/<span class="ref-char" style="color:#2980b9">ダ</span><br><span class="ref-romaji">da</span></td>
+        <td><span class="ref-char">ぢ</span>/<span class="ref-char" style="color:#2980b9">ヂ</span><br><span class="ref-romaji">ji</span></td>
+        <td><span class="ref-char">づ</span>/<span class="ref-char" style="color:#2980b9">ヅ</span><br><span class="ref-romaji">zu</span></td>
+        <td><span class="ref-char">で</span>/<span class="ref-char" style="color:#2980b9">デ</span><br><span class="ref-romaji">de</span></td>
+        <td><span class="ref-char">ど</span>/<span class="ref-char" style="color:#2980b9">ド</span><br><span class="ref-romaji">do</span></td></tr>
+      <tr><td class="row-label">ば行 b</td>
+        <td><span class="ref-char">ば</span>/<span class="ref-char" style="color:#2980b9">バ</span><br><span class="ref-romaji">ba</span></td>
+        <td><span class="ref-char">び</span>/<span class="ref-char" style="color:#2980b9">ビ</span><br><span class="ref-romaji">bi</span></td>
+        <td><span class="ref-char">ぶ</span>/<span class="ref-char" style="color:#2980b9">ブ</span><br><span class="ref-romaji">bu</span></td>
+        <td><span class="ref-char">べ</span>/<span class="ref-char" style="color:#2980b9">ベ</span><br><span class="ref-romaji">be</span></td>
+        <td><span class="ref-char">ぼ</span>/<span class="ref-char" style="color:#2980b9">ボ</span><br><span class="ref-romaji">bo</span></td></tr>
+      <tr><td class="row-label">ぱ行 p</td>
+        <td><span class="ref-char">ぱ</span>/<span class="ref-char" style="color:#2980b9">パ</span><br><span class="ref-romaji">pa</span></td>
+        <td><span class="ref-char">ぴ</span>/<span class="ref-char" style="color:#2980b9">ピ</span><br><span class="ref-romaji">pi</span></td>
+        <td><span class="ref-char">ぷ</span>/<span class="ref-char" style="color:#2980b9">プ</span><br><span class="ref-romaji">pu</span></td>
+        <td><span class="ref-char">ぺ</span>/<span class="ref-char" style="color:#2980b9">ペ</span><br><span class="ref-romaji">pe</span></td>
+        <td><span class="ref-char">ぽ</span>/<span class="ref-char" style="color:#2980b9">ポ</span><br><span class="ref-romaji">po</span></td></tr>
+    </table>
+  </div>
+</div>
+
+</div><!-- container -->
+
+<script>
+// ==================== 数据 ====================
+// 清音 46 音
+const SEION = [
+  { hira:"あ", kata:"ア", roma:"a",   row:"a" },
+  { hira:"い", kata:"イ", roma:"i",   row:"a" },
+  { hira:"う", kata:"ウ", roma:"u",   row:"a" },
+  { hira:"え", kata:"エ", roma:"e",   row:"a" },
+  { hira:"お", kata:"オ", roma:"o",   row:"a" },
+  { hira:"か", kata:"カ", roma:"ka",  row:"ka" },
+  { hira:"き", kata:"キ", roma:"ki",  row:"ka" },
+  { hira:"く", kata:"ク", roma:"ku",  row:"ka" },
+  { hira:"け", kata:"ケ", roma:"ke",  row:"ka" },
+  { hira:"こ", kata:"コ", roma:"ko",  row:"ka" },
+  { hira:"さ", kata:"サ", roma:"sa",  row:"sa" },
+  { hira:"し", kata:"シ", roma:"shi", row:"sa" },
+  { hira:"す", kata:"ス", roma:"su",  row:"sa" },
+  { hira:"せ", kata:"セ", roma:"se",  row:"sa" },
+  { hira:"そ", kata:"ソ", roma:"so",  row:"sa" },
+  { hira:"た", kata:"タ", roma:"ta",  row:"ta" },
+  { hira:"ち", kata:"チ", roma:"chi", row:"ta" },
+  { hira:"つ", kata:"ツ", roma:"tsu", row:"ta" },
+  { hira:"て", kata:"テ", roma:"te",  row:"ta" },
+  { hira:"と", kata:"ト", roma:"to",  row:"ta" },
+  { hira:"な", kata:"ナ", roma:"na",  row:"na" },
+  { hira:"に", kata:"ニ", roma:"ni",  row:"na" },
+  { hira:"ぬ", kata:"ヌ", roma:"nu",  row:"na" },
+  { hira:"ね", kata:"ネ", roma:"ne",  row:"na" },
+  { hira:"の", kata:"ノ", roma:"no",  row:"na" },
+  { hira:"は", kata:"ハ", roma:"ha",  row:"ha" },
+  { hira:"ひ", kata:"ヒ", roma:"hi",  row:"ha" },
+  { hira:"ふ", kata:"フ", roma:"fu",  row:"ha" },
+  { hira:"へ", kata:"ヘ", roma:"he",  row:"ha" },
+  { hira:"ほ", kata:"ホ", roma:"ho",  row:"ha" },
+  { hira:"ま", kata:"マ", roma:"ma",  row:"ma" },
+  { hira:"み", kata:"ミ", roma:"mi",  row:"ma" },
+  { hira:"む", kata:"ム", roma:"mu",  row:"ma" },
+  { hira:"め", kata:"メ", roma:"me",  row:"ma" },
+  { hira:"も", kata:"モ", roma:"mo",  row:"ma" },
+  { hira:"や", kata:"ヤ", roma:"ya",  row:"ya" },
+  { hira:"ゆ", kata:"ユ", roma:"yu",  row:"ya" },
+  { hira:"よ", kata:"ヨ", roma:"yo",  row:"ya" },
+  { hira:"ら", kata:"ラ", roma:"ra",  row:"ra" },
+  { hira:"り", kata:"リ", roma:"ri",  row:"ra" },
+  { hira:"る", kata:"ル", roma:"ru",  row:"ra" },
+  { hira:"れ", kata:"レ", roma:"re",  row:"ra" },
+  { hira:"ろ", kata:"ロ", roma:"ro",  row:"ra" },
+  { hira:"わ", kata:"ワ", roma:"wa",  row:"wa" },
+  { hira:"を", kata:"ヲ", roma:"wo",  row:"wa" },
+  { hira:"ん", kata:"ン", roma:"n",   row:"n" },
+];
+
+// 濁音 + 半濁音 25 音
+const DAKUON = [
+  { hira:"が", kata:"ガ", roma:"ga", row:"ga" },
+  { hira:"ぎ", kata:"ギ", roma:"gi", row:"ga" },
+  { hira:"ぐ", kata:"グ", roma:"gu", row:"ga" },
+  { hira:"げ", kata:"ゲ", roma:"ge", row:"ga" },
+  { hira:"ご", kata:"ゴ", roma:"go", row:"ga" },
+  { hira:"ざ", kata:"ザ", roma:"za", row:"za" },
+  { hira:"じ", kata:"ジ", roma:"ji", row:"za" },
+  { hira:"ず", kata:"ズ", roma:"zu", row:"za" },
+  { hira:"ぜ", kata:"ゼ", roma:"ze", row:"za" },
+  { hira:"ぞ", kata:"ゾ", roma:"zo", row:"za" },
+  { hira:"だ", kata:"ダ", roma:"da", row:"da" },
+  { hira:"ぢ", kata:"ヂ", roma:"ji", row:"da" },
+  { hira:"づ", kata:"ヅ", roma:"zu", row:"da" },
+  { hira:"で", kata:"デ", roma:"de", row:"da" },
+  { hira:"ど", kata:"ド", roma:"do", row:"da" },
+  { hira:"ば", kata:"バ", roma:"ba", row:"ba" },
+  { hira:"び", kata:"ビ", roma:"bi", row:"ba" },
+  { hira:"ぶ", kata:"ブ", roma:"bu", row:"ba" },
+  { hira:"べ", kata:"ベ", roma:"be", row:"ba" },
+  { hira:"ぼ", kata:"ボ", roma:"bo", row:"ba" },
+  { hira:"ぱ", kata:"パ", roma:"pa", row:"pa" },
+  { hira:"ぴ", kata:"ピ", roma:"pi", row:"pa" },
+  { hira:"ぷ", kata:"プ", roma:"pu", row:"pa" },
+  { hira:"ぺ", kata:"ペ", roma:"pe", row:"pa" },
+  { hira:"ぽ", kata:"ポ", roma:"po", row:"pa" },
+];
+
+const ALL_CHARS = [...SEION, ...DAKUON];
+
+// ==================== 状态 ====================
+let questions = [];
+let currentIdx = 0;
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let wrongQList = [];   // 错题记录
+let startTime = 0;
+let isQuizActive = false;
+
+// ==================== 工具 ====================
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// 根据范围过滤字符
+function filterByRange(range) {
+  if (range === "all") return [...ALL_CHARS];
+  if (range === "seion") return [...SEION];
+  if (range === "dakuon") return [...DAKUON];
+  // 行过滤
+  const rowMap = {
+    "a-row":"a","ka-row":"ka","sa-row":"sa","ta-row":"ta",
+    "na-row":"na","ha-row":"ha","ma-row":"ma","ya-row":"ya",
+    "ra-row":"ra","wa-row":"wa"
+  };
+  const row = rowMap[range];
+  if (row) return ALL_CHARS.filter(c => c.row === row);
+  return [...ALL_CHARS];
+}
+
+// ==================== 题目生成 ====================
+function generateQuestions() {
+  const mode = document.getElementById("sel-mode").value;
+  const quizType = document.getElementById("sel-type").value;
+  const range = document.getElementById("sel-range").value;
+  const countSel = document.getElementById("sel-count").value;
+
+  let pool = filterByRange(range);
+  if (pool.length === 0) pool = [...ALL_CHARS];
+
+  // 混合模式：平假名和片假名各一半
+  if (mode === "mix") {
+    pool = shuffle(pool);
+  }
+
+  let total = countSel === "all" ? pool.length : parseInt(countSel);
+  if (total > pool.length * 2) total = pool.length * 2;
+
+  const qs = [];
+  const used = [];
+  // 循环使用 pool，每个字符最多出现 2 次
+  for (let i = 0; i < total; i++) {
+    const ch = pool[i % pool.length];
+    qs.push(buildQ(ch, mode, quizType));
+  }
+
+  return qs;
+}
+
+function buildQ(ch, mode, quizType) {
+  let stem, correct, prompt;
+
+  // 混合模式平假名和片假名交替
+  let actualMode = mode;
+  if (mode === "mix") {
+    const mixModes = ["hira2roma", "kata2roma", "roma2hira", "roma2kata"];
+    actualMode = mixModes[Math.floor(Math.random() * mixModes.length)];
+  }
+
+  switch (actualMode) {
+    case "hira2roma":
+      stem = ch.hira;
+      correct = ch.roma;
+      prompt = "平假名 → 罗马音";
+      break;
+    case "kata2roma":
+      stem = ch.kata;
+      correct = ch.roma;
+      prompt = "片假名 → 罗马音";
+      break;
+    case "roma2hira":
+      stem = ch.roma;
+      correct = ch.hira;
+      prompt = "罗马音 → 平假名";
+      break;
+    case "roma2kata":
+      stem = ch.roma;
+      correct = ch.kata;
+      prompt = "罗马音 → 片假名";
+      break;
+    default:
+      stem = ch.hira;
+      correct = ch.roma;
+      prompt = "平假名 → 罗马音";
+  }
+
+  return { stem, correct, prompt, char: ch, mode: actualMode, isChoice: quizType === "choice" };
+}
+
+// 生成干扰项
+function getDistractors(correct, mode) {
+  let pool;
+  if (mode.includes("roma")) {
+    // 答案是罗马音
+    pool = [...new Set(ALL_CHARS.map(c => c.roma))];
+  } else {
+    // 答案是假名
+    if (mode === "roma2hira") pool = ALL_CHARS.map(c => c.hira);
+    else pool = ALL_CHARS.map(c => c.kata);
+  }
+  const others = pool.filter(v => v !== correct);
+  const picked = shuffle(others).slice(0, 3);
+  return shuffle([correct, ...picked]);
+}
+
+// ==================== 渲染 ====================
+let currentQ = null;
+
+function renderCurrent() {
+  if (currentIdx >= questions.length) {
+    showResult();
+    return;
+  }
+
+  currentQ = questions[currentIdx];
+  const area = document.getElementById("quiz-area");
+  area.innerHTML = "";
+
+  const card = document.createElement("div");
+  card.className = "q-card";
+  card.id = "q-card";
+
+  const label = `<div class="q-label">第 ${currentIdx + 1} / ${questions.length} 题 · ${currentQ.prompt}</div>`;
+  const big = `<div class="q-big" id="q-stem">${currentQ.stem}</div>`;
+
+  if (currentQ.isChoice) {
+    card.innerHTML = label + big;
+    const opts = getDistractors(currentQ.correct, currentQ.mode);
+    const optsDiv = document.createElement("div");
+    optsDiv.className = "opts";
+    opts.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.className = "opt-btn";
+      btn.textContent = opt;
+      btn.onclick = function() { onChoice(opt, card, optsDiv); };
+      optsDiv.appendChild(btn);
+    });
+    card.appendChild(optsDiv);
+  } else {
+    card.innerHTML = label + big;
+    const fillRow = document.createElement("div");
+    fillRow.className = "fill-row";
+    const inp = document.createElement("input");
+    inp.className = "fill-input";
+    inp.id = "fill-inp";
+    inp.placeholder = currentQ.mode.includes("roma") ? "输入罗马音…" : "输入假名…";
+    inp.autofocus = true;
+    const submitBtn = document.createElement("button");
+    submitBtn.className = "fill-submit";
+    submitBtn.textContent = "确认";
+    inp.onkeydown = function(e) {
+      if (e.key === "Enter") onFill(inp, submitBtn, card);
+    };
+    submitBtn.onclick = function() { onFill(inp, submitBtn, card); };
+    fillRow.appendChild(inp);
+    fillRow.appendChild(submitBtn);
+    card.appendChild(fillRow);
+  }
+
+  const fb = document.createElement("div");
+  fb.className = "feedback";
+  fb.id = "q-feedback";
+  card.appendChild(fb);
+
+  area.appendChild(card);
+
+  document.getElementById("next-btn").disabled = true;
+  updateStats();
+}
+
+function onChoice(chosen, card, optsDiv) {
+  if (card.classList.contains("answered")) return;
+  card.classList.add("answered");
+  answeredCount++;
+
+  const isCorrect = chosen === currentQ.correct;
+  if (isCorrect) correctCount++;
+  else {
+    wrongCount++;
+    wrongQList.push({ ...currentQ, userAnswer: chosen });
+  }
+
+  Array.from(optsDiv.querySelectorAll(".opt-btn")).forEach(btn => {
+    btn.disabled = true;
+    if (btn.textContent === currentQ.correct) {
+      btn.classList.add("correct-ans");
+    } else if (btn.textContent === chosen && !isCorrect) {
+      btn.classList.add("wrong-ans");
+    }
+  });
+
+  card.classList.add(isCorrect ? "correct-flash" : "wrong-flash");
+
+  const fb = document.getElementById("q-feedback");
+  fb.className = "feedback show " + (isCorrect ? "ok" : "ng");
+  fb.textContent = isCorrect ? "✅ 正解！" : "❌ 錯誤！正解：" + currentQ.correct;
+
+  document.getElementById("next-btn").disabled = false;
+  document.getElementById("next-btn").focus();
+  updateStats();
+}
+
+function onFill(inp, btn, card) {
+  if (card.classList.contains("answered")) return;
+  const val = inp.value.trim();
+  if (!val) return;
+
+  card.classList.add("answered");
+  answeredCount++;
+  inp.disabled = true;
+  btn.disabled = true;
+
+  function norm(s) { return s.trim().toLowerCase().replace(/\s+/g, ""); }
+  const isCorrect = norm(val) === norm(currentQ.correct);
+
+  if (isCorrect) {
+    correctCount++;
+    inp.classList.add("correct-ans");
+  } else {
+    wrongCount++;
+    inp.classList.add("wrong-ans");
+    wrongQList.push({ ...currentQ, userAnswer: val });
+  }
+
+  card.classList.add(isCorrect ? "correct-flash" : "wrong-flash");
+
+  const fb = document.getElementById("q-feedback");
+  fb.className = "feedback show " + (isCorrect ? "ok" : "ng");
+  fb.textContent = isCorrect ? "✅ 正解！" : "❌ 錯誤！正解：" + currentQ.correct;
+
+  document.getElementById("next-btn").disabled = false;
+  document.getElementById("next-btn").focus();
+  updateStats();
+}
+
+function nextQuestion() {
+  if (currentIdx >= questions.length) return;
+  currentIdx++;
+  if (currentIdx >= questions.length) {
+    showResult();
+  } else {
+    renderCurrent();
+  }
+  // 滚动到题目
+  document.getElementById("quiz-area").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+// ==================== 键盘快捷键 ====================
+document.addEventListener("keydown", function(e) {
+  if (!isQuizActive || !currentQ) return;
+  const card = document.getElementById("q-card");
+  if (!card) return;
+
+  // 选择题：1/2/3/4 选答案
+  if (currentQ.isChoice && !card.classList.contains("answered")) {
+    const btns = card.querySelectorAll(".opt-btn");
+    const keys = { "1":0, "2":1, "3":2, "4":3 };
+    if (e.key in keys && btns[keys[e.key]]) {
+      btns[keys[e.key]].click();
+    }
+  }
+
+  // 空格 / 回车 → 下一题
+  if ((e.key === " " || e.key === "Enter") && card.classList.contains("answered")) {
+    e.preventDefault();
+    nextQuestion();
+  }
+});
+
+// ==================== 统计 & 结果 ====================
+function updateStats() {
+  document.getElementById("s-total").textContent = answeredCount;
+  document.getElementById("s-correct").textContent = correctCount;
+  document.getElementById("s-wrong").textContent = wrongCount;
+  document.getElementById("s-remain").textContent = questions.length - currentIdx - (currentIdx < questions.length && document.getElementById("q-card") && document.getElementById("q-card").classList.contains("answered") ? 1 : 0);
+  const pct = questions.length > 0 ? Math.round((answeredCount / questions.length) * 100) : 0;
+  document.getElementById("progress-bar").style.width = pct + "%";
+
+  // 更新剩余
+  let rem = questions.length - answeredCount;
+  document.getElementById("s-remain").textContent = Math.max(0, rem);
+}
+
+function showResult() {
+  isQuizActive = false;
+  const elapsed = Math.round((Date.now() - startTime) / 1000);
+  const min = Math.floor(elapsed / 60);
+  const sec = elapsed % 60;
+
+  document.getElementById("quiz-area").innerHTML = "";
+  document.getElementById("next-btn").style.display = "none";
+
+  const panel = document.getElementById("result-panel");
+  panel.style.display = "block";
+
+  const total = questions.length;
+  const pct = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+  document.getElementById("score-text").textContent = correctCount + " / " + total;
+  document.getElementById("time-text").textContent = "用时 " + min + "分" + sec + "秒 · 正确率 " + pct + "%";
+
+  let grade = "";
+  if (pct >= 95) grade = "🏆 完璧！你已经掌握了！";
+  else if (pct >= 80) grade = "👍 優秀！再练练就满分了！";
+  else if (pct >= 60) grade = "📖 合格！还需要多练几次！";
+  else grade = "💪 加油！五十音需要反复记忆！";
+  document.getElementById("grade-text").textContent = grade;
+
+  // 错题列表
+  const wl = document.getElementById("wrong-list");
+  wl.innerHTML = "";
+  if (wrongQList.length > 0) {
+    wl.classList.add("show");
+    document.getElementById("retry-btn").style.display = "inline-block";
+    wrongQList.forEach(wq => {
+      const span = document.createElement("span");
+      span.className = "wrong-item";
+      span.textContent = wq.stem + " → " + wq.correct + "（你答了" + wq.userAnswer + "）";
+      wl.appendChild(span);
+    });
+  } else {
+    wl.classList.remove("show");
+    document.getElementById("retry-btn").style.display = "none";
+  }
+
+  scrollTo({ top: panel.offsetTop - 20, behavior: "smooth" });
+}
+
+function retryWrong() {
+  if (wrongQList.length === 0) return;
+  const qType = document.getElementById("sel-type").value;
+  questions = wrongQList.map(wq => ({
+    stem: wq.stem,
+    correct: wq.correct,
+    prompt: wq.prompt,
+    char: wq.char,
+    mode: wq.mode,
+    isChoice: qType === "choice"
+  }));
+  wrongQList = [];
+  resetState();
+  startQuizInternal();
+}
+
+// ==================== 开始测验 ====================
+function startQuiz() {
+  questions = generateQuestions();
+  resetState();
+  startQuizInternal();
+}
+
+function resetState() {
+  currentIdx = 0;
+  answeredCount = 0;
+  correctCount = 0;
+  wrongCount = 0;
+  wrongQList = [];
+  isQuizActive = true;
+  startTime = Date.now();
+  document.getElementById("result-panel").style.display = "none";
+  document.getElementById("wrong-list").classList.remove("show");
+  document.getElementById("retry-btn").style.display = "none";
+  document.getElementById("next-btn").style.display = "block";
+  document.getElementById("next-btn").disabled = true;
+  document.getElementById("score-text").textContent = "0 / 0";
+  document.getElementById("grade-text").textContent = "";
+  document.getElementById("time-text").textContent = "";
+  document.getElementById("s-total").textContent = "0";
+  document.getElementById("s-correct").textContent = "0";
+  document.getElementById("s-wrong").textContent = "0";
+  document.getElementById("s-remain").textContent = "0";
+  document.getElementById("progress-bar").style.width = "0%";
+}
+
+function startQuizInternal() {
+  document.getElementById("s-remain").textContent = questions.length;
+  renderCurrent();
+  document.getElementById("quiz-area").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function onModeChange() {
+  // 切换模式时自动重新开始
+  if (isQuizActive && answeredCount > 0) {
+    // 如果已经开始答题了，不自动重置，让用户点按钮
+  }
+}
+
+function toggleRef() {
+  const p = document.getElementById("ref-panel");
+  p.classList.toggle("show");
+  if (p.classList.contains("show")) {
+    p.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+// ==================== 初始化 ====================
+window.onload = function() {
+  startQuiz();
+};
+</script>
+</body>
+</html>
