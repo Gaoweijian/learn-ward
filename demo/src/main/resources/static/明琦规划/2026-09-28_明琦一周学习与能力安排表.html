@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="tmUGGaKwQJCB7xoKSuBEno">
+<head data-page-node-id="1JoMkYFJByB8eM6G9rD2Bx">
+<meta charset="UTF-8" data-page-node-id="TfQv9Gosm35hh3VDLn3Utx">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="wmChyTC4s3PZVQvEqNdU6s">
+<title>明琦 · 一周学习与能力安排表</title>
+<style>
+  :root{
+    --bg:#FFFBF5;--card:#FFFFFF;--ink:#3D3226;--ink-2:#6B5B4A;--ink-3:#9A8A79;
+    --line:#EFE4D6;--line-2:#E3D3BE;
+    --orange:#E08A45;--orange-s:#FDF1E4;--orange-d:#B96A2C;
+    --green:#7FA06A;--green-s:#F1F6EC;--green-d:#587445;
+    --blue:#7C93AC;--blue-s:#EFF3F7;--blue-d:#56697C;
+    --plum:#A97C93;--plum-s:#F7EFF4;--plum-d:#835F73;
+    --gold:#C9A06A;--gold-s:#FBF3E7;--gold-d:#96702F;
+    --red:#C4715F;--red-s:#FBEFEC;
+    --r:16px;--shadow:0 1px 2px rgba(96,74,48,.05),0 6px 18px rgba(96,74,48,.06);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.75;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px 72px}
+
+  header{padding:32px 0 18px}
+  .kicker{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--orange-d);
+    background:var(--orange-s);border:1px solid #F3DFC6;border-radius:999px;padding:4px 12px;margin-bottom:13px}
+  h1{font-size:26px;line-height:1.35;margin:0 0 9px;letter-spacing:-.01em}
+  h1 small{display:block;font-size:13.5px;font-weight:400;color:var(--ink-3);margin-top:7px}
+  .lede{font-size:15px;color:var(--ink-2);margin:0}
+
+  nav{position:sticky;top:0;z-index:20;background:rgba(255,251,245,.94);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);margin:18px -16px 24px;padding:10px 16px}
+  .chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;text-decoration:none;font-size:13px;color:var(--ink-2);border:1px solid var(--line-2);
+    background:#fff;border-radius:999px;padding:6px 13px;white-space:nowrap}
+  .chips a:active{background:var(--orange-s)}
+
+  .warn{background:var(--red-s);border:1px solid #F2DCD6;border-left:3px solid var(--red);
+    border-radius:0 12px 12px 0;padding:12px 14px;font-size:14.5px;color:#8E4E40;margin:18px 0 0}
+  .warn b{color:#7A3F33}
+
+  section{margin-bottom:32px;scroll-margin-top:62px}
+  .sec-h{display:flex;align-items:baseline;gap:10px;margin:0 0 5px}
+  .sec-n{font-size:12px;font-weight:700;color:var(--orange);letter-spacing:.06em;padding-top:4px}
+  h2{font-size:20px;margin:0;letter-spacing:-.01em}
+  .sec-sub{color:var(--ink-3);font-size:13.5px;margin:0 0 15px;padding-left:30px}
+
+  /* 总览表 */
+  .ovw{border:1px solid var(--line);border-radius:var(--r);background:var(--card);
+    box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden}
+  .ovw .oh{display:flex;gap:12px;padding:9px 13px;background:#FFFDF9;border-bottom:1px solid var(--line);
+    font-size:12px;color:var(--ink-3);font-weight:600}
+  .ovw .oh .l1{flex:0 0 112px}
+  .ovw .orow{display:flex;gap:12px;padding:11px 13px;border-bottom:1px solid var(--line);align-items:flex-start}
+  .ovw .orow:last-child{border-bottom:none}
+  .ovw .oleft{flex:0 0 112px;min-width:0}
+  .ovw .oday{display:block;font-weight:700;color:var(--orange-d);font-size:14.5px;line-height:1.5}
+  .ovw .osub{display:block;font-size:12.5px;color:var(--ink-3);line-height:1.55}
+  .ovw .oright{flex:1;min-width:0}
+  .ovw .oabil{font-size:14.5px;font-weight:600;color:var(--ink);line-height:1.55}
+  .ovw .ohint{display:block;font-size:12.5px;color:var(--ink-3);line-height:1.6;margin-top:2px}
+
+  .tg{display:inline-block;font-size:11.5px;padding:1.5px 8px;border-radius:6px;margin-right:5px;
+    vertical-align:1.5px;border:1px solid transparent;white-space:nowrap}
+  .tg.o{background:var(--orange-s);color:var(--orange-d);border-color:#F3DFC6}
+  .tg.g{background:var(--green-s);color:var(--green-d);border-color:#DCE9D2}
+  .tg.b{background:var(--blue-s);color:var(--blue-d);border-color:#DBE4EC}
+  .tg.p{background:var(--plum-s);color:var(--plum-d);border-color:#EBDCE5}
+  .tg.y{background:var(--gold-s);color:var(--gold-d);border-color:#EEDFC4}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    padding:16px 15px;box-shadow:var(--shadow);margin-bottom:13px}
+  .card h3{font-size:15.5px;margin:0 0 10px}
+  .card p{margin:0 0 9px}
+  .card p:last-child{margin-bottom:0}
+  ul.plain{margin:0;padding:0;list-style:none}
+  ul.plain li{position:relative;padding-left:19px;margin-bottom:8px;font-size:14.5px;color:var(--ink-2)}
+  ul.plain li:last-child{margin-bottom:0}
+  ul.plain li::before{content:"";position:absolute;left:5px;top:10px;width:6px;height:6px;border-radius:50%;background:var(--line-2)}
+  ul.plain li b{color:var(--ink)}
+  .tip{border-radius:10px;padding:10px 12px;font-size:13.5px;line-height:1.7;margin-top:11px;
+    background:var(--orange-s);color:#7A5636}
+  .tip.g{background:var(--green-s);color:#4F6B3D}
+  .tip.b{background:var(--blue-s);color:#4E6273}
+  .tip.r{background:var(--red-s);color:#8E4E40}
+
+  /* 能力卡 */
+  .ab{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+    box-shadow:var(--shadow);margin-bottom:12px}
+  .ab .hd{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#FFFDF9,#FFF9F1)}
+  .ab .no{flex:0 0 auto;width:26px;height:26px;border-radius:9px;color:#fff;font-size:13.5px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;background:var(--orange)}
+  .ab.n2 .no{background:var(--green)}.ab.n3 .no{background:var(--gold)}
+  .ab.n4 .no{background:#B08968}.ab.n5 .no{background:var(--blue)}
+  .ab.n6 .no{background:#8FA97C}.ab.n7 .no{background:var(--plum)}
+  .ab .nm{font-size:15.5px;font-weight:600}
+  .ab .dy{font-size:12px;color:var(--orange-d);background:var(--orange-s);border:1px solid #F3DFC6;
+    border-radius:6px;padding:1px 8px;margin-left:auto;flex:0 0 auto}
+  .ab .bd{padding:13px 14px}
+  .ab .why{font-size:14px;color:var(--ink-2);margin:0 0 12px}
+  .ab .why b{color:var(--ink)}
+  .ab h4{font-size:13px;color:var(--ink-3);font-weight:600;letter-spacing:.03em;margin:0 0 8px}
+  .ab ul.how{margin:0 0 12px;padding:0;list-style:none}
+  .ab ul.how li{position:relative;padding-left:19px;margin-bottom:8px;font-size:14.5px;color:var(--ink-2)}
+  .ab ul.how li:last-child{margin-bottom:0}
+  .ab ul.how li::before{content:"▸";position:absolute;left:4px;top:-1px;color:var(--orange);font-size:13px}
+  .ab ul.how li b{color:var(--ink)}
+  .ab .goal{background:#FFFDF9;border:1px dashed var(--line-2);border-radius:10px;padding:9px 12px;
+    font-size:13.5px;color:var(--ink-2)}
+  .ab .goal b{color:var(--orange-d)}
+
+  /* 日卡 */
+  .day{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+    margin-bottom:11px;box-shadow:var(--shadow)}
+  .day .hd{display:flex;align-items:center;gap:9px;padding:12px 14px;
+    background:linear-gradient(180deg,#FFFDF9,#FFF9F1);border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .day .dn{flex:0 0 auto;width:44px;height:26px;border-radius:8px;background:var(--orange);color:#fff;
+    font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .day.d1 .dn{background:var(--blue)}.day.d2 .dn{background:var(--plum)}
+  .day.d3 .dn{background:var(--green)}.day.d4 .dn{background:var(--gold)}
+  .day .dt{font-size:15px;font-weight:600}
+  .day .bd{padding:13px 14px}
+  .day .row{display:flex;gap:8px;margin-bottom:10px;font-size:14.5px;color:var(--ink-2)}
+  .day .row:last-of-type{margin-bottom:0}
+  .day .lb{flex:0 0 50px;font-size:12.5px;color:var(--ink-3);padding-top:3px}
+  .day .ct{flex:1;min-width:0}
+  .day .ct b{color:var(--ink);font-weight:600}
+  .day ol{margin:0;padding-left:17px}
+  .day ol li{margin-bottom:5px}
+  .day ol li:last-child{margin-bottom:0}
+  .day .abil-line{background:#FFFDF9;border-radius:10px;padding:9px 12px;font-size:14px;color:var(--ink-2)}
+  .day .abil-line b{color:var(--orange-d)}
+
+  .chk{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;border-top:1px dashed var(--line);
+    cursor:pointer;background:#FFFEFC}
+  .chk input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:19px;height:19px;margin:2px 0 0;
+    border:1.6px solid var(--line-2);border-radius:6px;background:#fff;position:relative;cursor:pointer;transition:.15s}
+  .chk input:checked{background:var(--orange);border-color:var(--orange)}
+  .chk input:checked::after{content:"";position:absolute;left:5.5px;top:2px;width:5px;height:10px;
+    border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .chk .t{font-size:14px;color:var(--ink-2)}
+  .chk input:checked + .t{color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--line-2)}
+
+  .bar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;align-items:center}
+  button.c{font-family:inherit;font-size:13px;color:var(--orange-d);background:#fff;border:1px solid var(--line-2);
+    border-radius:999px;padding:7px 15px;cursor:pointer}
+  button.c:active{background:var(--orange-s)}
+  button.c.ok{background:var(--green-s);color:var(--green-d);border-color:#DCE9D2}
+  .hint{font-size:12.5px;color:var(--ink-3)}
+
+  .final{text-align:center;background:var(--orange-s);border:1px solid #F3DFC6;border-radius:var(--r);
+    padding:20px 18px;margin:24px 0 0}
+  .final .big{font-size:17px;font-weight:600;color:var(--orange-d);line-height:1.6;margin:0}
+  .final .sm{font-size:13.5px;color:#7A5B38;margin:9px 0 0}
+
+  footer{border-top:1px solid var(--line);margin-top:34px;padding-top:17px;font-size:12.5px;color:var(--ink-3);line-height:1.8}
+
+  @media (max-width:400px){
+    h1{font-size:22px}
+    body{font-size:15.5px}
+    .day .lb{flex:0 0 44px;font-size:12px}
+
+  }
+  @media print{
+    body{background:#fff;font-size:12px}
+    nav,.bar,.noprint{display:none}
+    .wrap{padding:0;max-width:none}
+    .day,.card,.ab,.tw{box-shadow:none;break-inside:avoid}
+    @page{margin:12mm}
+  }
+</style>
+</head>
+<body data-page-node-id="Ajvsj3sQLtBGvZXV11mOwf">
+<div class="wrap" data-page-node-id="J9PAojFEWrsBGbmZAfJHcw">
+
+<header data-page-node-id="NEOo5WeRkvOTYiP3AlfIpM">
+  <span class="kicker" data-page-node-id="Hgx1vFNz3eOT7VdQi62fZK">阶段一 · 一周全表</span>
+  <h1 data-page-node-id="g5rtLFB8uQ5F9MaVzAmuwW">明琦 · 每天学什么，练什么能力
+    <small data-page-node-id="bYPWfaKYbwpoGdPPL9cHaC">2026 年 10 月 — 2027 年 2 月 ｜ 4 岁 11 个月 → 5 岁 3 个月 ｜ 幼儿园中班</small>
+  </h1>
+  <p class="lede" data-page-node-id="jTFgGfYzwPuj4zC6EEVFWZ">每天<b data-page-node-id="OoEWDXWZ69U5k0vryIjoSY">一个学科主攻 + 一项能力主攻</b>。学科是生字、数字、拼音；能力是把"其他能力"拆开后的八项，一天练一项，不占额外时间。</p>
+  <div class="warn" data-page-node-id="0eqZdSHGTJqjWqgd8UYrgI">
+    <b data-page-node-id="40JyuC4x1e60dEQsgtCJlQ">先记一条铁规矩：拼音现在只听音，不认符号。</b><br data-page-node-id="TB2n4pYTuPPclUNW6W7fhx">
+    明琦现在 4 岁 10 个月，拼音这条线只玩押韵、拆音节、数音节，<b data-page-node-id="g72yDJB4AV7y3bFJtPOsPA">一个字母都不出现</b>。等 5 岁半（2027 年中）再认 b p m f。现在教等于让他背密码，记不住还容易厌学。
+  </div>
+</header>
+
+<nav data-page-node-id="LToBPP6iAxoClvRHontjIB">
+  <div class="chips" data-page-node-id="AfO6PFdSWv1W3sh4FCGN44">
+    <a href="#s0" data-page-node-id="QAMIFBt3E5lxfBsFNWXX4N">一周总览</a>
+    <a href="#s1" data-page-node-id="PBcCquHgHoa1SH2Fzdg27l">三层结构</a>
+    <a href="#s2" data-page-node-id="njOW662qHYUgRKCjvIAS9w">八项能力</a>
+    <a href="#s3" data-page-node-id="v4HubFHAocMB7O8oSuYwXy">逐日安排</a>
+    <a href="#s4" data-page-node-id="HAQpM4lO2c4TcR6cjewEh8">执行铁律</a>
+  </div>
+</nav>
+
+<!-- 00 总览 -->
+<section id="s0" data-page-node-id="uNd39JueThU1ZAvqlQIi4t">
+  <div class="sec-h" data-page-node-id="OFiE5qL6yNzVUJBQUczclY"><span class="sec-n" data-page-node-id="puhgYkJ3VwXFIPKDy4hfBL">00</span><h2 data-page-node-id="FqoFJpNWhkLtGsppHsto3M">一周总览</h2></div>
+  <p class="sec-sub" data-page-node-id="Q0Zx4Q4NwhOppjC1gbHRuG">左边是学科，右边是当天要练的能力</p>
+
+  <div class="ovw" data-page-node-id="cHYRtpkVNNidBouTwyBP1i">
+    <div class="oh" data-page-node-id="VKxByiIzM2P39a92Xx1Zeo"><span class="l1" data-page-node-id="PEbC222d7ZRDzyyvr3VOkQ">星期 / 学科主攻</span><span data-page-node-id="x5ddYcGRG9J4e9mfuEL2Cc">能力主攻</span></div>
+    <div class="orow" data-page-node-id="jZpYrdILAc4sClscKpHAjm">
+      <div class="oleft" data-page-node-id="bMQ4quD4YZBLCGJ9lTe7mT"><span class="oday" data-page-node-id="BngpwuPyNhPgvxYvgpWYhU">周一</span><span class="osub" data-page-node-id="vydRz0RDFj8ioKF044ZmtO">生字 · 字卡游戏</span></div>
+      <div class="oright" data-page-node-id="2eDM8HiubpL0xrX4Krwzbb"><div class="oabil" data-page-node-id="7EEoKES6AM1Pw6GSZjZZYS">专注力</div><span class="ohint" data-page-node-id="57YYmT0G4fPVGQb73zbFwT">舒尔特方格 / 拼图 / 找不同</span></div>
+    </div>
+    <div class="orow" data-page-node-id="0eFQom6UqvNKHIFBPR5oum">
+      <div class="oleft" data-page-node-id="F2aGBgZQHs31tD26Ui9t9p"><span class="oday" data-page-node-id="3r7uGphAPsLt14XkQ0zkmI">周二</span><span class="osub" data-page-node-id="lFsbCCehHIABDkO7ah7NKb">数字 · 实物操作</span></div>
+      <div class="oright" data-page-node-id="jWJAHUEDW6wsFd1x8Fn6pl"><div class="oabil" data-page-node-id="A6XhIF5DEsua2oMQYL7BrO">逻辑思维</div><span class="ohint" data-page-node-id="u5tKAegP2lhSB9ynm7ARu9">分类 / 排序 / 找规律 / 因果</span></div>
+    </div>
+    <div class="orow" data-page-node-id="WZWD3m8hnp9XDcqDhASNPe">
+      <div class="oleft" data-page-node-id="hQ1EucKLKKNFkUJh8Ekcv6"><span class="oday" data-page-node-id="AGuRNh85xX7R6XRY1Sk8Kg">周三</span><span class="osub" data-page-node-id="9NAGDhmDvTvfGKnjrKcVnY">手部精细动作</span></div>
+      <div class="oright" data-page-node-id="BvCPzJQTNjKEFnTqy9l0Xo"><div class="oabil" data-page-node-id="4DXCihGgRJRLF7EtXUz8sL">生活自理</div><span class="ohint" data-page-node-id="QVRz6QAFcsrwjYGwjxrRGq">穿脱 / 收拾 / 帮厨</span></div>
+    </div>
+    <div class="orow" data-page-node-id="vzTb1KiwpYL3CNCilDAz7u">
+      <div class="oleft" data-page-node-id="EBG8nnPIVAiYxXsx5pNRVP"><span class="oday" data-page-node-id="pBGbYYsFT5LRVr9v4dtODg">周四</span><span class="osub" data-page-node-id="oAGnYzICHBsdM9uiKQyHBE">生字 + 数字<br data-page-node-id="L0e2POoeyhDHS7PQzxSjLo">各 5 分钟</span></div>
+      <div class="oright" data-page-node-id="6fCEO7ieIcsO6U6IOXBjSl"><div class="oabil" data-page-node-id="hM1EufhGzHs3JqBwDIsZds">语言表达</div><span class="ohint" data-page-node-id="0oM4u6viGEgRfqYI12wlMm">复述 / 描述 / 扩句</span></div>
+    </div>
+    <div class="orow" data-page-node-id="vKHu601wC8tOo6waihs4jT">
+      <div class="oleft" data-page-node-id="qXy0xEIIeGHZ6gLw4hy8ih"><span class="oday" data-page-node-id="W3r9zJPw7ZNZRtZINZrnfa">周五</span><span class="osub" data-page-node-id="AsJszKBmEXSK9BndxvVUkC">拼音 · 只听音</span></div>
+      <div class="oright" data-page-node-id="4vtQZNVRFg9oPtfPaHDSoU"><div class="oabil" data-page-node-id="6W5ENJ7U2o4MakkkU0Y3jd">听指令与听觉记忆</div><span class="ohint" data-page-node-id="RSLGUU6U6bKoo8PQonkgJT">多步指令 / 传话 / 复述数字</span></div>
+    </div>
+    <div class="orow" data-page-node-id="xrPYJ4G1vjPhBUFJRGNSj9">
+      <div class="oleft" data-page-node-id="nSr6E4Vxv1xtxH1KauHbHK"><span class="oday" data-page-node-id="NmYQvvtkLi1xhplXHTjRPw">周六</span><span class="osub" data-page-node-id="sSo6WKrR8xlTUR25wdQfJ2">生活实践<br data-page-node-id="3mFKKpDLSdMHmsG5E1BnDg">超市认字算钱</span></div>
+      <div class="oright" data-page-node-id="ADQwQp2Di054WwulK7af4O"><div class="oabil" data-page-node-id="qUqoGIYtQr7dGKl5HPDXhB">大运动 + 社交</div><span class="ohint" data-page-node-id="UxrMAqZqaCrYAhycsGFrtO">跑跳平衡 / 加入游戏</span></div>
+    </div>
+    <div class="orow" data-page-node-id="AGFaADzt6BDnaBa4BY3NNY">
+      <div class="oleft" data-page-node-id="R5AlAphxBpVOGWdjzoVu1D"><span class="oday" data-page-node-id="0uc4Q6IhusELlFDIf50y2L">周日</span><span class="osub" data-page-node-id="2iQ2Q87ffTFhFTWUQV01Ew">—　留白</span></div>
+      <div class="oright" data-page-node-id="Lqg8DQMLbB35skAVGZoGTe"><div class="oabil" data-page-node-id="VYRYIN5rfDNR732Wd8rHYT">情绪认知</div><span class="ohint" data-page-node-id="Hu2KTk4nFb8WMO3i7dX3QL">情绪命名 / 一周回顾</span></div>
+    </div>
+  </div>
+  <div class="bar noprint" data-page-node-id="MVKbJFsQ5HWRzriyDRv5lt">
+    <button class="c" data-copy="all" data-page-node-id="8gXQi9bRLX2gze7YH3g0Bn">复制纯文本（存手机）</button>
+    <button class="c" onclick="window.print()" data-page-node-id="hfvCVp9cbBOyIWAO4LAYSr">打印这张表</button>
+    <span class="hint" data-page-node-id="ZTpoW1azAdfuwsjxxHz22t">勾选按周自动重置</span>
+  </div>
+</section>
+
+<!-- 01 三层结构 -->
+<section id="s1" data-page-node-id="eIzDNxjpbKtZTDHX7sPqZz">
+  <div class="sec-h" data-page-node-id="LAH5V1TX4TMDzB2M6C4Ptu"><span class="sec-n" data-page-node-id="fN9F5Z2t3jiFJH1R1L5qZO">01</span><h2 data-page-node-id="JHRdEOA6MoQmnRjBUCxOdI">三层结构，先看这个</h2></div>
+  <p class="sec-sub" data-page-node-id="hZ11lw5YFL8vn2EA92av0Z">所有安排都归到这三层里，加起来每天 20 分钟出头</p>
+  <div class="card" data-page-node-id="upWUbXvjozM4OJN57laAHF">
+    <ul class="plain" data-page-node-id="EJc3EgXBExIK4d5Muz3Xsw">
+      <li data-page-node-id="0RYD1Dn5q9jdeVfiU0dAJa"><b data-page-node-id="I3DlR6DCIkLn5SnPjhGfoY">零时间层（天天有，不占配额）</b>　出门认 2–3 个字、电梯数楼层、自己穿鞋收玩具、饭前摆碗筷。走路本来就要走，这些是白捡的。</li>
+      <li data-page-node-id="x5nEJJTaICBJ7yfolQFxx1"><b data-page-node-id="1L0aXDQktFJFRRDRAjz0PO">主攻层（每天 10 分钟）</b>　当天那<b data-page-node-id="O5YjRUfPWktk5huBXgNm0n">一个学科</b> + 那<b data-page-node-id="D1klKFrV4UDKaLssDRTStM">一项能力</b>，固定在小书桌前，两件事可以揉在一起做。周日不排。</li>
+      <li data-page-node-id="7MpBytkb1TNbyovKqJ6l4T"><b data-page-node-id="0z4ogyfFnNS263i4MPfb0G">保底层（每天 10 分钟）</b>　睡前亲子共读，你指着字读。<b data-page-node-id="zg7ZWZvMUa9GOSTlCijBwr">雷打不动，两年不断</b>——它才是识字量最大的来源。</li>
+    </ul>
+    <div class="tip" data-page-node-id="gigAtCv3BBiAQmWJfElTmU">
+      真正"坐下来"的只有 10 分钟。别把主攻层撑到 20 分钟——这个年龄注意力极限大约是 <b data-page-node-id="IPRy50EFaFJvXKJAbDhNWh">年龄 × 3</b>，4 岁 10 个月就是 12–15 分钟，超了就是在做无效功。
+    </div>
+  </div>
+</section>
+
+<!-- 02 八项能力 -->
+<section id="s2" data-page-node-id="e5DGDLDHKtznlgUdszRWCH">
+  <div class="sec-h" data-page-node-id="Q6VPm7zUt9CpDCUsF8bygI"><span class="sec-n" data-page-node-id="NEe7JRLKKq9YeDsXDcZrQ4">02</span><h2 data-page-node-id="n7M8biARCx4XgIc768q4ls">八项能力，逐项说清楚</h2></div>
+  <p class="sec-sub" data-page-node-id="NcOByiHvDIuKKOQQsHuMAC">这就是"其他能力"的完整清单——每一项都有具体练法，不用报班，在家就能做</p>
+
+  <!-- 1 -->
+  <div class="ab n1" data-page-node-id="tQMDpoAIJk9q0s1vmX9r09">
+    <div class="hd" data-page-node-id="Q0DK359g9RsLMXRcPQs0Ih"><span class="no" data-page-node-id="2DtSdyvjomNv3F5qpIzCVe">1</span><span class="nm" data-page-node-id="fDm8DT1g0YVXfEInEnc2C4">专注力</span><span class="dy" data-page-node-id="9nsCIgdhY9pVCp5sUnKmpp">周一</span></div>
+    <div class="bd" data-page-node-id="GEY3WnqSzpqNm4L3liWjRL">
+      <p class="why" data-page-node-id="mAyEpSfpIEi7GxDZl3nVJf"><b data-page-node-id="64UfL0XsgzJ09yIVZYGp3B">为什么重要：</b>小学一节课 40 分钟，前 20 分钟是黄金时段。孩子只能坐住 5 分钟，基本等于没听。这是入学第一课，比认字还靠前。</p>
+      <h4 data-page-node-id="GQUlqMBq9XQ42u7VdClwX0">怎么练（挑一个，5–10 分钟）</h4>
+      <ul class="how" data-page-node-id="mWpLG1PYxH2ONHUvbAEPNV">
+        <li data-page-node-id="NN4wP1ZSp3RwVGhzXGeRh5"><b data-page-node-id="8LSU8uEzPLPajSqLBcpk6P">舒尔特方格 3×3</b>：纸上画九宫格填 1–9，按顺序指出来的同时念出声，计时。<b data-page-node-id="1DUgwJp3LxKE6XWcbYFtNo">每天 2 分钟，效果最直接</b>，稳了升 4×4。</li>
+        <li data-page-node-id="UQOeycdlmO5qHC1i8ZOofe"><b data-page-node-id="plx1woE6PDGJzirbhuOdDh">拼图 / 找不同 / 迷宫</b>：24 片起步，能一口气拼完一幅不停下来，就算过关。</li>
+        <li data-page-node-id="gJreHHylcBWkSK3lXVlcMC"><b data-page-node-id="7KU9vQBHwb8EEhm1kuXtHY">沙漏计时</b>：5 分钟沙漏翻过来，做完一件事贴一颗星。时间看得见，概念才具体。</li>
+        <li data-page-node-id="0k5JeiiC3btVw0Nei2REds"><b data-page-node-id="fz0XMgkSvIM7kVXI5ZA4Fl">减少打断</b>：他专心玩的时候别问"喝水吗""吃不吃水果"。这是最常见的专注力杀手，很多家长每天都在犯。</li>
+      </ul>
+      <div class="goal" data-page-node-id="ArJrHpuztjyZ3272YclmzH"><b data-page-node-id="FpJEjJnBCwkIv7zaJj48PF">阶段一验收：</b>能连续做一件事 <b data-page-node-id="W96sXQdYNgYMFBfYVjgwyE">8–10 分钟</b>不走神、不跑开。</div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="ab n2" data-page-node-id="AZuAZei7rEIFWxBLqLDUYh">
+    <div class="hd" data-page-node-id="CPGZvQqPHZof3f26cBkaCv"><span class="no" data-page-node-id="uIJ9vECPf8xeVV6tLZZuAJ">2</span><span class="nm" data-page-node-id="NWibvh7BVbwI7LAVC88VWD">逻辑思维</span><span class="dy" data-page-node-id="BxJOhpBtMaLlWeFGQPWmUn">周二</span></div>
+    <div class="bd" data-page-node-id="5hBLts03R2YU31fKnlWbnr">
+      <p class="why" data-page-node-id="ko9FpeJUTl1ekHcVkJAKNZ"><b data-page-node-id="xrbK5FKgqcG8A2EVmBTOh7">为什么重要：</b>一年级数学卡住的孩子，多半不是不会算，是不理解"因为……所以……"。会分类、会找规律、会问原因，后面的数学才学得动。</p>
+      <h4 data-page-node-id="xeBUEMg7DGsVaiYpSxy6vw">怎么练（挑一个，5–10 分钟）</h4>
+      <ul class="how" data-page-node-id="1aTYD2BSaSLVmrD1FJJmzV">
+        <li data-page-node-id="PEF4dBqN9yJhEyx3AzQbVa"><b data-page-node-id="meSNQoEH5JNSi1D4T5JBYi">分类</b>：给他一堆玩具，让他<b data-page-node-id="r1in0ISdQcGrx1wEICe57o">自己定规则</b>分成两堆（颜色、形状、大小都行），分完问一句"你为什么这么分？"——理由比结果值钱。</li>
+        <li data-page-node-id="7DNaFlPnH9dcgnT4P6B01C"><b data-page-node-id="SyExnkVyaT5tt3u878sUCt">排序</b>：5 样东西从大到小排队；或者把"昨天—今天—明天"排成顺序。</li>
+        <li data-page-node-id="T6HOiT9sxV0iAJ6fxEUNP0"><b data-page-node-id="o6jNVmSqy7vMbFnOkiZHZX">找规律</b>：红黄红黄红__，下一个是什么？串珠时顺手就玩了，不用另开时间。</li>
+        <li data-page-node-id="4L8BtC9Nc7M0PuzcPo6Osz"><b data-page-node-id="jq2umWRLQ0SR45FxplYBtU">因果推理</b>：多问"你觉得是什么原因？""如果……会怎样？"——洗手时说"如果不关水龙头会怎么样？"</li>
+      </ul>
+      <div class="goal" data-page-node-id="CMqZ8VPl1iWkFeFELoE2xR"><b data-page-node-id="EdDSPUSzZtEdeSXrdOymHZ">阶段一验收：</b>能说清自己<b data-page-node-id="NpESKamKBWTNC08ysurxa0">为什么</b>这么分类；能接上简单的 ABAB 规律。</div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="ab n3" data-page-node-id="D1IH9lGFuk0QI1K2Y1crIx">
+    <div class="hd" data-page-node-id="mu4L8LPHO0TfjI6pZ5sZyf"><span class="no" data-page-node-id="rF6YF8659BJTzbBBM1Ddfg">3</span><span class="nm" data-page-node-id="A6q5Q6tfV8FIV8tJckjtZ2">手部精细动作</span><span class="dy" data-page-node-id="DlQkAxWt1OP5gphOD8IoDb">周三</span></div>
+    <div class="bd" data-page-node-id="M1HZLsR31DNPrGaCyVDFre">
+      <p class="why" data-page-node-id="7yMNJ5ol5mUIF1C7hGQoAL"><b data-page-node-id="TY0QWzpCHSAk1drNfbXS3t">为什么重要：</b>写字不是"练"出来的，是手部力量和协调性够了以后自然就会的事。4–5 岁手腕骨化还没完成，现在硬练写字，一旦形成错误握笔姿势，以后纠正比从零教难十倍。</p>
+      <h4 data-page-node-id="AZipisPzL8IMwX2JIUkemU">怎么练（10 分钟，换着来）</h4>
+      <ul class="how" data-page-node-id="aAVVVEbz5j3uqRgeVrqBCN">
+        <li data-page-node-id="WLea54ZwwI6Hzw7DPGxtYL"><b data-page-node-id="mGUT5XUuCd7n1Mpfhrpk2x">剪</b>：先在废纸上剪直线，稳了再剪曲线。<b data-page-node-id="moz0MUFX7PE8OZ1hCeRkVG">剪完不歪就是进步。</b></li>
+        <li data-page-node-id="8km8QCDt5FQUr9HByEF5r1"><b data-page-node-id="e4sln1pdNsoQbqM5aHv75o">捏</b>：超轻粘土搓条、压饼、捏小动物。</li>
+        <li data-page-node-id="QjlnQ5m6G5uPLbwnBP4koc"><b data-page-node-id="CRijn2EHWRtxVN1AOGETtm">串 / 夹</b>：串珠按颜色排规律；筷子或夹子夹豆子、夹棉花球。</li>
+        <li data-page-node-id="EG9lERgxojtfwD9ITZGwH6"><b data-page-node-id="RJQ0HhQVDZJVLAYP17uiCh">描 / 涂</b>：走迷宫、连虚线、涂色不出格；撕纸、折纸、翻书页、系扣子。</li>
+      </ul>
+      <div class="goal" data-page-node-id="XwHGck9JGW7Mm34Z4uGvKi"><b data-page-node-id="upkyTq9No1eCAOwe6B1EHz">阶段一验收：</b>能剪出一条不歪的直线；筷子能夹起棉花球；能捏出成形的形状。</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="ab n4" data-page-node-id="HivwfyrZPMQjaBi5Rh5OOx">
+    <div class="hd" data-page-node-id="2PHF1T2AfRb0nrQNpAWHIS"><span class="no" data-page-node-id="3P6dOR55GvQq2vrZ02LsHB">4</span><span class="nm" data-page-node-id="DN7jtwa3S8xRPlYiyhE9Cw">生活自理</span><span class="dy" data-page-node-id="S5JYt5fJ66RKO1glPiDtDp">周三</span></div>
+    <div class="bd" data-page-node-id="YiqyiU5khmFlXQaUCBLn0K">
+      <p class="why" data-page-node-id="7AKmDDRvlviwIxzueEWZml"><b data-page-node-id="GDca5XfDZm5BqRA4DX23o4">为什么重要：</b>一年级老师最头疼的，往往不是学习差的孩子，是不会系鞋带、不会整理书包、不敢开口说"老师我想上厕所"的孩子。这些事上学后没人手把手教。</p>
+      <h4 data-page-node-id="yDxSiFzXYnfAsQhaqGCypR">怎么练（编进生活，不额外占时间）</h4>
+      <ul class="how" data-page-node-id="uR5YMSBgPoCqJl05ZQ9egn">
+        <li data-page-node-id="ETv5bEiu2fxZGsImvpVjEE"><b data-page-node-id="lzmZ65TfH4aqB3HPPFKlqT">穿脱</b>：自己穿脱衣服、穿鞋、扣扣子、拉拉链。出门前留够 3 分钟让他自己来。</li>
+        <li data-page-node-id="zmqyAhDoMpa04nSYLPNZy6"><b data-page-node-id="mWpjJa0u1LGBz892PSZACk">吃饭</b>：自己吃、不挑食、吃得快一点（学校吃饭有时间限制）。</li>
+        <li data-page-node-id="P1fJCdijBoVTGKb6d9gkTn"><b data-page-node-id="OzEVqwfwZD3ua9w6LbLAY8">收拾</b>：玩具自己收，按类别放回原位。不给命令给"岗位"——"你是玩具管理员"。</li>
+        <li data-page-node-id="flqHD82r2emxk9rR7wl54y"><b data-page-node-id="4sVdD2ddUEEjOVD8I2Dm8C">帮厨</b>：剥鸡蛋、撕生菜、摆碗筷。</li>
+        <li data-page-node-id="QddfXlvZ7GaPB62250lMiQ"><b data-page-node-id="gCOkJHjzuoDTci5HrADYgz">表达需求</b>：在家演练"老师我要喝水""我想上厕所"——很多孩子不敢说，硬憋一整天。</li>
+        <li data-page-node-id="ZorOvSrMIkcV4Nv70lgk6p"><b data-page-node-id="cjGIRimSOi8Wk6tBv9R5ai">每周一件"完全自己负责的事"</b>：比如负责给绿植浇水、负责收自己的袜子。</li>
+      </ul>
+      <div class="goal" data-page-node-id="E7c0bUYkEekSBtOM2TTeLe"><b data-page-node-id="4Tol8wDEPDuTidvD1iO5rg">阶段一验收：</b>出门自己穿鞋、自己背小书包；玩完能自己把东西收回去。</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="ab n5" data-page-node-id="KGgfvL5rIjiD3nJ3weQqqy">
+    <div class="hd" data-page-node-id="jgThFFHiHJw9mkp4ZydgKK"><span class="no" data-page-node-id="TMR1bi9SzFJTvzr7jlebQd">5</span><span class="nm" data-page-node-id="FzXmij88QBI6xm95YOc4Z3">语言表达</span><span class="dy" data-page-node-id="3Z5C7AScWeIqorvS7w3mIn">周四</span></div>
+    <div class="bd" data-page-node-id="Em0y0QldGg2Zj28Z95jG3o">
+      <p class="why" data-page-node-id="ITzgIFtbDrbRoiXp7H27lZ"><b data-page-node-id="xq7xIJeKGImfUaw23YE66w">为什么重要：</b>语言是思维的外壳。能说清楚一件事的孩子，上课敢举手、能复述老师的要求、以后写作文不发愁。这个能力和识字是互相喂的。</p>
+      <h4 data-page-node-id="VHJelPLu4Pl0v7gE5fQdF7">怎么练（5–10 分钟，睡前最好）</h4>
+      <ul class="how" data-page-node-id="b72CBJZmz1vgnHWb853Lq1">
+        <li data-page-node-id="1XUFcHvHcOQVlw0ZCCJ0a2"><b data-page-node-id="Hake6kTvV7gXrRqKxwYSbK">复述</b>：读完绘本让他讲一遍。讲漏了你就补一句，<b data-page-node-id="mrmGeXQccGzSavXMofxjuU">别纠正、别打断</b>。</li>
+        <li data-page-node-id="cly7Y7FsvJLegImpUnajG0"><b data-page-node-id="DnSRZ8O8QL5jVmed2pGK3v">描述</b>：看图说话——"你看到了什么？"越具体越好，看到什么说什么。</li>
+        <li data-page-node-id="6j3mmyOAgFxiTATOEx2FvL"><b data-page-node-id="Uhf23JRE9ZmMomuuyaErtq">扩句</b>：他说"狗"，你接"什么颜色的狗？它在干什么？"——两三问就长成一个完整句子。</li>
+        <li data-page-node-id="96vFUyNSJDiwZvqJM26TdC"><b data-page-node-id="nzjvWhT4ihJDP4cnLK5Xux">时间顺序</b>：让他讲今天幼儿园的一件事，用"<b data-page-node-id="PnkTsWdDdGWBrCq6mQdT1r">先……然后……最后……</b>"串起来。</li>
+        <li data-page-node-id="UdSEuJu3sYjW1GBT8gLvMO"><b data-page-node-id="lquBGDHYoM4vpvjjZyB1mN">猜谜</b>：你说特征他猜东西；反过来他出题你猜——出题比答题更练脑子。</li>
+      </ul>
+      <div class="goal" data-page-node-id="DgK93vRsDEzyOedEDK8s5V"><b data-page-node-id="OfQCQDFwgl64dTV6vVxTKa">阶段一验收：</b>能把幼儿园发生的一件事说清楚，有先后顺序，别人能听懂。</div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="ab n6" data-page-node-id="pkdADfxCduE2VnuJ8rwHFI">
+    <div class="hd" data-page-node-id="iLEy0KAp3ifiDoZkpLENTk"><span class="no" data-page-node-id="mVGxhUPwB3VWocR6XXZEEc">6</span><span class="nm" data-page-node-id="3IT03Auwj3TbKG3x3cgHF3">听指令与听觉记忆</span><span class="dy" data-page-node-id="cfo6RaIABralnTGXHFH5p7">周五</span></div>
+    <div class="bd" data-page-node-id="G0CbTelSjETClG1lFoIwWe">
+      <p class="why" data-page-node-id="3gVOEWqxzU5ugH4zUajxuX"><b data-page-node-id="ImqVtsH2i421U63NGoFsZh">为什么重要：</b>小学课堂 90% 的信息是"听"来的。不会听指令的孩子不是笨，是根本没接收到信息。这一项和周五的听音游戏同源，都靠耳朵。</p>
+      <h4 data-page-node-id="L9XRKxPAcdycyhJKwPAPEs">怎么练（5–10 分钟）</h4>
+      <ul class="how" data-page-node-id="HCb3LSjKlPSqju31CZVaaB">
+        <li data-page-node-id="vle3X5xNLNtORuCHqIPYhq"><b data-page-node-id="pJ1sMNKPUHuXMsgbVjgDxt">多步指令</b>：从两步开始——"把红色积木放到桌子下面，然后拍两下手。"稳了加到三步。</li>
+        <li data-page-node-id="Q38lI8x5slkFintWP6TYdR"><b data-page-node-id="gOtM7xjK3W9OkQJYWovQ3e">传话游戏</b>：跟他说一句话，让他原样传给妈妈。</li>
+        <li data-page-node-id="J9aPQXkRejSunRMdtLlorZ"><b data-page-node-id="7hQOxAM1Jf2ucJxtHb0U07">复述数字</b>：说 3 个数字让他重复，熟了加到 4 个、5 个。</li>
+        <li data-page-node-id="Ed9CdDnPWJGy7reGv6eQ88"><b data-page-node-id="uQGnfXyHqlBttr4YwK8pee">闭眼听声</b>：闭上眼，听这是什么声音（水声、钥匙声、脚步、关门）。</li>
+        <li data-page-node-id="7xE6B4J1NwVwuGTw0mEdV0"><b data-page-node-id="IKt2j3AJbRt3yJXaDmhjO8">听故事答细节</b>：读一小段，问一个具体问题——"小兔子穿的是什么颜色的衣服？"</li>
+      </ul>
+      <div class="goal" data-page-node-id="BRdnVCDPXhiZFlzC2gwkAH"><b data-page-node-id="X0dBffaPC1Y48mVY2PQWUa">阶段一验收：</b>三步指令<b data-page-node-id="BcVvUWQwTFj164j2xaLDiA">说一遍</b>就能做完，不用重复第二遍。</div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="ab n7" data-page-node-id="EIx6HAAO5BEcHczCv6MZcD">
+    <div class="hd" data-page-node-id="dWFjF87rkHV3oypwEWRBe4"><span class="no" data-page-node-id="OmgNEpsAcqDN4JG1fqKaHf">7</span><span class="nm" data-page-node-id="uxi2MdZos8335R2hOf5yaX">大运动与体能</span><span class="dy" data-page-node-id="JgGhbIdLBfjKhCN7zgP0wN">周六</span></div>
+    <div class="bd" data-page-node-id="eArpvBZQBpaJjRL6bjL6Kf">
+      <p class="why" data-page-node-id="Us29a3Fm4TyDj3saxsUYqU"><b data-page-node-id="wdQURRcEhVvcTSQVmKfXaS">为什么重要：</b>户外跑够的孩子，静下来学东西明显更快。运动不是学习的对立面，是前置条件。4–5 岁是运动协调的窗口期，大脑和小脑在高速整合。</p>
+      <h4 data-page-node-id="TjZ319PKiUWUfjgEhLooKN">怎么练（周六重点，平时每天户外 1 小时）</h4>
+      <ul class="how" data-page-node-id="v8ugqO5PLlMpEPTWrabmNd">
+        <li data-page-node-id="P893BlByjUb1ufn3Q4kB4C"><b data-page-node-id="Klt1tXfx4pjPReO3Zoegjb">跑跳</b>：追跑、丢沙包、贴膏药。</li>
+        <li data-page-node-id="VFHWHRFkBkt66kdC1J2U7S"><b data-page-node-id="Zd6FbDcDmr0bSvNMxA3L4u">平衡</b>：单脚站比赛、走马路牙子、蹦台阶。</li>
+        <li data-page-node-id="WcHbflm9rVN0buk0679MpT"><b data-page-node-id="m3LPdOBLF3peywccmdqqmu">协调</b>：跨绳子（爸妈摆动跳绳他跳过去）；跳绳初体验先玩"摇绳走"和"跨过摆动的绳"，<b data-page-node-id="KaOnvlitX9KygmxJxg2zH4">别急着连着跳</b>。</li>
+        <li data-page-node-id="1JSsHK9PMG4p5abk5saHkG"><b data-page-node-id="PPZG3Y2ekP3QgXPbfJgboF">球类</b>：踢球、抛接球。</li>
+      </ul>
+      <div class="goal" data-page-node-id="4vhIKYsN331n6E5RY6R2Nx"><b data-page-node-id="ThXiSqq6JJJBBACl2cL6Hr">阶段一验收：</b>能单脚站 5 秒以上；能连续跳 10 下；敢玩跨绳子。</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="ab n1" style="--orange:#A97C93" data-page-node-id="bYjLRRueYam1KFI8Y8R3zz">
+    <div class="hd" data-page-node-id="YEdb5GBHItCApFdF88AG2w"><span class="no" style="background:#A97C93" data-page-node-id="uNJBFQQHxbBEEXjabp0cgA">8</span><span class="nm" data-page-node-id="g2f637yUdoTka8yWeBOkhv">情绪认知与社交</span><span class="dy" data-page-node-id="WltVdOEOku2BSj2FcaBJjX">周日</span></div>
+    <div class="bd" data-page-node-id="a6D6XqOBCSNgNhNE5Y43Rg">
+      <p class="why" data-page-node-id="5UXXLCDknbS4UJNFgvPNaU"><b data-page-node-id="HkRkWqwwlopgHyicdn7KjA">为什么重要：</b>4–5 岁是同理心爆发的前夜，"公平感"也刚开始觉醒。会说出情绪的孩子，才不会用打滚和动手来表达。这一项决定他上学后有没有朋友、敢不敢开口。</p>
+      <h4 data-page-node-id="OXuEpj5iBGgyTpXfQUPZgP">怎么练（周日重点，平时每天都有）</h4>
+      <ul class="how" data-page-node-id="LAnlG3dE2oa5KtISN8SqFg">
+        <li data-page-node-id="QcZtc81XH6sLFcjIzamd4Y"><b data-page-node-id="QWYevi7KbEc0mqUGwzadip">情绪命名</b>：他闹的时候，先给情绪起个名字——"你现在很生气，因为积木倒了。"<b data-page-node-id="YNne0u2wKQNGC72keuBh8Z">不讲道理、不急着解决</b>，说出口本身就是降温。</li>
+        <li data-page-node-id="jG5Ls2NfSVM6SjdAdhvcZW"><b data-page-node-id="mgEMG50d3Q5GdisvFGeieT">情绪天气预报</b>：全家互相报"今天的心情天气"（晴天 / 多云 / 下雨），<b data-page-node-id="kWxZ62wh5OChCHMYTFP6H3">大人先说</b>。</li>
+        <li data-page-node-id="yQjsGyGRjBsnwtnz4n89IW"><b data-page-node-id="bxdmO8LFCwEDG4L3QGLoDn">教具体的词</b>：生气、委屈、着急、失望、得意——比笼统的"不开心"细得多。</li>
+        <li data-page-node-id="Kh6Wuy3Skqpl4lNr19vk23"><b data-page-node-id="jEMH9Fm7rDUA7yE5IKW0SJ">练习等待</b>：玩"数到 10 再吃糖"、"你说我做"轮流游戏。</li>
+        <li data-page-node-id="Y1drrE5AGzlHgCyhOMMntQ"><b data-page-node-id="7UXiWvmXGDKKBiuRZpNOTH">加入游戏</b>：教他先看一会儿，再顺着剧情递个东西进去。比喊"你要勇敢"有用得多。</li>
+        <li data-page-node-id="4YuAv8n4SduO2Dub3jeCFA"><b data-page-node-id="fGFXPCZVqd0u6EBomKeufR">绝交别当真</b>：4–5 岁孩子说"我再也不跟你玩了"，通常几小时内自己就和好了。别站队、别审问。</li>
+      </ul>
+      <div class="goal" data-page-node-id="bkieriqjxHIFZbF9Q8nWSf"><b data-page-node-id="ZYO9eSYO6Eenhy67F685Ru">阶段一验收：</b>能说出"我生气了""我着急"这类具体词；想要的东西能等 3 分钟。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 逐日 -->
+<section id="s3" data-page-node-id="E8JDL9di37yzxARXDixgSA">
+  <div class="sec-h" data-page-node-id="ZGPG2UX1sqtLMfqeylEo5Y"><span class="sec-n" data-page-node-id="AWlnYo7GvItKf9Rv4WLwcf">03</span><h2 data-page-node-id="7HbWXTX0b9wKeCeArHBBmR">周一到周日，一天一天说</h2></div>
+  <p class="sec-sub" data-page-node-id="DQs00FLfbjW8wQbdHvSMKI">每天：学科 10 分钟 + 能力练法 5 分钟 + 顺带的事</p>
+
+  <!-- 周一 -->
+  <div class="day" data-page-node-id="EP6R2S6ePCGvNuy7383VJh">
+    <div class="hd" data-page-node-id="c9dIqaCZOiIUuOHo7LLZzV"><span class="dn" data-page-node-id="eYLYejBGFHkw1FuEaCF0Gd">周一</span><span class="dt" data-page-node-id="nMuuC9Oes7wBBBrt976UG9">生字 + 专注力</span>
+      <span class="tg o" style="margin-left:auto" data-page-node-id="rcVzVHWiPMmzcoT9AUFJZO">字卡游戏</span><span class="tg p" data-page-node-id="Q3KRnjqAB14dFWwESAsDxG">舒尔特方格</span></div>
+    <div class="bd" data-page-node-id="7zoJO4hbQ0A5Zd6bMqWKks">
+      <div class="row" data-page-node-id="L1UkI1lO5hHuN6Hn88KAxl"><span class="lb" data-page-node-id="QtAZU5cUka9GewRmDMEWAY">学科</span><span class="ct" data-page-node-id="jv455MYTgyYdfd7V100oN5"><b data-page-node-id="SVqN26j6ObqxmTlhMncSq8">生字 10 分钟</b>——字卡游戏三选一轮换：
+        <ol data-page-node-id="kafATcCUngeAb2DeDmwaTn">
+          <li data-page-node-id="41FIYvq1cxIUdX3vF2vfrW"><b data-page-node-id="a9fGadmpfriz7Ne63D4GTK">找字</b>：藏 5 张字卡在客厅，喊"'大'躲哪去了？"</li>
+          <li data-page-node-id="iN2VpdC7xBrvYSsQqIMz2z"><b data-page-node-id="mPfn4JZHigHvJNIGwAURuc">配对</b>：字卡配实物，"苹果"贴到苹果上。</li>
+          <li data-page-node-id="AeWa4fiQsgXkfOc6s9PIk2"><b data-page-node-id="Xt8mIkMCeLXHSGpdSU80fD">字宝宝回家</b>："门""窗""床""灯"贴到家里对应的东西上。</li>
+        </ol>
+      </span></div>
+      <div class="row" data-page-node-id="Xf10lWZ9imv2O8OZAmW2JS"><span class="lb" data-page-node-id="sjeSRkdNpBHkFCkeiRzQH4">能力</span><span class="ct" data-page-node-id="zKmjXZTYjUYDFpwoI0OfzE"><div class="abil-line" data-page-node-id="oTaxBbrnF9SSRdFnkGQQU7"><b data-page-node-id="ulkzPne3YuAUHDBY3TBDLr">专注力：</b>玩字卡之前，先来 2 分钟舒尔特方格 3×3（1 到 9 按顺序指出来，计时）。<b data-page-node-id="f5O2SVWY731sxAN8zVehV4">他专心的时候，一个字都别插嘴。</b></div></span></div>
+      <div class="row" data-page-node-id="JeiXXPmdEHrWfi9aeX08g5"><span class="lb" data-page-node-id="qgAiPfvjSZrTu8IVr0MN5H">顺带</span><span class="ct" data-page-node-id="5AZ2xlZGotBHKqpk9ZeDuA">出门认 2–3 个字（店招、路牌、电梯按钮）</span></div>
+      <div class="tip r" data-page-node-id="HeeCMbrS7nwEAekFJXBr23"><b data-page-node-id="TKtObzKQeqkNqHUsiV58IW">别做：</b>闪卡背诵、让他抄写。这一阶段"认"和"写"是两条腿——会认 100 个、只会写 5 个完全正常。</div>
+    </div>
+    <label class="chk" data-page-node-id="gfCxeDosn99uZsHS2FFOse"><input type="checkbox" data-k="d1" data-page-node-id="1HcrtYISKrSukdJOUKuSkz"><span class="t" data-page-node-id="mYylKFPGoZSH418O9HC2Cr">周一完成</span></label>
+  </div>
+
+  <!-- 周二 -->
+  <div class="day d3" data-page-node-id="3C3MeNECDMtopBJ2AeD63h">
+    <div class="hd" data-page-node-id="m87SJ1DM0YDlZDLxfzbI6d"><span class="dn" data-page-node-id="x3vHoz1u4ZqX5BwTKeLgvx">周二</span><span class="dt" data-page-node-id="QgaNGNhdQm0VQU4HO03Gox">数字 + 逻辑思维</span>
+      <span class="tg g" style="margin-left:auto" data-page-node-id="0rkUUJQG3pxJWZhYX5yfeb">十格阵</span><span class="tg y" data-page-node-id="wy8bApujS8TEPm7OgWZ0A3">找规律</span></div>
+    <div class="bd" data-page-node-id="T1sIQDBSys5MGuIIRPht4z">
+      <div class="row" data-page-node-id="wbgro67JrGvmCA1nLiEQif"><span class="lb" data-page-node-id="QRWEJ1w7fLFQg6WyysSLyb">学科</span><span class="ct" data-page-node-id="ZDvvGAWtU04K4lqblmuPGx"><b data-page-node-id="5CbcHJgGBkysKm6nIWT8D3">数字 10 分钟</b>——全部用实物，不背答案：
+        <ol data-page-node-id="oriJB1vva80FI0YiBRnQEF">
+          <li data-page-node-id="8IPOvhBmbkdE13fFYi51uK"><b data-page-node-id="cksNHpueP7u7x2qGqyU3CF">十格阵摆豆子</b>：练"手口一致"——手指到哪，嘴说到哪。</li>
+          <li data-page-node-id="XA5HDPKdXjCPSkD7t3eW3w"><b data-page-node-id="t5wxQx4uJ8j19xstZqgDAX">骰子比大小</b>：各掷一颗，谁点大谁收走，最后数谁的豆子多。</li>
+          <li data-page-node-id="zmzcHRoutZz9s8mf0UEjyL"><b data-page-node-id="fPki2ReRJJEyhNpmDIJnX5">分与合</b>：5 块积木分两堆，"可以 2 和 3，还能怎么分？"</li>
+        </ol>
+      </span></div>
+      <div class="row" data-page-node-id="ANcVdHVs4Z8WhziL8Xyfgt"><span class="lb" data-page-node-id="YzQhoLRfCZCXzL70LmOR99">能力</span><span class="ct" data-page-node-id="tADwmXk8wud2Z5vdBPp6Hw"><div class="abil-line" data-page-node-id="MaiHEFGWxqCE5CY64xAVsT"><b data-page-node-id="BDpsz2nY8iz4tYYkR0gENy">逻辑思维：</b>玩完顺手把积木按颜色或形状分成两堆，让他<b data-page-node-id="kIDfaAlUZ4FvZ7tcoAVjIP">自己定规则</b>，然后问一句"你为什么这么分？"</div></span></div>
+      <div class="row" data-page-node-id="azuBCFvNPlXkySYZSvLGCy"><span class="lb" data-page-node-id="rLPjwyZoCJ36slNFCJMlPO">顺带</span><span class="ct" data-page-node-id="huHSYtMXhJW87RAhVIxIqD">电梯按几楼、还有几层；拿筷子时数家里几个人</span></div>
+      <div class="tip r" data-page-node-id="VtaZ4Jx4kYMFqO3pzis7Pi"><b data-page-node-id="28zruFOqwuh9zQ3Ab3fp3Y">别做：</b>刷题本、竖式计算、背乘法口诀。没有数感时硬背，看着会了其实不懂。</div>
+    </div>
+    <label class="chk" data-page-node-id="7iEStdMQkXbxn7VzqC8UCX"><input type="checkbox" data-k="d2" data-page-node-id="lW3A3fnM2DBw05Q6fPh0bD"><span class="t" data-page-node-id="zt1nbEZYFeMh0h3O9DC4Ky">周二完成</span></label>
+  </div>
+
+  <!-- 周三 -->
+  <div class="day d4" data-page-node-id="bipocfynWbZiJ4KLtqm5rY">
+    <div class="hd" data-page-node-id="XNYPdq9MABNqpqLPF2irX4"><span class="dn" data-page-node-id="NX4P0JlEvTfaKUCq3QNtyZ">周三</span><span class="dt" data-page-node-id="ZhlLO483laCvtawUHWTrv7">手部精细动作 + 生活自理</span>
+      <span class="tg y" style="margin-left:auto" data-page-node-id="pe5HY4pm5Y7jPhXGkjcIGF">练手不练字</span><span class="tg p" data-page-node-id="Wdu6AMEY01VXr985oXBvil">自己来</span></div>
+    <div class="bd" data-page-node-id="0ntdj76rR4oGLjFRb6AUUG">
+      <div class="row" data-page-node-id="pUuEHzbyj7lgT9k5FFp0nx"><span class="lb" data-page-node-id="rBEBGR7CuUxaH3X6C2H0Al">学科</span><span class="ct" data-page-node-id="kP2FNQPSSTr2qjiH1uzrAX"><b data-page-node-id="vJUTc9QAHsOeMRs4vggVPa">手部 10 分钟</b>——练"手"，不练"字"：
+        <ol data-page-node-id="vuYNbESJp9Z4bOhJeY2smF">
+          <li data-page-node-id="VCSKLzmRBHVBzh9b3jZDAS"><b data-page-node-id="98LRB7DBOV9l4nE8kHkCVl">安全剪刀</b>：剪直线 → 剪曲线。</li>
+          <li data-page-node-id="LX4wce83KWUiD0Xe8MEZKs"><b data-page-node-id="qVjaiDbxqCx3VrmrjMPvW9">超轻粘土</b>：捏 3 个小动物，或捏今天在幼儿园看到的东西。</li>
+          <li data-page-node-id="9SF2r3te8eiTjm27RZmWUK"><b data-page-node-id="tHEueGeXH1cvQ8v0PSCg0P">串珠 / 夹豆子</b>：串珠按"红黄红黄"排规律。</li>
+        </ol>
+      </span></div>
+      <div class="row" data-page-node-id="60VpHQQnC33BVhBO5VbNwa"><span class="lb" data-page-node-id="Bo75YcrM1HlXzzVRuIrUYz">能力</span><span class="ct" data-page-node-id="A8iOaYR4li2Q12Gq89VbJ9"><div class="abil-line" data-page-node-id="Yaa8U8HTkCKyUMnR6rHXtq"><b data-page-node-id="CMEwyBu0pZhBy5El3fA7pm">生活自理：</b>今天所有"能他自己来"的事，全让他自己来——穿鞋、扣扣子、收拾玩具、饭前摆碗筷。你只负责在旁边等着，别接手。</div></span></div>
+      <div class="row" data-page-node-id="6Ba6YEOm3Od8BeCbrhyGVS"><span class="lb" data-page-node-id="FlWXUi1xQ8Eiyh3besGFd0">顺带</span><span class="ct" data-page-node-id="dIiWlEsSMC8zytBtEIyvrJ">给他一个"岗位"（玩具管理员），比给命令管用</span></div>
+      <div class="tip" data-page-node-id="Zr0am0ODYfFqB8qnToNHVD"><b data-page-node-id="BlEirC6DJOEBrM3wDfC8od">为什么手部排周三：</b>写字的地基是手的力量和协调，不是笔画的遍数。现在练手，等于给一年级的写字垫底。</div>
+    </div>
+    <label class="chk" data-page-node-id="fjUy9nazEkHS7VJK1ohnFZ"><input type="checkbox" data-k="d3" data-page-node-id="MRiRBOCZhUl3TnONe45Iof"><span class="t" data-page-node-id="44dJD9xBHrz3TFzk9sqnZD">周三完成</span></label>
+  </div>
+
+  <!-- 周四 -->
+  <div class="day d1" data-page-node-id="09Rb6ycqff96DpU0JzQPv2">
+    <div class="hd" data-page-node-id="A0qev2OUN7Hi3NHA2Ha1Us"><span class="dn" data-page-node-id="91CFHBYLOATUPnhvErXwfV">周四</span><span class="dt" data-page-node-id="4bJj2nAsuH7a1hj9nBsGHA">生字+数字 + 语言表达</span>
+      <span class="tg o" data-page-node-id="59nkM5PQ474KRvtgWQ4peb">各 5 分钟</span><span class="tg b" data-page-node-id="fIFJc40I0LCLogkLByY9nK">复述 / 扩句</span></div>
+    <div class="bd" data-page-node-id="7ERdZPH2CESucnIbEpxBBl">
+      <div class="row" data-page-node-id="od5XrxY9meTsSV9y49Ni6D"><span class="lb" data-page-node-id="EH77HrwM4AeD8Z2smQgPv4">学科</span><span class="ct" data-page-node-id="zHapzfWH3gFyIk0TeqNdBt"><b data-page-node-id="TfC2Y5K4z8NY1KEyAKtujy">各 5 分钟，掐表</b>——前 5 分钟字卡游戏（换个周一没玩过的玩法），后 5 分钟实物分合或比大小。</span></div>
+      <div class="row" data-page-node-id="uD7e8wtjPJIx6DxTaAE57H"><span class="lb" data-page-node-id="t6kHEtjp2QeFCJ1506eCXC">能力</span><span class="ct" data-page-node-id="dNx7pwUvdhjACoBOk14kPc"><div class="abil-line" data-page-node-id="Na4SybH0qUloT9kPShGvC0"><b data-page-node-id="nuDqkiW4DjBXVBeslPAv6U">语言表达：</b>睡前共读之后加 3 分钟——让他把故事讲一遍，或者说说今天幼儿园的一件事，用"<b data-page-node-id="wtDGJIHdlLMNiduFSJXUlR">先……然后……最后……</b>"串起来。</div></span></div>
+      <div class="row" data-page-node-id="ugBoAc97sJsTDgSaaxqWIE"><span class="lb" data-page-node-id="A5hukZ4Btoiq4UdaTiBHzY">顺带</span><span class="ct" data-page-node-id="i1xgBgQgt22PXY7YFvFlp8">摆碗筷时问："今天 4 个人，要拿几双筷子？"</span></div>
+      <div class="tip r" data-page-node-id="A8ohXxsHiXsnbfsTFjZB8P"><b data-page-node-id="7AB0CXy3yfEQKHWcj3iCAG">今天最容易超时。</b>5 分钟就是 5 分钟，到点收工。多玩那几分钟不值钱，把"每天只要一小会儿"这个感觉破坏掉才亏。</div>
+    </div>
+    <label class="chk" data-page-node-id="g5zG4HxLDsF1TJo4qPEctG"><input type="checkbox" data-k="d4" data-page-node-id="8TeJP3B2TYyETTM130lrCP"><span class="t" data-page-node-id="KhuIri9CP7ReUFrkO5mS0n">周四完成</span></label>
+  </div>
+
+  <!-- 周五 -->
+  <div class="day d1" data-page-node-id="IWf6pgEZVoNaAFwV5f7lp9">
+    <div class="hd" data-page-node-id="ypyFUvL1kOit31GeUDLjJf"><span class="dn" data-page-node-id="g0tAQTSTQGuom8dt3KPrsV">周五</span><span class="dt" data-page-node-id="Hm2sn10PCt1OEZbUDNzC6g">拼音听音 + 听指令</span>
+      <span class="tg b" style="margin-left:auto" data-page-node-id="1tQfoyoRddRVfjVrmJk9fI">只听音</span><span class="tg p" data-page-node-id="rECYXyjIZpxZm7z9W5Ek2G">多步指令</span></div>
+    <div class="bd" data-page-node-id="Nt0yoCjcez7oKXyF99o5se">
+      <div class="row" data-page-node-id="sg4ETx3LQPnkhHgBvpXiqh"><span class="lb" data-page-node-id="r0WaQjRMUoKAY9BOpCzW2x">学科</span><span class="ct" data-page-node-id="DE13Iwo63XLO4VroFW9Jng"><b data-page-node-id="keQ2dJP0YEuZCGJMdlyg2G">拼音 10 分钟</b>——全程只用耳朵和嘴，不出现任何字母：
+        <ol data-page-node-id="Tw5h4dqhtfJhvRHDNA9LNO">
+          <li data-page-node-id="uhnhvflNnFkCrrszc6zs4P"><b data-page-node-id="dl8WI3uEuDsEQ6COOk1Q66">押韵接龙</b>："花、瓜、鸭、虾"——哪个和"花"是一家人？</li>
+          <li data-page-node-id="wrcXCT1NVIn8MAeEFp7tvt"><b data-page-node-id="NR9M9PqlCrxSdG7T1nb14a">拆音节</b>："苹—果"，"苹"的开头是什么音？（只说音，不写）</li>
+          <li data-page-node-id="ZwM7t58o5Ln788eTAvrvCb"><b data-page-node-id="aV6CaAqmYCBT30t4IPMaXg">数音节</b>："西—安—天—气—好"，一共几个音？</li>
+          <li data-page-node-id="VhvgX0Uq3GAjiy05RG7w05"><b data-page-node-id="ZLtW8EjWHYEFC3tu9OsdzA">首音找朋友</b>："猫、门、米"开头是不是一个音？</li>
+        </ol>
+      </span></div>
+      <div class="row" data-page-node-id="l3i1fM2lCJrJVuSst2xqCi"><span class="lb" data-page-node-id="YAt0XRgb3DJTokAGeyA9uB">能力</span><span class="ct" data-page-node-id="7qb9eeabuLKBjFG31FxvHo"><div class="abil-line" data-page-node-id="cA0ng19FXv7liULnbD4PjK"><b data-page-node-id="lhNeLUraVkMhlE7R8wI4MO">听指令：</b>玩两轮多步指令——"把红色积木放到桌子下面，然后拍两下手。"稳了就加第三步。再来一次传话游戏，让他把一句话完整传给妈妈。</div></span></div>
+      <div class="row" data-page-node-id="U10X18IVZQP4oz3mSXbUvy"><span class="lb" data-page-node-id="SQyBFfKA1n1M1DHWFfszjX">顺带</span><span class="ct" data-page-node-id="yghBs2bBtEdroU8s8KHHOp">路上随口玩："'天'和'田'是不是一个开头？"</span></div>
+      <div class="tip b" data-page-node-id="bKSazr8Dp8rs6MQi9UFJ8v"><b data-page-node-id="ndwR4dII0IwJTrqnTtiWsa">现在练的是什么：</b>叫"语音意识"——把声音拆开、再拼起来的能力。这才是学拼音真正的地基，比提前认 b p m f 有用得多。</div>
+    </div>
+    <label class="chk" data-page-node-id="112CqLUWrGHPGfSJQHc3v9"><input type="checkbox" data-k="d5" data-page-node-id="qG7rmIAUd6PUvQoxfYTiZe"><span class="t" data-page-node-id="wR1jpN3tqEatXUaeFK05F0">周五完成</span></label>
+  </div>
+
+  <!-- 周六 -->
+  <div class="day d2" data-page-node-id="50Uf9JM6Rx1BhipkfE1kpi">
+    <div class="hd" data-page-node-id="rvjNBvR9ytNKZQFPzqGoGj"><span class="dn" data-page-node-id="uT4cfTpEoMTS1hJAoldmfW">周六</span><span class="dt" data-page-node-id="plcbxbxba2aGaI2jsmJvHP">生活实践 + 大运动 + 社交</span>
+      <span class="tg p" style="margin-left:auto" data-page-node-id="75QuXFMfUJw1Bbbmm3etBz">跑够</span><span class="tg g" data-page-node-id="d6sJAros1VQoRtkJjYiR0w">找伙伴</span></div>
+    <div class="bd" data-page-node-id="IpHn2vuLH406gMD0zm3tYu">
+      <div class="row" data-page-node-id="UqdjeZKsDJjZDiKBSVBQKN"><span class="lb" data-page-node-id="eRwIh9QzwjfPkHljNKp4eA">上午</span><span class="ct" data-page-node-id="NvMXRYd8EZFB2ap52IfO8G"><b data-page-node-id="55ZK071NUDrfQeWUDoCES5">户外 1–2 小时</b>——丢沙包、追跑、单脚站比赛、跨绳子、踢球。渭河边、公园、小区空地都行。</span></div>
+      <div class="row" data-page-node-id="WRqT5Fvxck2CXrGGrRIQBr"><span class="lb" data-page-node-id="TZ48V3aeoGge9Un8D1ZZF3">下午</span><span class="ct" data-page-node-id="5tQT8kptvxFd0aS5tfOIq1"><b data-page-node-id="kfTwFpKFeTuVF1TKEr7TE8">生活实践：</b>
+        <ol data-page-node-id="lqNzlAmyCsCArE7h42Xsxs">
+          <li data-page-node-id="9z2V4axsgoXaPicAbsuMJt"><b data-page-node-id="l448o9kY6y83p592SvxKt5">超市认字算钱</b>："帮爸爸拿 3 个苹果，再拿 2 个，一共几个？"</li>
+          <li data-page-node-id="UEWfuPmYGGDR0766h1z620"><b data-page-node-id="OPBQqSvCjejHm15qZYbklC">公园找数字</b>：车牌、门牌、健身器材编号，看到就念。</li>
+          <li data-page-node-id="rfacrQmrM1LoUBOXBFEh9D"><b data-page-node-id="04HmJyo0lU95BzCB4TtcFF">认店招</b>：一路走过去，他念得出几个？</li>
+        </ol>
+      </span></div>
+      <div class="row" data-page-node-id="4RlBbtvIsj0u8XzdflDHXa"><span class="lb" data-page-node-id="TEQMtkXjyXchTL58DIWuHf">能力</span><span class="ct" data-page-node-id="lt8U0LPB2TKCvxpewTLyO7"><div class="abil-line" data-page-node-id="rdsH95yg4zFOrkuoKQHfDL"><b data-page-node-id="PYEEz83P8wq1fOj2YwyDUy">社交：</b>公园里遇到小朋友，让他自己走过去试一句"我可以和你一起玩吗"。教他先看一会儿、再顺着剧情递个东西进去——比喊"你要勇敢"实用。抢玩具时，<b data-page-node-id="38BK0eG9cvEeQhsgVuA51r">先当翻译不当裁判</b>。</div></span></div>
+      <div class="row" data-page-node-id="v3Riv0O6Wr9lxbPUTDGBkc"><span class="lb" data-page-node-id="kVx1M5TTDohNTGMjSuU2bV">顺带</span><span class="ct" data-page-node-id="rDIfN1TpQxAMvRQmDe7brI">出门自己背小书包、自己穿鞋；回家东西自己放回原位</span></div>
+      <div class="tip g" data-page-node-id="6bCyCZndcQAfYSXKFQcK9o"><b data-page-node-id="vThSRAjo6jFaptzOJxSucl">这一天别小看。</b>户外跑够的孩子，静下来学东西明显更快。而且认字算钱在真实场景里发生，比字卡记得牢得多。</div>
+    </div>
+    <label class="chk" data-page-node-id="qPDVwTrPGrbaLdbv6iuhF6"><input type="checkbox" data-k="d6" data-page-node-id="xVPiuUEhZMMxJgUMdZ1DHt"><span class="t" data-page-node-id="gn2EsNIFpQ5laYN9WuQ3uU">周六完成</span></label>
+  </div>
+
+  <!-- 周日 -->
+  <div class="day" data-page-node-id="s1wAzE7n8jVFNzMJjWv5rb">
+    <div class="hd" data-page-node-id="1lDGcc9u0IIRRQyZr8SbGM"><span class="dn" style="background:#BFAC97" data-page-node-id="oBF6Dvo9OGgTJyCybvzmJ9">周日</span><span class="dt" data-page-node-id="hpTW7CyBypxyRyymAo94tt">留白 + 情绪</span>
+      <span class="tg" style="margin-left:auto;background:#F5F0E9;color:#8A7A67;border-color:#E8DCCC" data-page-node-id="0PD6TAAB8s7YiUyTffjlL8">不排新内容</span></div>
+    <div class="bd" data-page-node-id="ZHxqrfHCqi5ZL91IpAbY9v">
+      <div class="row" data-page-node-id="VF1vGnDEXImlRSGsikE5sh"><span class="lb" data-page-node-id="Hwq6vLdg46ZAmS2Izov0FU">学科</span><span class="ct" data-page-node-id="gizbVHkMU2vzSSSjQfetBp"><b data-page-node-id="iuNfLViXnrwnIE0QzmMH8A">没有。</b>今天完全属于他自己，想干嘛干嘛。</span></div>
+      <div class="row" data-page-node-id="L34TixMQzPZVRIWTWpCi8w"><span class="lb" data-page-node-id="hbfAU4GsfJWP3bEmSFqcLt">能力</span><span class="ct" data-page-node-id="GEv5BwnVcUH94y9k2bXOMG"><div class="abil-line" data-page-node-id="GFU3OTxShawU8FtAgeMjDc"><b data-page-node-id="ULv3HHQ4G87Zki2Wz5BoDR">情绪认知：</b>睡前聊 3 分钟——① 全家报"今天的心情天气"，<b data-page-node-id="ugHuGH6yin6ZGgOzupN218">大人先说</b>；② 问他"这一周你最开心的是哪件事？"；③ 教一个具体的情绪词（生气 / 委屈 / 着急 / 失望）。</div></span></div>
+      <div class="row" data-page-node-id="S3iTTQH1F42n9VV4ab0Ho6"><span class="lb" data-page-node-id="zswNlwMmGavBFJiqMpb2AL">保留</span><span class="ct" data-page-node-id="5g28SfnXaBE4G3LTIFdMHD">睡前共读 10 分钟（这个从不放假）</span></div>
+      <div class="tip r" data-page-node-id="JbidKf6EEFS4ecQ53AR9aJ"><b data-page-node-id="pEtUGdSffhFGwHTJG13Dxh">为什么必须留白：</b>一个被填满的星期，会在某个节点集中爆发抵触——通常周三周四就开始磨蹭。留一天空白，是给下周蓄电。</div>
+    </div>
+    <label class="chk" data-page-node-id="K063pEbf7SGmlPE4NgVhBi"><input type="checkbox" data-k="d7" data-page-node-id="y18Fm02ecuaZ7IDTlimaaC"><span class="t" data-page-node-id="iVgp3B2G6unv9076RuXuah">周日完成</span></label>
+  </div>
+</section>
+
+<!-- 04 铁律 -->
+<section id="s4" data-page-node-id="LRzTWbs67EsTsyw7Y0NBUU">
+  <div class="sec-h" data-page-node-id="5OGTJiNBKNOhXveEEsgT3r"><span class="sec-n" data-page-node-id="h4KSSR7NzbVAcEa847spvt">04</span><h2 data-page-node-id="7WH90xHBxzLvLNoP6aXORI">三条执行铁律</h2></div>
+  <p class="sec-sub" data-page-node-id="6CQZaK1F538DJ9ThPVbSvw">比表格本身更重要</p>
+  <div class="card" data-page-node-id="kaOpTcZERBmEopX4v7qvJY">
+    <ul class="plain" data-page-node-id="zcAsFMMlYZCuBSYV1yugky">
+      <li data-page-node-id="peyLtNn7EVEHvpvv9UfZDd"><b data-page-node-id="nEj5BHVqNwDA374ZMmibgE">说好 10 分钟就 10 分钟。</b>今天状态特别好也不加量——否则孩子很快会发现"表现好 = 更多任务"，下次开始磨蹭。</li>
+      <li data-page-node-id="eCpqqKBBFbzeNBmV3UpJds"><b data-page-node-id="crNaxhT6M3KPGMSXCUQPTo">他专心的时候别打断。</b>不问"喝水吗""吃不吃水果"。这一条对专注力的影响，比其他所有训练方法加起来都大。</li>
+      <li data-page-node-id="vJklJUQmONCXIjzvkFKnQj"><b data-page-node-id="G8bbXoKyqFaFy5wcfaYWCH">哪一天没做成，第二天接着来就行。</b>不用补、不用批评。这周只做到 4 天也算成功——习惯看的是"没断"，不是"没缺"。</li>
+    </ul>
+    <div class="tip r" data-page-node-id="HzeXpm0EgqtnnXNuKjdrwT">
+      <b data-page-node-id="Uz30W8tHL9HIQmgbVs4vzM">时长红线：</b>4–6 岁每天"坐下来"的结构化时间不要超过 15 分钟。超了不是勤奋，是在消耗学习兴趣。这个阶段"玩"才是主业。
+    </div>
+  </div>
+
+  <div class="final" data-page-node-id="LfSRFntWNjw3dQyzz8u4e3">
+    <p class="big" data-page-node-id="fYvqZtws0CDatxLET35ZYm">一天一件事，做两年。<br data-page-node-id="BDLUHejfElYURkRVQvA5zL">比周末补三小时管用得多。</p>
+    <p class="sm" data-page-node-id="UwWvHXcV3Og4ZIXMHFO9Dw">如果只能保住一项，保住睡前那 10 分钟共读——它抵得上其他所有内容的总和。</p>
+  </div>
+</section>
+
+<footer data-page-node-id="ALbzFeEkPNhATeE41WH39r">
+  说明<br data-page-node-id="omJnwzIwLJauQeo5SRkkik">
+  · 依据明琦（2021-11-25 出生）当前 4 岁 10 个月、幼儿园中班设定，对应阶段一：2026 年 10 月 – 2027 年 2 月。<br data-page-node-id="P4qOAbMKdwD0BGAnm0Du5y">
+  · 八项能力 = 除生字、数字、拼音三项学科外，这个年龄段需要同步生长的能力清单；其中手部精细动作在周三同时作为学科主攻。<br data-page-node-id="2XombM5yKuFuU6ONoCF4b9">
+  · 拼音遵循"能力前置、知识后置"：5 岁半前只练听音辨音，不认符号；5 岁半后认读声母韵母；入学前半年学拼读与书写。<br data-page-node-id="iA9gcQTPNTHNz4DwhdUvbR">
+  · 与《明琦 · 幼小衔接两年学习计划》（2026-09-22）、《阶段一落地执行手册》（2026-09-28）配套使用。<br data-page-node-id="9n4Xth1CwVBstuGWPnVYxj">
+  制定于 2026 年 9 月 28 日
+</footer>
+</div>
+
+<script>
+(function(){
+  var d=new Date();
+  var mon=new Date(d.getTime()-((d.getDay()+6)%7)*864e5);
+  var wk='mq_wk_'+mon.toISOString().slice(0,10);
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(wk)||'{}')}catch(e){}
+  document.querySelectorAll('.chk input').forEach(function(box){
+    var k=box.dataset.k;
+    if(saved[k])box.checked=true;
+    box.addEventListener('change',function(){
+      saved[k]=box.checked;localStorage.setItem(wk,JSON.stringify(saved));
+    });
+  });
+
+  var all=
+'明琦 · 一周学习与能力安排（阶段一：4岁11个月-5岁3个月）\n\n'
++'【每天保底】睡前亲子共读 10 分钟（雷打不动）\n'
++'【每天零时间】出门认 2-3 个字；电梯数楼层；自己穿鞋收玩具、饭前摆碗筷\n\n'
++'周一 生字 + 专注力\n'
++'  学科：字卡游戏 10 分钟（找字 / 配对 / 字宝宝回家，三选一）\n'
++'  能力：舒尔特方格 3×3 计时 2 分钟；他专心时不打断\n'
++'周二 数字 + 逻辑思维\n'
++'  学科：十格阵摆豆子、骰子比大小、积木分与合（全用实物，不背答案）\n'
++'  能力：玩具按自己定的规则分两堆，问他"为什么这么分"\n'
++'周三 手部精细动作 + 生活自理\n'
++'  学科：安全剪刀剪直线→曲线、粘土捏动物、串珠排规律（练手不练字）\n'
++'  能力：今天能他自己来的事全让他自己来——穿鞋、扣扣子、收玩具、摆碗筷\n'
++'周四 生字+数字 + 语言表达\n'
++'  学科：各 5 分钟，掐表（最容易超时的一天）\n'
++'  能力：讲今天幼儿园的一件事，用"先…然后…最后…"串起来\n'
++'周五 拼音听音 + 听指令\n'
++'  学科：押韵接龙、拆音节、数音节、首音找朋友（全程不出现字母）\n'
++'  能力：三步指令（放积木→拍手→拿书）+ 传话游戏\n'
++'周六 生活实践 + 大运动 + 社交\n'
++'  上午户外 1-2 小时：丢沙包、追跑、单脚站、跨绳子、踢球\n'
++'  下午：超市认字算钱、公园找数字、认店招\n'
++'  能力：教他走过去问"我可以和你一起玩吗"；抢玩具先当翻译不当裁判\n'
++'周日 留白 + 情绪认知\n'
++'  不排新内容。睡前聊"心情天气预报"+"这周最开心的事"，教一个具体情绪词\n\n'
++'三条铁律：① 说好 10 分钟就 10 分钟，状态好也不加量；② 他专心时不打断；③ 没做成不补不批评，第二天接着来\n'
++'时长红线：4-6 岁每天坐下来结构化时间不超过 15 分钟';
+
+  var btn=document.querySelector('button[data-copy=all]');
+  btn.addEventListener('click',function(){
+    var ok=function(){
+      var o=btn.textContent;btn.textContent='已复制 ✓';btn.classList.add('ok');
+      setTimeout(function(){btn.textContent=o;btn.classList.remove('ok')},1600);
+    };
+    var fb=function(){
+      var ta=document.createElement('textarea');ta.value=all;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}
+      document.body.removeChild(ta);ok();
+    };
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(all).then(ok,fb);
+    }else{fb()}
+  });
+
+  document.querySelectorAll('.chips a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var el=document.querySelector(a.getAttribute('href'));
+      if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+})();
+</script>
+</body>
+</html>

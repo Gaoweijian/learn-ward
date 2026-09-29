@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="DwgT8Bnkr3O3yFCGekSnBu">
+<head data-page-node-id="NFxNim2KkEuOTGi6cXNQVv">
+<meta charset="UTF-8" data-page-node-id="puLlJPhAG3KPpEei197gdQ">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="IhYZFgg8w2FOkXzDiAl5XW">
+<title>明琦两年计划 · 执行保障系统</title>
+<style>
+  :root{
+    --bg:#FFFBF5;--card:#FFFFFF;--ink:#3D3226;--ink-2:#6B5B4A;--ink-3:#9A8A79;
+    --line:#EFE4D6;--line-2:#E3D3BE;--dash:#D8C7AF;
+    --orange:#E08A45;--orange-s:#FDF1E4;--orange-d:#B96A2C;
+    --green:#7FA06A;--green-s:#F1F6EC;--green-d:#587445;
+    --blue:#7C93AC;--blue-s:#EFF3F7;--blue-d:#56697C;
+    --red:#C4715F;--red-s:#FBEFEC;--red-d:#8E4E40;
+    --plum:#A97C93;--plum-s:#F7EFF4;--plum-d:#835F73;
+    --r:16px;--shadow:0 1px 2px rgba(96,74,48,.05),0 6px 18px rgba(96,74,48,.06);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.75;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif}
+  .wrap{max-width:780px;margin:0 auto;padding:0 16px 72px}
+
+  header{padding:32px 0 16px}
+  .kicker{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--orange-d);
+    background:var(--orange-s);border:1px solid #F3DFC6;border-radius:999px;padding:4px 12px;margin-bottom:13px}
+  h1{font-size:26px;line-height:1.35;margin:0 0 9px;letter-spacing:-.01em}
+  h1 small{display:block;font-size:13.5px;font-weight:400;color:var(--ink-3);margin-top:7px}
+  .lede{font-size:15px;color:var(--ink-2);margin:0}
+  .lede b{color:var(--orange-d)}
+
+  nav{position:sticky;top:0;z-index:20;background:rgba(255,251,245,.94);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);margin:18px -16px 24px;padding:10px 16px}
+  .chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;text-decoration:none;font-size:13px;color:var(--ink-2);border:1px solid var(--line-2);
+    background:#fff;border-radius:999px;padding:6px 13px;white-space:nowrap}
+  .chips a:active{background:var(--orange-s)}
+
+  section{margin-bottom:32px;scroll-margin-top:62px}
+  .sec-h{display:flex;align-items:baseline;gap:10px;margin:0 0 5px}
+  .sec-n{font-size:12px;font-weight:700;color:var(--orange);letter-spacing:.06em;padding-top:4px}
+  h2{font-size:20px;margin:0;letter-spacing:-.01em}
+  .sec-sub{color:var(--ink-3);font-size:13.5px;margin:0 0 15px;padding-left:30px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    padding:16px 15px;box-shadow:var(--shadow);margin-bottom:13px}
+  .card h3{font-size:15.5px;margin:0 0 10px}
+  .card p{margin:0 0 9px}
+  .card p:last-child{margin-bottom:0}
+  ul.plain{margin:0;padding:0;list-style:none}
+  ul.plain li{position:relative;padding-left:19px;margin-bottom:8px;font-size:14.5px;color:var(--ink-2)}
+  ul.plain li:last-child{margin-bottom:0}
+  ul.plain li::before{content:"";position:absolute;left:5px;top:10px;width:6px;height:6px;border-radius:50%;background:var(--line-2)}
+  ul.plain li b{color:var(--ink)}
+
+  .tip{border-radius:10px;padding:11px 13px;font-size:13.5px;line-height:1.7;margin-top:12px;
+    background:var(--orange-s);color:#7A5636}
+  .tip.g{background:var(--green-s);color:#4F6B3D}
+  .tip.r{background:var(--red-s);color:#8E4E40}
+  .tip.b{background:var(--blue-s);color:#4E6273}
+
+  /* 反直觉三条 */
+  .truth{border:1px solid var(--line);border-radius:var(--r);background:var(--card);overflow:hidden;
+    box-shadow:var(--shadow);margin-bottom:12px}
+  .truth .hd{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#FFFDF9,#FFF9F1)}
+  .truth .no{flex:0 0 auto;width:26px;height:26px;border-radius:9px;background:var(--red);color:#fff;
+    font-size:13.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .truth.t2 .no{background:var(--blue)}
+  .truth.t3 .no{background:var(--plum)}
+  .truth .nm{font-size:15.5px;font-weight:600}
+  .truth .bd{padding:13px 14px}
+  .truth .why{font-size:14.5px;color:var(--ink-2);margin:0 0 10px}
+  .truth .why b{color:var(--ink)}
+  .truth .fix{background:var(--green-s);border-radius:10px;padding:10px 12px;font-size:14px;color:#4F6B3D}
+  .truth .fix b{color:#3E5730}
+
+  /* 承诺书 */
+  .oath{background:linear-gradient(180deg,#FFFDF9,#FFF8F0);border:1.5px solid #EEDCC3;
+    border-radius:var(--r);padding:20px 18px;box-shadow:var(--shadow);margin-bottom:13px}
+  .oath .ot{font-size:13px;letter-spacing:.1em;color:var(--orange-d);text-align:center;margin-bottom:14px}
+  .oath .body{font-size:15px;line-height:2.1;color:var(--ink)}
+  .blank{display:inline-block;min-width:120px;border-bottom:1.4px dashed var(--dash);padding:0 6px;text-align:center;color:var(--orange-d);font-weight:600}
+  .sign{display:flex;gap:20px;margin-top:22px;flex-wrap:wrap}
+  .sign .s{flex:1;min-width:150px}
+  .sign .ln{border-bottom:1.4px solid var(--line-2);height:34px}
+  .sign .lb{font-size:12.5px;color:var(--ink-3);margin-top:5px}
+
+  /* 七件套 */
+  .part{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    padding:14px;box-shadow:var(--shadow);margin-bottom:11px}
+  .part .pn{flex:0 0 auto;width:28px;height:28px;border-radius:10px;background:var(--orange-s);
+    color:var(--orange-d);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;
+    border:1px solid #F3DFC6}
+  .part .pc{flex:1;min-width:0}
+  .part .pt{font-size:15.5px;font-weight:600;margin-bottom:5px}
+  .part .pd{font-size:14.5px;color:var(--ink-2)}
+  .part .pd b{color:var(--ink)}
+  .part .pd + .pd{margin-top:7px}
+  .part .ex{margin-top:9px;background:#FFFDF9;border:1px dashed var(--line-2);border-radius:10px;
+    padding:9px 12px;font-size:13.5px;color:var(--ink-2)}
+  .part .ex b{color:var(--orange-d)}
+
+  /* 表格 */
+  .tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--card);
+    box-shadow:var(--shadow);margin-bottom:12px}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:420px}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#FFFDF9;font-weight:600;font-size:12.5px;color:var(--ink-2);white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  td.sit{font-weight:600;color:var(--ink)}
+  td.dn2{color:var(--orange-d)}
+  td.red2{color:var(--red-d);font-weight:600}
+
+  /* 断链 */
+  .rec{display:flex;gap:12px;border:1px solid var(--line);border-radius:14px;background:var(--card);
+    padding:13px 14px;box-shadow:var(--shadow);margin-bottom:10px}
+  .rec .rn{flex:0 0 auto;font-size:12.5px;font-weight:700;color:#fff;background:var(--blue);
+    border-radius:8px;padding:3px 9px;height:fit-content}
+  .rec.rc2 .rn{background:var(--plum)}
+  .rec.rc3 .rn{background:var(--red)}
+  .rec .rt{font-weight:600;font-size:15px;margin-bottom:4px}
+  .rec .rd{font-size:14px;color:var(--ink-2)}
+
+  /* 铁律 / 反铁律 */
+  .law{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+    box-shadow:var(--shadow);margin-bottom:13px}
+  .law .lh{padding:12px 15px;font-size:15.5px;font-weight:600;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#FFFDF9,#FFF9F1)}
+  .law.neg .lh{background:linear-gradient(180deg,#FFF9F7,#FDF1ED);color:var(--red-d)}
+  .law .lb{padding:13px 15px}
+  .law ol{margin:0;padding-left:20px;font-size:14.5px;color:var(--ink-2)}
+  .law ol li{margin-bottom:9px}
+  .law ol li:last-child{margin-bottom:0}
+  .law ol li b{color:var(--ink)}
+
+  /* 打卡墙 */
+  .wall{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:15px 14px;
+    box-shadow:var(--shadow);margin-bottom:12px}
+  .wall .wh{display:flex;align-items:baseline;gap:9px;margin-bottom:12px}
+  .wall .wt{font-size:15.5px;font-weight:600}
+  .wall .ws{font-size:12.5px;color:var(--ink-3);margin-left:auto}
+  .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+  .grid .gh{font-size:11px;color:var(--ink-3);text-align:center;padding-bottom:2px}
+  .grid .cell{aspect-ratio:1/1;border:1.4px solid var(--line-2);border-radius:8px;background:#FFFDF9;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;
+    font-size:12px;color:var(--ink-3)}
+  .grid .cell:active{transform:scale(.94)}
+  .grid .cell.on{background:var(--orange);border-color:var(--orange);color:#fff;font-size:15px}
+  .grid .cell.on::after{content:"✓";font-weight:700}
+  .wall .foot{margin-top:12px;font-size:13px;color:var(--ink-2);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .wall .big{font-size:15px;font-weight:700;color:var(--orange-d)}
+
+  .bar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;align-items:center}
+  button.c{font-family:inherit;font-size:13px;color:var(--orange-d);background:#fff;border:1px solid var(--line-2);
+    border-radius:999px;padding:7px 15px;cursor:pointer}
+  button.c:active{background:var(--orange-s)}
+  button.c.ok{background:var(--green-s);color:var(--green-d);border-color:#DCE9D2}
+  .hint{font-size:12.5px;color:var(--ink-3)}
+
+  /* 里程碑 */
+  .ms{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
+  .ms .m{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:13px 14px;box-shadow:var(--shadow)}
+  .ms .mt2{font-size:14.5px;font-weight:600;margin-bottom:3px}
+  .ms .mw{font-size:12px;color:var(--ink-3);margin-bottom:8px}
+  .ms .me{font-size:13.5px;color:var(--green-d);background:var(--green-s);border-radius:8px;padding:7px 10px}
+
+  .final{text-align:center;background:var(--orange-s);border:1px solid #F3DFC6;border-radius:var(--r);
+    padding:22px 18px;margin:24px 0 0}
+  .final .big{font-size:17.5px;font-weight:600;color:var(--orange-d);line-height:1.65;margin:0}
+  .final .sm{font-size:13.5px;color:#7A5B38;margin:10px 0 0}
+
+  footer{border-top:1px solid var(--line);margin-top:34px;padding-top:17px;font-size:12.5px;color:var(--ink-3);line-height:1.8}
+
+  @media (max-width:400px){
+    h1{font-size:22px}.ms{grid-template-columns:1fr}
+    body{font-size:15.5px}
+    .grid{gap:4px}
+  }
+  @media print{
+    body{background:#fff;font-size:12px}
+    nav,.bar,.noprint{display:none}
+    .wrap{padding:0;max-width:none}
+    .card,.part,.truth,.law,.wall,.tw,.ms .m{box-shadow:none;break-inside:avoid}
+    @page{margin:12mm}
+  }
+</style>
+</head>
+<body data-page-node-id="FWKSv5oMZDN10ZOTuJaDdP">
+<div class="wrap" data-page-node-id="UpszR9XLHmcxJIFeLyEvze">
+
+<header data-page-node-id="qBz0n2zygtlzty1bClWPdu">
+  <span class="kicker" data-page-node-id="skghhGGHrwNQw6cqwm7aaB">执行保障系统</span>
+  <h1 data-page-node-id="cKXZy9cOJw5odQcngD2yob">怎么让它真的跑两年，而不是三周
+    <small data-page-node-id="2ZDRnEtVUGQKSzspxCRNdK">《明琦一周学习与能力安排表》配套 · 2026 年 9 月 – 2028 年 9 月</small>
+  </h1>
+  <p class="lede" data-page-node-id="dGDVBUd33dSSijbEJmNHvD">你问"怎么提到很高的高度严格执行"。我的答案可能和你想的不一样：<b data-page-node-id="5fU0yX2daSGnspF9E0U676">真正的高度不在于每天做满分，而在于两年不断链。</b>下面是让它扛得住现实的机制。</p>
+</header>
+
+<nav data-page-node-id="xkvUasd1CV6T6uqD8JR8ny">
+  <div class="chips" data-page-node-id="DkMgTIEjELapHrSk6xOicn">
+    <a href="#s1" data-page-node-id="3GUCVAkZhtQsMxsCQpRYjD">三个真相</a>
+    <a href="#s2" data-page-node-id="jEVsc5jailxOyRKJaZKp5J">承诺书</a>
+    <a href="#s3" data-page-node-id="X9KcFNrolBJ411f1QTUQCk">七个部件</a>
+    <a href="#s4" data-page-node-id="GChKEZSkjfo9Bj3nsZUIos">异常预案</a>
+    <a href="#s5" data-page-node-id="ykSQGWzx2YbLnYb36usVt1">断链恢复</a>
+    <a href="#s6" data-page-node-id="A93xgsbvOzLx6owP1gga11">铁律</a>
+    <a href="#s7" data-page-node-id="Gp6qZuNznTJ6G7JyS4nWSy">打卡墙</a>
+  </div>
+</nav>
+
+<!-- 01 -->
+<section id="s1" data-page-node-id="IHaVou9f61HO9QsPCuECnc">
+  <div class="sec-h" data-page-node-id="SYwTr7BVkBAiGGfrKeSdVr"><span class="sec-n" data-page-node-id="4rp49CFeiDe1mrHEaUUSQJ">01</span><h2 data-page-node-id="eBPCHECg2vSpm1NhHq84e0">先把三个反直觉的真相说清楚</h2></div>
+  <p class="sec-sub" data-page-node-id="PhD0DMllIESnBTKF4Jjluk">不看这三条，机制做得再漂亮也会在三周内崩掉</p>
+
+  <div class="truth t1" data-page-node-id="Ct36gYJzCGVC0lhoDAzKSA">
+    <div class="hd" data-page-node-id="cHxt6cajC6VjM6RxKY7Lo6"><span class="no" data-page-node-id="HS9MAdtlJ76CfWvLF2ufGR">1</span><span class="nm" data-page-node-id="sjjPOHLuzXUUUveGUeME5i">"严格执行"这个念头，本身就是头号风险</span></div>
+    <div class="bd" data-page-node-id="MUc0OMSvW4nVJLI9kXgom6">
+      <p class="why" data-page-node-id="3WpUpBpHkJI9dnNXYapdeX">因为它隐含了一个假设：<b data-page-node-id="zYOUOoGoV2v3gtlK9iyAKY">每天都必须做到</b>。而现实是，任何超过两周的计划都必然撞上一次意外——你加班到十点、明琦发烧、家里来客人。第一次破例的那一刻，心里冒出来的不是"我遇到了一次异常"，而是<b data-page-node-id="QDBfFZD8NKgsGb6sPN7JYd">"我失败了，这计划黄了"</b>。</p>
+      <p class="why" data-page-node-id="q5RuNNvoMv0NNvLYEbYjfI">然后就是破窗效应：既然破了，索性全破。你写过代码，见过这个——一个模块烂了没人管，三个月后整个项目没人敢动。计划崩掉从来不是因为标准低，是因为<b data-page-node-id="ySiDwFaV8OXmVMHD5EieFT">把异常当故障，而不是当流程</b>。</p>
+      <div class="fix" data-page-node-id="9b6T6iiNkzxTBdsNUvXuba"><b data-page-node-id="v6VT9siMnub1gnYto9ACW9">换个做法：</b>像写代码处理异常一样处理"做不成的那天"——提前写好 <b data-page-node-id="EJJDMAW07J0PIlAJL1Ejk6">catch 分支</b>。计划里必须有"今天做不到怎么办"，而且这条分支要和正常流程一样明确、一样有尊严。</div>
+    </div>
+  </div>
+
+  <div class="truth t2" data-page-node-id="lv0Vp3xCIrCFsTNzBpYwP3">
+    <div class="hd" data-page-node-id="MlgpOZLC26Wus5xBgFlDgd"><span class="no" data-page-node-id="Wz84Dffcq2g4DvqW5lj9tg">2</span><span class="nm" data-page-node-id="e4dOmRJjkGHyt7lAVrLw7u">算术站在你这边：缺 50 天不影响结果</span></div>
+    <div class="bd" data-page-node-id="iz6DjX7EjmZ1UdbJUYoerQ">
+      <p class="why" data-page-node-id="ddCNB7a1cNsdIbSf6ALwWN">两年约 730 天。每天"坐下来"15 分钟加共读，一年能攒下 <b data-page-node-id="ot0ip9dqrOWv681hhXTEG6">180 小时</b>的高质量陪伴。而缺 50 天（平均每周缺半天）只损失 7%。</p>
+      <p class="why" data-page-node-id="Udhxqa0cOiHDAkniJRMcVL">反过来看另一条路径：周末突击 3 小时，坚持两个月，然后彻底放弃——总投入 24 小时，收益接近零，还给孩子留下了"学习是件苦差事"的印象。</p>
+      <div class="fix" data-page-node-id="Rz2FhCCDOUa8d4FQ2SRWnr"><b data-page-node-id="NqTkdi0iEBaS1K4jeo7nLf">结论：</b>你的目标函数不该是"每天完成率 100%"，而是<b data-page-node-id="hW4pGhui3BJK9WpuM58PFH">"连续未断链天数最大化"</b>。这两者的差别是，前者会因为一天失败而崩盘，后者会因为你周日补上一次共读而继续跑。</div>
+    </div>
+  </div>
+
+  <div class="truth t3" data-page-node-id="FkdG9sP1gXGAIawgOMD9yD">
+    <div class="hd" data-page-node-id="gFQvSDuHyPVdoMyNmvL7O9"><span class="no" data-page-node-id="Joi1Ccb2RcCCBQAXQv4pEz">3</span><span class="nm" data-page-node-id="eUdEBuUKQEnpnorWzEOCJb">被考核的人是你，不是明琦</span></div>
+    <div class="bd" data-page-node-id="jtDxNz8Q1URInNxubJHCCy">
+      <p class="why" data-page-node-id="Vj7UwgWQhICgqgQDAQFWyN">这是整套系统里唯一不能让步的一条。<b data-page-node-id="UzLj23pWLfVukMiOI3kChT">明琦永远不打分、不排名、不被考核。</b>打卡墙上那排勾，记录的是"爸爸有没有做到"，不是"孩子表现好不好"。</p>
+      <p class="why" data-page-node-id="wjCr1P7EZhsOhzBfHbeEmW">一旦把考核对象搞错，你会开始看他的完成质量，然后不自觉地催、评价、比较——他会很快学会躲和应付。到那时候，你手里这套机制就从助力变成了压力源。</p>
+      <div class="fix" data-page-node-id="AS4CjSQmEeEfnDvaRQoCdL"><b data-page-node-id="ppuqKZqLYfdCiyyC9kurzX">判断标准很简单：</b>如果某天明琦开始躲着那 10 分钟、开始讲条件，那不是他不配合，是<b data-page-node-id="aM6HhmBFHxlxJiDbtjfX0h">强度超了</b>。立刻减量，别硬顶。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section id="s2" data-page-node-id="7VrFSzgR9Ts0P6WuRJpg54">
+  <div class="sec-h" data-page-node-id="vnlQFozLwzbAiLtTTUdd9b"><span class="sec-n" data-page-node-id="xjDnlh6hlzLAydSTMYdbbE">02</span><h2 data-page-node-id="XF0Z0Bsp559jqi11RLC5fP">第一步：把它变成一份签过字的承诺</h2></div>
+  <p class="sec-sub" data-page-node-id="9B2tmnxIADbDuDHt7ZgF9H">打印出来，手写填空，签完贴墙上——这一张纸比任何 App 都有效</p>
+
+  <div class="oath" data-page-node-id="NNxmgCC0WZCbB2MhqjQIE8">
+    <div class="ot" data-page-node-id="nwI895ETBq4kobBu4jcSdK">家 庭 学 习 计 划 承 诺 书</div>
+    <div class="body" data-page-node-id="uxEMjOxauU4qo4zHdsoR3q">
+      我们为 <span class="blank" data-page-node-id="BaMZSEpymz75xTSsnVBcgf">明琦</span> 制定两年成长计划，时间从
+      <span class="blank" data-page-node-id="3zZ8WrLqidUfPOmYPRswaC">2026 年 10 月</span> 到 <span class="blank" data-page-node-id="a3OH36zkClcRetIKOsqHfy">2028 年 8 月</span>。<br data-page-node-id="AQyqY3DfFmfjZEWPH8RYtn">
+      我们做这件事，是因为 <span class="blank" style="min-width:260px" data-page-node-id="AsnwsBOf9OMLkl9K6x4wd3"></span>。<br data-page-node-id="MU0FbbJ5Oxwx4A8H23AuSo">
+      我们的承诺只有一条：<b data-page-node-id="3r4wbRUZ4HDCz3HU53iyD6">每天睡前亲子共读 10 分钟，两年不断。</b><br data-page-node-id="B6sNguqsc3sNvUledecVoW">
+      其余安排可以少做、可以降配，但这一条不打折。<br data-page-node-id="CJQ9jRmDwqEaKGee5zj0OP">
+      我们承诺：<b data-page-node-id="GJOTFEdEKyFXMGzLmuNqTn">不考核孩子、不拿他跟别人比、不把学习当惩罚。</b>
+    </div>
+    <div class="sign" data-page-node-id="bp0dPGH47ylMzYLYeoiigI">
+      <div class="s" data-page-node-id="59RUMCoEgX4s0M7CUPWRxt"><div class="ln" data-page-node-id="n2cTmJANrHLndd3UVYqlgc"></div><div class="lb" data-page-node-id="4dqxxCdr2EqC3TQsFh7twT">爸爸签字</div></div>
+      <div class="s" data-page-node-id="lk6zZvkw0DZJExoZ06pTPQ"><div class="ln" data-page-node-id="qoyetsiXHhp0kz3Me48cea"></div><div class="lb" data-page-node-id="37TRrmXuetgH3aDV6DMFLC">妈妈签字</div></div>
+      <div class="s" data-page-node-id="lfA4GptJiyOXDrP0Ljr8Hb"><div class="ln" data-page-node-id="ee0iaMcwkGoX0mFt7QXHwD"></div><div class="lb" data-page-node-id="OIbBpjHI4mfYcG05DyQSN8">日期</div></div>
+    </div>
+  </div>
+
+  <div class="card" data-page-node-id="tgZ8ODV42Y2gVEuewaq2ob">
+    <h3 data-page-node-id="OH8aEkiTMOu42lxETBrDJZ">为什么这张纸有用</h3>
+    <ul class="plain" data-page-node-id="Ycg9DjDlKcPmaau797Q9DY">
+      <li data-page-node-id="tyCi44imiG0TzwaC8TGcUQ"><b data-page-node-id="T9FtshEC65unP39hHi4p3e">公开承诺的约束力远大于私下决心。</b>你带团队最清楚——在会上当着人定下的事，执行率跟在微信里说一句"回头我搞一下"完全不是一回事。</li>
+      <li data-page-node-id="3OZpYzbt9Mm6J5N0YHmmkr"><b data-page-node-id="Clh3WnKrevswp8N2Vb1oZS">让妈妈签字，是把这件事变成家庭共识。</b>你出差、加班、项目冲刺的时候，得有人接得住。一个人的计划撑不过三个月。</li>
+      <li data-page-node-id="PFKnWfapV8QIPYq39GfEZC"><b data-page-node-id="m2TYAM4F8vqfSFDUTIToMm">贴在墙上，每天路过都看一眼。</b>物理可见 &gt; 手机里的待办清单。</li>
+    </ul>
+    <div class="tip" data-page-node-id="3E8TjRcFn3lMRRlfXBW4wU">上面那个"因为……"的空格别糊弄。<b data-page-node-id="cXU6KKyvnEtJEEzPU6UsR6">写具体</b>——不是"为了他好"，而是"我希望他上小学时，提到上学是期待的，不是害怕的"。三个月后你靠这句话撑住，不靠意志力。</div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section id="s3" data-page-node-id="OFTrUzmtOEBcOIA8I3HdiN">
+  <div class="sec-h" data-page-node-id="e75Tdh25hUwK3Ulvu1ExPJ"><span class="sec-n" data-page-node-id="UlXMCTBAJrU4IliklZLc1F">03</span><h2 data-page-node-id="10zjVELH7VMhCEJhJ9Uf0m">执行系统的七个部件</h2></div>
+  <p class="sec-sub" data-page-node-id="GaokiCRsl7aLgi8NYA8AxQ">用管项目的方式管这件事——但记住，孩子不是项目</p>
+
+  <div class="part" data-page-node-id="Mv3YagpmRfIxNXUZCnbwJe">
+    <div class="pn" data-page-node-id="YlODU9Ll92P6CtYSloP21S">1</div>
+    <div class="pc" data-page-node-id="PmSpKTQ77A71ufBqGsVFGW">
+      <div class="pt" data-page-node-id="cKGCIfI3NAsJ2cPMazKNPN">北极星：一句话写清"为什么"</div>
+      <div class="pd" data-page-node-id="QpkDCERO6CjuQL83box4U2">整份计划只能有一个最高目标，写死、不换。三个月后你会累、会怀疑、会想"是不是该加个英语"，那时候只有这句话能帮你把方向盘打回来。</div>
+      <div class="ex" data-page-node-id="I2phKF1jNBM0lTqzXt6dZn"><b data-page-node-id="5Z8opmVsdtZ7NMPJkTmMB1">建议这样写：</b>"让他觉得学东西是件好玩的事，上小学时有期待、不害怕。" 里程碑可以调，物理目标可以缓——<b data-page-node-id="dHhr1MXKlcKFMjW9XH8jJo">北极星不动</b>。</div>
+    </div>
+  </div>
+
+  <div class="part" data-page-node-id="J7BBJLUk5BQGchWbO6JOuY">
+    <div class="pn" data-page-node-id="oFCTYSdp3PFASNSbMTIHb6">2</div>
+    <div class="pc" data-page-node-id="2KVK6U6IXEsVss2PE2l5aU">
+      <div class="pt" data-page-node-id="SF3fQJN2RudiVkynwCIJtF">把新习惯焊在旧习惯上</div>
+      <div class="pd" data-page-node-id="XyvtJiLLcoBiGVwPdy7RV1">别定"晚饭前"，要定<b data-page-node-id="rOF6Mge843EbEgHG42PG0G">"晚饭前，碗一收走就开始"</b>。大脑对时间点的记忆很弱，对"上一个动作"的记忆很强。绑定触发器，等于借用了旧习惯的惯性。</div>
+      <div class="ex" data-page-node-id="QEaN4snNbjCxScgwi3YyOs">三个锚点：<br data-page-node-id="2jKRbmUiHS2XTW98zgipf7">· <b data-page-node-id="9IwiUX4uCkBdS7mP27Ksc7">出门穿鞋 → 开始认字</b>（路上看到什么认什么）<br data-page-node-id="3q1jYjcsoZOVdyFHBAX3Mk">· <b data-page-node-id="M76pZrqhqBEOlKsqGLUJXV">碗收走 → 坐到小书桌前</b>（10 分钟主攻）<br data-page-node-id="5exLn3YJL8UTVknJKO8T4P">· <b data-page-node-id="tnfQx0UuA6yrW334UQR9la">洗完澡 → 拿绘本</b>（共读）</div>
+    </div>
+  </div>
+
+  <div class="part" data-page-node-id="BicaT08Ky3zwGQVIdy1mo9">
+    <div class="pn" data-page-node-id="Wig7SyflEjUF7uDxBBkssB">3</div>
+    <div class="pc" data-page-node-id="exAs8BO0zoD1YqdPt5PQkW">
+      <div class="pt" data-page-node-id="Cs2lCyCKPgoCoJWCBQpMgU">把启动成本压到接近零</div>
+      <div class="pd" data-page-node-id="RnFwqBJFVmMECDxlferGyq">执行不下来的绝大多数原因，不是懒，是<b data-page-node-id="YVuA52NE8LMAnY7ZMIQtW8">启动太贵</b>——要去柜子里翻材料、要决定今天玩什么、要收拾桌子。这些决策成本消耗的意志力比执行本身还多。</div>
+      <div class="ex" data-page-node-id="V2zxjsQlT3m73CFy9cuAcK"><b data-page-node-id="hnQFudqFpQlwNCZMtxyR74">前一晚摆好：</b>当晚要用的字卡/拼图/方格纸，提前放在小书桌上，摆成"打开就能用"的状态。桌上只放这一样东西。<br data-page-node-id="BVSrC5PTY7YKixmWXtFiKH"><b data-page-node-id="ayym9J3dNz1iwjEBDKdEAI">每周日一次备料：</b>把下周七天的材料分七个小袋装好，一天一袋。10 分钟的事，省掉七天决策。</div>
+    </div>
+  </div>
+
+  <div class="part" data-page-node-id="G0GdEAOPIY9jdqJcRfwvnu">
+    <div class="pn" data-page-node-id="GNC5driDU7jGBCxHx7EuX9">4</div>
+    <div class="pc" data-page-node-id="1c10y0f5pyx9jlHU0g8CBo">
+      <div class="pt" data-page-node-id="FaoJTlKMPvhSHD6RPtC88K">定义完成：什么算"今天做到了"</div>
+      <div class="pd" data-page-node-id="o4TK4egaxZS4fU1LPh6BvI">必须有一个<b data-page-node-id="SrOu3trB4PLTaF1soJdrIb">极低门槛的完成定义</b>，低到你累成狗也能达成。</div>
+      <div class="ex" data-page-node-id="bp5FWrGwf73dzluAWTYlAZ"><b data-page-node-id="80hj7ELLnIwjaymQhTE11g">完成标准（DoD）：共读 10 分钟。</b>做了，今天就及格。主攻那 10 分钟属于"加分项"，不是及格线。<br data-page-node-id="qdcJVsADzdlzmNGLAInRHF">这条设计的目的是：<b data-page-node-id="VG58zTqcbJbBFxiWC11VOi">让"及格"永远唾手可得</b>，从而永远不断链。</div>
+    </div>
+  </div>
+
+  <div class="part" data-page-node-id="0YquHYLGjPS5LWlnrSkcxN">
+    <div class="pn" data-page-node-id="rDGWG60ShA24YUh3QufRoB">5</div>
+    <div class="pc" data-page-node-id="e3j6cfg5BeFADAedSek4R5">
+      <div class="pt" data-page-node-id="DByWfpK4QBPicFgwAN2J9r">可观测性：把进步变看得见</div>
+      <div class="pd" data-page-node-id="goI7DdGhOZgoDOGJRwswDO">运维一个线上系统，你不靠"我觉得还健康"，你靠监控面板。这里也一样——<b data-page-node-id="9VbdwESfhM6uHoTqAb23WA">墙上那面打卡墙就是你的仪表盘</b>，一眼看出连续多少天。</div>
+      <div class="ex" data-page-node-id="lLLXD2T7KLcAxNGk1otbGU">下面第 07 节有一张可打印的打卡墙。贴在他房门上或书桌旁，做完就画勾。<br data-page-node-id="kTr46rNOVB7gi7P2jaEwlQ">关键：<b data-page-node-id="CIUBwcxkhOjlE8w4TCmxhO">只记"做了没有"，不记"做得好不好"。</b></div>
+    </div>
+  </div>
+
+  <div class="part" data-page-node-id="9av5L9eAV1FfXniaCyh9kk">
+    <div class="pn" data-page-node-id="7UCUz7BrwC3pbveeJkp6BK">6</div>
+    <div class="pc" data-page-node-id="RwoaFaniM9GtDNKaLJ2s7G">
+      <div class="pt" data-page-node-id="wf2jWIrSTl2PT6DNUk1lc0">每周 15 分钟复盘会（就你们俩）</div>
+      <div class="pd" data-page-node-id="y2Nuu4LUjueERJrhHqJa6G">固定周日晚上，问三个问题。别开成检讨会，开成"调参会"。</div>
+      <div class="ex" data-page-node-id="LWiE5hnQcBIxd9UwdH11gs"><b data-page-node-id="FfAuLT8zgUu7FkUlCJzvBf">①</b> 这周哪几天做到了？哪几天没做到？<br data-page-node-id="5Ic9FPaw43w2iKEJcePmBn"><b data-page-node-id="r6EXmmkrGGgOFjmn8EXvBB">②</b> 没做到的那几天，卡在什么上？（时间？状态？材料没备？）<br data-page-node-id="9n1bHsEOT87eEjoEcBpZWx"><b data-page-node-id="x8J0WtFHJiaeWfN277HBFi">③</b> 下周改一个什么小地方？<b data-page-node-id="JxTgrGs9zvGruXRKiqnpDl">只改一个。</b><br data-page-node-id="rJNoVOXOzCXhNdBcbtgtc8"><br data-page-node-id="KjTZ6FR87wuBALAToehC35">你带团队的复盘会怎么开，这个就怎么开——对事不对人，找系统问题不找道德问题。</div>
+    </div>
+  </div>
+
+  <div class="part" data-page-node-id="A7iDJ5gXLhYQ7Q0IGk7JQL">
+    <div class="pn" data-page-node-id="WOmE4BlxEtxGvcNAuMlAfS">7</div>
+    <div class="pc" data-page-node-id="OGmrmLsHUeVNM9y3HgDl8P">
+      <div class="pt" data-page-node-id="GVga71hwPSKSdpPJCP5NzW">里程碑 + 庆祝（不是奖励）</div>
+      <div class="pd" data-page-node-id="KWbOL80ZsKqEKhN7KFfsNr">每到阶段末（2 月、8 月），做一件<b data-page-node-id="XdZmWk27OY4JnTHRIX3anc">特别的事</b>庆祝，而不是给孩子发奖品。</div>
+      <div class="ex" data-page-node-id="sLy1deVBvgZLHVwTrsii4g">庆祝 = 一起做一件平时不做的事：去一次没去过的公园、办一场"家庭电影夜"、做一顿他点菜的晚餐。<br data-page-node-id="Al3PPKbYzhXBzeXFdZeUDP"><b data-page-node-id="6Vs3pF50UFcXXOLj8svVAK">区别在哪：</b>奖品是交易的筹码，庆祝是对过程的确认。前者会让他学会谈价，后者会让他记住这件事是温暖的。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="s4" data-page-node-id="Nw6GOQsXjWzx5tMEHu0FmM">
+  <div class="sec-h" data-page-node-id="UdVWY5g6N8qkgKRK9U1eu7"><span class="sec-n" data-page-node-id="c8mYPfbZFOqG7VxCj43xzs">04</span><h2 data-page-node-id="1K13r7b4bMKGTCSLMyrA3d">异常降配预案</h2></div>
+  <p class="sec-sub" data-page-node-id="p5vuOBg1Kgz32G2rVpdrCQ">这节最重要。提前把"做不到的那天"写死，才不用临场靠意志力撑</p>
+
+  <div class="tw" data-page-node-id="nEdFGx5Lek2hh5BFTa6NI8">
+    <table data-page-node-id="uivkDtvV0ENNEEjo7nx9tw">
+      <thead data-page-node-id="6U8Kf8JrAGdIdIYtARMF1G"><tr data-page-node-id="dRTDILZ2OQWXHgdSRKMqIX"><th data-page-node-id="iO64AY9l9xJGHHKFL2TC7I">情况</th><th data-page-node-id="ibgzf8qDwlAFkQvNR4OpdG">降配到</th><th data-page-node-id="raGDYUQyZYFjAAdrDAm4Gh">绝对不能停</th></tr></thead>
+      <tbody data-page-node-id="fO3dw1C0LgJ07RyUju4Vdl">
+        <tr data-page-node-id="wlHpKHH9Ngjkc2sLx3MdMR">
+          <td class="sit" data-page-node-id="YGw85QrJEPzrEAKRHUC4sB">加班 / 到家 21 点后</td>
+          <td class="dn2" data-page-node-id="O2leG3CK7VBgaTrctDasRQ">只做共读 10 分钟，主攻全部取消</td>
+          <td class="red2" data-page-node-id="DSoePPU6yFWGvQ5iqFwloU">共读</td>
+        </tr>
+        <tr data-page-node-id="xIu1MPckh0FtQIN6OK3nOg">
+          <td class="sit" data-page-node-id="AkNSR5s4iGquLX8uooFlpA">出差在外</td>
+          <td class="dn2" data-page-node-id="OiJxkmlDTBGTjOCjzK3ION">视频共读（挑最短的绘本）；妈妈负责出门认字</td>
+          <td class="red2" data-page-node-id="yHivRu04sLocBqhJEgTRZ3">每天一个视频/语音</td>
+        </tr>
+        <tr data-page-node-id="aCBjus7coJZH1IAgCUhGgi">
+          <td class="sit" data-page-node-id="qYsUTjzp9W97DZleBeUKLN">明琦生病</td>
+          <td class="dn2" data-page-node-id="cKktqhz3sEs5Q1WrmgKNiH">全停。只抱着他读他选的那本</td>
+          <td class="red2" data-page-node-id="iCVv9MSV4h0gZcxyTudroA">共读（当哄睡也行）</td>
+        </tr>
+        <tr data-page-node-id="dzGM3EH0KeIroZlb1hnwW2">
+          <td class="sit" data-page-node-id="dbWbxCuUnBCzZ5sHV07Pir">他明显抵触 / 躲 / 讲条件</td>
+          <td class="dn2" data-page-node-id="XcBSclmnFhCWF1RgxoV9jt">主攻停 3 天，只玩；观察是哪个环节让他烦</td>
+          <td class="red2" data-page-node-id="CHMKJJq3OcrmJOEBSpB0QC">共读 + 不催不逼</td>
+        </tr>
+        <tr data-page-node-id="GpML8tKVCmDxQzSpD27bVm">
+          <td class="sit" data-page-node-id="TAxEDR7FygfTnDpnnyV6m3">家里来客 / 旅游 / 节日</td>
+          <td class="dn2" data-page-node-id="W8gO1DSsIXRdKa6fczWWeJ">只保留共读，其余视同"假期模式"</td>
+          <td class="red2" data-page-node-id="Q5iLkF6hiiqJwx9Qu26ObW">共读</td>
+        </tr>
+        <tr data-page-node-id="XgImxdjElmAAHqjjEo5yuc">
+          <td class="sit" data-page-node-id="le7oyeJcFFD7caDBYE4x9k">我自己撑不住了</td>
+          <td class="dn2" data-page-node-id="qMiAoiDeSHDc4AMpAGHXNY">启动"最低配置周"：连续 7 天只共读，别的都不许做</td>
+          <td class="red2" data-page-node-id="GQfuI6FWecTd8DO648n44Z">共读</td>
+        </tr>
+        <tr data-page-node-id="lj2VT9BgDasfLqG1Rjo7QB">
+          <td class="sit" data-page-node-id="XDkX8WSeVgib1VwVf6i2oJ">连续两周执行率低于 40%</td>
+          <td class="dn2" data-page-node-id="uVsFbEzTGSq2GTRhAgTMdc">不加码，反过来砍：把主攻从 10 分钟砍到 5 分钟</td>
+          <td class="red2" data-page-node-id="SlUj4vpOnsiQs2qTu0Yg40">共读</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bar noprint" data-page-node-id="szQEqMQAfwH40BJQc0ynEK">
+    <button class="c" data-copy="plan" data-page-node-id="LlZJEqNGpO0BPtIbjOkHuJ">复制预案 + 复盘三问（存手机）</button>
+  </div>
+
+  <div class="tip r" data-page-node-id="rqpGkxWckoAQCW9pGoyWD6">
+    <b data-page-node-id="7erLOCAGNalUG4ahR8b6B2">注意最后一行的反直觉设计：</b>执行率低的时候，正常人的反应是"得加把劲"，而正确动作是<b data-page-node-id="rzSYFi7WAQ29lQDQATnOgc">减量</b>。因为执行率低几乎从来不是因为不够努力，是因为标准定得超出了当前的生活容量。把门槛降下来，让它先跑起来，比在原地喊口号有用得多。
+  </div>
+</section>
+
+<!-- 05 -->
+<section id="s5" data-page-node-id="4mIgGt9AXYFOcM2BTxc8d9">
+  <div class="sec-h" data-page-node-id="MUcR2xk8uFwCuEEU7PocMO"><span class="sec-n" data-page-node-id="qAC65UJVPURBsUHe260xMX">05</span><h2 data-page-node-id="XWqv6a8cMxWjsZoCElwbam">断链了怎么捡回来</h2></div>
+  <p class="sec-sub" data-page-node-id="5OVDNNOkcJnqJgQh6mAgfs">这一节决定这套系统能活两年还是三周</p>
+
+  <div class="rec" data-page-node-id="fzYC5PS983R0egutr7uu0l">
+    <span class="rn" data-page-node-id="jmzTp5evzfTdYjXN4cd0lF">断 1 天</span>
+    <div data-page-node-id="UmMnLBIRABDuerf3hknDzm">
+      <div class="rt" data-page-node-id="jr5JmbcfDho3yXSsm1x4V5">不用补，直接接上</div>
+      <div class="rd" data-page-node-id="NrLGr75mgBL287WAD7CwPH">第二天照常做就行。<b data-page-node-id="9eHZ0COgxGCbES8JAT29IR">不要补偿性加量</b>——"昨天没做，今天做两遍"，这会让计划变成一个越欠越多的债。断一天不是债。</div>
+    </div>
+  </div>
+
+  <div class="rec rc2" data-page-node-id="nap5M9dq0fMf18Z3RWCI7G">
+    <span class="rn" data-page-node-id="OmXbTeGUTm4xuatiuy4mXD">断 3 天</span>
+    <div data-page-node-id="RFwLx8mkj5Z7ZSX6RB1OBE">
+      <div class="rt" data-page-node-id="HYnU5UQjUkDuh53EUmBpOv">重启要"重新开机"，不能只是接着跑</div>
+      <div class="rd" data-page-node-id="s9GrAvRRJEvIGCPCpyojAA">孩子已经忘了这件事了。别直接从原来的强度恢复，<b data-page-node-id="73IyhLFqSwCWlzrvRk5sqm">从共读单独开始，做三天，再找回主攻那 10 分钟</b>。就像服务重启要先暖机。</div>
+    </div>
+  </div>
+
+  <div class="rec rc3" data-page-node-id="Wtw6PYejG9CNFSC946OqiV">
+    <span class="rn" data-page-node-id="79BeFib3lPDCNdPqVXCqaz">断 1 周以上</span>
+    <div data-page-node-id="VbKOvYD9mDGh96gM4Ct2m2">
+      <div class="rt" data-page-node-id="BMBsTYArNsBr0PmRWSFZWc">当成一次新项目的启动，走一遍流程</div>
+      <div class="rd" data-page-node-id="avQEMpYkgxyw4whHVAbkBk">重读一遍承诺书、重贴一次打卡墙、重新备一次料。<b data-page-node-id="WirJgX4ISdIH2AEjyxEHqc">并且问自己一个问题：当初为什么断的？</b>如果原因是"时间根本不够"，那重启前先把安排改小——不改，就会再断一次。</div>
+    </div>
+  </div>
+
+  <div class="tip b" data-page-node-id="jYQyCx061hPEsLawaHvDPD">
+    <b data-page-node-id="Z0PFD3C4NclNVG43ZQU2uR">最要防的不是"断"，是"断了以后的放弃"。</b>90% 的育儿计划都死在第一次中断后的一周内——不是因为中断，是因为把中断当成了失败。你把它当成一次异常抛出就好，catch 住，打条日志，继续跑。
+  </div>
+</section>
+
+<!-- 06 -->
+<section id="s6" data-page-node-id="gL0Bl2frWU72vO4OIRwC4x">
+  <div class="sec-h" data-page-node-id="FKpfjNoB50kz3DELwHn1ZO"><span class="sec-n" data-page-node-id="ZXrJUwg8WRt8axxJKy4M2z">06</span><h2 data-page-node-id="OZek5RZCNO12CcY45OCyFM">三条铁律 + 三条反铁律</h2></div>
+  <p class="sec-sub" data-page-node-id="Tmdivo38Lml6LXFF6WBIFD">反铁律比铁律更重要，越界了整件事就变味了</p>
+
+  <div class="law" data-page-node-id="W7Yc4bZyhUKSFyvl3rJSRn">
+    <div class="lh" data-page-node-id="kvqswSl0a5G0vK7kRNRSjO">执行铁律（对家长的要求）</div>
+    <div class="lb" data-page-node-id="S0oi6sMwOPoCGmPw8PJJ3t">
+      <ol data-page-node-id="X6P42qqaqOzH04cVwq9dZE">
+        <li data-page-node-id="Ks2JsODeIOLqKKMIU2tnsj"><b data-page-node-id="y4aZ7vGjAmawNkVftHKFKe">说好 10 分钟就 10 分钟。</b>状态特别好也不加量——否则孩子很快会发现"表现好 = 更多任务"，下次开始磨蹭。这条是保护兴趣的。</li>
+        <li data-page-node-id="VrF3eeptmJAxKxbzuuCKqP"><b data-page-node-id="ajpKHlGGGfbtrvyvmLn6F1">他专心的时候别打断。</b>不问喝水、不问水果。这一条对专注力的影响，比其他所有训练方法加起来都大，而且很多家长每天都在犯。</li>
+        <li data-page-node-id="6c5z9tVDJphSAZvUFyQUEK"><b data-page-node-id="5VyY9yVQF1T6M4eAsZ8pOy">没做成的那天，第二天接着来，不补、不批评、不翻旧账。</b>习惯看的是"没断"，不是"没缺"。</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="law neg" data-page-node-id="s5GwT4ZfWZPG369stwpgGd">
+    <div class="lh" data-page-node-id="qAzUXeVWbQignZmlO7rb37">反铁律（越线了就变味的四条）</div>
+    <div class="lb" data-page-node-id="e5VH9sJslFG8dXzKxtLMMB">
+      <ol data-page-node-id="Cm2YGqbZGv9anoAy22lrRY">
+        <li data-page-node-id="j5548p9ljBcikVJQQ4MD2q"><b data-page-node-id="KIm9OA7lF5so3L6WABqzx3">不给明琦打分、不排名、不当着他跟任何孩子比。</b>孩子之间的发展差异可达一年以上，这在 6 岁前完全正常。比出来的只有你的焦虑。</li>
+        <li data-page-node-id="Ll1FFZVaNJhKvWHAvDLtCJ"><b data-page-node-id="l3teBdsSEcYvqEHuv4dXSK">不贴标签。</b>"他就是不爱认字""他坐不住"——孩子最会照着标签演，你贴什么他演什么。</li>
+        <li data-page-node-id="jPoIuJLKJIpkst8IVAWtsb"><b data-page-node-id="FNcMeTSQzJItweqVeKsVnW">永远不把学习当惩罚。</b>"不听话就让你去写字"这句话一旦说出口，学习和负面情绪就绑上了，这是最难修的一种伤。</li>
+        <li data-page-node-id="Xc05O6oEUivaHm1nvXuV43"><b data-page-node-id="tRAJ6Gfqo9u7Q3DCefWhVZ">不用"再看你表现"当条件。</b>共读不是奖励，是每天都会发生的事，跟表现无关。</li>
+      </ol>
+      <div class="tip r" style="margin-top:12px" data-page-node-id="JyDkjsOdEDYBKFQrZCBoSw">
+        <b data-page-node-id="EsLiiv8sSk2cC0Ba29D0Of">最后一条自检：</b>如果这套系统跑了半年，你发现明琦开始为了让你高兴而假装认真——立刻停下来退回到"只共读"。<b data-page-node-id="kPvTzXI4zxIrvXrG74clvM">真实的兴趣永远比看上去的成果值钱。</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-page-node-id="gv0bJArxjBswPZVBpaDbao">
+    <h3 data-page-node-id="QC4eqqQTv370oynya1ZUEU">阶段里程碑与庆祝</h3>
+    <div class="ms" style="margin-top:6px" data-page-node-id="fBEI2JJYZm2U7C22ig9aER">
+      <div class="m" data-page-node-id="ZPDrRppiEtxYqqFmHd7rsL">
+        <div class="mt2" data-page-node-id="DprAAGiAqJCDDxAPkwMziA">2027 年 2 月</div>
+        <div class="mw" data-page-node-id="jR0bWw9QxbUfAypEScF8rM">阶段一结束 · 5 岁 3 个月</div>
+        <div class="me" data-page-node-id="SMpQQO1DmX656AB95DfsUU">认字 100+，专注 10 分钟<br data-page-node-id="J4ekXpKzlYuCs0SVAcIANE">庆祝：去一个没去过的公园野餐</div>
+      </div>
+      <div class="m" data-page-node-id="S1MUqTZ0gKHB7i3CMaCtMD">
+        <div class="mt2" data-page-node-id="nXs0YzEixl4sDrydEQBfB4">2027 年 8 月</div>
+        <div class="mw" data-page-node-id="Fj3C9IxMYegXnjOENFOef6">阶段二结束 · 5 岁 9 个月</div>
+        <div class="me" data-page-node-id="DDs6KHl36QCJWz1Ui1xzhn">认字 400+，10 以内加减<br data-page-node-id="Eo3YnLA1yfERuZP4qnQoQt">庆祝：家庭电影夜，他选片</div>
+      </div>
+      <div class="m" data-page-node-id="NEGtN6c9Uo1iWxD173jqFy">
+        <div class="mt2" data-page-node-id="pDNJJLSq211ojKBTLH0tbD">2028 年 2 月</div>
+        <div class="mw" data-page-node-id="L7E021PfNE0Ad0NsEZ8pGC">阶段三结束 · 6 岁 3 个月</div>
+        <div class="me" data-page-node-id="wJE14nfSqDCkO75PNkoDw3">认字 700+，20 以内加减，拼音认读<br data-page-node-id="ErSBCf6LGnDCduhLmjZG1q">庆祝：一起做一顿他点菜的晚餐</div>
+      </div>
+      <div class="m" data-page-node-id="K2qCWsLpjyRRFOEDra8SB3">
+        <div class="mt2" data-page-node-id="ZdiO26KoeDcAxiscBZJe3I">2028 年 8 月</div>
+        <div class="mw" data-page-node-id="rGFPyGqaIpJWBHbE0KWEqD">阶段四结束 · 6 岁 9 个月</div>
+        <div class="me" data-page-node-id="TogFZnmjQ1MEMG2IPPCUka">认字 1000+，拼音过关，会整理书包<br data-page-node-id="Mj2Skk12PrTf1bzgcuRjQa">庆祝：开学前一次短途旅行</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section id="s7" data-page-node-id="cVDJqVB7GpqMtckickrWqf">
+  <div class="sec-h" data-page-node-id="QOiONyHJ3vzKYVhbZBCEVA"><span class="sec-n" data-page-node-id="tulKUQIbhA1MjF0rMEAsG2">07</span><h2 data-page-node-id="PeshHV7kNtjNU1bAd3wom7">打卡墙（可打印）</h2></div>
+  <p class="sec-sub" data-page-node-id="aGHAhyr1owE70Phuq33FD9">只记"做了没有"，不记"做得好不好"。记录的对象是你，不是明琦</p>
+
+  <div class="wall" data-page-node-id="btUKE41aEIgZ5Khdtxz2yJ">
+    <div class="wh" data-page-node-id="kyGXVQBTgJRPLO06psNRiH">
+      <span class="wt" data-page-node-id="rcGet48D9X7ECy8HUFLPMp">连续未断链打卡</span>
+      <span class="ws" data-page-node-id="feRsIalEfZcJ9pbQESANkx">点一下打勾 · 状态自动保存</span>
+    </div>
+    <div class="grid" id="wallGrid" data-page-node-id="06Xdvi65Payi3JlZSe7VHE"></div>
+    <div class="foot" data-page-node-id="7Xw0CdgLWk3j01mo3Xu7uc">
+      <span data-page-node-id="4Em86chFW2jUyyq4F2WF8T">已连续打卡 <span class="big" id="streak" data-page-node-id="1smfrJR0gMZozzHlRAM2XA">0</span> 天</span>
+      <button class="c" id="resetWall" style="margin-left:auto" data-page-node-id="pF7deTKtBHFUcEPNAi7zS5">重置</button>
+    </div>
+  </div>
+
+  <div class="card" data-page-node-id="Ej14aVsEm59etxCdntc56D">
+    <h3 data-page-node-id="Hwd4nZM37l9IlXqV0nmRtn">怎么用这面墙</h3>
+    <ul class="plain" data-page-node-id="CWwKDQwIt5xGVmEbUdfLTI">
+      <li data-page-node-id="4QJjrB9hxLbCxiW8Xr1jxh"><b data-page-node-id="L94EEvsPgpzMw6UBjRMumG">贴在书桌旁或房门上。</b>每天共读完之后，当着他的面画勾——不是监督他，是让他看见"这件事每天都会发生"。</li>
+      <li data-page-node-id="7maybFy8BblUQd8494t8wr"><b data-page-node-id="dnYkk7rY3zHrZBxcNb3Rky">勾代表"共读完成"，</b>也就是及格线。主攻那 10 分钟做没做都不影响打勾。</li>
+      <li data-page-node-id="CfcnEV4dl42cjRp8uK2doH"><b data-page-node-id="kB9yCiRGH4K2CBOiDpHIY4">断了就空着，别涂改、别补昨天的。</b>空着的那格本身就是信息——它告诉你那天生活里发生了什么。</li>
+      <li data-page-node-id="QiCSjDn9x9bg6NkXM7nBaG"><b data-page-node-id="Uje42gcEAdGGQz1kFRu1ui">每满 30 天，全家一起看一次这面墙。</b>什么也不用说，看着就够了。</li>
+    </ul>
+  </div>
+</section>
+
+<div class="final" data-page-node-id="yyO6u6aAmIv8xWwjkwzkki">
+  <p class="big" data-page-node-id="a9HpRwqvxB5JMXHdbaQAme">别追求每天满分，追求两年不断线。<br data-page-node-id="4lAf42Yir1FcTBafnQtj5A">一天不漏很难，一周不漏不难。</p>
+  <p class="sm" data-page-node-id="GExewA6H2OWEPEk9Ml8al0">这套系统唯一的核心目标：让明琦在这两年里，一直觉得"学习这件事，跟爸爸在一起的时候是暖的"。</p>
+</div>
+
+<footer data-page-node-id="SRYy1h7QHYzyBsK87L2Ved">
+  说明<br data-page-node-id="DViQaC0h55VlxPUMXU9knL">
+  · 本文件是《明琦 · 幼小衔接两年学习计划》（2026-09-22）与《一周学习与能力安排表》的执行保障配套，解决"计划怎么做下去"的问题。<br data-page-node-id="BwbSFVAttn76mJcAndYhNZ">
+  · 承诺书、北极星、签字区设计为打印后手写；打卡墙支持屏幕点击（状态自动保存）与打印勾选两种用法。<br data-page-node-id="cMg1GmcujQ6WHDSlp7y7Ut">
+  · 异常降配预案的核心是"共读永不断"，这是整套系统唯一的硬约束。其余全部可调。<br data-page-node-id="nxe2Kbcf2RfsL1PKwDqDIe">
+  制定于 2026 年 9 月 28 日
+</footer>
+</div>
+
+<script>
+(function(){
+  /* 打卡墙：5周 x 7天 */
+  var grid=document.getElementById('wallGrid');
+  var heads=['一','二','三','四','五','六','日'];
+  heads.forEach(function(h){
+    var d=document.createElement('div');d.className='gh';d.textContent=h;grid.appendChild(d);
+  });
+  var total=35;
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem('mq_wall')||'{}')}catch(e){}
+  for(var i=0;i<total;i++){
+    var c=document.createElement('div');
+    c.className='cell';c.dataset.i=i;
+    if(saved[i])c.classList.add('on');
+    c.addEventListener('click',function(){
+      var k=this.dataset.i;
+      this.classList.toggle('on');
+      saved[k]=this.classList.contains('on');
+      localStorage.setItem('mq_wall',JSON.stringify(saved));
+      updateStreak();
+    });
+    grid.appendChild(c);
+  }
+  function updateStreak(){
+    var n=0;
+    for(var i=0;i<total;i++){ if(saved[i])n++; }
+    document.getElementById('streak').textContent=n;
+  }
+  updateStreak();
+  document.getElementById('resetWall').addEventListener('click',function(){
+    if(!confirm('清空打卡墙？'))return;
+    saved={};localStorage.setItem('mq_wall','{}');
+    grid.querySelectorAll('.cell').forEach(function(c){c.classList.remove('on')});
+    updateStreak();
+  });
+
+  /* 复制预案 */
+  var plan=
+'明琦计划 · 异常降配预案\n\n'
++'加班/到家21点后 → 只共读10分钟，主攻取消\n'
++'出差在外 → 视频共读 + 妈妈负责出门认字\n'
++'明琦生病 → 全停，只抱着他读他选的绘本\n'
++'他明显抵触/躲/讲条件 → 主攻停3天，只玩，观察是哪里让他烦\n'
++'来客/旅游/节日 → 只保留共读，其余视为假期模式\n'
++'我自己撑不住 → 启动"最低配置周"：连续7天只共读\n'
++'连续两周执行率<40% → 不加码，反而砍量：主攻从10分钟减到5分钟\n\n'
++'【唯一硬约束】共读永不断。其余全部可调。\n\n'
++'每周日15分钟复盘（三问，只改一处）\n'
++'① 这周哪几天做到了？哪几天没做到？\n'
++'② 没做到的那几天，卡在什么上？\n'
++'③ 下周只改一个小地方。\n\n'
++'铁律：说好10分钟就10分钟不加量 / 他专心时不打断 / 没做成不补不批评\n'
++'反铁律：不给明琦打分排名 / 不贴标签 / 不把学习当惩罚 / 不用"看你表现"当条件';
+
+  var btn=document.querySelector('button[data-copy=plan]');
+  btn.addEventListener('click',function(){
+    var ok=function(){
+      var o=btn.textContent;btn.textContent='已复制 ✓';btn.classList.add('ok');
+      setTimeout(function(){btn.textContent=o;btn.classList.remove('ok')},1600);
+    };
+    var fb=function(){
+      var ta=document.createElement('textarea');ta.value=plan;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}
+      document.body.removeChild(ta);ok();
+    };
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(plan).then(ok,fb);
+    }else{fb()}
+  });
+
+  document.querySelectorAll('.chips a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var el=document.querySelector(a.getAttribute('href'));
+      if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+})();
+</script>
+</body>
+</html>
