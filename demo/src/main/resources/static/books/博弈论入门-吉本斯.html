@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>博弈论入门 —— 吉本斯《Game Theory for Applied Economists》通俗解读</title>
+<style>
+/* ========== CSS 变量 & 主题 ========== */
+:root {
+  --bg: #faf8f5;
+  --bg-card: #ffffff;
+  --bg-nav: #ffffff;
+  --bg-nav-hover: #f0ebe3;
+  --bg-code: #f5f3ef;
+  --bg-matrix: #faf7f2;
+  --bg-highlight: #fef9e7;
+  --bg-tag: #e8f0fe;
+  --text: #2c2c2c;
+  --text-secondary: #6b6b6b;
+  --text-muted: #999;
+  --accent: #c0392b;
+  --accent-light: #e74c3c;
+  --accent-bg: #fdf2f0;
+  --link: #2e6b9e;
+  --link-hover: #1a4a73;
+  --border: #e8e2d8;
+  --border-light: #f0ece5;
+  --shadow: rgba(0,0,0,0.06);
+  --shadow-hover: rgba(0,0,0,0.12);
+  --nav-width: 300px;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-main: 'Noto Serif SC', 'Source Han Serif SC', 'STSong', Georgia, serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+[data-theme="dark"] {
+  --bg: #1a1a2e;
+  --bg-card: #22223a;
+  --bg-nav: #1e1e34;
+  --bg-nav-hover: #2a2a4a;
+  --bg-code: #2a2a44;
+  --bg-matrix: #252540;
+  --bg-highlight: #2e2b1a;
+  --bg-tag: #1e2a44;
+  --text: #e0ddd5;
+  --text-secondary: #a0a0b0;
+  --text-muted: #707080;
+  --accent: #e74c3c;
+  --accent-light: #ff6b5a;
+  --accent-bg: #3a2220;
+  --link: #5ba3d9;
+  --link-hover: #7fc4f0;
+  --border: #333355;
+  --border-light: #2e2e4a;
+  --shadow: rgba(0,0,0,0.3);
+  --shadow-hover: rgba(0,0,0,0.5);
+}
+
+/* ========== 全局重置 ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  transition: background var(--transition), color var(--transition);
+  overflow-x: hidden;
+}
+
+/* ========== 侧边导航 ========== */
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: var(--nav-width); height: 100vh;
+  background: var(--bg-nav);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  z-index: 1000;
+  transition: transform var(--transition), background var(--transition);
+  overflow: hidden;
+}
+.sidebar.collapsed { transform: translateX(calc(-1 * var(--nav-width))); }
+
+.nav-header {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid var(--border-light);
+  flex-shrink: 0;
+}
+.nav-header h2 {
+  font-family: var(--font-main);
+  font-size: 1.1rem;
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1.4;
+}
+.nav-header .subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.nav-search {
+  padding: 12px 20px;
+  flex-shrink: 0;
+}
+.nav-search input {
+  width: 100%; padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color var(--transition);
+}
+.nav-search input:focus { border-color: var(--accent); }
+.nav-search input::placeholder { color: var(--text-muted); }
+
+.nav-content {
+  flex: 1; overflow-y: auto; padding: 8px 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.nav-content::-webkit-scrollbar { width: 4px; }
+.nav-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.nav-chapter {
+  margin: 4px 0;
+}
+.nav-chapter-title {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px;
+  font-weight: 600; font-size: 0.9rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: background var(--transition);
+  user-select: none;
+}
+.nav-chapter-title:hover { background: var(--bg-nav-hover); }
+.nav-chapter-title .arrow {
+  display: inline-block;
+  transition: transform var(--transition);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+.nav-chapter.open .arrow { transform: rotate(90deg); }
+.nav-chapter-title .ch-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.nav-sections {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.nav-chapter.open .nav-sections { max-height: 600px; }
+
+.nav-section a {
+  display: block;
+  padding: 7px 20px 7px 52px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.82rem;
+  transition: all var(--transition);
+  border-left: 2px solid transparent;
+}
+.nav-section a:hover {
+  color: var(--accent);
+  background: var(--bg-nav-hover);
+  border-left-color: var(--accent-light);
+}
+.nav-section a.active {
+  color: var(--accent);
+  font-weight: 600;
+  background: var(--accent-bg);
+  border-left-color: var(--accent);
+}
+
+/* ========== 主内容区 ========== */
+.main-content {
+  margin-left: var(--nav-width);
+  min-height: 100vh;
+  transition: margin-left var(--transition);
+}
+.sidebar.collapsed ~ .main-content { margin-left: 0; }
+
+.content-wrapper {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 40px 40px 80px;
+}
+
+/* ========== 顶部工具栏 ========== */
+.top-bar {
+  position: sticky; top: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border-light);
+  padding: 12px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  z-index: 100;
+  transition: background var(--transition);
+  backdrop-filter: blur(10px);
+}
+.top-bar .breadcrumb {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.top-bar .breadcrumb a {
+  color: var(--link);
+  text-decoration: none;
+}
+.top-bar .breadcrumb a:hover { text-decoration: underline; }
+.top-bar .breadcrumb .sep { margin: 0 6px; color: var(--border); }
+.top-bar .breadcrumb .current { color: var(--text); font-weight: 500; }
+
+.top-actions { display: flex; gap: 8px; align-items: center; }
+.btn-icon {
+  width: 36px; height: 36px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--transition);
+  font-size: 1rem;
+}
+.btn-icon:hover { border-color: var(--accent); color: var(--accent); }
+
+.menu-btn { display: none; }
+
+/* ========== Hero 区域 ========== */
+.hero {
+  text-align: center;
+  padding: 60px 20px 50px;
+  margin-bottom: 40px;
+}
+.hero-badge {
+  display: inline-block;
+  padding: 4px 16px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: var(--font-main);
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.hero p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 30px;
+  line-height: 1.9;
+}
+.hero-stats {
+  display: flex; justify-content: center; gap: 40px;
+  flex-wrap: wrap;
+}
+.hero-stat {
+  text-align: center;
+}
+.hero-stat .num {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+.hero-stat .label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ========== 章节 ========== */
+.chapter {
+  margin-bottom: 50px;
+}
+.chapter-header {
+  margin-bottom: 30px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--border);
+}
+.chapter-header .ch-label {
+  display: inline-block;
+  padding: 3px 12px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.chapter-header h2 {
+  font-family: var(--font-main);
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.chapter-header p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* ========== 小节卡片 ========== */
+.section-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-bottom: 24px;
+  transition: all var(--transition);
+  box-shadow: 0 2px 8px var(--shadow);
+}
+.section-card:hover {
+  box-shadow: 0 6px 20px var(--shadow-hover);
+  transform: translateY(-2px);
+}
+.section-card h3 {
+  font-family: var(--font-main);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--border);
+}
+
+/* ========== 内容模块 ========== */
+.module {
+  margin-bottom: 20px;
+}
+.module:last-child { margin-bottom: 0; }
+
+.module-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.module-label.concept { background: #e8f5e9; color: #2e7d32; }
+.module-label.example { background: #e3f2fd; color: #1565c0; }
+.module-label.math { background: #fff3e0; color: #e65100; }
+.module-label.tip { background: #fce4ec; color: #c62828; }
+.module-label.myth { background: #f3e5f5; color: #7b1fa2; }
+
+[data-theme="dark"] .module-label.concept { background: #1b3a1e; color: #66bb6a; }
+[data-theme="dark"] .module-label.example { background: #1a2a3e; color: #64b5f6; }
+[data-theme="dark"] .module-label.math { background: #3a2a1a; color: #ffa726; }
+[data-theme="dark"] .module-label.tip { background: #3a1a1e; color: #ef5350; }
+[data-theme="dark"] .module-label.myth { background: #2e1a3a; color: #ba68c8; }
+
+.module p {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.9;
+  margin-bottom: 8px;
+}
+
+.example-box {
+  background: var(--bg-highlight);
+  border-left: 4px solid var(--link);
+  padding: 16px 20px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin: 10px 0;
+}
+.example-box .example-title {
+  font-weight: 700;
+  color: var(--link);
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+.example-box p { margin-bottom: 4px; font-size: 0.92rem; }
+
+/* ========== 矩阵/表格 ========== */
+.matrix-container {
+  background: var(--bg-matrix);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  margin: 12px 0;
+  overflow-x: auto;
+}
+.matrix-container .matrix-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.matrix-table th, .matrix-table td {
+  padding: 10px 16px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.matrix-table th {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.matrix-table td { background: var(--bg-card); }
+.matrix-table tr td:first-child {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.matrix-table .highlight-cell {
+  background: var(--accent-bg);
+  font-weight: 700;
+  color: var(--accent);
+}
+.matrix-table .nash-cell {
+  background: #e8f5e9;
+  font-weight: 700;
+  color: #2e7d32;
+  position: relative;
+}
+.matrix-table .nash-cell::after {
+  content: '★';
+  position: absolute;
+  right: 4px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  color: #2e7d32;
+}
+[data-theme="dark"] .matrix-table .nash-cell { background: #1b3a1e; color: #66bb6a; }
+
+/* ========== 要点列表 ========== */
+.key-points {
+  list-style: none;
+  padding: 0;
+}
+.key-points li {
+  position: relative;
+  padding: 8px 0 8px 24px;
+  font-size: 0.92rem;
+  color: var(--text);
+  border-bottom: 1px dashed var(--border-light);
+}
+.key-points li:last-child { border-bottom: none; }
+.key-points li::before {
+  content: '✦';
+  position: absolute; left: 0; top: 9px;
+  color: var(--accent);
+  font-size: 0.7rem;
+}
+
+/* ========== 迷思 ========== */
+.myth-item {
+  display: flex; gap: 12px;
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  background: var(--bg-code);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+.myth-item .myth-mark {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+.myth-item .myth-mark.wrong { background: #ffebee; color: #c62828; }
+.myth-item .myth-mark.right { background: #e8f5e9; color: #2e7d32; }
+[data-theme="dark"] .myth-item .myth-mark.wrong { background: #3a1a1e; color: #ef5350; }
+[data-theme="dark"] .myth-item .myth-mark.right { background: #1b3a1e; color: #66bb6a; }
+.myth-item .myth-text { flex: 1; }
+.myth-item .myth-text .wrong-text { text-decoration: line-through; color: var(--text-muted); font-size: 0.88rem; }
+.myth-item .myth-text .right-text { color: var(--text); font-size: 0.92rem; font-weight: 500; }
+
+/* ========== 公式 ========== */
+.formula {
+  display: block;
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 20px;
+  margin: 10px 0;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  color: var(--accent);
+  text-align: center;
+  overflow-x: auto;
+}
+
+/* ========== 小节锚点 ========== */
+.section-anchor {
+  display: block;
+  position: relative;
+  top: -20px;
+  visibility: hidden;
+}
+
+/* ========== 页脚 ========== */
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+.footer a { color: var(--link); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* ========== 回到顶部 ========== */
+.back-to-top {
+  position: fixed; bottom: 30px; right: 30px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 12px var(--shadow-hover);
+  opacity: 0; pointer-events: none;
+  transition: all var(--transition);
+  z-index: 999;
+}
+.back-to-top.visible { opacity: 1; pointer-events: auto; }
+.back-to-top:hover { transform: translateY(-3px); }
+
+/* ========== 遮罩层 ========== */
+.overlay {
+  display: none;
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+}
+.overlay.active { display: block; }
+
+/* ========== 响应式 ========== */
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(calc(-1 * var(--nav-width))); }
+  .sidebar.mobile-open { transform: translateX(0); }
+  .main-content { margin-left: 0; }
+  .menu-btn { display: flex; }
+  .content-wrapper { padding: 20px; }
+  .hero h1 { font-size: 1.8rem; }
+  .section-card { padding: 20px; }
+  .hero-stats { gap: 20px; }
+}
+
+/* ========== 滚动条 ========== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ========== 动画 ========== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.section-card { animation: fadeInUp 0.5s ease forwards; }
+
+/* ========== 打印 ========== */
+@media print {
+  .sidebar, .top-bar, .back-to-top, .menu-btn { display: none !important; }
+  .main-content { margin-left: 0 !important; }
+  .section-card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== 侧边导航 ========== -->
+<aside class="sidebar" id="sidebar">
+  <div class="nav-header">
+    <h2>博弈论入门</h2>
+    <div class="subtitle">吉本斯 · Game Theory for Applied Economists</div>
+  </div>
+  <div class="nav-search">
+    <input type="text" id="navSearch" placeholder="搜索章节..." oninput="filterNav(this.value)">
+  </div>
+  <nav class="nav-content" id="navContent">
+
+    <!-- 第一章 -->
+    <div class="nav-chapter open" data-chapter="ch1">
+      <div class="nav-chapter-title" onclick="toggleChapter(this)">
+        <span class="arrow">▶</span>
+        <span class="ch-num">1</span>
+        完全信息静态博弈
+      </div>
+      <div class="nav-sections">
+        <div class="nav-section"><a href="#s1-1" onclick="closeMobileNav()">1.1 博弈的基本要素</a></div>
+        <div class="nav-section"><a href="#s1-2" onclick="closeMobileNav()">1.2 严格优势策略</a></div>
+        <div class="nav-section"><a href="#s1-3" onclick="closeMobileNav()">1.3 纳什均衡</a></div>
+        <div class="nav-section"><a href="#s1-4" onclick="closeMobileNav()">1.4 混合策略均衡</a></div>
+        <div class="nav-section"><a href="#s1-5" onclick="closeMobileNav()">1.5 应用：古诺竞争</a></div>
+        <div class="nav-section"><a href="#s1-6" onclick="closeMobileNav()">1.6 应用：伯特兰竞争</a></div>
+      </div>
+    </div>
+
+    <!-- 第二章 -->
+    <div class="nav-chapter" data-chapter="ch2">
+      <div class="nav-chapter-title" onclick="toggleChapter(this)">
+        <span class="arrow">▶</span>
+        <span class="ch-num">2</span>
+        完全信息动态博弈
+      </div>
+      <div class="nav-sections">
+        <div class="nav-section"><a href="#s2-1" onclick="closeMobileNav()">2.1 扩展式博弈</a></div>
+        <div class="nav-section"><a href="#s2-2" onclick="closeMobileNav()">2.2 逆向归纳法</a></div>
+        <div class="nav-section"><a href="#s2-3" onclick="closeMobileNav()">2.3 子博弈完美均衡</a></div>
+        <div class="nav-section"><a href="#s2-4" onclick="closeMobileNav()">2.4 重复博弈与合作</a></div>
+        <div class="nav-section"><a href="#s2-5" onclick="closeMobileNav()">2.5 应用：斯塔克尔伯格模型</a></div>
+      </div>
+    </div>
+
+    <!-- 第三章 -->
+    <div class="nav-chapter" data-chapter="ch3">
+      <div class="nav-chapter-title" onclick="toggleChapter(this)">
+        <span class="arrow">▶</span>
+        <span class="ch-num">3</span>
+        不完全信息静态博弈
+      </div>
+      <div class="nav-sections">
+        <div class="nav-section"><a href="#s3-1" onclick="closeMobileNav()">3.1 贝叶斯博弈的基本框架</a></div>
+        <div class="nav-section"><a href="#s3-2" onclick="closeMobileNav()">3.2 贝叶斯纳什均衡</a></div>
+        <div class="nav-section"><a href="#s3-3" onclick="closeMobileNav()">3.3 拍卖理论入门</a></div>
+        <div class="nav-section"><a href="#s3-4" onclick="closeMobileNav()">3.4 机制设计初探</a></div>
+      </div>
+    </div>
+
+    <!-- 第四章 -->
+    <div class="nav-chapter" data-chapter="ch4">
+      <div class="nav-chapter-title" onclick="toggleChapter(this)">
+        <span class="arrow">▶</span>
+        <span class="ch-num">4</span>
+        不完全信息动态博弈
+      </div>
+      <div class="nav-sections">
+        <div class="nav-section"><a href="#s4-1" onclick="closeMobileNav()">4.1 完美贝叶斯均衡</a></div>
+        <div class="nav-section"><a href="#s4-2" onclick="closeMobileNav()">4.2 信号传递博弈</a></div>
+        <div class="nav-section"><a href="#s4-3" onclick="closeMobileNav()">4.3 信号甄别博弈</a></div>
+        <div class="nav-section"><a href="#s4-4" onclick="closeMobileNav()">4.4 应用：劳动力市场信号</a></div>
+        <div class="nav-section"><a href="#s4-5" onclick="closeMobileNav()">4.5 应用：公司投资信号</a></div>
+      </div>
+    </div>
+
+  </nav>
+</aside>
+
+<div class="overlay" id="overlay" onclick="closeMobileNav()"></div>
+
+<!-- ========== 主内容 ========== -->
+<div class="main-content">
+  <!-- 顶部工具栏 -->
+  <div class="top-bar">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="btn-icon menu-btn" onclick="toggleMobileNav()">☰</button>
+      <div class="breadcrumb">
+        <a href="#top">首页</a>
+        <span class="sep">›</span>
+        <span class="current" id="breadcrumbCurrent">博弈论入门</span>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="btn-icon" onclick="toggleTheme()" title="切换主题" id="themeBtn">🌙</button>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+
+    <!-- Hero -->
+    <div class="hero" id="top">
+      <span class="hero-badge">适合数学基础薄弱的读者</span>
+      <h1>博弈论<em>入门</em></h1>
+      <p>每个人都在博弈——买东西砍价、职场竞争、恋爱抉择，甚至猜拳游戏。博弈论就是研究"聪明人之间如何做决定"的学问。这本书带你从零开始，用生活化的方式读懂吉本斯经典教材。</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">4</span><span class="label">大核心章节</span></div>
+        <div class="hero-stat"><span class="num">20</span><span class="label">个知识小节</span></div>
+        <div class="hero-stat"><span class="num">20+</span><span class="label">个生活案例</span></div>
+        <div class="hero-stat"><span class="num">100%</span><span class="label">零门槛阅读</span></div>
+      </div>
+    </div>
+
+    <!-- ==================== 第一章 ==================== -->
+    <div class="chapter" id="ch1">
+      <div class="chapter-header">
+        <span class="ch-label">第一章</span>
+        <h2>完全信息静态博弈</h2>
+        <p>最基础的博弈形式：每个人都同时做决定，而且彼此知道对方的所有信息。听起来简单，但里面藏着的智慧超乎想象。</p>
+      </div>
+
+      <!-- 1.1 -->
+      <span class="section-anchor" id="s1-1"></span>
+      <div class="section-card">
+        <h3>1.1 博弈的基本要素</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p>一个博弈由<strong>三个核心要素</strong>组成：参与者（谁在玩？）、策略（可以选什么？）、收益（选了之后得到什么？）。完全信息意味着每个人对所有要素都一清二楚。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">石头剪刀布</div>
+            <p><strong>参与者：</strong>你和我（两个玩家）</p>
+            <p><strong>策略：</strong>出石头、出剪刀、出布（每人3个策略）</p>
+            <p><strong>收益：</strong>赢=+1，输=-1，平=0</p>
+            <p>这就是一个"2人、每人3策略、完全信息、同时出拳"的博弈。你不知道对方出什么，但你清楚对方有哪3个选项，这就叫"完全信息"。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label math">数学简化版</span>
+          <div class="matrix-container">
+            <div class="matrix-title">石头剪刀布收益矩阵</div>
+            <table class="matrix-table">
+              <tr><th></th><th>对方出石头</th><th>对方出剪刀</th><th>对方出布</th></tr>
+              <tr><td>你出石头</td><td>0, 0</td><td>+1, -1</td><td>-1, +1</td></tr>
+              <tr><td>你出剪刀</td><td>-1, +1</td><td>0, 0</td><td>+1, -1</td></tr>
+              <tr><td>你出布</td><td>+1, -1</td><td>-1, +1</td><td>0, 0</td></tr>
+            </table>
+          </div>
+          <p>括号里的两个数字分别是"你的收益"和"对方的收益"。比如你出石头、对方出剪刀 → 你+1，对方-1。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>"完全信息"≠"我知道你要出什么"。它只是说我知道你<strong>有哪些选项</strong>，不知道你<strong>具体选哪个</strong>。</li>
+            <li>"静态"=同时决策。不是说你们必须同时举手，而是你做决定的时候不知道对方已经选了什么。</li>
+            <li>收益是博弈的"计分板"，决定了每个人的动机。</li>
+          </ul>
+        </div>
+
+        <div class="module">
+          <span class="module-label myth">常见迷思</span>
+          <div class="myth-item">
+            <div class="myth-mark wrong">✗</div>
+            <div class="myth-text">
+              <div class="wrong-text">"完全信息就是我知道对方在想什么"</div>
+              <div class="right-text">完全信息只意味着你知道对方"能选什么"和"选了能得什么"，不代表你读懂了对方的心思。知道选项≠知道选择。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.2 -->
+      <span class="section-anchor" id="s1-2"></span>
+      <div class="section-card">
+        <h3>1.2 严格优势策略</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p><strong>严格优势策略</strong>（Strictly Dominant Strategy）就是：无论对方怎么选，你选这个策略都比选其他任何策略更赚。这是一个"闭着眼睛都不会选错"的选择。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">考驾照科三的焦虑</div>
+            <p>假设你要选驾校，有"认真学"和"混过去"两种策略。无论驾校教得好不好（对方的选择），认真学的通过率都比混过去高。</p>
+            <p>那么"认真学"就是你的严格优势策略——无论驾校怎么样，这都是你更好的选择。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label math">数学简化版</span>
+          <div class="matrix-container">
+            <div class="matrix-title">优势策略示例（你的收益）</div>
+            <table class="matrix-table">
+              <tr><th></th><th>驾校教得好</th><th>驾校教得一般</th></tr>
+              <tr><td>认真学</td><td class="highlight-cell">90分</td><td class="highlight-cell">80分</td></tr>
+              <tr><td>混过去</td><td>70分</td><td>50分</td></tr>
+            </table>
+          </div>
+          <p>"认真学"在每一列都大于"混过去" → 认真学是严格优势策略。</p>
+          <div class="formula">策略A严格优于策略B ⟺ 对所有s₂，u₁(A, s₂) > u₁(B, s₂)</div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>如果存在严格优势策略，理性的决策者一定会选它——不需要猜测对方。</li>
+            <li>但现实中严格优势策略很罕见，因为大多数情况下"最好的选择"取决于对方怎么选。</li>
+            <li>当一个博弈中所有参与者都有严格优势策略时，这个博弈的结局就是确定的。</li>
+          </ul>
+        </div>
+
+        <div class="module">
+          <span class="module-label myth">常见迷思</span>
+          <div class="myth-item">
+            <div class="myth-mark wrong">✗</div>
+            <div class="myth-text">
+              <div class="wrong-text">"优势策略就是能赢的策略"</div>
+              <div class="right-text">优势策略不一定保证赢，它只保证比你的其他选项好。比如考试中认真学也未必满分，但比不学强。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.3 -->
+      <span class="section-anchor" id="s1-3"></span>
+      <div class="section-card">
+        <h3>1.3 纳什均衡</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p><strong>纳什均衡</strong>（Nash Equilibrium）是博弈论最核心的概念。简单说：在一个策略组合中，每个参与者都"不想单方面改变"自己的策略——因为改了反而更差。大家都觉得"在对方这个选择下，我现在的选择就是最好的"。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">经典案例：囚徒困境</div>
+            <p>两个嫌疑人被抓，分别审讯。每人可以选择"沉默（合作）"或"坦白（背叛）"：</p>
+            <p>• 两人都沉默 → 各判1年（最轻）</p>
+            <p>• 一人坦白一人沉默 → 坦白的直接释放，沉默的判10年</p>
+            <p>• 两人都坦白 → 各判5年</p>
+            <p>虽然两人都沉默（各1年）是最优结果，但每个人都有动机坦白——因为不管对方怎么选，坦白都是更"安全"的。结果两人都坦白（各5年），这就是纳什均衡。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label math">数学简化版</span>
+          <div class="matrix-container">
+            <div class="matrix-title">囚徒困境收益矩阵（刑期，越低越好）</div>
+            <table class="matrix-table">
+              <tr><th></th><th>对方沉默</th><th>对方坦白</th></tr>
+              <tr><td>你沉默</td><td>-1, -1</td><td>-10, 0</td></tr>
+              <tr><td>你坦白</td><td>0, -10</td><td class="nash-cell">-5, -5 ★</td></tr>
+            </table>
+          </div>
+          <p>★ 标记的格子就是纳什均衡：双方都坦白。谁单方面改沉默，自己的刑期就从-5变成-10，更差了。</p>
+          <div class="formula">纳什均衡 (s₁*, s₂*, ... , sₙ*)：对所有 i 和所有 sᵢ ∈ Sᵢ，uᵢ(sᵢ*, s₋ᵢ*) ≥ uᵢ(sᵢ, s₋ᵢ*)</div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>纳什均衡不一定是最优的！囚徒困境中，(沉默,沉默)比(坦白,坦白)对双方都好，但它不是均衡。</li>
+            <li>纳什均衡只是"稳定的状态"——没人有动力单方面离开，不意味着这个状态对所有人最好。</li>
+            <li>一个博弈可以有多个纳什均衡，也可以只有一个，甚至可能没有纯策略纳什均衡。</li>
+            <li>约翰·纳什因此获得1994年诺贝尔经济学奖。</li>
+          </ul>
+        </div>
+
+        <div class="module">
+          <span class="module-label myth">常见迷思</span>
+          <div class="myth-item">
+            <div class="myth-mark wrong">✗</div>
+            <div class="myth-text">
+              <div class="wrong-text">"纳什均衡就是最优解"</div>
+              <div class="right-text">纳什均衡是"稳定解"而非"最优解"。它意味着没人想单方面改变，但所有人的境况可能比另一种安排更差。囚徒困境就是最好的反例。</div>
+            </div>
+          </div>
+          <div class="myth-item">
+            <div class="myth-mark wrong">✗</div>
+            <div class="myth-text">
+              <div class="wrong-text">"纳什均衡一定是唯一的"</div>
+              <div class="right-text">一个博弈可能有零个、一个或多个纳什均衡。存在多个均衡时，需要其他方法（如聚焦点、协调）来预测实际结果。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.4 -->
+      <span class="section-anchor" id="s1-4"></span>
+      <div class="section-card">
+        <h3>1.4 混合策略均衡</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p>有时候，纯策略（固定选一个）没有纳什均衡，但<strong>混合策略</strong>（以一定概率随机选择）可以有。混合策略纳什均衡就是：每个人都按某个概率分布随机选择，使得对方换任何纯策略的期望收益都一样。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">猜拳游戏为什么要随机出</div>
+            <p>石头剪刀布这个游戏，不存在纯策略纳什均衡——无论你固定出什么，我都能找到克制你的策略。</p>
+            <p>但如果我以1/3概率出石头、1/3出剪刀、1/3出布（完全随机），你就找不到更好的策略来应对。这就是混合策略纳什均衡——<strong>让对方"猜不透"就是你的最优策略</strong>。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label math">数学简化版</span>
+          <div class="formula">混合策略 σᵢ 是纯策略集 Sᵢ 上的概率分布</div>
+          <div class="formula">σᵢ = (p₁, p₂, ..., pₖ)，其中 pⱼ ≥ 0 且 p₁+p₂+...+pₖ = 1</div>
+          <p>纳什定理（1950）：每个有限博弈都至少存在一个混合策略纳什均衡。</p>
+          <p>这意味着纳什均衡普遍存在——你永远可以找到一个"没人想单方面偏离"的概率组合。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>混合策略不是"犹豫不决"，而是"故意随机化"来让对手无法利用你的规律。</li>
+            <li>在体育比赛中，罚球手踢左还是右、守门员扑左还是右，经典模型就是混合策略博弈。</li>
+            <li>纳什的存在性定理保证了至少一个均衡存在——这就像数学中的"不动点定理"。</li>
+          </ul>
+        </div>
+
+        <div class="module">
+          <span class="module-label myth">常见迷思</span>
+          <div class="myth-item">
+            <div class="myth-mark wrong">✗</div>
+            <div class="myth-text">
+              <div class="wrong-text">"混合策略就是随便乱选"</div>
+              <div class="right-text">混合策略是精心计算的概率分布。比如足球罚球中，如果罚球手偏左的射门成功率高，他应该调整左右概率让守门员的期望收益相等。这是有最优解的，不是"随便选"。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.5 -->
+      <span class="section-anchor" id="s1-5"></span>
+      <div class="section-card">
+        <h3>1.5 应用：古诺竞争</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p><strong>古诺竞争</strong>（Cournot Competition）是寡头市场中企业同时选择产量的模型。每家企业在决定生产多少时，会把对方的产量当作"给定的"（即认为对方不会因自己的选择而改变）。均衡时，没有企业有动机单方面改变产量。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">奶茶店选址竞争</div>
+            <p>假设一条街上只有两家奶茶店（你和我），每天的顾客总数是固定的。如果两家都生产很多（都大量备货），供过于求，价格下降，两家都亏。</p>
+            <p>如果你知道对方今天备了100杯的料，你会想：我备多少最赚？太少赚不够，太多卖不完浪费。这就是古诺竞争的核心——<strong>在预测对方产量的前提下，选择自己的最优产量</strong>。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label math">数学简化版</span>
+          <div class="formula">线性需求：P = a - Q = a - (q₁ + q₂)</div>
+          <div class="formula">企业1的利润：π₁ = q₁ × (a - q₁ - q₂) - c×q₁</div>
+          <div class="formula">古诺均衡产量：q₁* = q₂* = (a - c) / 3</div>
+          <p>关键洞察：两家企业的总产量 (2(a-c)/3) 大于垄断产量 ((a-c)/2)，但小于完全竞争产量 (a-c)。这就是"竞争让消费者受益，但少于完全竞争"的含义。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>古诺模型中，企业竞争的手段是"产量"，不是"价格"。</li>
+            <li>反应函数（Best Response Function）描述了给定对方产量时自己的最优产量。</li>
+            <li>古诺均衡就是两条反应函数的交点——双方都不想改了。</li>
+            <li>企业越多，均衡越接近完全竞争，价格越低。</li>
+          </ul>
+        </div>
+
+        <div class="module">
+          <span class="module-label myth">常见迷思</span>
+          <div class="myth-item">
+            <div class="myth-mark wrong">✗</div>
+            <div class="myth-text">
+              <div class="wrong-text">"古诺竞争中企业会合作限产来抬价"</div>
+              <div class="right-text">在基本的古诺模型中，企业是独立决策的，不合作。如果合作限产，双方利润确实更高（回到垄断水平），但这不是纳什均衡——每方都有动机偷偷多生产。这就是囚徒困境的经济学翻版。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.6 -->
+      <span class="section-anchor" id="s1-6"></span>
+      <div class="section-card">
+        <h3>1.6 应用：伯特兰竞争</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p><strong>伯特兰竞争</strong>（Bertrand Competition）与古诺相反：企业同时选择<strong>价格</strong>而非产量。在产品同质的情况下，消费者只会买最便宜的，因此均衡结果出人意料——只要有两家企业竞争，价格就会降到边际成本。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">小区门口的水果摊</div>
+            <p>两家水果摊卖一模一样的苹果，进货价都是3元/斤。如果A卖5元，B卖4元，所有人都会去B那里买。</p>
+            <p>B想：我卖4元已经抢到所有客户了，那我卖3.5元呢？利润少了但客户不变。A想：那我卖3.1元，薄利多销。</p>
+            <p>最终两家都会把价格压到3元——刚好等于进货成本，谁也赚不到额外利润。这就是"伯特兰悖论"：只需两家企业就能达到完全竞争的价格。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>伯特兰悖论说明：价格竞争比产量竞争激烈得多。两家的价格战就能把利润打光。</li>
+            <li>现实中为什么没有这么极端？因为产品有差异（品牌、服务、位置）、产能有限制、企业存在其他约束。</li>
+            <li>古诺竞争和伯特兰竞争是两种极端的竞争模式，现实介于两者之间。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 第二章 ==================== -->
+    <div class="chapter" id="ch2">
+      <div class="chapter-header">
+        <span class="ch-label">第二章</span>
+        <h2>完全信息动态博弈</h2>
+        <p>当决策有了先后顺序，"先下手"和"后发制人"就变得截然不同。博弈树替代了收益矩阵，成为新的分析工具。</p>
+      </div>
+
+      <!-- 2.1 -->
+      <span class="section-anchor" id="s2-1"></span>
+      <div class="section-card">
+        <h3>2.1 扩展式博弈</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p><strong>扩展式博弈</strong>（Extensive-Form Game）用<strong>博弈树</strong>来描述有先后顺序的博弈。树的节点代表"轮到谁做决定"，分支代表"可以选什么"，末端代表"最终收益"。相比静态博弈的矩阵，博弈树能清楚地展现决策的时序和信息结构。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">市场进入博弈</div>
+            <p>一个新品牌想进入市场：</p>
+            <p>第一步：新品牌选择"进入"或"不进入"</p>
+            <p>第二步（如果新品牌进入）：在位者选择"打价格战"或"和平共处"</p>
+            <p>结果：进入+共处 → 双方都赚钱；进入+价格战 → 双方亏损；不进入 → 在位者独享利润。</p>
+            <p>这种"先后有序"的场景，用博弈树画出来一目了然。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label math">数学简化版</span>
+          <div class="formula">扩展式博弈 = (N, H, P, ƒₐ, uᵢ)</div>
+          <p><strong>N</strong> = 参与者集合，<strong>H</strong> = 历史集合（所有可能的行动序列），<strong>P</strong> = 参与者函数（谁在哪个节点做决策），<strong>ƒₐ</strong> = 可行行动函数，<strong>uᵢ</strong> = 收益函数。</p>
+          <p>信息集（Information Set）是扩展式中的关键概念：如果后行动者不能区分某些节点，这些节点就属于同一个信息集——代表"虽然轮到你了，但你不知道具体处于哪个节点"。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>静态博弈用矩阵，动态博弈用博弈树——这是最直观的区别。</li>
+            <li>信息集用虚线连接的节点表示：你在这个决策点，但不知道具体是哪一条路径到达的。</li>
+            <li>如果所有信息集都是单点（即每个节点都能区分），这就是"完美信息"博弈，如国际象棋。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2.2 -->
+      <span class="section-anchor" id="s2-2"></span>
+      <div class="section-card">
+        <h3>2.2 逆向归纳法</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p><strong>逆向归纳法</strong>（Backward Induction）是求解完美信息动态博弈的核心方法：从博弈树的最末端开始，倒推每个参与者在每个节点会怎么做，最终得出第一个行动者的最优选择。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">最后通牒博弈</div>
+            <p>我拿到100元，可以分给你一部分。我提出方案后你选择"接受"或"拒绝"。拒绝则两人都拿0元。</p>
+            <p><strong>逆向推理：</strong>最后一步，你面对我给你的金额X，接受得X，拒绝得0 → 理性的你会接受任何 X > 0。知道了这一点，我在第一步就会给你最少的钱（比如1元），自己留99元。</p>
+            <p>这就是逆向归纳法的威力——从最后一步开始推理，一步步倒推出整个博弈的结局。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>逆向归纳法的前提是"完美信息"——每一步都知道之前发生了什么。</li>
+            <li>最后通牒博弈的理论预测（给1元）与现实不符——人们会出于"公平感"拒绝过低的分配。这说明纯粹的理性人假设有局限。</li>
+            <li>逆向归纳法得到的均衡一定是子博弈完美均衡（下节讲）。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2.3 -->
+      <span class="section-anchor" id="s2-3"></span>
+      <div class="section-card">
+        <h3>2.3 子博弈完美均衡</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p><strong>子博弈完美纳什均衡</strong>（Subgame Perfect Nash Equilibrium, SPNE）是泽尔腾（Selten, 1994年诺贝尔奖得主）提出的概念。它要求：不仅在整体博弈中是纳什均衡，而且在每一个子博弈中也是纳什均衡。这排除了"空洞威胁"——那些说着玩的、不会被真正执行的策略。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">空头威胁 vs 可信威胁</div>
+            <p>市场进入博弈中，在位者威胁"如果你进入，我就打价格战"。</p>
+            <p>• <strong>空头威胁：</strong>如果新品牌真的进入了，打价格战对在位者亏得更多。所以在位者实际上不会打。这个威胁不可信。</p>
+            <p>• <strong>可信威胁：</strong>如果在位者在进入之前已经投入大量沉没成本（比如建了巨大产能），那么打价格战的成本就低了，威胁就变得可信。</p>
+            <p>子博弈完美均衡剔除了空头威胁——只保留每个节点上都是最优选择的策略。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>子博弈完美均衡 = 逆向归纳法的结果。在有限完美信息博弈中，两者等价。</li>
+            <li>SPNE是纳什均衡的"精炼"——纳什均衡允许空洞威胁，SPNE不允许。</li>
+            <li>这就是为什么谈判中"说到做到"比"随便说说"更有力量——SPNE只承认可信的承诺。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2.4 -->
+      <span class="section-anchor" id="s2-4"></span>
+      <div class="section-card">
+        <h3>2.4 重复博弈与合作</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p>当同一个博弈<strong>重复进行多次</strong>，结果会与单次博弈截然不同。在无限重复博弈中，即使是囚徒困境这样的"不合作"博弈，也可以通过"以牙还牙"等策略实现合作均衡。<strong>无名氏定理</strong>（Folk Theorem）给出了更一般的结果：只要参与人有足够的耐心，几乎任何合理的收益都可以被维持为均衡。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">为什么小区便利店不卖假货</div>
+            <p>单次博弈中，卖假货能赚更多（类似囚徒困境中的"坦白"）。但便利店要经营很久（重复博弈），如果卖一次假货被发现，以后就没人来了。</p>
+            <p>• <strong>以牙还牙策略（Tit-for-Tat）：</strong>第一轮合作，之后每轮模仿对方上一轮的做法。你合作我也合作，你背叛我也背叛。</p>
+            <p>这个策略简单但极其有效——在 Axelrod 的计算机锦标赛中，"以牙还牙"击败了所有复杂的策略。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>单次博弈 → 不合作（囚徒困境）；重复博弈 → 可能合作。这就是"长期关系改变行为"的博弈论解释。</li>
+            <li>贴现因子 δ 衡量"耐心程度"：越接近1说明越有耐心，越看重未来收益。</li>
+            <li>有限次重复博弈的最后几轮又会退化成不合作——"最后一天了，捞一把就跑"。</li>
+          </ul>
+        </div>
+
+        <div class="module">
+          <span class="module-label myth">常见迷思</span>
+          <div class="myth-item">
+            <div class="myth-mark wrong">✗</div>
+            <div class="myth-text">
+              <div class="wrong-text">"重复博弈一定能实现合作"</div>
+              <div class="right-text">合作需要条件：参与者有足够耐心（贴现因子够大）、能观察到对方行为、有惩罚背叛的能力。如果只重复2-3次，或者大家都急功近利，合作仍然难以实现。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.5 -->
+      <span class="section-anchor" id="s2-5"></span>
+      <div class="section-card">
+        <h3>2.5 应用：斯塔克尔伯格模型</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p><strong>斯塔克尔伯格模型</strong>（Stackelberg Model）是古诺模型的动态版本：一家企业（领导者）先选择产量，另一家（跟随者）在观察到领导者的产量后再选择自己的产量。这种"先动优势"模型常见于市场中已有强势企业和新进入者的场景。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">大品牌先发布新品</div>
+            <p>苹果先发布新手机（领导者），确定了市场定位和功能配置。安卓厂商观察到苹果的配置后，再决定自己的产品策略（跟随者）。</p>
+            <p>领导者因为"先动"，可以利用跟随者的反应来优化自己的选择——它知道跟随者会怎么回应，因此可以做出更有利的决策。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>领导者有"先动优势"：产量通常高于古诺均衡，利润也更高。</li>
+            <li>跟随者虽然后动，但可以利用"信息优势"——它看到了领导者的选择。</li>
+            <li>先动 vs 后动，哪个更好取决于具体场景，没有绝对优劣。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 第三章 ==================== -->
+    <div class="chapter" id="ch3">
+      <div class="chapter-header">
+        <span class="ch-label">第三章</span>
+        <h2>不完全信息静态博弈</h2>
+        <p>现实中最常见的情况：你不知道对方的底牌。不知道对方的真实成本、真实偏好、真实能力……怎么办？贝叶斯博弈给了我们一套在"不确定性"中做决策的框架。</p>
+      </div>
+
+      <!-- 3.1 -->
+      <span class="section-anchor" id="s3-1"></span>
+      <div class="section-card">
+        <h3>3.1 贝叶斯博弈的基本框架</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p><strong>贝叶斯博弈</strong>（Bayesian Game）引入了<strong>类型</strong>（Type）的概念。每个参与者有一个只有自己知道的"类型"（比如自己的真实成本、真实能力），其他参与者只知道类型的概率分布。决策就是在"不知道对方真实类型"的情况下做出的。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">二手车的柠檬问题</div>
+            <p>卖家知道自己的车是好车（"桃子"）还是坏车（"柠檬"），买家不知道。买家只知道"市场上70%是好车，30%是坏车"这个概率。</p>
+            <p>• 卖家的类型：{好车卖家, 坏车卖家}，这是卖家自己知道的</p>
+            <p>• 买家只知道概率分布：P(好车)=0.7, P(坏车)=0.3</p>
+            <p>买家要在这个不确定性下决定出多少钱——出高了怕被坑，出低了可能错过好车。这就是贝叶斯博弈。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label math">数学简化版</span>
+          <div class="formula">贝叶斯博弈 = (N, {Aᵢ}, {Tᵢ}, {pᵢ}, {uᵢ})</div>
+          <p><strong>Tᵢ</strong> = 参与者 i 的类型集合，<strong>pᵢ</strong> = 关于他人类型的信念（概率），<strong>uᵢ</strong> = 依赖于自己类型和所有人行动的收益函数。</p>
+          <p>策略变成了<strong>类型依赖的策略</strong>：sᵢ(tᵢ) 表示"如果我是类型 tᵢ，我就选策略 sᵢ"。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>"不完全信息"≠"完全不知道"。你不知道对方的真实类型，但你知道类型的概率分布。</li>
+            <li>"类型"可以代表任何私人信息：成本高低、能力强弱、风险偏好、产品好坏等。</li>
+            <li>贝叶斯博弈是海萨尼（Harsanyi, 1994年诺贝尔奖得主）的贡献，他巧妙地将"不知道"转化为"面对自然的随机选择"。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 3.2 -->
+      <span class="section-anchor" id="s3-2"></span>
+      <div class="section-card">
+        <h3>3.2 贝叶斯纳什均衡</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p><strong>贝叶斯纳什均衡</strong>（Bayesian Nash Equilibrium）是不完全信息静态博弈的解概念。在均衡中，每个参与者在给定自己类型的条件下，选择的最优策略也是针对其他人类型依赖策略的最佳回应。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">古董拍卖</div>
+            <p>你在古董拍卖会上竞拍一件瓷器。你不知道其他人对这件瓷器的估价（他们的"类型"），只知道估价的大致范围。</p>
+            <p>在贝叶斯纳什均衡中：每个人的出价策略取决于自己的估价，且在给定"其他人的出价策略"后，你的出价策略对你来说是最优的。</p>
+            <p>直觉上：你不知道别人值不值这个价，但你根据自己的估价和概率判断来决定出多少。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>贝叶斯纳什均衡 = 纳什均衡 + 类型依赖策略 + 信念（概率）。</li>
+            <li>每个类型都"最优回应"其他人的类型依赖策略 → 这就是均衡的含义。</li>
+            <li>完全信息纳什均衡是贝叶斯纳什均衡的特例（只有一个类型时）。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 3.3 -->
+      <span class="section-anchor" id="s3-3"></span>
+      <div class="section-card">
+        <h3>3.3 拍卖理论入门</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p>拍卖是贝叶斯博弈最经典的应用场景。2020年诺贝尔经济学奖得主米尔格罗姆和威尔逊（Milgrom & Wilson）的工作就主要在拍卖理论。核心问题是：<strong>在不知道对方估价的情况下，如何设计拍卖规则来实现最优结果？</strong></p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">四种常见拍卖形式</div>
+            <p><strong>英式拍卖（递增出价）：</strong>从低价开始，大家轮流加价，价高者得。像淘宝拍卖、艺术品拍卖。买家会根据别人的出价逐步调整自己的估值。</p>
+            <p><strong>荷式拍卖（递减出价）：</strong>从高价开始往下喊，第一个喊"停"的人得到商品。像菜市场批量甩卖。</p>
+            <p><strong>第一价格密封拍卖：</strong>每人偷偷写一个价格交给拍卖师，价高者得，付自己写的价。像招标。</p>
+            <p><strong>第二价格密封拍卖（维克里拍卖）：</strong>价高者得，但只付第二高的价格。你会在淘宝上看到类似的"出价代理"机制。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>维克里拍卖（第二价格）的一个神奇性质：真实出价是最优策略——你写自己的真实估价，永远不会亏。</li>
+            <li>拍卖设计需要考虑"赢者诅咒"：在共同价值拍卖中（如石油开采权），赢家往往是过度乐观的那个，实际可能亏钱。</li>
+            <li>收入等价定理：在一定条件下，四种拍卖形式给拍卖者带来的期望收入是相同的。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 3.4 -->
+      <span class="section-anchor" id="s3-4"></span>
+      <div class="section-card">
+        <h3>3.4 机制设计初探</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p><strong>机制设计</strong>（Mechanism Design）是博弈论的"逆向工程"：不是分析给定的博弈规则下会发生什么，而是<strong>设计博弈规则来达到你想要的结果</strong>。2007年诺贝尔经济学奖（赫维茨、马斯金、迈尔森）就颁给了这个领域。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">如何让大家说实话</div>
+            <p>假设你要组织一次聚餐，需要大家报自己能出多少钱。</p>
+            <p>如果直接问，大家都会低报（为了少出钱）。但如果设计一个规则：报的价格最低的人请所有人吃饭——那么大家都会真实报出自己的承受能力（因为报低了反而亏更多）。</p>
+            <p>这就是机制设计的核心：设计规则让人<strong>自愿说真话</strong>，不需要知道对方的真实想法。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</sum>
+          <ul class="key-points">
+            <li>机制设计的两大核心条件：<strong>激励相容</strong>（Incentive Compatibility，说真话是最优选择）和<strong>个人理性</strong>（参与约束，每个人都愿意参加）。</li>
+            <li>显示原理（Revelation Principle）：任何机制能实现的结果，都可以通过一个"激励相容的直接机制"来实现。</li>
+            <li>应用广泛：拍卖设计、匹配市场（如医生-医院匹配、学校录取）、投票制度、合同设计等。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 第四章 ==================== -->
+    <div class="chapter" id="ch4">
+      <div class="chapter-header">
+        <span class="ch-label">第四章</span>
+        <h2>不完全信息动态博弈</h2>
+        <p>这是博弈论中最复杂的类型——既不知道对方的底牌，决策又有先后顺序。你不仅要在不确定性中做选择，还要通过观察对方的行动来推断对方的类型。信号传递和信号甄别成为核心。</p>
+      </div>
+
+      <!-- 4.1 -->
+      <span class="section-anchor" id="s4-1"></span>
+      <div class="section-card">
+        <h3>4.1 完美贝叶斯均衡</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p><strong>完美贝叶斯均衡</strong>（Perfect Bayesian Equilibrium, PBE）将贝叶斯推断与子博弈完美性结合起来。要求：（1）在每个信息集上，参与者的信念（关于"我在哪个节点"的概率判断）是理性的——用贝叶斯法则更新；（2）给定这些信念，每个参与者的策略都是最优的。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">通过行为判断人品</div>
+            <p>你认识一个新朋友，不知道TA是"大方的人"还是"小气的人"（这是TA的类型，你不知道）。</p>
+            <p>第一次约会，TA主动买单（行动）。你观察到这个行为后，更新你的判断："大方的人"概率上升了。</p>
+            <p>第二次约会，你根据更新后的判断决定自己的行为。这就是完美贝叶斯均衡的核心——<strong>边做边学，边学边调</strong>。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>完美贝叶斯均衡 = 纳什均衡 + 贝叶斯信念更新 + 序贯理性。</li>
+            <li>"信念"就是概率判断——你在某个信息集上对"处于哪个节点"的概率估计。</li>
+            <li>PBE在不完全信息动态博弈中扮演的角色，类似于SPNE在完全信息动态博弈中的角色。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4.2 -->
+      <span class="section-anchor" id="s4-2"></span>
+      <div class="section-card">
+        <h3>4.2 信号传递博弈</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p><strong>信号传递博弈</strong>（Signaling Game）是不完全信息动态博弈的典型形式：拥有私人信息的一方（发送者）先采取行动，这个行动可以传递关于自己类型的"信号"；另一方（接收者）观察信号后更新信念，然后做出反应。问题是：信号是可信的吗？</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">孔雀开屏 = 发信号</div>
+            <p>生物学中最经典的信号博弈：雄孔雀拖着又大又重的尾巴（成本很高的信号）来吸引雌孔雀。尾巴越大，说明这只能活下来（身体健康），因为虚弱的孔雀根本拖不动这么大的尾巴。</p>
+            <p>• <strong>发送者：</strong>雄孔雀，类型是{强壮, 虚弱}，信号是尾巴大小</p>
+            <p>• <strong>接收者：</strong>雌孔雀，观察尾巴大小后选择{接受, 拒绝}</p>
+            <p>• <strong>关键：</strong>只有强壮的孔雀能承担"大尾巴"的成本 → 信号是<strong>分离均衡</strong>，雌孔雀可以通过尾巴大小准确判断雄孔雀的类型。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>信号要有效，必须满足"单交叉条件"（Spence-Mirrlees condition）：不同类型发出信号的"成本"必须不同。成本低的人才能发出强信号。</li>
+            <li><strong>分离均衡</strong>：不同类型发出不同信号 → 接收者能准确识别类型（如学历信号）。</li>
+            <li><strong>混同均衡</strong>：所有类型发出相同信号 → 接收者无法区分（如面试中所有人都说"我有团队精神"）。</li>
+            <li><strong>半分离均衡</strong>：部分类型信号相同，部分不同 → 接收者只能部分推断。</li>
+          </ul>
+        </div>
+
+        <div class="module">
+          <span class="module-label myth">常见迷思</span>
+          <div class="myth-item">
+            <div class="myth-mark wrong">✗</div>
+            <div class="myth-text">
+              <div class="wrong-text">"信号越强，说明实力越强"</div>
+              <div class="right-text">不一定。只有当强信号对"弱者"来说成本太高时，信号才是可信的。如果发信号没有成本差异（比如谁都能花钱做广告），信号就没有信息含量。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4.3 -->
+      <span class="section-anchor" id="s4-3"></span>
+      <div class="section-card">
+        <h3>4.3 信号甄别博弈</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p><strong>信号甄别</strong>（Screening）与信号传递的顺序相反：不知情的一方（接收者）先行动，设计一个"方案"（如合同），让对方（拥有私人信息的一方）来选择。不同类型的人会选择不同的方案，从而自动暴露自己的类型。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">保险公司的分层定价</div>
+            <p>保险公司不知道你开车是"安全型"还是"冒险型"。但保险公司可以设计两个方案：</p>
+            <p>• 方案A：低月费 + 高免赔额（适合安全驾驶者，因为几乎不需要理赔）</p>
+            <p>• 方案B：高月费 + 低免赔额（适合冒险驾驶者，因为经常需要理赔）</p>
+            <p>安全驾驶者会自动选A，冒险驾驶者会自动选B → 保险公司不需要知道你的类型，通过方案设计就能自动区分。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>信号传递：知情方先动（孔雀开屏），信号甄别：不知情方先动（保险公司设计方案）。</li>
+            <li>核心思想都是通过"成本差异"来分离不同类型的人。</li>
+            <li>现实中两者常常同时存在：企业既发信号（广告、品牌），也设计甄别方案（定价策略、合同条款）。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4.4 -->
+      <span class="section-anchor" id="s4-4"></span>
+      <div class="section-card">
+        <h3>4.4 应用：劳动力市场信号</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p>这是斯彭斯（Spence, 2001年诺贝尔奖得主）的经典模型：学历作为劳动能力的"信号"。企业不知道求职者的真实能力，但观察到求职者的学历。高能力者获得高学历的"成本"（如学习负担）比低能力者低，因此高学历成为高能力的可信信号。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">为什么考名校那么拼命</div>
+            <p>假设有两类人：高能力（生产率=10）和低能力（生产率=5）。企业愿意付的工资=期望生产率。</p>
+            <p>如果没有学历信号，企业只能付市场平均工资7.5，高能力者亏了。</p>
+            <p>如果名校录取标准足够严格，使得低能力者考上名校的概率极低（成本极高），那么名校学历就成为高能力的<strong>可信信号</strong>。企业看到名校毕业就给高薪，高能力者通过学历"证明"了自己。</p>
+            <p>注意：这里的学历可能并不直接提升能力，它只是"证明能力"的信号。这是信号传递博弈的核心洞察。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>学历信号模型解释了为什么人们愿意为"名校光环"付出巨大代价——因为信号有经济价值。</li>
+            <li>但也揭示了一个社会效率问题：如果教育只发挥"信号"功能而不提升实际能力，那大量教育投入可能是社会资源的浪费。</li>
+            <li>这也解释了"学历贬值"现象：当越来越多的人获得高学历，信号的区分力下降，需要更高的学历来传递同样的信号。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4.5 -->
+      <span class="section-anchor" id="s4-5"></span>
+      <div class="section-card">
+        <h3>4.5 应用：公司投资信号</h3>
+
+        <div class="module">
+          <span class="module-label concept">核心概念</span>
+          <p>公司管理层比外部投资者更了解公司的真实价值（信息不对称）。管理层可以通过某些决策向市场传递"公司前景很好"的信号——比如发行债务而非股票、提高分红、进行大规模投资等。</p>
+        </div>
+
+        <div class="module">
+          <span class="module-label example">生活化例子</span>
+          <div class="example-box">
+            <div class="example-title">为什么好公司发债而不发股</div>
+            <p>假设一家公司需要融资。投资者不知道公司是"优质公司"还是"劣质公司"。</p>
+            <p>如果公司选择发行债券（需要还本付息）：劣质公司不敢借太多，因为还不起会破产。优质公司才敢借——因为它的未来现金流足够偿还。</p>
+            <p>所以<strong>"敢于借债"</strong>本身就是一个信号：告诉市场"我有信心还钱"。投资者观察到发债行为后，会提高对公司质量的评估。</p>
+          </div>
+        </div>
+
+        <div class="module">
+          <span class="module-label tip">小白理解要点</span>
+          <ul class="key-points">
+            <li>"信号成本"是关键：只有好公司能承担的成本，才能传递可信的信号。</li>
+            <li>股利信号理论：提高分红 = 管理层对公司前景有信心（因为减少了内部可用资金）。</li>
+            <li>这个模型解释了很多公司金融现象：为什么IPO后股价常常波动、为什么融资方式的选择本身会传递信息。</li>
+          </ul>
+        </div>
+
+        <div class="module">
+          <span class="module-label myth">常见迷思</span>
+          <div class="myth-item">
+            <div class="myth-mark wrong">✗</div>
+            <div class="myth-text">
+              <div class="wrong-text">"公司做的一切都是为了传递好信号"</div>
+              <div class="right-text">信号传递是副产品，不是目的。公司首先做出最有利于自己的经营决策，市场从这些决策中"读取"信号。刻意做"信号"而不顾经营实质，就是"假大空"了。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 总结 -->
+    <div class="chapter" id="summary">
+      <div class="chapter-header">
+        <span class="ch-label">全书总结</span>
+        <h2>四张图，看懂博弈论全貌</h2>
+      </div>
+
+      <div class="section-card">
+        <div class="matrix-container">
+          <div class="matrix-title">博弈论四大分支速查表</div>
+          <table class="matrix-table" style="font-size:0.85rem;">
+            <tr>
+              <th></th>
+              <th>静态（同时决策）</th>
+              <th>动态（先后决策）</th>
+            </tr>
+            <tr>
+              <td>完全信息</td>
+              <td>纳什均衡<br><small>经典案例：囚徒困境、古诺竞争</small></td>
+              <td>子博弈完美均衡<br><small>经典案例：逆向归纳、重复博弈</small></td>
+            </tr>
+            <tr>
+              <td>不完全信息</td>
+              <td>贝叶斯纳什均衡<br><small>经典案例：拍卖、机制设计</small></td>
+              <td>完美贝叶斯均衡<br><small>经典案例：信号传递、信号甄别</small></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="module" style="margin-top:20px;">
+          <span class="module-label tip">一句话总结</span>
+          <ul class="key-points">
+            <li><strong>完全信息 + 静态</strong> → 大家同时做决定，彼此了解规则。核心工具：纳什均衡。</li>
+            <li><strong>完全信息 + 动态</strong> → 有先后顺序，后来者能观察。核心工具：逆向归纳 / 子博弈完美均衡。</li>
+            <li><strong>不完全信息 + 静态</strong> → 同时做决定，但不知道对方底牌。核心工具：贝叶斯纳什均衡。</li>
+            <li><strong>不完全信息 + 动态</strong> → 先后做决定，且不知道对方底牌，但可以从行为推断。核心工具：完美贝叶斯均衡。</li>
+          </ul>
+        </div>
+
+        <div class="module">
+          <span class="module-label concept">核心启示</span>
+          <p>博弈论教会我们三件事：</p>
+          <p><strong>第一，你的最优选择取决于对方的选择。</strong>不存在"放之四海而皆准"的最优策略，一切都在互动中决定。</p>
+          <p><strong>第二，承诺和威胁只有在"可信"时才有效。</strong>空洞的威胁只会让自己失去信用。</p>
+          <p><strong>第三，信息就是力量。</strong>在博弈中，知道更多（或让对方知道你更多）往往决定了胜负。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer">
+      <p>本页面内容基于罗伯特·吉本斯《博弈论入门》（Game Theory for Applied Economists）整理</p>
+      <p>仅供学习参考，建议配合原书阅读 · 2026</p>
+    </div>
+  </div>
+</div>
+
+<!-- 回到顶部 -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ========== 主题切换 ==========
+const themeBtn = document.getElementById('themeBtn');
+const html = document.documentElement;
+
+function setTheme(theme) {
+  html.setAttribute('data-theme', theme);
+  themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('game-theory-theme', theme);
+}
+
+function toggleTheme() {
+  const current = html.getAttribute('data-theme');
+  setTheme(current === 'dark' ? 'light' : 'dark');
+}
+
+// 加载保存的主题
+const saved = localStorage.getItem('game-theory-theme');
+if (saved) { setTheme(saved); }
+
+// ========== 侧边栏导航折叠 ==========
+function toggleChapter(el) {
+  el.parentElement.classList.toggle('open');
+}
+
+// ========== 移动端导航 ==========
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+
+function toggleMobileNav() {
+  sidebar.classList.toggle('mobile-open');
+  overlay.classList.toggle('active');
+}
+function closeMobileNav() {
+  sidebar.classList.remove('mobile-open');
+  overlay.classList.remove('active');
+}
+
+// ========== 导航搜索 ==========
+function filterNav(query) {
+  const q = query.toLowerCase().trim();
+  document.querySelectorAll('.nav-section').forEach(sec => {
+    const text = sec.textContent.toLowerCase();
+    const chapter = sec.closest('.nav-chapter');
+    if (!q || text.includes(q)) {
+      sec.style.display = '';
+      if (q && chapter) chapter.classList.add('open');
+    } else {
+      sec.style.display = 'none';
+    }
+  });
+}
+
+// ========== 滚动高亮 ==========
+const navLinks = document.querySelectorAll('.nav-section a');
+const sections = [];
+navLinks.forEach(link => {
+  const id = link.getAttribute('href').substring(1);
+  const el = document.getElementById(id);
+  if (el) sections.push({ id, el, link });
+});
+
+function updateActiveNav() {
+  const scrollY = window.scrollY + 100;
+  let current = sections[0];
+
+  for (const sec of sections) {
+    if (sec.el.offsetTop <= scrollY) current = sec;
+  }
+
+  navLinks.forEach(l => l.classList.remove('active'));
+  if (current) {
+    current.link.classList.add('active');
+    // 更新面包屑
+    const breadcrumb = document.getElementById('breadcrumbCurrent');
+    breadcrumb.textContent = current.link.textContent;
+    // 确保父章节展开
+    const chapter = current.link.closest('.nav-chapter');
+    if (chapter && !chapter.classList.contains('open')) {
+      chapter.classList.add('open');
+    }
+  }
+}
+
+// ========== 回到顶部按钮 ==========
+const backToTop = document.getElementById('backToTop');
+function updateBackToTop() {
+  if (window.scrollY > 400) {
+    backToTop.classList.add('visible');
+  } else {
+    backToTop.classList.remove('visible');
+  }
+}
+
+// ========== 节流滚动事件 ==========
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      updateActiveNav();
+      updateBackToTop();
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+// 初始化
+updateActiveNav();
+updateBackToTop();
+</script>
+</body>
+</html>

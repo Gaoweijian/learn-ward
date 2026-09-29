@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日语语法练习 — 第2课</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 6px;
+        }
+        .header p {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        /* 进度条 */
+        .progress-bar-wrap {
+            background: #ecf0f1;
+            border-radius: 10px;
+            height: 8px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        /* 计分 */
+        .score-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .score-panel span {
+            font-size: 1.05rem;
+            color: #2c3e50;
+        }
+        .score-num {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.3rem;
+        }
+
+        /* 题目卡片 */
+        .question-card {
+            background: white;
+            border-radius: 14px;
+            padding: 24px 26px;
+            margin-bottom: 18px;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.07);
+            transition: transform 0.2s;
+            border-left: 5px solid #3498db;
+        }
+        .question-card.correct {
+            border-left-color: #2ecc71;
+            background: #f0faf5;
+        }
+        .question-card.wrong {
+            border-left-color: #e74c3c;
+            background: #fdf2f2;
+            animation: shake 0.4s;
+        }
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            50% { transform: translateX(6px); }
+            75% { transform: translateX(-4px); }
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .q-num {
+            font-weight: bold;
+            color: #3498db;
+            font-size: 0.9rem;
+        }
+        .q-grammar {
+            font-size: 0.8rem;
+            background: #eaf2fb;
+            color: #2980b9;
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+        .q-type {
+            font-size: 0.78rem;
+            color: #95a5a6;
+        }
+
+        .q-title {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+        .q-title .jp {
+            color: #e74c3c;
+        }
+
+        /* 选项 */
+        .options { display: flex; flex-direction: column; gap: 8px; }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 10px 14px;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+        .option:hover { border-color: #3498db; background: #f0f7ff; }
+        .option.selected { border-color: #3498db; background: #dcedfc; }
+        .option.correct { border-color: #2ecc71; background: #d5f5e3; }
+        .option.wrong { border-color: #e74c3c; background: #fadbd8; }
+        .option input[type="radio"] { margin-right: 10px; accent-color: #3498db; }
+
+        /* 填空输入 */
+        .input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .input-group input {
+            padding: 9px 12px;
+            border: 2px solid #dce4ec;
+            border-radius: 6px;
+            font-size: 1rem;
+            width: 140px;
+            transition: border-color 0.2s;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        /* 排序题 */
+        .sort-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .sort-word {
+            padding: 8px 14px;
+            background: #f0f4f8;
+            border: 2px solid #dce4ec;
+            border-radius: 6px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s;
+        }
+        .sort-word:hover { background: #dfe9f3; }
+        .sort-word.selected-sort { background: #3498db; color: white; border-color: #2980b9; }
+        .answer-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            min-height: 42px;
+            padding: 8px;
+            background: #fafbfc;
+            border: 2px dashed #bdc3c7;
+            border-radius: 8px;
+            margin-top: 6px;
+        }
+        .answer-word {
+            padding: 6px 12px;
+            background: #2ecc71;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .answer-word:hover { background: #e74c3c; }
+
+        .btn {
+            padding: 9px 22px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+        .btn-submit {
+            background: #3498db;
+            color: white;
+        }
+        .btn-submit:hover { background: #2980b9; }
+        .btn-submit:disabled { background: #bdc3c7; cursor: not-allowed; }
+        .btn-reset {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+        .btn-reset:hover { background: #d5dbdb; }
+
+        .feedback {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            min-height: 20px;
+        }
+        .feedback.green { color: #27ae60; }
+        .feedback.red { color: #e74c3c; }
+
+        .bottom-bar {
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>📝 日语语法练习 — 第2课</h1>
+        <p>こちら・あそこ・いくら・どこ・も　など</p>
+    </div>
+
+    <div class="progress-bar-wrap">
+        <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+    </div>
+
+    <div class="score-panel">
+        <span>✅ 正确：<b class="score-num" id="correctCount">0</b></span>
+        <span>📋 总题数：<b id="totalQuestions">15</b></span>
+        <span>📊 正确率：<b id="accuracy">0%</b></span>
+    </div>
+
+    <div id="questionsContainer"></div>
+
+    <div class="bottom-bar">
+        <button class="btn btn-submit" id="btnCheckAll" onclick="checkAll()">📋 提交全部答案</button>
+        <button class="btn btn-reset" onclick="resetAll()">🔄 重新作答</button>
+    </div>
+</div>
+
+<script>
+// ==================== 题目数据 ====================
+const questions = [
+    // ─── 语法1: ～はいくらですか ───
+    {
+        grammar: '～はいくらですか',
+        type: '选择题',
+        title: 'A：これは<span class="jp">（　　　）</span>ですか。　B：<span class="jp">500円</span>です。',
+        options: ['どこ', 'いくら', 'どちら', 'なん'],
+        answer: 1,
+        explanation: '询问价钱用「いくら」。いくらですか = 多少钱？'
+    },
+    {
+        grammar: '～はいくらですか',
+        type: '排序题',
+        title: '将以下单词排列成正确的句子',
+        words: ['この', 'かばん', 'は', 'いくら', 'ですか'],
+        answer: 'このかばんはいくらですか',
+        explanation: 'このかばんはいくらですか。（这个包多少钱？）'
+    },
+    {
+        grammar: '～はいくらですか',
+        type: '翻译题',
+        title: '翻译成日语：那件衬衫（シャツ）多少钱？',
+        hint: 'その シャツ',
+        answer: 'そのシャツはいくらですか',
+        explanation: 'そのシャツはいくらですか。注意用「その」修饰名词。'
+    },
+
+    // ─── 语法2: ここ/そこ/あそこは～です ───
+    {
+        grammar: 'ここ/そこ/あそこ',
+        type: '选择题',
+        title: '（指着远处）<span class="jp">（　　　）</span>は<span class="jp">デパート</span>です。',
+        options: ['ここ', 'そこ', 'あそこ', 'どこ'],
+        answer: 2,
+        explanation: '「あそこ」表示远称，指远处的地方。ここ=这儿，そこ=那儿，あそこ=那儿（远）。'
+    },
+    {
+        grammar: 'ここ/そこ/あそこ',
+        type: '选择题',
+        title: '<span class="jp">（　　　）</span>は<span class="jp">教室</span>です。あなたの後ろです。',
+        options: ['ここ', 'そこ', 'あそこ', 'どちら'],
+        answer: 1,
+        explanation: '「そこ」指对方附近的地方。对方后面 → そこ。'
+    },
+
+    // ─── 语法3: こちら/そちら/あちら/どちら ───
+    {
+        grammar: 'こちら/そちら/あちら',
+        type: '选择题',
+        title: '（接待处礼貌地说）<span class="jp">（　　　）</span>は<span class="jp">受付</span>です。',
+        options: ['ここ', 'そこ', 'あそこ', 'こちら'],
+        answer: 3,
+        explanation: '「こちら」是「ここ」的礼貌说法。受付＝前台/接待处。'
+    },
+    {
+        grammar: 'こちら/そちら/あちら',
+        type: '改写题',
+        title: '将下面的句子改为更礼貌的说法：<br/><span class="jp">ここは出口（でぐち）です。</span>',
+        hint: 'ここ → こちら',
+        answer: 'こちらは出口です',
+        explanation: 'ここ → こちら、そこ → そちら、あそこ → あちら 是礼貌说法。'
+    },
+
+    // ─── 语法4: ～ですか，～ですか ───
+    {
+        grammar: '～ですか，～ですか',
+        type: '填空题',
+        title: '翻译成日语：你是日本人，还是中国人？<br/><span style="color:#7f8c8d">日本人（にほんじん）/ 中国人（ちゅうごくじん）</span>',
+        hint: '日本人ですか、中国人ですか',
+        answer: '日本人ですか、中国人ですか',
+        explanation: '选择疑问句：Aですか、Bですか。注意用「、」连接。'
+    },
+    {
+        grammar: '～ですか，～ですか',
+        type: '选择题',
+        title: 'コーヒーですか、<span class="jp">（　　　）</span>ですか。',
+        options: ['おちゃ', 'お茶', 'おちゃか', 'ちゃ'],
+        answer: 1,
+        explanation: 'コーヒーですか、お茶ですか。在です前放名词，「お茶（おちゃ）」是名词。'
+    },
+
+    // ─── 语法5: (～は)どこですか ───
+    {
+        grammar: '～はどこですか',
+        type: '排序题',
+        title: '将以下单词排列成正确的句子',
+        words: ['トイレ', 'は', 'どこ', 'です', 'か'],
+        answer: 'トイレはどこですか',
+        explanation: 'トイレはどこですか。（洗手间在哪里？）询问存在的场所。'
+    },
+    {
+        grammar: '～はどこですか',
+        type: '填空题',
+        title: '翻译成日语：邮局在哪里？<br/><span style="color:#7f8c8d">邮局 ＝ 郵便局（ゆうびんきょく）</span>',
+        hint: '郵便局はどこですか',
+        answer: '郵便局はどこですか',
+        explanation: '郵便局（ゆうびんきょく）はどこですか。询问场所的固定句型。'
+    },
+
+    // ─── 语法6: ～は～です（场所） ───
+    {
+        grammar: '～は～です',
+        type: '选择题',
+        title: '李さん<span class="jp">は（　　　）</span>ですか。　—　<span class="jp">教室</span>です。',
+        options: ['だれ', 'なん', 'どこ', 'どちら'],
+        answer: 2,
+        explanation: '回答是场所「教室」，所以用「どこ」来问。どこですか＝在哪里？'
+    },
+    {
+        grammar: '～は～です',
+        type: '填空题',
+        title: '翻译成日语：小王在图书馆。<br/><span style="color:#7f8c8d">图书馆 ＝ 図書館（としょかん）</span>',
+        hint: '王さんは図書館です',
+        answer: '王さんは図書館です',
+        explanation: '～は＋場所＋です 表示"……在……（场所）"。'
+    },
+
+    // ─── 语法7: ～も～です ───
+    {
+        grammar: '～も～です',
+        type: '选择题',
+        title: '田中さんは日本人です。李さん<span class="jp">（　　　）</span>日本人です。',
+        options: ['は', 'が', 'も', 'の'],
+        answer: 2,
+        explanation: '「も」表示"也"。田中先生是日本人，李先生也是日本人。'
+    },
+    {
+        grammar: '～も～です',
+        type: '填空题',
+        title: '翻译成日语：这个也是1000日元。<br/><span style="color:#7f8c8d">这个＝これ / 1000日元＝1000円</span>',
+        hint: 'これも1000円です',
+        answer: 'これも1000円です',
+        explanation: 'これ「も」1000円です。助词も表示"也"。'
+    }
+];
+
+// ==================== 状态管理 ====================
+const total = questions.length;
+document.getElementById('totalQuestions').textContent = total;
+
+// 每道题的用户输入状态
+const userState = questions.map(() => ({
+    selectedOption: null,      // 选择题：选中的选项索引
+    inputText: '',             // 填空题：输入的文本
+    sortOrder: [],             // 排序题：已排序的词索引
+    sortAvailable: [],         // 排序题：剩余可选词索引
+    answered: false,
+    correct: false
+}));
+
+// ==================== 渲染 ====================
+function renderAll() {
+    const container = document.getElementById('questionsContainer');
+    let html = '';
+
+    questions.forEach((q, idx) => {
+        const state = userState[idx];
+        html += `<div class="question-card" id="card-${idx}">`;
+        html += `<div class="q-header">`;
+        html += `<span class="q-num">第${idx+1}题</span>`;
+        html += `<span class="q-grammar">${q.grammar}</span>`;
+        html += `<span class="q-type">${q.type}</span>`;
+        html += `</div>`;
+        html += `<div class="q-title">${q.title}</div>`;
+
+        if (q.type === '选择题') {
+            html += `<div class="options" id="options-${idx}">`;
+            q.options.forEach((opt, oi) => {
+                const selected = state.selectedOption === oi;
+                let cls = selected ? 'selected' : '';
+                if (state.answered) {
+                    if (oi === q.answer) cls = 'correct';
+                    else if (oi === state.selectedOption) cls = 'wrong';
+                }
+                const disabled = state.answered ? 'disabled' : '';
+                const checked = selected ? 'checked' : '';
+                html += `<label class="option ${cls}">`;
+                html += `<input type="radio" name="q${idx}" value="${oi}" ${checked} ${disabled} onclick="selectOption(${idx}, ${oi})">`;
+                html += `<span>${opt}</span>`;
+                html += `</label>`;
+            });
+            html += `</div>`;
+        }
+
+        if (q.type === '填空题') {
+            html += `<div class="input-group">`;
+            html += `<input type="text" id="input-${idx}" value="${escapeHtml(state.inputText)}" placeholder="${escapeHtml(q.hint || '请输入答案...')}" ${state.answered ? 'disabled' : ''} oninput="fillInput(${idx}, this.value)">`;
+            if (!state.answered) {
+                html += `<button class="btn btn-submit" onclick="checkOne(${idx})">确认</button>`;
+            }
+            html += `</div>`;
+        }
+
+        if (q.type === '翻译题') {
+            html += `<div class="input-group">`;
+            html += `<input type="text" id="input-${idx}" value="${escapeHtml(state.inputText)}" placeholder="${escapeHtml(q.hint || '请输入答案...')}" ${state.answered ? 'disabled' : ''} oninput="fillInput(${idx}, this.value)" style="width:260px;">`;
+            if (!state.answered) {
+                html += `<button class="btn btn-submit" onclick="checkOne(${idx})">确认</button>`;
+            }
+            html += `</div>`;
+        }
+
+        if (q.type === '改写题') {
+            html += `<div class="input-group">`;
+            html += `<input type="text" id="input-${idx}" value="${escapeHtml(state.inputText)}" placeholder="${escapeHtml(q.hint || '请输入答案...')}" ${state.answered ? 'disabled' : ''} oninput="fillInput(${idx}, this.value)" style="width:260px;">`;
+            if (!state.answered) {
+                html += `<button class="btn btn-submit" onclick="checkOne(${idx})">确认</button>`;
+            }
+            html += `</div>`;
+        }
+
+        if (q.type === '排序题') {
+            if (state.sortAvailable.length === 0 && !state.answered) {
+                // initialize
+                state.sortAvailable = [...Array(q.words.length).keys()];
+                state.sortOrder = [];
+            }
+            html += `<div class="sort-words" id="sort-words-${idx}">`;
+            state.sortAvailable.forEach(wi => {
+                html += `<span class="sort-word" onclick="pickWord(${idx}, ${wi})">${q.words[wi]}</span>`;
+            });
+            html += `</div>`;
+            html += `<div class="answer-area" id="answer-area-${idx}">`;
+            state.sortOrder.forEach(wi => {
+                html += `<span class="answer-word" onclick="removeWord(${idx}, ${wi})">${q.words[wi]}</span>`;
+            });
+            if (state.sortOrder.length === 0) {
+                html += `<span style="color:#bdc3c7;font-style:italic;">点击上方词语排列顺序...</span>`;
+            }
+            html += `</div>`;
+            if (!state.answered) {
+                html += `<button class="btn btn-submit" style="margin-top:10px;" onclick="checkSort(${idx})">确认排序</button>`;
+            }
+        }
+
+        // Feedback
+        if (state.answered) {
+            const cls = state.correct ? 'green' : 'red';
+            const icon = state.correct ? '✅' : '❌';
+            html += `<div class="feedback ${cls}">${icon} 正确答案：${q.answer}　|　${q.explanation}</div>`;
+        }
+
+        html += `</div>`;
+    });
+
+    container.innerHTML = html;
+    updateProgress();
+}
+
+function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ==================== 交互 ====================
+function selectOption(idx, oi) {
+    if (userState[idx].answered) return;
+    userState[idx].selectedOption = oi;
+    renderAll();
+}
+
+function fillInput(idx, val) {
+    userState[idx].inputText = val;
+}
+
+function pickWord(idx, wi) {
+    const s = userState[idx];
+    if (s.answered) return;
+    const availIdx = s.sortAvailable.indexOf(wi);
+    if (availIdx > -1) {
+        s.sortAvailable.splice(availIdx, 1);
+        s.sortOrder.push(wi);
+        renderAll();
+    }
+}
+
+function removeWord(idx, wi) {
+    const s = userState[idx];
+    if (s.answered) return;
+    const orderIdx = s.sortOrder.indexOf(wi);
+    if (orderIdx > -1) {
+        s.sortOrder.splice(orderIdx, 1);
+        s.sortAvailable.push(wi);
+        renderAll();
+    }
+}
+
+// ==================== 判题 ====================
+function checkOne(idx) {
+    const s = userState[idx];
+    if (s.answered) return;
+
+    const q = questions[idx];
+    let userAnswer = '';
+
+    if (q.type === '选择题') {
+        if (s.selectedOption === null) {
+            alert('请先选择一个选项！');
+            return;
+        }
+        s.correct = (s.selectedOption === q.answer);
+        userAnswer = q.options[s.selectedOption];
+    } else if (q.type === '填空题' || q.type === '翻译题' || q.type === '改写题') {
+        userAnswer = s.inputText.trim();
+        // 简单匹配：忽略多余空格
+        const normalizedUser = userAnswer.replace(/　/g, ' ').replace(/\s+/g, '').toLowerCase();
+        const normalizedAns = q.answer.replace(/　/g, ' ').replace(/\s+/g, '').toLowerCase();
+        s.correct = (normalizedUser === normalizedAns);
+    }
+
+    // 对于填空题等，如果没有输入，提示
+    if ((q.type === '填空题' || q.type === '翻译题' || q.type === '改写题') && s.inputText.trim() === '') {
+        alert('请输入答案！');
+        return;
+    }
+
+    s.answered = true;
+    renderAll();
+    updateProgress();
+}
+
+function checkSort(idx) {
+    const s = userState[idx];
+    if (s.answered) return;
+
+    if (s.sortOrder.length !== questions[idx].words.length) {
+        alert('请选择所有词语！');
+        return;
+    }
+    const userAnswer = s.sortOrder.map(wi => questions[idx].words[wi]).join('');
+    const normalizedUser = userAnswer.replace(/\s+/g, '').toLowerCase();
+    const normalizedAns = questions[idx].answer.replace(/\s+/g, '').toLowerCase();
+    s.correct = (normalizedUser === normalizedAns);
+    s.answered = true;
+    renderAll();
+    updateProgress();
+}
+
+function checkAll() {
+    let allDone = true;
+    for (let i = 0; i < total; i++) {
+        if (!userState[i].answered) {
+            const q = questions[i];
+            if (q.type === '选择题' && userState[i].selectedOption === null) {
+                allDone = false;
+                continue;
+            }
+            if (q.type === '排序题' && userState[i].sortOrder.length !== q.words.length) {
+                allDone = false;
+                continue;
+            }
+            if ((q.type === '填空题' || q.type === '翻译题' || q.type === '改写题') && userState[i].inputText.trim() === '') {
+                allDone = false;
+                continue;
+            }
+            // 自动判题
+            if (q.type === '选择题') {
+                userState[i].correct = (userState[i].selectedOption === q.answer);
+                userState[i].answered = true;
+            } else if (q.type === '排序题') {
+                const ans = userState[i].sortOrder.map(wi => q.words[wi]).join('').replace(/\s+/g, '').toLowerCase();
+                userState[i].correct = (ans === q.answer.replace(/\s+/g, '').toLowerCase());
+                userState[i].answered = true;
+            } else {
+                const ans = userState[i].inputText.trim().replace(/　/g, ' ').replace(/\s+/g, '').toLowerCase();
+                userState[i].correct = (ans === q.answer.replace(/　/g, ' ').replace(/\s+/g, '').toLowerCase());
+                userState[i].answered = true;
+            }
+        }
+    }
+    if (!allDone) {
+        // 还有未完成的
+    }
+    renderAll();
+    updateProgress();
+}
+
+function updateProgress() {
+    const done = userState.filter(s => s.answered).length;
+    const correct = userState.filter(s => s.correct).length;
+    document.getElementById('progressBar').style.width = (done / total * 100) + '%';
+    document.getElementById('correctCount').textContent = correct;
+    document.getElementById('accuracy').textContent = done > 0 ? Math.round(correct / done * 100) + '%' : '0%';
+}
+
+function resetAll() {
+    for (let i = 0; i < total; i++) {
+        userState[i].selectedOption = null;
+        userState[i].inputText = '';
+        userState[i].sortOrder = [];
+        userState[i].sortAvailable = [];
+        userState[i].answered = false;
+        userState[i].correct = false;
+    }
+    renderAll();
+}
+
+// ==================== 启动 ====================
+document.addEventListener('DOMContentLoaded', () => {
+    renderAll();
+});
+</script>
+
+</body>
+</html>
