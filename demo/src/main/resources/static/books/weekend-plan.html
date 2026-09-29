@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>周末父子时间计划</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: #FFF8F0;
+    padding: 40px;
+    color: #4A3728;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(245, 166, 35, 0.15);
+    padding: 48px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #E86A33;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 16px;
+    color: #B8956A;
+    margin-bottom: 40px;
+  }
+  .day-section {
+    margin-bottom: 36px;
+  }
+  .day-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: #E86A33;
+    display: inline-block;
+    padding: 8px 24px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+  th {
+    background: #FDE8D0;
+    color: #8B5E3C;
+    font-weight: 600;
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 15px;
+  }
+  td {
+    padding: 12px 16px;
+    font-size: 14px;
+    border-bottom: 1px solid #F5E6D3;
+    line-height: 1.6;
+  }
+  tr:nth-child(even) { background: #FFFAF5; }
+  tr:hover { background: #FFF3E6; }
+  .time-cell {
+    font-weight: 600;
+    color: #C75B2A;
+    white-space: nowrap;
+    width: 120px;
+  }
+  .dad-cell {
+    color: #5A7D9A;
+    font-weight: 500;
+    width: 180px;
+  }
+  .kid-cell {
+    color: #8B9A5A;
+    font-weight: 500;
+    width: 180px;
+  }
+  .activity-cell {
+    color: #6B5B4F;
+  }
+  .tips-section {
+    background: #FFF5EB;
+    border-radius: 16px;
+    padding: 28px;
+    margin-top: 36px;
+    border: 2px dashed #F5C89A;
+  }
+  .tips-title {
+    font-size: 20px;
+    color: #E86A33;
+    font-weight: bold;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tips-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+  }
+  .tip-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #5C4B3E;
+  }
+  .tip-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .footer {
+    text-align: center;
+    margin-top: 32px;
+    color: #C4A882;
+    font-size: 13px;
+  }
+  .emoji-tag {
+    font-size: 13px;
+    margin-right: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>周末父子时间计划表</h1>
+  <p class="subtitle">平衡学习与陪伴，高质量周末安排</p>
+
+  <div class="day-section">
+    <div class="day-title">周六 · 探索日</div>
+    <table>
+      <tr>
+        <th>时间段</th>
+        <th>爸爸</th>
+        <th>儿子</th>
+        <th>活动建议</th>
+      </tr>
+      <tr>
+        <td class="time-cell">08:00-09:00</td>
+        <td class="dad-cell">洗漱、做早餐</td>
+        <td class="kid-cell">起床、洗漱</td>
+        <td class="activity-cell">一起准备早餐，让孩子参与简单操作</td>
+      </tr>
+      <tr>
+        <td class="time-cell">09:00-10:30</td>
+        <td class="dad-cell">陪同参与</td>
+        <td class="kid-cell">识字/数字启蒙</td>
+        <td class="activity-cell">用 learn-ward 识字卡，配合TTS语音学习</td>
+      </tr>
+      <tr>
+        <td class="time-cell">10:30-12:00</td>
+        <td class="dad-cell">日语学习(N3备考)</td>
+        <td class="kid-cell">自由玩耍/积木</td>
+        <td class="activity-cell">你学日语，孩子旁边安静玩，有需要随时回应</td>
+      </tr>
+      <tr>
+        <td class="time-cell">12:00-14:00</td>
+        <td class="dad-cell">午餐+午休</td>
+        <td class="kid-cell">午餐+午休</td>
+        <td class="activity-cell">一起吃饭，聊聊上午学了什么</td>
+      </tr>
+      <tr>
+        <td class="time-cell">14:00-15:30</td>
+        <td class="dad-cell">户外亲子时间</td>
+        <td class="kid-cell">户外亲子时间</td>
+        <td class="activity-cell">公园、骑车、踢球——放电时间</td>
+      </tr>
+      <tr>
+        <td class="time-cell">15:30-17:00</td>
+        <td class="dad-cell">技术学习/项目</td>
+        <td class="kid-cell">动画片/故事</td>
+        <td class="activity-cell">你看书或敲代码，孩子看动画30-40分钟</td>
+      </tr>
+      <tr>
+        <td class="time-cell">17:00-18:00</td>
+        <td class="dad-cell">陪同参与</td>
+        <td class="kid-cell">亲子游戏/手工</td>
+        <td class="activity-cell">拼图、乐高、折纸，实践亲子理念</td>
+      </tr>
+      <tr>
+        <td class="time-cell">18:00-19:30</td>
+        <td class="dad-cell">晚餐+家庭时间</td>
+        <td class="kid-cell">晚餐+家庭时间</td>
+        <td class="activity-cell">一起准备晚餐，聊聊一天</td>
+      </tr>
+      <tr>
+        <td class="time-cell">19:30-20:30</td>
+        <td class="dad-cell">洗澡+睡前故事</td>
+        <td class="kid-cell">洗澡+睡前故事</td>
+        <td class="activity-cell">读故事给他听，也是你的放松时间</td>
+      </tr>
+      <tr>
+        <td class="time-cell">20:30-22:00</td>
+        <td class="dad-cell">自由时间</td>
+        <td class="kid-cell">睡觉</td>
+        <td class="activity-cell">你看书、刷剧、继续学习，随意安排</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="day-section">
+    <div class="day-title">周日 · 共创日</div>
+    <table>
+      <tr>
+        <th>时间段</th>
+        <th>爸爸</th>
+        <th>儿子</th>
+        <th>活动建议</th>
+      </tr>
+      <tr>
+        <td class="time-cell">08:30-09:30</td>
+        <td class="dad-cell">洗漱、早餐</td>
+        <td class="kid-cell">起床、洗漱</td>
+        <td class="activity-cell">比周六稍晚起，节奏放缓</td>
+      </tr>
+      <tr>
+        <td class="time-cell">09:30-11:00</td>
+        <td class="dad-cell">亲子共创时间</td>
+        <td class="kid-cell">亲子共创时间</td>
+        <td class="activity-cell">一起画画、做手工、搭积木城堡</td>
+      </tr>
+      <tr>
+        <td class="time-cell">11:00-12:00</td>
+        <td class="dad-cell">日语/阅读</td>
+        <td class="kid-cell">辅助陪伴玩耍</td>
+        <td class="activity-cell">你学习，他在旁边玩，偶尔互动</td>
+      </tr>
+      <tr>
+        <td class="time-cell">12:00-14:00</td>
+        <td class="dad-cell">午餐+午休</td>
+        <td class="kid-cell">午餐+午休</td>
+        <td class="activity-cell">周日可以稍微晚一点吃</td>
+      </tr>
+      <tr>
+        <td class="time-cell">14:00-15:30</td>
+        <td class="dad-cell">户外/超市采购</td>
+        <td class="kid-cell">户外/超市采购</td>
+        <td class="activity-cell">带孩子去超市认识蔬菜水果，或去公园</td>
+      </tr>
+      <tr>
+        <td class="time-cell">15:30-17:00</td>
+        <td class="dad-cell">项目/技术</td>
+        <td class="kid-cell">安静活动</td>
+        <td class="activity-cell">你专注时间，孩子独立玩拼图/看书</td>
+      </tr>
+      <tr>
+        <td class="time-cell">17:00-18:00</td>
+        <td class="dad-cell">亲子桌游/游戏</td>
+        <td class="kid-cell">亲子桌游/游戏</td>
+        <td class="activity-cell">飞行棋、记忆卡、躲猫猫——互动收尾</td>
+      </tr>
+      <tr>
+        <td class="time-cell">18:00-19:30</td>
+        <td class="dad-cell">晚餐+准备下周</td>
+        <td class="kid-cell">晚餐+准备下周</td>
+        <td class="activity-cell">一起收拾玩具，聊聊明天上幼儿园</td>
+      </tr>
+      <tr>
+        <td class="time-cell">19:30-20:30</td>
+        <td class="dad-cell">洗澡+睡前故事</td>
+        <td class="kid-cell">洗澡+睡前故事</td>
+        <td class="activity-cell">固定睡前仪式，建立安全感</td>
+      </tr>
+      <tr>
+        <td class="time-cell">20:30-22:30</td>
+        <td class="dad-cell">自由时间</td>
+        <td class="kid-cell">睡觉</td>
+        <td class="activity-cell">你的专属时间，复盘一周或提前规划</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="tips-section">
+    <div class="tips-title">💡 温馨小贴士</div>
+    <div class="tips-grid">
+      <div class="tip-item">
+        <span class="tip-icon">📚</span>
+        <span><b>你的学习：</b>每天保证2-3小时整块时间，日语N3需要持续积累</span>
+      </div>
+      <div class="tip-item">
+        <span class="tip-icon">⏱️</span>
+        <span><b>孩子注意力：</b>4岁注意力集中约15-20分钟，活动别太长</span>
+      </div>
+      <div class="tip-item">
+        <span class="tip-icon">🤝</span>
+        <span><b>高质量陪伴：</b>每天至少1-2个"共创时段"，一起做事</span>
+      </div>
+      <div class="tip-item">
+        <span class="tip-icon">🔄</span>
+        <span><b>弹性原则：</b>计划是参考，孩子状态不好就调整</span>
+      </div>
+      <div class="tip-item">
+        <span class="tip-icon">💻</span>
+        <span><b>利用项目：</b>learn-ward识字卡周末可当亲子游戏玩</span>
+      </div>
+      <div class="tip-item">
+        <span class="tip-icon">😊</span>
+        <span><b>保持轻松：</b>周末是用来充电的，别给自己太大压力</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">周末愉快 · 陪伴是最好的教育 · 学习是最好的榜样</div>
+</div>
+</body>
+</html>

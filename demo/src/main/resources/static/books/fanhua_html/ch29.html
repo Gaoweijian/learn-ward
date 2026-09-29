@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第二十九章 — 繁花导读</title>
+<style>
+:root {
+  --bg: #faf8f3;
+  --bg2: #f0ebe0;
+  --card: #fff;
+  --text: #2c2415;
+  --text2: #5a4a35;
+  --accent: #8b2c2c;
+  --accent2: #c4793a;
+  --gold: #b8902a;
+  --green: #3a6b3a;
+  --border: #d4c5a9;
+  --shadow: rgba(139,44,44,0.12);
+  --font-serif: 'Georgia','SimSun','宋体',serif;
+  --font-sans: 'PingFang SC','Microsoft YaHei',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);line-height:1.85;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent2);text-decoration:underline}
+
+/* ===== HEADER ===== */
+.site-header {
+  background: linear-gradient(135deg, #f5f0e1 0%, #e8dcc5 60%, #dcc8a8 100%);
+  color: #4a3b2c;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+}
+.header-inner{max-width:1100px;margin:0 auto;padding:10px 20px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.header-title{font-family:var(--font-serif);font-size:22px;font-weight:bold;
+  letter-spacing:3px;color:#f5e6d3;text-shadow:1px 1px 3px rgba(0,0,0,0.5)}
+.header-sub{font-size:12px;color:#c9a882;letter-spacing:1px}
+.header-nav{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.header-nav a{color:#f5e6d3;font-size:13px;padding:4px 10px;
+  border:1px solid rgba(245,230,211,0.3);border-radius:3px;transition:all 0.2s}
+.header-nav a:hover{background:rgba(255,255,255,0.15);text-decoration:none}
+
+/* ===== LAYOUT ===== */
+.main-wrap{max-width:1100px;margin:0 auto;padding:24px 16px;display:grid;
+  grid-template-columns:240px 1fr;gap:24px}
+@media(max-width:768px){.main-wrap{grid-template-columns:1fr}}
+
+/* ===== SIDEBAR ===== */
+.sidebar{position:sticky;top:70px;height:calc(100vh - 80px);overflow-y:auto;
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:16px 0;box-shadow:0 2px 8px var(--shadow)}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.sidebar-title{padding:0 16px 10px;font-size:13px;font-weight:bold;
+  color:var(--accent);letter-spacing:2px;border-bottom:1px solid var(--border)}
+.sidebar-section{padding:8px 0}
+.sidebar-era{padding:4px 16px;font-size:11px;font-weight:bold;color:var(--gold);
+  letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+.sidebar a{display:block;padding:5px 16px;font-size:13px;color:var(--text2);
+  border-left:3px solid transparent;transition:all 0.2s;line-height:1.4}
+.sidebar a:hover,.sidebar a.active{color:var(--accent);
+  border-left-color:var(--accent);background:#fdf0e8;text-decoration:none}
+
+/* ===== CONTENT ===== */
+.content{min-width:0}
+.page-hero{background:linear-gradient(135deg,#2c1810,#5a2020);
+  color:#f5e6d3;border-radius:10px;padding:28px 32px;margin-bottom:24px;
+  position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;right:-20px;top:-20px;
+  width:150px;height:150px;background:rgba(255,255,255,0.04);
+  border-radius:50%}
+.page-hero-num{font-size:48px;font-family:var(--font-serif);opacity:0.25;
+  position:absolute;right:32px;bottom:10px;line-height:1}
+.hero-badge{display:inline-block;padding:3px 10px;border-radius:12px;
+  font-size:12px;font-weight:bold;margin-bottom:8px;letter-spacing:1px}
+.badge-60{background:#4a5568;color:#e2e8f0}
+.badge-70{background:#744210;color:#fefcbf}
+.badge-80{background:#2d6a2d;color:#c6f6d5}
+.badge-90{background:#c05621;color:#feebcb}
+.badge-both{background:linear-gradient(90deg,#4a5568,#c05621);color:#fff}
+.hero-title{font-family:var(--font-serif);font-size:28px;font-weight:bold;
+  letter-spacing:2px;margin-bottom:6px}
+.hero-sub{font-size:14px;color:#c9a882;line-height:1.6}
+
+/* ===== CHAPTER OVERVIEW ===== */
+.overview-box{background:var(--card);border:1px solid var(--border);
+  border-radius:8px;padding:20px 24px;margin-bottom:20px;
+  border-left:4px solid var(--accent)}
+.overview-box h3{font-size:14px;font-weight:bold;color:var(--accent);
+  margin-bottom:10px;letter-spacing:1px}
+.overview-box p{color:var(--text2);font-size:14px;line-height:1.8}
+
+/* ===== TABS ===== */
+.tabs{display:flex;gap:0;margin-bottom:0;border-bottom:2px solid var(--border);flex-wrap:wrap}
+.tab-btn{padding:9px 18px;background:transparent;border:none;cursor:pointer;
+  font-size:13px;color:var(--text2);border-bottom:2px solid transparent;
+  margin-bottom:-2px;font-family:var(--font-sans);transition:all 0.2s;font-weight:500}
+.tab-btn:hover{color:var(--accent)}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:bold}
+.tab-panel{display:none;padding:20px 0}
+.tab-panel.active{display:block}
+
+/* ===== SCENE CARD ===== */
+.scene-card{background:var(--card);border:1px solid var(--border);
+  border-radius:8px;margin-bottom:16px;overflow:hidden;
+  box-shadow:0 1px 4px var(--shadow)}
+.scene-header{padding:12px 18px;background:var(--bg2);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px}
+.scene-num{width:26px;height:26px;background:var(--accent);color:#fff;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:bold;flex-shrink:0}
+.scene-title{font-weight:bold;font-size:15px;color:var(--text)}
+.scene-body{padding:16px 18px}
+
+/* ===== PART BOXES ===== */
+.part-box{margin-bottom:14px;border-radius:6px;overflow:hidden}
+.part-label{font-size:11px;font-weight:bold;letter-spacing:2px;
+  padding:5px 12px;display:flex;align-items:center;gap:6px}
+.part-content{padding:12px 14px;font-size:14px;line-height:1.85}
+
+.part-plot .part-label{background:#f0f4ff;color:#2d5a9e;border-left:3px solid #2d5a9e}
+.part-plot .part-content{background:#f8faff;border-left:3px solid #cfd8f0}
+
+.part-original .part-label{background:#fef9f0;color:#7a4a10;border-left:3px solid #c4793a}
+.part-original .part-content{background:#fffaf4;border-left:3px solid #e8d4b0;
+  font-family:var(--font-serif);font-size:13.5px;color:#5a3a15}
+
+.part-dialog .part-label{background:#f0fff4;color:#276749;border-left:3px solid #38a169}
+.part-dialog .part-content{background:#f8fffa;border-left:3px solid #c6f6d5}
+.dialect-row{display:flex;gap:8px;padding:4px 0;border-bottom:1px dashed #d4edda;font-size:13.5px}
+.dialect-row:last-child{border-bottom:none}
+.dialect-sh{color:#5a3a15;font-family:var(--font-serif);flex:1;min-width:0}
+.dialect-std{color:#276749;flex:1;min-width:0}
+.dialect-arrow{color:#aaa;font-size:12px;padding-top:2px}
+
+.part-tell .part-label{background:#fdf5ff;color:#6b21a8;border-left:3px solid #9333ea}
+.part-tell .part-content{background:#fdf8ff;border-left:3px solid #e9d5ff}
+
+.part-analysis .part-label{background:#fff7ed;color:#92400e;border-left:3px solid #d97706}
+.part-analysis .part-content{background:#fffbf5;border-left:3px solid #fde68a}
+
+.part-buxiang .part-label{background:#fef2f2;color:#991b1b;border-left:3px solid #dc2626}
+.part-buxiang .part-content{background:#fff8f8;border-left:3px solid #fecaca;
+  font-style:italic}
+
+.part-ask .part-label{background:#f0fdf4;color:#166534;border-left:3px solid #16a34a}
+.part-ask .part-content{background:#f8fff9;border-left:3px solid #bbf7d0}
+.qa-item{margin-bottom:10px;font-size:13.5px}
+.qa-q{color:#166534;font-weight:bold;margin-bottom:3px}
+.qa-a{color:#374151;padding-left:12px;border-left:2px solid #bbf7d0;line-height:1.7}
+
+/* ===== CHARACTERS TABLE ===== */
+.chars-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:12px}
+.chars-table th{background:var(--accent);color:#fff;padding:8px 12px;text-align:left;font-weight:bold}
+.chars-table td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.chars-table tr:hover td{background:#fdf0e8}
+.char-tag{display:inline-block;padding:2px 7px;border-radius:10px;font-size:11px;
+  margin:2px;font-weight:bold}
+.tag-main{background:#fee2e2;color:#991b1b}
+.tag-side{background:#dbeafe;color:#1e40af}
+.tag-era60{background:#f3f4f6;color:#374151}
+.tag-era90{background:#fef3c7;color:#92400e}
+
+/* ===== TIMELINE ===== */
+.timeline{position:relative;padding-left:24px;margin-top:12px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;
+  width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:16px}
+.tl-dot{position:absolute;left:-20px;top:4px;width:12px;height:12px;
+  border-radius:50%;border:2px solid var(--accent);background:var(--card)}
+.tl-year{font-size:11px;font-weight:bold;color:var(--accent);margin-bottom:2px}
+.tl-text{font-size:13.5px;color:var(--text2);line-height:1.7}
+
+/* ===== INDEX PAGE ===== */
+.index-hero{background:linear-gradient(135deg,#1a0a05 0%,#3d1515 50%,#6b2d0a 100%);
+  color:#f5e6d3;padding:48px 40px;text-align:center;border-radius:12px;
+  margin-bottom:32px;position:relative;overflow:hidden}
+.index-hero::after{content:'繁花';position:absolute;font-size:200px;
+  font-family:var(--font-serif);opacity:0.04;right:-20px;bottom:-40px;line-height:1}
+.index-hero h1{font-family:var(--font-serif);font-size:42px;letter-spacing:8px;
+  margin-bottom:10px;text-shadow:2px 2px 8px rgba(0,0,0,0.5)}
+.index-hero p{font-size:16px;color:#c9a882;letter-spacing:2px;margin-bottom:6px}
+.index-hero .author{font-size:18px;color:#e8c98a;letter-spacing:4px;margin-top:12px;
+  font-family:var(--font-serif)}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+@media(max-width:600px){.intro-grid{grid-template-columns:1fr}}
+.intro-card{background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:18px 20px;border-top:3px solid var(--accent)}
+.intro-card h3{color:var(--accent);font-size:15px;font-weight:bold;margin-bottom:8px;
+  letter-spacing:1px}
+.intro-card p{font-size:13.5px;color:var(--text2);line-height:1.75}
+.chapter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.ch-card{background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:14px 16px;transition:all 0.25s;cursor:pointer;
+  border-left:4px solid transparent}
+.ch-card:hover{transform:translateY(-2px);box-shadow:0 4px 14px var(--shadow);
+  border-left-color:var(--accent);text-decoration:none}
+.ch-card-num{font-size:11px;font-weight:bold;color:var(--gold);margin-bottom:4px;
+  letter-spacing:1px}
+.ch-card-title{font-size:14px;font-weight:bold;color:var(--text);margin-bottom:6px}
+.ch-card-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.era-badge{display:inline-block;font-size:10px;padding:2px 6px;border-radius:8px;
+  font-weight:bold;margin-top:6px}
+
+/* ===== PREV/NEXT NAV ===== */
+.chapter-nav{display:flex;gap:12px;margin-top:28px;padding-top:20px;
+  border-top:1px solid var(--border)}
+.nav-btn{flex:1;padding:12px 16px;background:var(--card);border:1px solid var(--border);
+  border-radius:8px;text-align:center;transition:all 0.2s;font-size:13px}
+.nav-btn:hover{background:var(--accent);color:#fff;text-decoration:none;
+  border-color:var(--accent)}
+.nav-btn small{display:block;font-size:11px;color:var(--text2);margin-bottom:3px}
+.nav-btn:hover small{color:rgba(255,255,255,0.7)}
+.nav-label{font-weight:bold}
+
+/* ===== BACK TO TOP ===== */
+.back-top{position:fixed;right:20px;bottom:24px;background:var(--accent);
+  color:#fff;border:none;width:40px;height:40px;border-radius:50%;
+  font-size:18px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.3);
+  display:none;z-index:200;transition:all 0.2s}
+.back-top:hover{transform:scale(1.1)}
+
+/* ===== MISC ===== */
+.divider{text-align:center;color:var(--border);margin:20px 0;
+  font-size:18px;letter-spacing:8px}
+.highlight{background:#fff3cd;padding:2px 4px;border-radius:2px}
+.note{background:#e8f4ff;border-left:3px solid #3b82f6;padding:8px 12px;
+  font-size:13px;color:#1e40af;margin:10px 0;border-radius:0 4px 4px 0}
+blockquote{border-left:3px solid var(--accent2);padding:8px 14px;
+  background:#fdf8f0;margin:10px 0;font-style:italic;font-size:13.5px;
+  color:var(--text2);border-radius:0 4px 4px 0}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <div>
+      <div class="header-title">《繁花》说书人导读</div>
+      <div class="header-sub">金宇澄 · 茅盾文学奖 2015</div>
+    </div>
+    <nav class="header-nav">
+      <a href="index.html">目录首页</a>
+      <a href="characters.html">人物关系</a>
+    </nav>
+  </div>
+</header>
+<div class="main-wrap">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-title">📖 导航</div>
+    <div class="sidebar-section"><a href="ch28.html">← 第二十八章</a></div><div class="sidebar-section"><a href="#ch29-1">  1. 阿宝李李，几段感情的终始</a><a href="#ch29-2">  2. 阿宝李李，几段感情的终始</a><a href="#ch29-3">  3. 阿宝李李，几段感情的终始</a><a href="#ch29-4">  4. 阿宝李李，几段感情的终始</a></div><div class="sidebar-section"><a href="ch30.html">第三十章 →</a></div><div class="sidebar-section"><a href="index.html">↩ 返回目录</a></div>
+  </aside>
+  <main class="content">
+    <div class="page-hero">
+  <span class="hero-badge badge-90">90年代</span>
+  <div class="hero-title">第二十九章</div>
+  <div class="hero-sub">阿宝李李，几段感情的终始</div>
+</div><div class="tab-wrap">
+<div class="tabs">
+  <button class="tab-btn active" data-tab="guide">&#128214; 章节导读</button>
+  <button class="tab-btn" data-tab="original">&#128220; 原文精选</button>
+  <button class="tab-btn" data-tab="timeline">&#128336; 时间线</button>
+  <button class="tab-btn" data-tab="analysis">&#128269; 深度解析</button>
+</div><div class="tab-panel active" data-panel="guide"><div class="scene-card" id="ch29-1">
+  <div class="scene-header">
+    <div class="scene-num">1</div>
+    <div class="scene-title">1. 阿宝李李，几段感情的终始</div>
+  </div>
+  <div class="scene-body"><div class="part-box part-plot">
+  <div class="part-label"> 🎬 一句话说情节</div>
+  <div class="part-content">一</div>
+</div><div class="part-box part-original">
+  <div class="part-label"> 📜 原文</div>
+  <div class="part-content">“一”<br><br>“春雨连绵，路灯昏黄。莫干山路老弄堂，几乎与苏州河齐平，迷蒙一片。小毛吃了半瓶黄酒，吃一点水笋，黄芽菜肉丝年糕，脚底发热，胃里仍旧不舒服。电视里播股市行情。二楼薛阿姨到灶问烧水。小毛听到后门一动，有声音。看见薛阿姨开了门，两个男人走进灶间。一个熟悉声音说，小毛，小毛。声音穿过底楼走廊，溜进朝南房间，传到小毛的酒瓶旁。小毛一转头，眼光穿过了门外走廊，老楼梯扶手，墙上灰扑扑的小囡坐车，破躺椅，油腻节能灯管，水斗，看见晃动的人像，伞。小毛说，牌搭子已经到了。薛阿姨说，小毛，有客人。小毛立起来，看见两个男人，朝南面房间直接过来。小毛一呆。十多年之前，理发店两张年轻面孔，与现在黯淡环境相符，但是眼睛，头发，神态已经走样，逐渐相并，等于两张底片，慢慢合拢，产生叠影，模糊，再模糊，变为清晰，像有一记啪的声音，忽然合而为一，半秒钟里还原。前面是沪生，后面是阿宝。”<br><br>“沪生说，小毛。阿宝说，小毛。筷子落地，小毛手一抖，叫了一声，啊呀，老兄弟。声音发哑，喉咙里小舌头压紧，一股酒味，眼眶发热。小毛说，快进来坐。两个人进来。小毛说，薛阿姨，咖啡有吧，咖啡。沪生说，不要忙了，刚刚吃过饭。阿宝摇摇手。小毛说，先吃酒。坐呀。薛阿姨进来。小毛说，帮我买四瓶黄酒，弄一点熟小菜。沪生说，真的吃过了。”<br><br>“小毛说，要的，薛阿姨去买。阿宝说，已经吃过了，真的。小毛说，先坐，坐。两个人看看房间。小毛开了日光灯。房间大亮。薛阿姨收作台面，倒两杯茶说，不打牌了。小毛说，我老兄弟来了，跟楼上去讲。薛阿姨出去。沪生说，一直想来，这次下了决心，落雨天，外面吃了老酒，吃到后来，就寻过来了。小毛说，我一直想到拉德公寓来。沪生黯然说，啥年代的事体了，早就搬出来了。小毛说，记得有一年，“大都会”门口，我眼看阿宝经过。沪生说，“大都会”，拆光好多年了。阿宝说，样样不能拖，一拖，拖到现在。小毛指一指墙上十字架说，我老婆临走还埋怨我，为啥跟沪生阿宝不来往。大家不响。小毛落了一滴眼泪说，是我脾气不好。此刻，门外一阵人声，楼梯响，楼上拖台子，脚步嘈杂，小毛说，邻居打小麻将。阿宝说，还好吧。小毛说，我工龄买断，再做门卫，炒点小股票。沪生笑笑。小毛说，我可以问吧，我的地址，哪里来的。阿宝说，沪生是律师，当然有办法。讲到此地，楼上轰隆一笑。三个人不响。情况往往如此，老友见面，以为有讲不完的话题，其实难以通达，长期的间隔，性格习惯差异，因为蜂拥的回忆，夹头夹脑，七荤八素，谈兴非但不高，时常百感交集，思路阻塞。三个人开无轨电车，散漫讲了现状，发了感慨，坐一个多钟头，准备告辞。沪生说，小毛要注意身体，以后再碰头。阿宝说，身体最要紧，有病就去看。小毛说，我还好。”<br><br>“沪生说，老酒少吃。小毛说，嗯。阿宝走了两步说，对了，另外是。小毛说，我晓得，我当时，确实是臭脾气。沪生说，走吧，以后再讲。阿宝说，我是想问，有个朋友叫汪小姐，小毛认得吧。小毛一呆。沪生说，再讲吧。阿宝说，慢，是汪小姐老公的司机，介绍认得了小毛，对不对。小毛说，还是坐下来讲，坐。三个人再落座。小毛说，事体简单的，当时我只晓得，汪小姐是单身女人，是我隔壁邻居的侄囡，这个隔壁邻居，不是司机。沪生说，大概是书记，支部书记，上海人讲是同音。小毛说，是煤球店的退休职工，这天对我讲，汪小姐怀孕了，以后小囡申报户口，就有麻烦，小毛一直是单身，无子无女，两个人，可以谈谈吧。我一吓讲，要我跟孕妇谈感情，谈结婚，少有少见，新婚之夜做啥，我做寿头。邻居对讲，谈一谈假结婚，懂了吧，两个人开出红派司，还是各管各，等小囡落地，报了户口，就办离婚，红派司，再调绿派司，图章一敲，结束了。小毛说，我吃饱了。邻居说，以前结婚，要开单位证明，现在方便，小毛谈一个价钿，听听看。我不响。邻居讲，现在股市不错，弄个几万洋钿，天天涨一眼，天天涨一眼，有啥不好，另外也是积德，女人肚皮一点一点大起来，又不是外国，可以脱光了拍照，一个上海单身女人怀孕，总是难看，小囡事体不落实，穿马路再碰到土方车。我听了一吓说，越讲越吓人了。邻居讲，帮个忙，急人所急，这种派司不办，也是浪费。这天，大致就谈这点。第二天再谈，我就答应了，过一天，三个人到“绿缘”去吃茶，见了面。汪小姐衣裳宽松，样子还算贤惠，问我讲，小毛原来的老婆，叫啥名字。我邻居讲，有必要吧。汪小姐讲，这倒也是，要是美国，麻烦比较多，当局上门单独调查，老公用啥牙膏，老婆戴啥胸罩，夜里做几趟。邻居讲，办移民呀，缠七缠八，小毛能够答应，不容易了。汪小姐讲，小毛，我有点担心，登记结婚阶段，两个人起码要亲热一点，手拉手，开心笑一笑。我答应。到了登记的这天，汪小姐像真的一样，当了别人面，叫我几次老公，靠紧我讲，老公，刚刚我肚皮一胀，是心里太紧张了。”</div>
+</div><div class="part-box part-tell">
+  <div class="part-label"> 💬 普通话讲述</div>
+  <div class="part-content"><b>阿宝李李，几段感情的终始</b> - 第二十九章的关键段落。金宇澄以克制笔法书写，人物命运在平淡日常中展开，细节中见深意。</div>
+</div><div class="part-box part-dialect">
+  <div class="part-label"> 🗣 沪语时刻</div>
+  <div class="part-content"><div class="dialect-row"><span class="dialect-sh">"春雨连绵，路灯昏黄。莫干山路老弄堂，几乎与苏州河齐平，迷蒙一片。小毛吃了半瓶黄酒"</span><span class="dialect-arrow">→</span><span class="dialect-std">春雨连绵，路灯昏黄。莫干山路老弄堂，几乎与苏州河齐平，迷蒙一片。小毛吃了半瓶黄酒</span></div><div class="dialect-row"><span class="dialect-sh">"是伐？"</span><span class="dialect-arrow">→</span><span class="dialect-std">是吗？</span></div></div>
+</div><div class="part-box part-buzhong">
+  <div class="part-label"> 🔇 "不响"解读</div>
+  <div class="part-content">阿宝李李，几段感情的终始场景中，人物不响。沉默是金宇澄最常用的修辞——不响不是无话可说，而是一切尽在不言中。</div>
+</div><div class="part-box part-ask">
+  <div class="part-label"> ❓ 小白问答</div>
+  <div class="part-content"><div class="qa-item"><div class="qa-q">Q: 这段说了什么？</div><div class="qa-a">第二十九章的重要场景，揭示人物关系和时代背景。</div></div><div class="qa-item"><div class="qa-q">Q: 和全书什么关系？</div><div class="qa-a">体现了《繁花》双线叙事的独特美学。</div></div></div>
+</div></div>
+</div><div class="scene-card" id="ch29-2">
+  <div class="scene-header">
+    <div class="scene-num">2</div>
+    <div class="scene-title">2. 阿宝李李，几段感情的终始</div>
+  </div>
+  <div class="scene-body"><div class="part-box part-plot">
+  <div class="part-label"> 🎬 一句话说情节</div>
+  <div class="part-content">小毛说，要的，薛阿姨去买。阿宝说，已经吃过了，真的。小毛说，先坐，坐。两个人看看房间。小毛开了日光灯。房间大亮。薛阿姨收作台面，倒两杯茶说，不打牌了。小毛说，我老兄弟来了，跟楼上去讲。薛阿姨出去。沪生说，一直想来，这次下了决心，落雨天，外面吃了老酒，吃到后来，就寻过来了。小毛说，我一直想到拉德公寓来...</div>
+</div><div class="part-box part-original">
+  <div class="part-label"> 📜 原文</div>
+  <div class="part-content">“我轻声讲，假老婆，我是假老公，假老婆要发嗲，对真老公去发。汪小姐笑一笑说，小毛是至真的好男人，等我有空，就来拜访。阿宝不响。小毛说，事体，大致就是这样。”<br><br>“十天后黄昏，路灯亮了一点，正值退潮，莫干山路地势，已高出苏州河水位，空中是初春的河风。沪生与阿宝到得稍早，经过路口，先踏上附近昌化路桥，到对岸“潭子湾”棚户走一圈。少年时代，沪生跟随小毛，来过此地游玩，暮色苍茫，眼前是大名鼎鼎的两湾，潘家湾，潭子湾，蛛网密集的狭弄，正准备拆迁，灯火迷离，人来人往，完全脱离少年时代记忆。两个人走了一段，沪生看手表，阿宝买一张夜报，忽然想到上海历史里，反复来往于此的烈士顾正红，思古幽情，随之而生。待等两人原路返回，眼前的河面，已黑得发亮，远见一艘苏北驳船，等于沪西一条不烂之舌，伸出桥洞一截，椭圆船头翘于暮气中，上有小狗两只，像舌苔上两粒粽子糖，互相滚动，一转眼，弹跳到岸上，隐进黑暗里。两人沿河浏览，登桥眺远，惠风和畅，船鸣起伏，河床在此宽阔，折向东南。正东的远方，是火车站如同瀑布的星海，流人墨玉的河中，与逐渐交会的两支夜航船队，化为一体。阿宝说，白萍有消息吧。沪生说，上个礼拜，收到澳大利亚来信，称已经有了身份，跟一个菲律宾华裔男人生了小囡，如果我想去发展，可以代办，条件是，到了澳洲，就办离婚，两人就此分手。阿宝说，还算有良心。沪生说，我根本不回信，让我一个人到墨尔本，蹲到马路旁，天天看汽车，我发痴了。阿宝不响。两个人下桥朝南，避让上桥卡车，进人莫干山路老弄堂。”<br><br>“这天夜里，是小毛摆酒请客。小毛电话里解释，是替春香还愿。沪生当时说，这也太客气了。小毛说，如果沪生有小妹妹，老相好，尽量带过来，一道谈谈聚聚。沪生笑笑。小毛说，真也不是对路，沪生朋友圈子，基本是女律师，女干部，女秘书，知识女人，不方便对吧。沪生笑笑说，有我就可以了。小毛说，弄堂小百姓，台面寒酸，不好意思带来，我理解，这就我来安排，吃酒要热闹。此刻，沪生与阿宝走进小毛房间，先是一吓。房间里已有五六个女人，圆台面摆好，二楼薛阿姨端上电暖锅，生熟小菜。小毛是突发胃病，胸口包一块毯子，居中坐定。来宾除了建国，招娣，菊芬，小毛指三个年轻女子说，我三个小姊妹，大自鸣钟拆迁之前，理发师退休，店堂做过几年发廊，这三位妹妹，社会上叫发廊妹，相当无情，我取名中妹，发妹，白妹，啥意思，麻将打得好。中妹说，多少难听。白妹说，我欢喜，我觉得好，我皮肤白。小毛说，三姊妹重情义，平时有啥事体，样样来帮衬，自家人，就特地请过来，陪我的老兄弟，酒要女人陪。小毛裹紧毯子，吃牛奶，吃一片白面包。三姊妹连忙请沪生阿宝人座，形成三夹两。建国笑笑说，赞的，一人身边，两个妹妹，像模像样，吃酒有心得。三姊妹斟酒搛菜，殷勤体贴。建国不动筷子，自称土方小老板，两瓶白酒的量。小毛介绍另两位女士说，这位，是招娣，我老房子二楼邻居。沪生说，二楼，应该是银凤呀。阿宝说，这不提了。”<br><br>“招娣说，男人为啥，个个记得银凤。小毛打断说，招娣的前夫，是警察，离婚独身之后，男朋友不断，年纪个个比招娣小，唉，我想到上海纺织厂，压锭一千万呀，完全敲光拆光了，当年招娣，是年度生产标兵，一双巧手，结果是帮人看服装店，做营养品，是作孽。招娣一笑，端详说，两位阿哥的气色，真是不大好，工作太辛苦了，就需要补营养。小毛说，招娣，等一等再传销，我先介绍，我同事菊芬，车问跳舞皇后，脚法赞，腰身软，男步女步全懂，钟表厂关了门，承包街道小舞厅，也办过婚介，结过两趟婚，现在的老公，是三婚头了，结过三次婚，对菊芬，百依百顺，最近，特地开一间棋牌室，让菊芬解恹气，我也就放心了。菊芬一笑，文绉绉端了杯，做样子说，全靠我阿哥大媒人，耶稣保佑我阿哥健康，保佑春香阿嫂，天国里开心。小毛说，做女人，先就要对自家老公好，就算外面有户头，有了外插花，对老公还是体贴，就是好女人，正常女人，聪明女人。菊芬不耐烦说，可以了，我已经晓得了。小毛说，千好万好，老公最好，调胃口，可以的，不可以影响到老公。菊芬面孔一红说，阿哥，身体不适意，少讲一点可以吧。二楼薛阿姨此刻也坐进来，一台子人，吃吃讲讲。建国说，一直听小毛讲两位老兄弟，总算又见面了。阿宝说，是呀，当年为了蓓蒂的钢琴，大家开到杨树浦高郎桥，去寻马头，建国兄，真是帮了忙。建国眼圈一红说，不谈了。沪生说，现在还打拳吧。建国说，废了多年了，来，上海人不欢喜敬酒，我自弄三杯。沪生端杯，建国已经吃了两盅。小毛说，三个嗲妹妹，代我敬客人呀，不要做木头人，拨一拨动一动。中妹说，我先吃一点菜。小毛说，法兰盘已经吃得铺开了，肚皮有救生圈了，寻男人是难了。中妹说，下作。小毛说，发妹先吃一杯。发妹说，阿哥讲啥，我做啥。发妹仰面吃了一盅。沪生也吃了一盅。白妹说，二姐姐做啥，我做啥。白妹也一口吃了。阿宝一吓说，慢一点。小毛说，不要紧，三姊妹有酒量，阿宝，咪一咪就可以。中妹说，不可以，我要跟阿宝吃满杯。招娣说，上来就疯。菊芬说，中妹乖，阿姐已经头昏了，不要弄得棋牌室一样，乌烟瘴气，乖一点。建国说，上次的女人，为啥不来了。招娣说，啥。小毛说，就是我的假老婆。菊芬说，对了，小毛的假户头，为啥不来。招娣说，这个女人不错，买过我产品。小毛说，传销基本功，要记牢名字，汪小姐已经来了几趟，产品买了不少，还是记不住。招娣说，当我两个新阿哥面前，讲我做传销，应该吧。建国说，记得上一趟，汪小姐就想醉一醉。小毛说，有了喜的女人，可以醉吧，是散心，这次听说，我要请沪生阿宝，汪小姐电话里一吓讲，啊呀，我动胎气了，我过不来了。我讲，汪小姐，客气啥呢，大家老朋友了，过来坐。汪小姐讲，假老公，我肚皮不适意了。我听了笑笑。汪小姐讲，求求小毛，阿宝沪生面前，不要提我汪小姐三个字，社会太复杂了，答应我。我讲，老弟兄见见面，有啥呢。汪小姐说，一定不要提到我呀，拜托了。”<br><br>“二楼薛阿姨摆上一盆蛋饺。小毛说，我对女人，一般是闷声不响，不问任何原因，女人的心思太细密，我问了，等于白问，当年理发店关门，招娣，跟了二楼爷叔合办发廊，我一句不响。中妹说，阿哥越是不响，我越想对阿哥讲心事。菊芬说，嗲煞人了。小毛说，这辈子，我最买账两位闷声不响男人，一就是领袖，一是耶稣，单是我老娘，我老婆春香，一天要跟这两个男人，讲多少事体，费多少口舌，全世界百姓，多少心思，装进两个人肚皮，嗳，就是一声不响，无论底下百姓，横讲竖讲，哭哭笑笑，吵吵闹闹，一点不倦，一声不响，面无表情。大家笑笑。沪生说，想不到，老房子还做过发廊，这个二楼爷叔，我记不得了。阿宝不响。小毛说，爷叔是老好人，隔壁房间的招娣，人也好，但是警察老公，是铁板面孔，像一直有情报，一直怀疑招娣，外面有了野男人，每趟要穷吵，二楼爷叔听见，总是好言相劝。阿宝不响。招娣说，陈年旧账，一场噩梦，不许再讲了。小毛说，后来就离婚。招娣讲，做警察的，确实精明。小毛说，平时房间里来人，招娣讲了啥，做了啥，样样会晓得，只能大吵一场，离，我劝招娣，既然离了，不要多想了。招娣说，是呀，但小毛对我，有交情吧，根本不关心我，不来看我，等我离了婚，单身了，总可以到我房里坐吧，还是不来，弄堂也不进来。阿宝不响。沪生笑说，夜里可以坐一坐理发店，样样就可以谈了。小毛说，我样样不响，招娣跟爷叔合作，三个妹妹前后来上班，为客人捏脚敲背，之后弄堂拆迁，大家滚蛋，我一律不管。招娣，三个妹妹，包括我娘，样样会来讲，我根本不想管老房子任何事体。发妹说，是呀，因此我喜欢来此地，就像是办事处，我乡下来了亲眷，也过来借宿，讲讲谈谈。菊芬说，三个阿妹，样样式式，到此地做市面，此地等于公共浴室，公共厨房问，到此地烧小菜，剪螺蛳，腌咸肉，做鳗鲞，汰衣裳，汰浴，揩身，夜里搦了粉，点了胭脂，到火车站去兜生意。发妹冷笑说，只会讲别人，姐姐自家呢。建国说，我理解，生活实在是难，多少不容易。菊芬说，我有趟进来，看见汪小姐，横到床上看报纸，我一吓。有次看见房间里，叠了几十箱过期产品，另一次，一房间坐满男男女女，准备开传销会议。小毛笑笑。招娣说，吃啥醋呢，汪小姐来，是临时保胎，正常休息，不稀奇，讲到我的产品，我组织开会，正常的，人总有不顺利阶段，产品积压了，暂时搬到此地放几个月，是小毛答应的。小毛说，不要吵了，菊芬也一样，大家是兄弟姐妹。”</div>
+</div><div class="part-box part-tell">
+  <div class="part-label"> 💬 普通话讲述</div>
+  <div class="part-content"><b>阿宝李李，几段感情的终始</b> - 第二十九章的关键段落。金宇澄以克制笔法书写，人物命运在平淡日常中展开，细节中见深意。</div>
+</div><div class="part-box part-dialect">
+  <div class="part-label"> 🗣 沪语时刻</div>
+  <div class="part-content"><div class="dialect-row"><span class="dialect-sh">"沪生说，老酒少吃。小毛说，嗯。阿宝走了两步说，对了，另外是。小毛说，我晓得，我当"</span><span class="dialect-arrow">→</span><span class="dialect-std">沪生说，老酒少吃。小毛说，嗯。阿宝走了两步说，对了，另外是。小毛说，我晓得，我当</span></div><div class="dialect-row"><span class="dialect-sh">"是伐？"</span><span class="dialect-arrow">→</span><span class="dialect-std">是吗？</span></div></div>
+</div><div class="part-box part-buzhong">
+  <div class="part-label"> 🔇 "不响"解读</div>
+  <div class="part-content">阿宝李李，几段感情的终始场景中，人物不响。沉默是金宇澄最常用的修辞——不响不是无话可说，而是一切尽在不言中。</div>
+</div><div class="part-box part-ask">
+  <div class="part-label"> ❓ 小白问答</div>
+  <div class="part-content"><div class="qa-item"><div class="qa-q">Q: 这段说了什么？</div><div class="qa-a">第二十九章的重要场景，揭示人物关系和时代背景。</div></div><div class="qa-item"><div class="qa-q">Q: 和全书什么关系？</div><div class="qa-a">体现了《繁花》双线叙事的独特美学。</div></div></div>
+</div></div>
+</div><div class="scene-card" id="ch29-3">
+  <div class="scene-header">
+    <div class="scene-num">3</div>
+    <div class="scene-title">3. 阿宝李李，几段感情的终始</div>
+  </div>
+  <div class="scene-body"><div class="part-box part-plot">
+  <div class="part-label"> 🎬 一句话说情节</div>
+  <div class="part-content">十天后黄昏，路灯亮了一点，正值退潮，莫干山路地势，已高出苏州河水位，空中是初春的河风。沪生与阿宝到得稍早，经过路口，先踏上附近昌化路桥，到对岸“潭子湾”棚户走一圈。少年时代，沪生跟随小毛，来过此地游玩，暮色苍茫，眼前是大名鼎鼎的两湾，潘家湾，潭子湾，蛛网密集的狭弄，正准备拆迁，灯火迷离，人来人往，完...</div>
+</div><div class="part-box part-original">
+  <div class="part-label"> 📜 原文</div>
+  <div class="part-content">“招娣笑说，菊芬也有事体呀，我想听。菊芬说，我清清白白做人，我有啥。小毛说，菊芬舞步灵，但是面皮薄。菊芬放了筷子，朝小毛手背上敲一记说，我有啥见不得人的。白妹说，阿哥已经生病了，为啥动手要敲。建国说，这是女人发嗲，敲一记，拍一记，钟表厂一枝花，当年如果这样敲一记男人，这个男人，就想心思，通宵吃茶摇扇子。菊芬说，我是正大光明，这天是小毛发胃病，我买了牛奶，切片白面包，带一个朋友，正正经经去看小毛，想不到，小毛坐了五分钟，就走了，好像，我是来借房间一样，我跟朋友，只能坐等小毛回来，也是无聊，后来就跳跳舞，正规的国标，研究脚法，跳来跳去，跳得头有点晕，小毛回来了。建国说，小毛开门一看，菊芬浑身发软，昏过去一样，男人抱紧细腰，对准菊芬的耳朵眼里，灌迷魂汤，赞，小毛吓了，只能退出去。菊芬说，切，瞎三话四。招娣冷笑说，是吧是吧，看来瘾头不小，人家让出了房间，已经避出去两个多钟头了，还是抱不够，做不够，不知足。小毛笑说，不许乱讲，菊芬是文雅人。发妹说，是的，女人越文雅，这方面越厉害。白妹说，表面不响，心里要得更多，这就叫文雅。菊芬笑说，小娘皮，嘴巴像毒蛇。”<br><br>“小毛说，好了好了，三姊妹，陪过我兄弟了吧，动起来呀。中妹笑笑，十指粉红，端了酒盅说，今朝，我阿哥身体不适意，特地派妹妹来服侍宝大哥，有啥要求，宝大哥尽管提。阿宝端起了酒盅，旁边白妹伸手一盖说，宝大哥，还是派我出山，我来代替，拼个几盅。阿宝笑。白妹端起阿宝的酒盅，发妹端了沪生的酒盅。中妹说，做啥，两个男人一动不动，三姊妹自相残杀。小毛说，中妹最哕嗦，吃了再讲嘛。三个年轻女子笑笑，一仰头，乌发翻动。建国说，吃一杯，就算动过了。中妹说，还要动啥，要我坐到男人大腿上动。建国说，啥。白妹立起来，走到建国面前，一屁股坐到建国身上说，这样子动，对吧，我来动，适意吧，招娣姐姐，菊芬姐姐，心里穷想，根本是不敢的，我敢，要我叫老公吧。建国大笑。小毛笑说，又瞎搞了，快坐好。建国笑说，喔哟哟哟，我吃不消了，我做活神仙了。招娣说，假正经。菊芬吃吃吃笑。小毛说，既然坐了，建国就抱一抱。大家笑。白妹摸一摸建国的面孔，回来落座。中妹说，自动送上门了，一屁股坐到身上了，建国大哥就不敢动了，嘴硬骨头酥。”<br><br>“阿宝看看小毛，想起多年前理发店的夜景。月光，灯光，映到老式瓷砖地上，一层纱。阿宝说，真想不到，理发店做了发廊。小毛说，世界变化快，领袖讲，弹指一挥，挥就是灰，一年就是一粒灰尘，理发店，大自鸣钟，所有人，全部是灰尘，有啥呢。发妹说，发廊里最卫生，哪里来的灰，我头天上班，二楼爷叔就讲，要争当卫生标兵，天天要揩灰，要扫，做得到吧。我讲，做得到。爷叔讲，来上海，准备长做，还是短做。我讲，不长不短，我一直做。爷叔讲，做发廊，最容易学到啥。我讲，广东人讲是“坐灯”，粉红电灯一开，人坐店里，让外面男人看，勾搭男人，生客变熟客。二楼爷叔讲，错，最容易学上海方言，学会了，样样好办。白妹笑说，爷叔讲出口的，基本是上海下作方言。招娣说，爷叔当时，实在太困难，棉花胎商店，做不动生意，关了门，店面出租，做了发廊，爷叔是看样学样，发现楼下理发店，准备要打烊，就跟我商量，最后盘下来，一问一间做了隔断，心思用尽。白妹说，我刚来的头一天，发廊里一小间一小问，见不到一个生意，想不到爷叔，就想弄我了。我讲，喂，老爷叔，我不是随便女人，我只敲小背，不做大背。爷叔不响。我讲，既然当老板，就不可以乱来，做生意要一致对外，如果自家人也乱七八糟，偷偷摸摸穷搞，不吉利的。爷叔不响。还好，招娣姐姐回来了。中妹说，是呀，人人讲，做小姐下作，其实最下作的，是客人，是二楼爷叔。发妹说，老酒吃多了，少讲讲。白妹说，重要的事体，我讲吧，根本不讲。建国说，讲故事，就要抓重点。白妹吃一口酒，不响。招娣说，牵丝扳藤，吊我胃口嘛。白妹说，多年秘密了，招娣姐姐也不晓得。招娣说，有啥秘密。白妹说，店堂里，做了一间一间隔断，最后一问，爷叔叫人做一只大橱，门开到背面，锁好。招娣说，这只橱，是爷叔专门摆棉花胎的呀。白妹说，平时，爷叔端一杯茶，客人走了，接过妹妹钞票，一声不响。有一次，店里新来两个东北妹妹，前凸后翘，客人忙煞，只要客人进来，二楼爷叔就领了妹妹，客人，到最后一问去，随后放了茶杯，走进后面楼梯间。每次新来妹妹，有了客人，就领到最后一间，爷叔也就去后面。一次我到灶间去冲热水，发现楼梯间的大橱门，掀开了一条缝，我亲眼所见，橱里蹲了一个人，就是爷叔。招娣说，啊。白妹说，等到客人离开，爷叔走到前面，吃茶看报纸。我钻小间里看一看，简单一只按摩榻，旁边是板壁，贴一排美女画报，几个美女头碰头，我仔细再看，美女六只眼睛，每只眼黑里，是一只小洞。我当场就气了，我走出来对爷叔讲，为啥偷偷摸摸，钻到橱里偷看。爷叔笑笑，一声不响。我讲，等于广东人讲的“睇嚼”，“阴功”嘛，偷看女人，广东叫“勾脂粉”，为啥要做这种龌龊事体。爷叔不响。我讲，店里这两个新妹妹，最大方，爷叔想看，当面就可以脱光嘛。爷叔不响。我讲，太没腔调了。爷叔不响，后来笑了笑讲，好了好了，我开一句广东腔，唔噘了，对不起了，好了吧。我不响。爷叔说，做女人，哪里会懂男人，我就算下作男人，龌龊男人，总可以了吧。阿宝不响。”<br><br>“中妹讲到此地，听见居委会摇铃，大家门窗关好，注意安全。小毛的面孔，忽然低下去，低下去。发妹说，阿哥做啥，阿哥。小毛不响。二楼薛阿姨说，发胃痛了。小毛闷了一阵说，是老毛病发作了。薛阿姨拿过药瓶。白妹说，阿哥像磕头虫一样，我晓得苦了。小毛说，刚刚胃里一抽，我真还不晓得，二楼爷叔有这一套。阿宝不响。沪生说，“两万户”的厕所间，洞眼也挖得密密麻麻。阿宝不响。薛阿姨倒了温开水，让小毛吃药。薛阿姨说，我早就不开心了，几个人讲来讲去，就是讲二楼爷叔，多讲有啥意思呢，别人还以为，二楼爷叔，是我男人，我同样住二层楼，此地哪里有这种下作坯的爷叔。建国说，薛阿姨，以后要火烛小心了，夜里汰脚，换衣裳，先检查墙壁，天花板。薛阿姨说，乱话三千。”<br><br>“菊芬说，我最怕有人偷看，寒毛也竖起来了。阿宝不响。白妹拿来热水袋，塞到毯子里。小毛叹息说，过去的事体，只能一声不响了，响有啥用，总算老房子敲光了，过去，已经是灰了。大家不响。小毛说，春香临走，念过一段耶稣经，大概就是，生有时，死有时。拆有时，造有时。斗有时，好有时。抱有时，不抱有时。静有时，烦有时。讲有时，闷有时。”</div>
+</div><div class="part-box part-tell">
+  <div class="part-label"> 💬 普通话讲述</div>
+  <div class="part-content"><b>阿宝李李，几段感情的终始</b> - 第二十九章的关键段落。金宇澄以克制笔法书写，人物命运在平淡日常中展开，细节中见深意。</div>
+</div><div class="part-box part-dialect">
+  <div class="part-label"> 🗣 沪语时刻</div>
+  <div class="part-content"><div class="dialect-row"><span class="dialect-sh">"这天夜里，是小毛摆酒请客。小毛电话里解释，是替春香还愿。沪生当时说，这也太客气了"</span><span class="dialect-arrow">→</span><span class="dialect-std">这天夜里，是小毛摆酒请客。小毛电话里解释，是替春香还愿。沪生当时说，这也太客气了</span></div><div class="dialect-row"><span class="dialect-sh">"是伐？"</span><span class="dialect-arrow">→</span><span class="dialect-std">是吗？</span></div></div>
+</div><div class="part-box part-buzhong">
+  <div class="part-label"> 🔇 "不响"解读</div>
+  <div class="part-content">阿宝李李，几段感情的终始场景中，人物不响。沉默是金宇澄最常用的修辞——不响不是无话可说，而是一切尽在不言中。</div>
+</div><div class="part-box part-ask">
+  <div class="part-label"> ❓ 小白问答</div>
+  <div class="part-content"><div class="qa-item"><div class="qa-q">Q: 这段说了什么？</div><div class="qa-a">第二十九章的重要场景，揭示人物关系和时代背景。</div></div><div class="qa-item"><div class="qa-q">Q: 和全书什么关系？</div><div class="qa-a">体现了《繁花》双线叙事的独特美学。</div></div></div>
+</div></div>
+</div><div class="scene-card" id="ch29-4">
+  <div class="scene-header">
+    <div class="scene-num">4</div>
+    <div class="scene-title">4. 阿宝李李，几段感情的终始</div>
+  </div>
+  <div class="scene-body"><div class="part-box part-plot">
+  <div class="part-label"> 🎬 一句话说情节</div>
+  <div class="part-content">二楼薛阿姨摆上一盆蛋饺。小毛说，我对女人，一般是闷声不响，不问任何原因，女人的心思太细密，我问了，等于白问，当年理发店关门，招娣，跟了二楼爷叔合办发廊，我一句不响。中妹说，阿哥越是不响，我越想对阿哥讲心事。菊芬说，嗲煞人了。小毛说，这辈子，我最买账两位闷声不响男人，一就是领袖，一是耶稣，单是我老娘，...</div>
+</div><div class="part-box part-original">
+  <div class="part-label"> 📜 原文</div>
+  <div class="part-content">“菊芬说，啥意思呢，我根本听不懂。小毛不响。菊芬说，小毛太闷了，这最伤身体，当初厂里不少同事，兄妹下乡生了重病，就可以退回上海，小毛一声不响，帮同事家属，拍了不少ｘ光贝餐，直到最后一趟，放射科女医生电灯一开就讲，喂，小师傅小师傅，我认出来了，这个月，小师傅闷声不响，拍了七八次对吧，等于身体吃了七八次射线，这条小命，还要吧。小毛不响。招娣说，小毛做过这种笨事体，讨厌了，就算再吃我的产品，也等于零了。小毛说，我现在想到一个女人，也是一声不响，真是好女人，对了，我不便讲，薛阿姨肯定不开心。薛阿姨说，只要不再谈二楼爷叔，样样允许讲。小毛说，听了肯定会光火。薛阿姨说，我一直笑眯眯，可以讲。建国说，讲讲看。小毛说，有天到老北站打麻将，半夜一点钟散场，静等通宵电车，我看见一个女人，四十多岁，顺了路灯过来，一看就是良家女人，样子清爽，手拎两只马甲袋，过来等车，两个人一声不响，等了一刻钟，我比较无聊，就搭讪讲，阿妹下中班了。女人不响。”<br><br>“我讲，麻将散场了。女人不响。我讲，输赢还好吧。女人不响。我讲，现在几点钟。女人不响。我讲，社会乱，坏人多，跑出来生闷气，对身体不利。女人一声不响。我讲，跟老公不开心，是正常的，想开一点算了。”<br><br>“女人不响。我讲，走几圈，消了气，就原谅老公，总归是小囡的爸爸。建国说，这种搭讪功夫，贴心的，正正派派。小毛说，女人一声不响。我讲，半夜三更出来，小囡醒了，要吓的。女人不响。我也不响。后来，女人讲了三个字，像蚊子叫。我讲，阿妹讲啥。女人讲，汰衣裳。我讲，啥。女人不响。车子一直不来，出租车一律绿灯，我同这个女人，是坐通宵电车的档次，因此眼睛看出去，马路漆黑一片，看不到一部车子。”<br><br>“我对女人讲，汰衣裳，可以到我房间去汰，我一个人，有汰衣机，水斗，非常便当。二楼薛阿姨咳嗽一声，不响。小毛说，这个女人不响，我讲，马甲袋，地上先放一放，休息休息。女人不动，拎了不放。我碰到这种女人，还可以开口吧，我只能一声不响。两个人等了十多分钟，通宵电车来了，我上前门，女人上后门，车里只有三四个人。到江宁路，我下车，回头一看后门，女人拎两只马甲袋，也下车了。我朝北走一段，回头看，女人一路跟，隔七八步距离。再走一段，我停下来讲，阿妹，我来拎。女人低头不响，马甲袋朝后一让。我也就不管了，走到澳门路，再走昌化路，回头看，女人隔七八步距离，一路跟。我走到莫干山路，女人相隔七八步距离，等我走到弄堂口，回头看看，隔四五步的距离，女人跟我转弯，进弄堂，已经半夜两点钟，弄堂剩一盏路灯。我开了后门，进去开灯，经过楼梯口，开房门，开灯，回头看，女人跟进来，马甲袋摆到灶间水斗里，走进我房间，奇怪的是，一进了房间，女人就活络了。房间里闷热，我开了窗，开电风扇。女人脱了衬衫，裙子，脱剩了短裤胸罩，赤了脚，自家老婆一样，走来走去，寻到了脚盆，面盆，毛巾，一声不响，去烧水，准备漶浴。我不响，看女人忙来忙去，到灶间放水，点煤气烧水。我开了冰箱，倒一杯可乐。女人端了半盆水进来。我讲，先吃一杯，天真热。女人一声不响吃了，就到我后间里，用力揩篾席，揩枕头席，熟门熟路。再后来，大脚盆拖到房间当中，冷水热水拎进来，倒进盆里，拖鞋放好，毛巾搭好，关了电灯讲，先漶浴。声音像蚊子叫一样。我有点呆，窗对面有房子，漶浴我要关电灯，女人完全明白，我就漶浴，听到灶间里，女人翻马甲袋的声音，等我结束，女人进来，相帮我浑身揩。我讲，阿妹，我自家来，让我自家揩。女人不响。我走到后间，身体到席子上摆平，听外面，女人走来走去，倒水，拎水，然后，脱了短裤胸罩，漶浴，再是揩，绞毛巾，倒水，拖鞋声音，然后，轻关了房门，像我平时一样，小电风扇拿进小问，对准大床边，开关一开，风凉。身体就坐到床上来，后来，两个人熟门熟路，黑贴墨揭，就做了生活，一点也不陌生，我也就咽了。”<br><br>“等我醒过来，天已经发亮，三点多钟了，听到灶间里有人汰衣裳，自来水声音不断。我又眯了一觉，再看表，五点钟不到，外面是马甲袋声音，大概是叠齐了湿衣裳，装进马甲袋的声音，之后，女人回进房间来。我当时不响。女人进来了，靠到床沿上。我讲，衣裳叠好了。女人不响，之后讲了一句，我走了。声音像蚊子叫。我讲，嗯。女人就走出去，后门轻轻一响，整幢房子静下来了，我看手表，五点零两分。小毛讲到此地，一声不响。大家也不响。二楼薛阿姨面孔涨红说，这是哪一年的事体。”</div>
+</div><div class="part-box part-tell">
+  <div class="part-label"> 💬 普通话讲述</div>
+  <div class="part-content"><b>阿宝李李，几段感情的终始</b> - 第二十九章的关键段落。金宇澄以克制笔法书写，人物命运在平淡日常中展开，细节中见深意。</div>
+</div><div class="part-box part-dialect">
+  <div class="part-label"> 🗣 沪语时刻</div>
+  <div class="part-content"><div class="dialect-row"><span class="dialect-sh">"招娣笑说，菊芬也有事体呀，我想听。菊芬说，我清清白白做人，我有啥。小毛说，菊芬舞"</span><span class="dialect-arrow">→</span><span class="dialect-std">招娣笑说，菊芬也有事体呀，我想听。菊芬说，我清清白白做人，我有啥。小毛说，菊芬舞</span></div><div class="dialect-row"><span class="dialect-sh">"是伐？"</span><span class="dialect-arrow">→</span><span class="dialect-std">是吗？</span></div></div>
+</div><div class="part-box part-buzhong">
+  <div class="part-label"> 🔇 "不响"解读</div>
+  <div class="part-content">阿宝李李，几段感情的终始场景中，人物不响。沉默是金宇澄最常用的修辞——不响不是无话可说，而是一切尽在不言中。</div>
+</div><div class="part-box part-ask">
+  <div class="part-label"> ❓ 小白问答</div>
+  <div class="part-content"><div class="qa-item"><div class="qa-q">Q: 这段说了什么？</div><div class="qa-a">第二十九章的重要场景，揭示人物关系和时代背景。</div></div><div class="qa-item"><div class="qa-q">Q: 和全书什么关系？</div><div class="qa-a">体现了《繁花》双线叙事的独特美学。</div></div></div>
+</div></div>
+</div></div><div class="tab-panel" data-panel="original"><div class="part-box part-original"><div class="part-label">📜 第二十九章原文节选</div><div class="part-content"><p style="margin-bottom:14px;line-height:2.1">一</p><p style="margin-bottom:14px;line-height:2.1">春雨连绵，路灯昏黄。莫干山路老弄堂，几乎与苏州河齐平，迷蒙一片。小毛吃了半瓶黄酒，吃一点水笋，黄芽菜肉丝年糕，脚底发热，胃里仍旧不舒服。电视里播股市行情。二楼薛阿姨到灶问烧水。小毛听到后门一动，有声音。看见薛阿姨开了门，两个男人走进灶间。一个熟悉声音说，小毛，小毛。声音穿过底楼走廊，溜进朝南房间，传到小毛的酒瓶旁。小毛一转头，眼光穿过了门外走廊，老楼梯扶手，墙上灰扑扑的小囡坐车，破躺椅，油腻节能灯管，水斗，看见晃动的人像，伞。小毛说，牌搭子已经到了。薛阿姨说，小毛，有客人。小毛立起来，看见两个男人，朝南面房间直接过来。小毛一呆。十多年之前，理发店两张年轻面孔，与现在黯淡环境相符，但是眼睛，头发，神态已经走样，逐渐相并，等于两张底片，慢慢合拢，产生叠影，模糊，再模糊，变为清晰，像有一记啪的声音，忽然合而为一，半秒钟里还原。前面是沪生，后面是阿宝。</p><p style="margin-bottom:14px;line-height:2.1">沪生说，小毛。阿宝说，小毛。筷子落地，小毛手一抖，叫了一声，啊呀，老兄弟。声音发哑，喉咙里小舌头压紧，一股酒味，眼眶发热。小毛说，快进来坐。两个人进来。小毛说，薛阿姨，咖啡有吧，咖啡。沪生说，不要忙了，刚刚吃过饭。阿宝摇摇手。小毛说，先吃酒。坐呀。薛阿姨进来。小毛说，帮我买四瓶黄酒，弄一点熟小菜。沪生说，真的吃过了。</p><p style="margin-bottom:14px;line-height:2.1">小毛说，要的，薛阿姨去买。阿宝说，已经吃过了，真的。小毛说，先坐，坐。两个人看看房间。小毛开了日光灯。房间大亮。薛阿姨收作台面，倒两杯茶说，不打牌了。小毛说，我老兄弟来了，跟楼上去讲。薛阿姨出去。沪生说，一直想来，这次下了决心，落雨天，外面吃了老酒，吃到后来，就寻过来了。小毛说，我一直想到拉德公寓来。沪生黯然说，啥年代的事体了，早就搬出来了。小毛说，记得有一年，“大都会”门口，我眼看阿宝经过。沪生说，“大都会”，拆光好多年了。阿宝说，样样不能拖，一拖，拖到现在。小毛指一指墙上十字架说，我老婆临走还埋怨我，为啥跟沪生阿宝不来往。大家不响。小毛落了一滴眼泪说，是我脾气不好。此刻，门外一阵人声，楼梯响，楼上拖台子，脚步嘈杂，小毛说，邻居打小麻将。阿宝说，还好吧。小毛说，我工龄买断，再做门卫，炒点小股票。沪生笑笑。小毛说，我可以问吧，我的地址，哪里来的。阿宝说，沪生是律师，当然有办法。讲到此地，楼上轰隆一笑。三个人不响。情况往往如此，老友见面，以为有讲不完的话题，其实难以通达，长期的间隔，性格习惯差异，因为蜂拥的回忆，夹头夹脑，七荤八素，谈兴非但不高，时常百感交集，思路阻塞。三个人开无轨电车，散漫讲了现状，发了感慨，坐一个多钟头，准备告辞。沪生说，小毛要注意身体，以后再碰头。阿宝说，身体最要紧，有病就去看。小毛说，我还好。</p><p style="margin-bottom:14px;line-height:2.1">沪生说，老酒少吃。小毛说，嗯。阿宝走了两步说，对了，另外是。小毛说，我晓得，我当时，确实是臭脾气。沪生说，走吧，以后再讲。阿宝说，我是想问，有个朋友叫汪小姐，小毛认得吧。小毛一呆。沪生说，再讲吧。阿宝说，慢，是汪小姐老公的司机，介绍认得了小毛，对不对。小毛说，还是坐下来讲，坐。三个人再落座。小毛说，事体简单的，当时我只晓得，汪小姐是单身女人，是我隔壁邻居的侄囡，这个隔壁邻居，不是司机。沪生说，大概是书记，支部书记，上海人讲是同音。小毛说，是煤球店的退休职工，这天对我讲，汪小姐怀孕了，以后小囡申报户口，就有麻烦，小毛一直是单身，无子无女，两个人，可以谈谈吧。我一吓讲，要我跟孕妇谈感情，谈结婚，少有少见，新婚之夜做啥，我做寿头。邻居对讲，谈一谈假结婚，懂了吧，两个人开出红派司，还是各管各，等小囡落地，报了户口，就办离婚，红派司，再调绿派司，图章一敲，结束了。小毛说，我吃饱了。邻居说，以前结婚，要开单位证明，现在方便，小毛谈一个价钿，听听看。我不响。邻居讲，现在股市不错，弄个几万洋钿，天天涨一眼，天天涨一眼，有啥不好，另外也是积德，女人肚皮一点一点大起来，又不是外国，可以脱光了拍照，一个上海单身女人怀孕，总是难看，小囡事体不落实，穿马路再碰到土方车。我听了一吓说，越讲越吓人了。邻居讲，帮个忙，急人所急，这种派司不办，也是浪费。这天，大致就谈这点。第二天再谈，我就答应了，过一天，三个人到“绿缘”去吃茶，见了面。汪小姐衣裳宽松，样子还算贤惠，问我讲，小毛原来的老婆，叫啥名字。我邻居讲，有必要吧。汪小姐讲，这倒也是，要是美国，麻烦比较多，当局上门单独调查，老公用啥牙膏，老婆戴啥胸罩，夜里做几趟。邻居讲，办移民呀，缠七缠八，小毛能够答应，不容易了。汪小姐讲，小毛，我有点担心，登记结婚阶段，两个人起码要亲热一点，手拉手，开心笑一笑。我答应。到了登记的这天，汪小姐像真的一样，当了别人面，叫我几次老公，靠紧我讲，老公，刚刚我肚皮一胀，是心里太紧张了。</p><p style="margin-bottom:14px;line-height:2.1">我轻声讲，假老婆，我是假老公，假老婆要发嗲，对真老公去发。汪小姐笑一笑说，小毛是至真的好男人，等我有空，就来拜访。阿宝不响。小毛说，事体，大致就是这样。</p><p style="margin-bottom:14px;line-height:2.1">十天后黄昏，路灯亮了一点，正值退潮，莫干山路地势，已高出苏州河水位，空中是初春的河风。沪生与阿宝到得稍早，经过路口，先踏上附近昌化路桥，到对岸“潭子湾”棚户走一圈。少年时代，沪生跟随小毛，来过此地游玩，暮色苍茫，眼前是大名鼎鼎的两湾，潘家湾，潭子湾，蛛网密集的狭弄，正准备拆迁，灯火迷离，人来人往，完全脱离少年时代记忆。两个人走了一段，沪生看手表，阿宝买一张夜报，忽然想到上海历史里，反复来往于此的烈士顾正红，思古幽情，随之而生。待等两人原路返回，眼前的河面，已黑得发亮，远见一艘苏北驳船，等于沪西一条不烂之舌，伸出桥洞一截，椭圆船头翘于暮气中，上有小狗两只，像舌苔上两粒粽子糖，互相滚动，一转眼，弹跳到岸上，隐进黑暗里。两人沿河浏览，登桥眺远，惠风和畅，船鸣起伏，河床在此宽阔，折向东南。正东的远方，是火车站如同瀑布的星海，流人墨玉的河中，与逐渐交会的两支夜航船队，化为一体。阿宝说，白萍有消息吧。沪生说，上个礼拜，收到澳大利亚来信，称已经有了身份，跟一个菲律宾华裔男人生了小囡，如果我想去发展，可以代办，条件是，到了澳洲，就办离婚，两人就此分手。阿宝说，还算有良心。沪生说，我根本不回信，让我一个人到墨尔本，蹲到马路旁，天天看汽车，我发痴了。阿宝不响。两个人下桥朝南，避让上桥卡车，进人莫干山路老弄堂。</p><p style="margin-bottom:14px;line-height:2.1">这天夜里，是小毛摆酒请客。小毛电话里解释，是替春香还愿。沪生当时说，这也太客气了。小毛说，如果沪生有小妹妹，老相好，尽量带过来，一道谈谈聚聚。沪生笑笑。小毛说，真也不是对路，沪生朋友圈子，基本是女律师，女干部，女秘书，知识女人，不方便对吧。沪生笑笑说，有我就可以了。小毛说，弄堂小百姓，台面寒酸，不好意思带来，我理解，这就我来安排，吃酒要热闹。此刻，沪生与阿宝走进小毛房间，先是一吓。房间里已有五六个女人，圆台面摆好，二楼薛阿姨端上电暖锅，生熟小菜。小毛是突发胃病，胸口包一块毯子，居中坐定。来宾除了建国，招娣，菊芬，小毛指三个年轻女子说，我三个小姊妹，大自鸣钟拆迁之前，理发师退休，店堂做过几年发廊，这三位妹妹，社会上叫发廊妹，相当无情，我取名中妹，发妹，白妹，啥意思，麻将打得好。中妹说，多少难听。白妹说，我欢喜，我觉得好，我皮肤白。小毛说，三姊妹重情义，平时有啥事体，样样来帮衬，自家人，就特地请过来，陪我的老兄弟，酒要女人陪。小毛裹紧毯子，吃牛奶，吃一片白面包。三姊妹连忙请沪生阿宝人座，形成三夹两。建国笑笑说，赞的，一人身边，两个妹妹，像模像样，吃酒有心得。三姊妹斟酒搛菜，殷勤体贴。建国不动筷子，自称土方小老板，两瓶白酒的量。小毛介绍另两位女士说，这位，是招娣，我老房子二楼邻居。沪生说，二楼，应该是银凤呀。阿宝说，这不提了。</p><p style="margin-bottom:14px;line-height:2.1">招娣说，男人为啥，个个记得银凤。小毛打断说，招娣的前夫，是警察，离婚独身之后，男朋友不断，年纪个个比招娣小，唉，我想到上海纺织厂，压锭一千万呀，完全敲光拆光了，当年招娣，是年度生产标兵，一双巧手，结果是帮人看服装店，做营养品，是作孽。招娣一笑，端详说，两位阿哥的气色，真是不大好，工作太辛苦了，就需要补营养。小毛说，招娣，等一等再传销，我先介绍，我同事菊芬，车问跳舞皇后，脚法赞，腰身软，男步女步全懂，钟表厂关了门，承包街道小舞厅，也办过婚介，结过两趟婚，现在的老公，是三婚头了，结过三次婚，对菊芬，百依百顺，最近，特地开一间棋牌室，让菊芬解恹气，我也就放心了。菊芬一笑，文绉绉端了杯，做样子说，全靠我阿哥大媒人，耶稣保佑我阿哥健康，保佑春香阿嫂，天国里开心。小毛说，做女人，先就要对自家老公好，就算外面有户头，有了外插花，对老公还是体贴，就是好女人，正常女人，聪明女人。菊芬不耐烦说，可以了，我已经晓得了。小毛说，千好万好，老公最好，调胃口，可以的，不可以影响到老公。菊芬面孔一红说，阿哥，身体不适意，少讲一点可以吧。二楼薛阿姨此刻也坐进来，一台子人，吃吃讲讲。建国说，一直听小毛讲两位老兄弟，总算又见面了。阿宝说，是呀，当年为了蓓蒂的钢琴，大家开到杨树浦高郎桥，去寻马头，建国兄，真是帮了忙。建国眼圈一红说，不谈了。沪生说，现在还打拳吧。建国说，废了多年了，来，上海人不欢喜敬酒，我自弄三杯。沪生端杯，建国已经吃了两盅。小毛说，三个嗲妹妹，代我敬客人呀，不要做木头人，拨一拨动一动。中妹说，我先吃一点菜。小毛说，法兰盘已经吃得铺开了，肚皮有救生圈了，寻男人是难了。中妹说，下作。小毛说，发妹先吃一杯。发妹说，阿哥讲啥，我做啥。发妹仰面吃了一盅。沪生也吃了一盅。白妹说，二姐姐做啥，我做啥。白妹也一口吃了。阿宝一吓说，慢一点。小毛说，不要紧，三姊妹有酒量，阿宝，咪一咪就可以。中妹说，不可以，我要跟阿宝吃满杯。招娣说，上来就疯。菊芬说，中妹乖，阿姐已经头昏了，不要弄得棋牌室一样，乌烟瘴气，乖一点。建国说，上次的女人，为啥不来了。招娣说，啥。小毛说，就是我的假老婆。菊芬说，对了，小毛的假户头，为啥不来。招娣说，这个女人不错，买过我产品。小毛说，传销基本功，要记牢名字，汪小姐已经来了几趟，产品买了不少，还是记不住。招娣说，当我两个新阿哥面前，讲我做传销，应该吧。建国说，记得上一趟，汪小姐就想醉一醉。小毛说，有了喜的女人，可以醉吧，是散心，这次听说，我要请沪生阿宝，汪小姐电话里一吓讲，啊呀，我动胎气了，我过不来了。我讲，汪小姐，客气啥呢，大家老朋友了，过来坐。汪小姐讲，假老公，我肚皮不适意了。我听了笑笑。汪小姐讲，求求小毛，阿宝沪生面前，不要提我汪小姐三个字，社会太复杂了，答应我。我讲，老弟兄见见面，有啥呢。汪小姐说，一定不要提到我呀，拜托了。</p><p style="margin-bottom:14px;line-height:2.1">二楼薛阿姨摆上一盆蛋饺。小毛说，我对女人，一般是闷声不响，不问任何原因，女人的心思太细密，我问了，等于白问，当年理发店关门，招娣，跟了二楼爷叔合办发廊，我一句不响。中妹说，阿哥越是不响，我越想对阿哥讲心事。菊芬说，嗲煞人了。小毛说，这辈子，我最买账两位闷声不响男人，一就是领袖，一是耶稣，单是我老娘，我老婆春香，一天要跟这两个男人，讲多少事体，费多少口舌，全世界百姓，多少心思，装进两个人肚皮，嗳，就是一声不响，无论底下百姓，横讲竖讲，哭哭笑笑，吵吵闹闹，一点不倦，一声不响，面无表情。大家笑笑。沪生说，想不到，老房子还做过发廊，这个二楼爷叔，我记不得了。阿宝不响。小毛说，爷叔是老好人，隔壁房间的招娣，人也好，但是警察老公，是铁板面孔，像一直有情报，一直怀疑招娣，外面有了野男人，每趟要穷吵，二楼爷叔听见，总是好言相劝。阿宝不响。招娣说，陈年旧账，一场噩梦，不许再讲了。小毛说，后来就离婚。招娣讲，做警察的，确实精明。小毛说，平时房间里来人，招娣讲了啥，做了啥，样样会晓得，只能大吵一场，离，我劝招娣，既然离了，不要多想了。招娣说，是呀，但小毛对我，有交情吧，根本不关心我，不来看我，等我离了婚，单身了，总可以到我房里坐吧，还是不来，弄堂也不进来。阿宝不响。沪生笑说，夜里可以坐一坐理发店，样样就可以谈了。小毛说，我样样不响，招娣跟爷叔合作，三个妹妹前后来上班，为客人捏脚敲背，之后弄堂拆迁，大家滚蛋，我一律不管。招娣，三个妹妹，包括我娘，样样会来讲，我根本不想管老房子任何事体。发妹说，是呀，因此我喜欢来此地，就像是办事处，我乡下来了亲眷，也过来借宿，讲讲谈谈。菊芬说，三个阿妹，样样式式，到此地做市面，此地等于公共浴室，公共厨房问，到此地烧小菜，剪螺蛳，腌咸肉，做鳗鲞，汰衣裳，汰浴，揩身，夜里搦了粉，点了胭脂，到火车站去兜生意。发妹冷笑说，只会讲别人，姐姐自家呢。建国说，我理解，生活实在是难，多少不容易。菊芬说，我有趟进来，看见汪小姐，横到床上看报纸，我一吓。有次看见房间里，叠了几十箱过期产品，另一次，一房间坐满男男女女，准备开传销会议。小毛笑笑。招娣说，吃啥醋呢，汪小姐来，是临时保胎，正常休息，不稀奇，讲到我的产品，我组织开会，正常的，人总有不顺利阶段，产品积压了，暂时搬到此地放几个月，是小毛答应的。小毛说，不要吵了，菊芬也一样，大家是兄弟姐妹。</p><p style="margin-bottom:14px;line-height:2.1">招娣笑说，菊芬也有事体呀，我想听。菊芬说，我清清白白做人，我有啥。小毛说，菊芬舞步灵，但是面皮薄。菊芬放了筷子，朝小毛手背上敲一记说，我有啥见不得人的。白妹说，阿哥已经生病了，为啥动手要敲。建国说，这是女人发嗲，敲一记，拍一记，钟表厂一枝花，当年如果这样敲一记男人，这个男人，就想心思，通宵吃茶摇扇子。菊芬说，我是正大光明，这天是小毛发胃病，我买了牛奶，切片白面包，带一个朋友，正正经经去看小毛，想不到，小毛坐了五分钟，就走了，好像，我是来借房间一样，我跟朋友，只能坐等小毛回来，也是无聊，后来就跳跳舞，正规的国标，研究脚法，跳来跳去，跳得头有点晕，小毛回来了。建国说，小毛开门一看，菊芬浑身发软，昏过去一样，男人抱紧细腰，对准菊芬的耳朵眼里，灌迷魂汤，赞，小毛吓了，只能退出去。菊芬说，切，瞎三话四。招娣冷笑说，是吧是吧，看来瘾头不小，人家让出了房间，已经避出去两个多钟头了，还是抱不够，做不够，不知足。小毛笑说，不许乱讲，菊芬是文雅人。发妹说，是的，女人越文雅，这方面越厉害。白妹说，表面不响，心里要得更多，这就叫文雅。菊芬笑说，小娘皮，嘴巴像毒蛇。</p><p style="margin-bottom:14px;line-height:2.1">小毛说，好了好了，三姊妹，陪过我兄弟了吧，动起来呀。中妹笑笑，十指粉红，端了酒盅说，今朝，我阿哥身体不适意，特地派妹妹来服侍宝大哥，有啥要求，宝大哥尽管提。阿宝端起了酒盅，旁边白妹伸手一盖说，宝大哥，还是派我出山，我来代替，拼个几盅。阿宝笑。白妹端起阿宝的酒盅，发妹端了沪生的酒盅。中妹说，做啥，两个男人一动不动，三姊妹自相残杀。小毛说，中妹最哕嗦，吃了再讲嘛。三个年轻女子笑笑，一仰头，乌发翻动。建国说，吃一杯，就算动过了。中妹说，还要动啥，要我坐到男人大腿上动。建国说，啥。白妹立起来，走到建国面前，一屁股坐到建国身上说，这样子动，对吧，我来动，适意吧，招娣姐姐，菊芬姐姐，心里穷想，根本是不敢的，我敢，要我叫老公吧。建国大笑。小毛笑说，又瞎搞了，快坐好。建国笑说，喔哟哟哟，我吃不消了，我做活神仙了。招娣说，假正经。菊芬吃吃吃笑。小毛说，既然坐了，建国就抱一抱。大家笑。白妹摸一摸建国的面孔，回来落座。中妹说，自动送上门了，一屁股坐到身上了，建国大哥就不敢动了，嘴硬骨头酥。</p></div></div></div><div class="tab-panel" data-panel="timeline"><div class="part-box part-plot"><div class="part-label">🕐 第二十九章时间线</div><div class="part-content"><div style="border-left:3px solid var(--gold);padding-left:16px"><div style="margin-bottom:18px"><span class="era-badge badge-90">90年代</span><div style="font-weight:bold;margin:6px 0;font-size:14px">4. 阿宝李李，几段感情的终始</div></div><div style="margin-bottom:18px"><span class="era-badge badge-90">90年代</span><div style="font-weight:bold;margin:6px 0;font-size:14px">4. 阿宝李李，几段感情的终始</div></div><div style="margin-bottom:18px"><span class="era-badge badge-90">90年代</span><div style="font-weight:bold;margin:6px 0;font-size:14px">4. 阿宝李李，几段感情的终始</div></div><div style="margin-bottom:18px"><span class="era-badge badge-90">90年代</span><div style="font-weight:bold;margin:6px 0;font-size:14px">4. 阿宝李李，几段感情的终始</div></div></div></div></div></div><div class="tab-panel" data-panel="analysis"><div class="part-box part-tell"><div class="part-label">🔍深度解析</div><div class="part-content"><h4 style="margin-bottom:10px;color:var(--accent)">第二十九章：阿宝李李，几段感情的终始</h4><p style="margin-bottom:12px">第二十九章：阿宝李李，几段感情的终始。金宇澄以独特的上海叙事风格，书写这段岁月的波澜与暗涌。</p><div class="note">📌本章属于90年代故事线，与另一时间线交替推进，构成全书复调叙事。</div><p style="margin-top:12px"><b>阅读建议：</b>注意每一处"不响"——那些沉默藏着最丰富的情感信息。</p></div></div></div></div><div class="chapter-nav"><a href="ch28.html" class="nav-btn"><small>上一章</small><span class="nav-label">← 第二十八章</span></a><a href="ch30.html" class="nav-btn" style="text-align:right"><small>下一章</small><span class="nav-label">第三十章 →</span></a></div>
+  </main>
+</div>
+<button class="back-top" onclick="window.scrollTo(0,0)" title="回到顶部" style="display:none">↑</button>
+<script>
+// Tabs
+function initTabs(){
+  document.querySelectorAll('.tabs').forEach(tabs=>{
+    tabs.querySelectorAll('.tab-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const panel = btn.dataset.tab;
+        tabs.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const wrap = tabs.closest('.tab-wrap')||tabs.parentElement;
+        wrap.querySelectorAll('.tab-panel').forEach(p=>{
+          p.classList.toggle('active', p.dataset.panel===panel);
+        });
+      });
+    });
+  });
+}
+
+// Back to top
+window.addEventListener('scroll',()=>{
+  const btn=document.querySelector('.back-top');
+  if(btn) btn.style.display=window.scrollY>400?'flex':'none';
+});
+
+// Sidebar active
+function updateSidebarActive(){
+  const sections = document.querySelectorAll('.scene-card[id]');
+  const links = document.querySelectorAll('.sidebar a[href*="#"]');
+  let active = null;
+  sections.forEach(s=>{
+    if(s.getBoundingClientRect().top < 120) active=s.id;
+  });
+  links.forEach(l=>{
+    l.classList.toggle('active', l.hash==='#'+active);
+  });
+}
+window.addEventListener('scroll', updateSidebarActive);
+
+document.addEventListener('DOMContentLoaded',()=>{
+  initTabs();
+  updateSidebarActive();
+});
+</script>
+</body>
+</html>

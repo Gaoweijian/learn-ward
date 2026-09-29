@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第十一章 — 繁花导读</title>
+<style>
+:root {
+  --bg: #faf8f3;
+  --bg2: #f0ebe0;
+  --card: #fff;
+  --text: #2c2415;
+  --text2: #5a4a35;
+  --accent: #8b2c2c;
+  --accent2: #c4793a;
+  --gold: #b8902a;
+  --green: #3a6b3a;
+  --border: #d4c5a9;
+  --shadow: rgba(139,44,44,0.12);
+  --font-serif: 'Georgia','SimSun','宋体',serif;
+  --font-sans: 'PingFang SC','Microsoft YaHei',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);line-height:1.85;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent2);text-decoration:underline}
+
+/* ===== HEADER ===== */
+.site-header {
+  background: linear-gradient(135deg, #f5f0e1 0%, #e8dcc5 60%, #dcc8a8 100%);
+  color: #4a3b2c;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+}
+.header-inner{max-width:1100px;margin:0 auto;padding:10px 20px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.header-title{font-family:var(--font-serif);font-size:22px;font-weight:bold;
+  letter-spacing:3px;color:#f5e6d3;text-shadow:1px 1px 3px rgba(0,0,0,0.5)}
+.header-sub{font-size:12px;color:#c9a882;letter-spacing:1px}
+.header-nav{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.header-nav a{color:#f5e6d3;font-size:13px;padding:4px 10px;
+  border:1px solid rgba(245,230,211,0.3);border-radius:3px;transition:all 0.2s}
+.header-nav a:hover{background:rgba(255,255,255,0.15);text-decoration:none}
+
+/* ===== LAYOUT ===== */
+.main-wrap{max-width:1100px;margin:0 auto;padding:24px 16px;display:grid;
+  grid-template-columns:240px 1fr;gap:24px}
+@media(max-width:768px){.main-wrap{grid-template-columns:1fr}}
+
+/* ===== SIDEBAR ===== */
+.sidebar{position:sticky;top:70px;height:calc(100vh - 80px);overflow-y:auto;
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:16px 0;box-shadow:0 2px 8px var(--shadow)}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.sidebar-title{padding:0 16px 10px;font-size:13px;font-weight:bold;
+  color:var(--accent);letter-spacing:2px;border-bottom:1px solid var(--border)}
+.sidebar-section{padding:8px 0}
+.sidebar-era{padding:4px 16px;font-size:11px;font-weight:bold;color:var(--gold);
+  letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+.sidebar a{display:block;padding:5px 16px;font-size:13px;color:var(--text2);
+  border-left:3px solid transparent;transition:all 0.2s;line-height:1.4}
+.sidebar a:hover,.sidebar a.active{color:var(--accent);
+  border-left-color:var(--accent);background:#fdf0e8;text-decoration:none}
+
+/* ===== CONTENT ===== */
+.content{min-width:0}
+.page-hero{background:linear-gradient(135deg,#2c1810,#5a2020);
+  color:#f5e6d3;border-radius:10px;padding:28px 32px;margin-bottom:24px;
+  position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;right:-20px;top:-20px;
+  width:150px;height:150px;background:rgba(255,255,255,0.04);
+  border-radius:50%}
+.page-hero-num{font-size:48px;font-family:var(--font-serif);opacity:0.25;
+  position:absolute;right:32px;bottom:10px;line-height:1}
+.hero-badge{display:inline-block;padding:3px 10px;border-radius:12px;
+  font-size:12px;font-weight:bold;margin-bottom:8px;letter-spacing:1px}
+.badge-60{background:#4a5568;color:#e2e8f0}
+.badge-70{background:#744210;color:#fefcbf}
+.badge-80{background:#2d6a2d;color:#c6f6d5}
+.badge-90{background:#c05621;color:#feebcb}
+.badge-both{background:linear-gradient(90deg,#4a5568,#c05621);color:#fff}
+.hero-title{font-family:var(--font-serif);font-size:28px;font-weight:bold;
+  letter-spacing:2px;margin-bottom:6px}
+.hero-sub{font-size:14px;color:#c9a882;line-height:1.6}
+
+/* ===== CHAPTER OVERVIEW ===== */
+.overview-box{background:var(--card);border:1px solid var(--border);
+  border-radius:8px;padding:20px 24px;margin-bottom:20px;
+  border-left:4px solid var(--accent)}
+.overview-box h3{font-size:14px;font-weight:bold;color:var(--accent);
+  margin-bottom:10px;letter-spacing:1px}
+.overview-box p{color:var(--text2);font-size:14px;line-height:1.8}
+
+/* ===== TABS ===== */
+.tabs{display:flex;gap:0;margin-bottom:0;border-bottom:2px solid var(--border);flex-wrap:wrap}
+.tab-btn{padding:9px 18px;background:transparent;border:none;cursor:pointer;
+  font-size:13px;color:var(--text2);border-bottom:2px solid transparent;
+  margin-bottom:-2px;font-family:var(--font-sans);transition:all 0.2s;font-weight:500}
+.tab-btn:hover{color:var(--accent)}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:bold}
+.tab-panel{display:none;padding:20px 0}
+.tab-panel.active{display:block}
+
+/* ===== SCENE CARD ===== */
+.scene-card{background:var(--card);border:1px solid var(--border);
+  border-radius:8px;margin-bottom:16px;overflow:hidden;
+  box-shadow:0 1px 4px var(--shadow)}
+.scene-header{padding:12px 18px;background:var(--bg2);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px}
+.scene-num{width:26px;height:26px;background:var(--accent);color:#fff;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:bold;flex-shrink:0}
+.scene-title{font-weight:bold;font-size:15px;color:var(--text)}
+.scene-body{padding:16px 18px}
+
+/* ===== PART BOXES ===== */
+.part-box{margin-bottom:14px;border-radius:6px;overflow:hidden}
+.part-label{font-size:11px;font-weight:bold;letter-spacing:2px;
+  padding:5px 12px;display:flex;align-items:center;gap:6px}
+.part-content{padding:12px 14px;font-size:14px;line-height:1.85}
+
+.part-plot .part-label{background:#f0f4ff;color:#2d5a9e;border-left:3px solid #2d5a9e}
+.part-plot .part-content{background:#f8faff;border-left:3px solid #cfd8f0}
+
+.part-original .part-label{background:#fef9f0;color:#7a4a10;border-left:3px solid #c4793a}
+.part-original .part-content{background:#fffaf4;border-left:3px solid #e8d4b0;
+  font-family:var(--font-serif);font-size:13.5px;color:#5a3a15}
+
+.part-dialog .part-label{background:#f0fff4;color:#276749;border-left:3px solid #38a169}
+.part-dialog .part-content{background:#f8fffa;border-left:3px solid #c6f6d5}
+.dialect-row{display:flex;gap:8px;padding:4px 0;border-bottom:1px dashed #d4edda;font-size:13.5px}
+.dialect-row:last-child{border-bottom:none}
+.dialect-sh{color:#5a3a15;font-family:var(--font-serif);flex:1;min-width:0}
+.dialect-std{color:#276749;flex:1;min-width:0}
+.dialect-arrow{color:#aaa;font-size:12px;padding-top:2px}
+
+.part-tell .part-label{background:#fdf5ff;color:#6b21a8;border-left:3px solid #9333ea}
+.part-tell .part-content{background:#fdf8ff;border-left:3px solid #e9d5ff}
+
+.part-analysis .part-label{background:#fff7ed;color:#92400e;border-left:3px solid #d97706}
+.part-analysis .part-content{background:#fffbf5;border-left:3px solid #fde68a}
+
+.part-buxiang .part-label{background:#fef2f2;color:#991b1b;border-left:3px solid #dc2626}
+.part-buxiang .part-content{background:#fff8f8;border-left:3px solid #fecaca;
+  font-style:italic}
+
+.part-ask .part-label{background:#f0fdf4;color:#166534;border-left:3px solid #16a34a}
+.part-ask .part-content{background:#f8fff9;border-left:3px solid #bbf7d0}
+.qa-item{margin-bottom:10px;font-size:13.5px}
+.qa-q{color:#166534;font-weight:bold;margin-bottom:3px}
+.qa-a{color:#374151;padding-left:12px;border-left:2px solid #bbf7d0;line-height:1.7}
+
+/* ===== CHARACTERS TABLE ===== */
+.chars-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:12px}
+.chars-table th{background:var(--accent);color:#fff;padding:8px 12px;text-align:left;font-weight:bold}
+.chars-table td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.chars-table tr:hover td{background:#fdf0e8}
+.char-tag{display:inline-block;padding:2px 7px;border-radius:10px;font-size:11px;
+  margin:2px;font-weight:bold}
+.tag-main{background:#fee2e2;color:#991b1b}
+.tag-side{background:#dbeafe;color:#1e40af}
+.tag-era60{background:#f3f4f6;color:#374151}
+.tag-era90{background:#fef3c7;color:#92400e}
+
+/* ===== TIMELINE ===== */
+.timeline{position:relative;padding-left:24px;margin-top:12px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;
+  width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:16px}
+.tl-dot{position:absolute;left:-20px;top:4px;width:12px;height:12px;
+  border-radius:50%;border:2px solid var(--accent);background:var(--card)}
+.tl-year{font-size:11px;font-weight:bold;color:var(--accent);margin-bottom:2px}
+.tl-text{font-size:13.5px;color:var(--text2);line-height:1.7}
+
+/* ===== INDEX PAGE ===== */
+.index-hero{background:linear-gradient(135deg,#1a0a05 0%,#3d1515 50%,#6b2d0a 100%);
+  color:#f5e6d3;padding:48px 40px;text-align:center;border-radius:12px;
+  margin-bottom:32px;position:relative;overflow:hidden}
+.index-hero::after{content:'繁花';position:absolute;font-size:200px;
+  font-family:var(--font-serif);opacity:0.04;right:-20px;bottom:-40px;line-height:1}
+.index-hero h1{font-family:var(--font-serif);font-size:42px;letter-spacing:8px;
+  margin-bottom:10px;text-shadow:2px 2px 8px rgba(0,0,0,0.5)}
+.index-hero p{font-size:16px;color:#c9a882;letter-spacing:2px;margin-bottom:6px}
+.index-hero .author{font-size:18px;color:#e8c98a;letter-spacing:4px;margin-top:12px;
+  font-family:var(--font-serif)}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+@media(max-width:600px){.intro-grid{grid-template-columns:1fr}}
+.intro-card{background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:18px 20px;border-top:3px solid var(--accent)}
+.intro-card h3{color:var(--accent);font-size:15px;font-weight:bold;margin-bottom:8px;
+  letter-spacing:1px}
+.intro-card p{font-size:13.5px;color:var(--text2);line-height:1.75}
+.chapter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.ch-card{background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:14px 16px;transition:all 0.25s;cursor:pointer;
+  border-left:4px solid transparent}
+.ch-card:hover{transform:translateY(-2px);box-shadow:0 4px 14px var(--shadow);
+  border-left-color:var(--accent);text-decoration:none}
+.ch-card-num{font-size:11px;font-weight:bold;color:var(--gold);margin-bottom:4px;
+  letter-spacing:1px}
+.ch-card-title{font-size:14px;font-weight:bold;color:var(--text);margin-bottom:6px}
+.ch-card-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.era-badge{display:inline-block;font-size:10px;padding:2px 6px;border-radius:8px;
+  font-weight:bold;margin-top:6px}
+
+/* ===== PREV/NEXT NAV ===== */
+.chapter-nav{display:flex;gap:12px;margin-top:28px;padding-top:20px;
+  border-top:1px solid var(--border)}
+.nav-btn{flex:1;padding:12px 16px;background:var(--card);border:1px solid var(--border);
+  border-radius:8px;text-align:center;transition:all 0.2s;font-size:13px}
+.nav-btn:hover{background:var(--accent);color:#fff;text-decoration:none;
+  border-color:var(--accent)}
+.nav-btn small{display:block;font-size:11px;color:var(--text2);margin-bottom:3px}
+.nav-btn:hover small{color:rgba(255,255,255,0.7)}
+.nav-label{font-weight:bold}
+
+/* ===== BACK TO TOP ===== */
+.back-top{position:fixed;right:20px;bottom:24px;background:var(--accent);
+  color:#fff;border:none;width:40px;height:40px;border-radius:50%;
+  font-size:18px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.3);
+  display:none;z-index:200;transition:all 0.2s}
+.back-top:hover{transform:scale(1.1)}
+
+/* ===== MISC ===== */
+.divider{text-align:center;color:var(--border);margin:20px 0;
+  font-size:18px;letter-spacing:8px}
+.highlight{background:#fff3cd;padding:2px 4px;border-radius:2px}
+.note{background:#e8f4ff;border-left:3px solid #3b82f6;padding:8px 12px;
+  font-size:13px;color:#1e40af;margin:10px 0;border-radius:0 4px 4px 0}
+blockquote{border-left:3px solid var(--accent2);padding:8px 14px;
+  background:#fdf8f0;margin:10px 0;font-style:italic;font-size:13.5px;
+  color:var(--text2);border-radius:0 4px 4px 0}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <div>
+      <div class="header-title">《繁花》说书人导读</div>
+      <div class="header-sub">金宇澄 · 茅盾文学奖 2015</div>
+    </div>
+    <nav class="header-nav">
+      <a href="index.html">目录首页</a>
+      <a href="characters.html">人物关系</a>
+    </nav>
+  </div>
+</header>
+<div class="main-wrap">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-title">📖 导航</div>
+    <div class="sidebar-section"><a href="ch10.html">← 第十章</a></div><div class="sidebar-section"><a href="#ch11-1">  1. 曹杨新村，两万户生活</a><a href="#ch11-2">  2. 曹杨新村，两万户生活</a><a href="#ch11-3">  3. 曹杨新村，两万户生活</a><a href="#ch11-4">  4. 曹杨新村，两万户生活</a></div><div class="sidebar-section"><a href="ch12.html">第十二章 →</a></div><div class="sidebar-section"><a href="index.html">↩ 返回目录</a></div>
+  </aside>
+  <main class="content">
+    <div class="page-hero">
+  <span class="hero-badge badge-60">60-70年代</span>
+  <div class="hero-title">第十一章</div>
+  <div class="hero-sub">曹杨新村，两万户生活</div>
+</div><div class="tab-wrap">
+<div class="tabs">
+  <button class="tab-btn active" data-tab="guide">&#128214; 章节导读</button>
+  <button class="tab-btn" data-tab="original">&#128220; 原文精选</button>
+  <button class="tab-btn" data-tab="timeline">&#128336; 时间线</button>
+  <button class="tab-btn" data-tab="analysis">&#128269; 深度解析</button>
+</div><div class="tab-panel active" data-panel="guide"><div class="scene-card" id="ch11-1">
+  <div class="scene-header">
+    <div class="scene-num">1</div>
+    <div class="scene-title">1. 曹杨新村，两万户生活</div>
+  </div>
+  <div class="scene-body"><div class="part-box part-plot">
+  <div class="part-label"> 🎬 一句话说情节</div>
+  <div class="part-content">壹</div>
+</div><div class="part-box part-original">
+  <div class="part-label"> 📜 原文</div>
+  <div class="part-content">“壹”<br><br>“阿宝全家搬离的前夜，想不到小阿姨拎了半篮水红菱，忽然上门，见房内大乱，姐姐姐夫，闷声整理行李，深受刺激，当场与抄家人员大吵大闹，杀千刀跳黄浦，样样全来。阿宝娘哀求不止。值班监督人员，初以为小阿姨是保姆，最后认定神经病，明天就搬场，也就无心恋战。小阿姨揩了眼泪，摸摸阿宝肩胛说，阿宝，小阿姨来了，不要怕。第二日一早，小阿姨跟了阿宝全家，爬上了卡车，迁往沪西曹杨工人新村。阿宝朝蓓蒂，阿婆挥手。蝉鸣不止，附近尼古拉斯东正小教堂，洋葱头高高低低，阿宝记得蓓蒂讲过，上海每隔几条马路，就有教堂，上海呢，就是淮海路，复兴路。但卡车一路朝北开，经过无数低矮苍黑民房，经过了苏州河，烟囱高矗人云，路人黑瘦，到中山北路，香料厂气味冲鼻，氧化铁颜料厂红尘滚滚，大片农田，农舍，杨柳，黄瓜棚，番茄田，种芦粟的毛豆田，凌乱掘开的坟墓，这全部算上海。最后，看见一片整齐的房子，曹杨新村到了。”<br><br>“此种房型，上海人称“两万户”，大名鼎鼎，五十年代苏联专家设计，沪东沪西建造约两万问，两层砖木结构，洋瓦，木窗木门，楼上杉木地板，楼下水门汀地坪，内墙泥草打底，罩薄薄一层纸筋灰。每个门牌十户人家，五上五下，五户合用一个灶间，两个马桶座位。对于苏州河旁边泥泞“滚地龙”，“潭子湾”油毛毡棚户的赤贫阶级，“两万户”遮风挡雨，人间天堂。阿宝家新地址为底楼４室，十五平方一小间，与１，２，３，５室共用走廊，窗外野草蔓生，室内灰尘蜘蛛网。一家人搬进箱笼，阿宝爸爸先捡一块砖头，到大门旁边敲钉子，挂一块硬板纸“认罪书”，上面贴了脱帽近照，全文工楷，起头是领袖语录，凡是反动的东西，你不打，他就不倒。下文是，认罪人何年何月脱离上海，混迹解放区，何年何月脱离解放区，混迹上海，心甘情愿做反动报纸编辑记者，破坏革命，解放后死不认账，罪该万死。居委会干部全体到场，其中一个女干部拿出认罪书副本，宣布说，工人阶级生活区，一户反革命搬了进来，对全体居民同志，是重大考验，大家要振作起来，行动起来，行使革命权利，监督认罪人，早夜扫地一次，１６号门口扫到１８号，认罪人要保持认罪书整洁，每早七点挂，十八点收。阿宝爸爸遵命。干部看了看工作手册说，新社会到现在，还有大小老婆。阿宝爸爸指小阿姨说，是我内人妹妹，帮忙搬场。女干部拿出钢笔，记到工作手册里，一声不响。４室门窗前，立满男女看客，窗台上坐三个小囡，一切尽收眼底。阿宝一家四人，睽睽之下布置房问，大床小床，五斗橱摆定。２室阿姨讲苏北上海话说，妹妹，你家里，最要紧的东西，忘记掉了。阿宝娘不响。２室阿姨说，煤球炉子。阿宝娘惊讶说，此地用煤炉。２室阿姨说，嗯哪，洋风炉子，也可以滴，我才刚，一件一件看你家的家当，没得煤球炉子，也没得火油瓶子。阿宝娘愁容满面。３室嫂嫂讲苏北话说，用我家煤炉子，下点面条子，快的。２室阿姨说，还是用我家的，煤球炉，最要紧了，要便宜，买个炉胆子，用洋油火油箱子，自家做一个炉子，也可以。阿宝娘说，谢谢谢谢。３室嫂嫂说，不要忘记了，去办个煤球卡。阿宝娘说，谢谢。只有５室阿姨旁边看，一声不响，细腰身，笑眯眯有礼貌。小阿姨对阿宝娘说，阿姐放心，我会生煤炉，也会烧洋风炉，以前住虹口，就靠洋风炉子过日脚，不急的。阿宝娘一时讲不出话来。”<br><br>“两万户”到处是人，走廊，灶披间，厕所，房前窗后，每天大人小人，从早到夜，楼上楼下，人声不断。木拖板声音，吵相骂，打小囡，骂老公，无线电声音，拉胡琴，吹笛子，唱江淮戏，京戏，本滩，咳嗽吐老痰，量米烧饭炒小菜，整副新鲜猪肺，套进自来水龙头，嘭嘭嘭拍打。钢钟镬盖，铁镬子声音，斩馄饨馅子，痰盂罐拉来拉去，倒脚盆，拎铅桶，拖地板，马桶间门砰一记关上，砰一记又一记。自来水按人头算，用电，照灯头算账，４灯收音机，等于１５支光电灯，５灯收音机，算２０支光灯泡的度数。阿宝爸爸每天准时扫地，赶到单位报到，认罪书天天挂进挂出，回来迟，阿宝代收。阿宝娘漶浴，方台靠边，小阿姨拖出床底的大木盆来，到灶间拎了热水冷水。房门关紧，家家一样。男人赤膊短裤，立到灶间外面，一块肥皂一只龙头，露天解决，再进马桶间里换衣裳。黄昏，各家小板凳摆到大门外，房前房后，密密麻麻是人，凳面当饭桌，女人最后收作碗筷，为一家老小，汰了衣裳，拉出躺椅来，搭铺板，外面乘凉过夜。小阿姨说，此地宽敞，市区郊区，上海人乡下人，其实差不多。阿宝不响。小阿姨说，南京路天津路，倒马桶的房子，要多少有多少。阿宝说，嗯。小阿姨说，阿宝，要多交朋友，看见了吧，楼上１０室的小珍，一直朝此地看。阿宝说，小阿姨，还不够烦呀。小阿姨笑笑。吃了夜饭，万家灯火，阿宝走出一排排房子，毫无眷恋，眼看前方，附近是田埂，几棵杨柳，白天，树下有螳螂，小草，蝴蝶飞过，现在漆黑。阿宝闭眼睛，风送凉爽，树叶与蒿草香气，大蒜炒豆干，焖大肠的气味，工厂的化学气味。等到夜深返回，整幢房子静了，家家开门过夜，点蚊香，熏艾蒿，走廊闷热黑暗。２室是两张双层铁床，月光泻到草席，照出四只脚，四条小腿。自家房门挂了半块门帘，阿宝爸爸已经打地铺，阿宝娘与小阿姨已经人梦。家人距离如此之近，如此拥挤，如此不真实，但阿宝对小阿姨，依然心存感激。搬来当日，小阿姨领了阿宝，阿宝娘，到日用品商店买了煤球炉，火钳，脚盆，铅桶，蒲扇，四只矮凳。阿宝娘说，买两只吧。<br><br>“小阿姨说，坐外面吃夜饭，两只凳不够。阿宝娘说，阿妹，我不习惯，不答应的。小阿姨说，外面吃饭，风凉。阿宝娘不响。小阿姨说，要跟邻居一样。阿宝娘说，要我坐到大门外，岔开两条大腿，端一碗粥，我做不出来。小阿姨说，苦头吃得不够，学习不够。阿宝娘说，十三点。小阿姨说，讲起来，以前我也算镇里有铜钿的二小姐，但吃苦比较早，人情世故早。阿宝娘说，结果呢，看错了男人。小阿姨说，是呀是呀，阿姐是享福人，房子好，男人好，现在呢，照样交“麻枯”运。阿宝娘不响。小阿姨说，放心，我会帮姐姐出头的。阿宝娘说，房子小，还是早点回乡吧。”</div>
+</div><div class="part-box part-tell">
+  <div class="part-label"> 💬 普通话讲述</div>
+  <div class="part-content"><b>曹杨新村，两万户生活</b> - 第十一章的关键段落。金宇澄以克制笔法书写，人物命运在平淡日常中展开，细节中见深意。</div>
+</div><div class="part-box part-dialect">
+  <div class="part-label"> 🗣 沪语时刻</div>
+  <div class="part-content"><div class="dialect-row"><span class="dialect-sh">"阿宝全家搬离的前夜，想不到小阿姨拎了半篮水红菱，忽然上门，见房内大乱，姐姐姐夫，"</span><span class="dialect-arrow">→</span><span class="dialect-std">阿宝全家搬离的前夜，想不到小阿姨拎了半篮水红菱，忽然上门，见房内大乱，姐姐姐夫，</span></div><div class="dialect-row"><span class="dialect-sh">"是伐？"</span><span class="dialect-arrow">→</span><span class="dialect-std">是吗？</span></div></div>
+</div><div class="part-box part-buzhong">
+  <div class="part-label"> 🔇 "不响"解读</div>
+  <div class="part-content">曹杨新村，两万户生活场景中，人物不响。沉默是金宇澄最常用的修辞——不响不是无话可说，而是一切尽在不言中。</div>
+</div><div class="part-box part-ask">
+  <div class="part-label"> ❓ 小白问答</div>
+  <div class="part-content"><div class="qa-item"><div class="qa-q">Q: 这段说了什么？</div><div class="qa-a">第十一章的重要场景，揭示人物关系和时代背景。</div></div><div class="qa-item"><div class="qa-q">Q: 和全书什么关系？</div><div class="qa-a">体现了《繁花》双线叙事的独特美学。</div></div></div>
+</div></div>
+</div><div class="scene-card" id="ch11-2">
+  <div class="scene-header">
+    <div class="scene-num">2</div>
+    <div class="scene-title">2. 曹杨新村，两万户生活</div>
+  </div>
+  <div class="scene-body"><div class="part-box part-plot">
+  <div class="part-label"> 🎬 一句话说情节</div>
+  <div class="part-content">“两万户”到处是人，走廊，灶披间，厕所，房前窗后，每天大人小人，从早到夜，楼上楼下，人声不断。木拖板声音，吵相骂，打小囡，骂老公，无线电声音，拉胡琴，吹笛子，唱江淮戏，京戏，本滩，咳嗽吐老痰，量米烧饭炒小菜，整副新鲜猪肺，套进自来水龙头，嘭嘭嘭拍打。钢钟镬盖，铁镬子声音，斩馄饨馅子，痰盂罐拉来拉去，...</div>
+</div><div class="part-box part-original">
+  <div class="part-label"> 📜 原文</div>
+  <div class="part-content">“小阿姨面孔一板说，啥，我跟派出所这个死人，已经离婚了呀，要我回乡，煤球炉，啥人来弄呢，每一户，照例轮流负责七天卫生，马桶间臭得要死，１室山东人，一家门天天吃韭菜大蒜洋葱头，熏得眼睛睁不开，啥人去弄。阿宝娘说，不要讲了。小阿姨说，楼上楼下，一共四只马桶间，下面通一条水泥槽，盖了四块马桶板，楼下负责打扫两块，每块要拖出来冲，揩，要到太阳里去晒，罗宋瘪三，苏联人搞的名堂，又臭又重，啥人做呢。阿宝娘说，不要讲了。小阿姨说，楼上几只赤佬，专门到楼下马桶问里大便，真自私，讲起来工人阶级。阿宝娘说，嘘。小阿姨说，烂污撤到马桶圈上，底下的水泥槽子里，月经草纸，“米田共”，堆成山，竹丝扫帚也推不动，真腻心呀。阿宝娘叹气说，实在不想走，再讲好吧。”<br><br>“礼拜天，大伯来到曹杨新村。思南路大房子扫地出门，一分为三。”<br><br>“大伯一家，迁到提篮桥石库门前厢房。婊婊因为皮箱事件，单位加大力度，忍痛与老公离了婚，跟了祖父单过，住闸北鸿兴路街面房。小叔一家三口，搬到闸北青云路亭子问。祖父定息取消了，大伯每月只发二十九块三角，等于工厂学徒的满师标准，人口多，艰难。婊婊与小叔两家，单位工资一分不减，人少，还过得去。此刻，大伯靠了窗口，吃冷开水。”<br><br>“从解放直到“文革”，阿宝父母只逢阴历年，到思南路与大伯见一面，来往不多。阿宝父母不响。大伯说，看来看去，此地最好，窗外有野趣，里厢有卫生。阿宝娘说，也有难处。大伯说，人比人，是气煞人，弟弟的工钿再减，也有六十八块，弟妹是事业单位，工资八十四块，跟我不能比。”<br><br>“阿宝爸爸说，今朝来，有啥事体吧。大伯说，弟弟开口，还是硬邦邦，还不明白，两兄弟，其实是读书不用功，有啥好结果呢。阿宝爸爸不响。”</div>
+</div><div class="part-box part-tell">
+  <div class="part-label"> 💬 普通话讲述</div>
+  <div class="part-content"><b>曹杨新村，两万户生活</b> - 第十一章的关键段落。金宇澄以克制笔法书写，人物命运在平淡日常中展开，细节中见深意。</div>
+</div><div class="part-box part-dialect">
+  <div class="part-label"> 🗣 沪语时刻</div>
+  <div class="part-content"><div class="dialect-row"><span class="dialect-sh">"小阿姨说，坐外面吃夜饭，两只凳不够。阿宝娘说，阿妹，我不习惯，不答应的。小阿姨说"</span><span class="dialect-arrow">→</span><span class="dialect-std">小阿姨说，坐外面吃夜饭，两只凳不够。阿宝娘说，阿妹，我不习惯，不答应的。小阿姨说</span></div><div class="dialect-row"><span class="dialect-sh">"是伐？"</span><span class="dialect-arrow">→</span><span class="dialect-std">是吗？</span></div></div>
+</div><div class="part-box part-buzhong">
+  <div class="part-label"> 🔇 "不响"解读</div>
+  <div class="part-content">曹杨新村，两万户生活场景中，人物不响。沉默是金宇澄最常用的修辞——不响不是无话可说，而是一切尽在不言中。</div>
+</div><div class="part-box part-ask">
+  <div class="part-label"> ❓ 小白问答</div>
+  <div class="part-content"><div class="qa-item"><div class="qa-q">Q: 这段说了什么？</div><div class="qa-a">第十一章的重要场景，揭示人物关系和时代背景。</div></div><div class="qa-item"><div class="qa-q">Q: 和全书什么关系？</div><div class="qa-a">体现了《繁花》双线叙事的独特美学。</div></div></div>
+</div></div>
+</div><div class="scene-card" id="ch11-3">
+  <div class="scene-header">
+    <div class="scene-num">3</div>
+    <div class="scene-title">3. 曹杨新村，两万户生活</div>
+  </div>
+  <div class="scene-body"><div class="part-box part-plot">
+  <div class="part-label"> 🎬 一句话说情节</div>
+  <div class="part-content">礼拜天，大伯来到曹杨新村。思南路大房子扫地出门，一分为三。</div>
+</div><div class="part-box part-original">
+  <div class="part-label"> 📜 原文</div>
+  <div class="part-content">“大伯压低声音说，如果以前就有觉悟，到十六铺码头当小工，现在我跟弟弟，就是工人无产阶级，为啥缺觉悟呢。阿宝爸爸冷笑。大伯说，我一直做小开，全部老爸做主，我做“马浪荡”，东荡西荡，吃点老酒，看《万有文库》，美国电影，听评弹迷魂调。阿宝爸爸不响。大伯说，弟弟当初，读书太不专心，听了宣传，参加了组织，吃苦不记苦吧。阿宝爸爸不响。大伯说，如果认真读英文，中国公司先做起来，账做得好，春秋两季“点元宝”。阿宝说，啥。大伯说，也就是盘账，盘点盈亏，两兄弟再出洋，英国美国，先做跑街先生，再做“康白度”，也就是洋行买办，就不会有今朝。阿宝爸爸压低声音说，马上滚出去，出去。大伯说，脾气真古怪，已经全部落难了，发啥火呢。阿宝娘说，阿哥难得来一趟，不要讲了。小阿姨说，吃了中饭回去，少讲两句。阿宝娘说，阿哥，衬衫先脱下来，房间里热。大伯说，弟妹，这件衣裳，阿哥脱不下来了，难为情的。”<br><br>“阿宝爸爸说，皮带抽过几趟，有伤了。大伯解开纽子说，运动到现在，只吃过一记耳光，还算好，每天写交代，问我黄金放啥地方，自家人面前，我食不兼味，衣不华绮，无所谓了。大伯脱了衬衫，里面一件和尚领旧汗衫，千疮百孔，渔网一样。大家不响。大伯说，开销实在难，我只能做瘪三，每日吃咸菜，吃发芽豆，还要帮邻居倒马桶。大家不响。”<br><br>“小阿姨出门，买来两包熟食，台子拉到床跟前，端菜盛饭。五人落座。小菜是叉烧，红肠，葱烤鲫鱼，糖醋小排，炒刀豆，开洋紫菜蛋汤。”<br><br>“看到一台子小菜，大伯忽然滑瘫到凳下。阿宝拉起大伯。阿宝爸爸说，以前我坐监牢，也少见这副急腔。大伯喘息说，是我馋痨病发作，胃痛了。小阿姨说，作孽，讲起来富家子弟，穷相到这种地步，快点吃。阿宝爸爸说，小阿姨，钞票太多对吧，为啥弄了七只八只，不是大客人，瞎起劲。小阿姨说，姐夫难得请兄长吃一顿饭，要面子吧，我不买账的，我是大脚娘姨，劳动人民，我买啥，就吃啥。阿宝娘说，轻点轻点。阿宝爸爸说，小菜弄得多，要吃伤的。大家不响，想不到此刻，大伯据案大嚼，已闷头吃进大半碗饭，叉烧红肠也吃了大半碗，仍旧不断拖到饭碗里，像聋甏，天吃星，嘴巴拼命动，恣吞恣嚼，不断下咽。小阿姨说，先吃口汤，慢慢咽，笃定吃，我早晓得，就买一只蹄髓，焖肉也可以，罪过罪过。大家不响，五个人这顿饭，吃得心惊肉跳。饭毕，大伯心定说ｊ想想以前，本埠的上等馆子，我全部吃到家了，中饭夜饭，夜宵，公司菜，“新雅”茶点，煽蛤蜊，煽蜗牛，“老正兴”虾籽大乌参，划水，鲍肺，金银蹄，“大鸿运”醉鸡醉虾，样样味道好，但是吃下去，就统统不作数了，人的肚皮，十分讨厌，吃过就等于白吃，比不过这顿饭。小阿姨说，风水轮流转，叫花子吃死蟹，只只鲜。”<br><br>“阿宝娘正要开腔，只听外面敲门，进来几个居委会女干部。阿宝爸爸立起来。大伯也立起来。居委会女干部看看台面说，好的，小菜蛮多，今朝庆祝啥呢，国民党生日。阿宝娘说，是我老公的阿哥来了。居委会女干部看工作手册，看看大伯说，叫啥名字。大伯不响。居委会女干部说，资产阶级搬到了提篮桥，还要见面。大伯点点头。居委会干部说，老远过来，带啥东西来。大伯说，我空手。另一女干部说，拎包也不带。大伯说，是的。居委会女干部说，空手来，偷带几根金条银条，也便当，别到裤腰里，绑到脚膀上，一样坐电车。大伯苦笑说，各位干部，不要讲旧秤十六两一根大黄鱼，就是小黄鱼，黄鱼鲞，黄鱼籽，黄鱼身上金屑粒，金粉金灰尘，全部充公上交了。居委会女干部说，哭穷。大伯说，一句不假。小阿姨说，有啥多问的，饭也吃不太平。居委会女干部说，喂，不许插嘴。小阿姨说，我现在是正常吃饭，犯啥法。居委会女干部说，外地乡下户口，乡下女人，赖到上海不肯走，为啥。小阿姨跳起来说，来帮我的阿姐姐夫，我不犯皇法，叫派出所来捉呀，我的死腔男人，就是派出所的，张同志李同志，我认得多了，我打电话就来，试试看。居委会女干部一呆。小阿姨说，太气人了，逼煞人不偿命。另一个女干部说，喂，嘴巴清爽点。小阿姨忽然朝干部面前一横说，我怕啥，我怕抄家吧，抄呀，抄呀，抄抄看呀。阿宝与阿宝娘去拖。此刻，旁边的大伯忽然解开腰带，长裤一落到底。大伯说，请政府随便检查，我啥地方有黄金。”</div>
+</div><div class="part-box part-tell">
+  <div class="part-label"> 💬 普通话讲述</div>
+  <div class="part-content"><b>曹杨新村，两万户生活</b> - 第十一章的关键段落。金宇澄以克制笔法书写，人物命运在平淡日常中展开，细节中见深意。</div>
+</div><div class="part-box part-dialect">
+  <div class="part-label"> 🗣 沪语时刻</div>
+  <div class="part-content"><div class="dialect-row"><span class="dialect-sh">"大伯一家，迁到提篮桥石库门前厢房。婊婊因为皮箱事件，单位加大力度，忍痛与老公离了"</span><span class="dialect-arrow">→</span><span class="dialect-std">大伯一家，迁到提篮桥石库门前厢房。婊婊因为皮箱事件，单位加大力度，忍痛与老公离了</span></div><div class="dialect-row"><span class="dialect-sh">"是伐？"</span><span class="dialect-arrow">→</span><span class="dialect-std">是吗？</span></div></div>
+</div><div class="part-box part-buzhong">
+  <div class="part-label"> 🔇 "不响"解读</div>
+  <div class="part-content">曹杨新村，两万户生活场景中，人物不响。沉默是金宇澄最常用的修辞——不响不是无话可说，而是一切尽在不言中。</div>
+</div><div class="part-box part-ask">
+  <div class="part-label"> ❓ 小白问答</div>
+  <div class="part-content"><div class="qa-item"><div class="qa-q">Q: 这段说了什么？</div><div class="qa-a">第十一章的重要场景，揭示人物关系和时代背景。</div></div><div class="qa-item"><div class="qa-q">Q: 和全书什么关系？</div><div class="qa-a">体现了《繁花》双线叙事的独特美学。</div></div></div>
+</div></div>
+</div><div class="scene-card" id="ch11-4">
+  <div class="scene-header">
+    <div class="scene-num">4</div>
+    <div class="scene-title">4. 曹杨新村，两万户生活</div>
+  </div>
+  <div class="scene-body"><div class="part-box part-plot">
+  <div class="part-label"> 🎬 一句话说情节</div>
+  <div class="part-content">阿宝爸爸说，今朝来，有啥事体吧。大伯说，弟弟开口，还是硬邦邦，还不明白，两兄弟，其实是读书不用功，有啥好结果呢。阿宝爸爸不响。</div>
+</div><div class="part-box part-original">
+  <div class="part-label"> 📜 原文</div>
+  <div class="part-content">“几个女干部，看见眼前两根瘦腿，一条发黄的破短裤，立即别转面孔，低头喊说，老流氓，快拉起来。下作。”<br><br>“贰”<br><br>“小毛进了门，端详一番说，到底是革命军人家庭，太平无事。沪生说，我爸讲，必须提高革命警惕。小毛说，这幢大楼，最近跳下去多少人。沪生笑说，最近我爸讲，建国开头几年，也有一个跳楼高潮，当时的上海市长，一早起来吃茶，就问身边的秘书，上海的“空降兵”，昨天跳下来多少。小毛笑笑。沪生说，当时天天有人跳，现在的河滨大楼，天天也有人跳，心甘情愿，自绝于人民。小毛摇头。沪生说，这幢大楼，目前还算太平，最轰动的，是我中学隔壁，长乐路瑞金路口的天主堂，忽然铲平了。小毛说，我弄堂里，天天斗四类分子，斗甫师太，斗逃亡地主。”<br><br>“沪生说，我不禁要问，这种形势下面，阿宝跟蓓蒂，是不是有了麻烦，是不是要表态。小毛说，朋友落难，我想去看一看。沪生不响。两个人走到阳台。小毛说，还记得大妹妹吧。沪生说，记得呀，喜欢跳橡皮筋，大眼睛。小毛压低声音说，前天见到我，大妹妹就哭了，因为，大妹妹的娘，旧社会做过一年半的“拿摩温”，之后，就到其他纱厂做工，最后跟小裁缝结了婚，做家庭妇女，又做普通工人，因此瞒到了现在，运动来了，只要听见附近的锣鼓家生，呛呛呛呛一响，连忙钻到床底下，有一次躲到半夜，等爬出来，大小便一裤子，浑身臭得要死。沪生说，这是活该。小毛说，我对大妹妹讲，不要哭，嘴巴一定要闭紧，就当这个老娘，天生神经病，已经风瘫了，痴呆了，准备天天汰臭裤子，汰臭屁股，也不可以开口。沪生说，大家不禁要问，这样的社会渣滓，为啥不去自首。”<br><br>“小毛说，“不禁要问”，大字报口气嘛。沪生笑笑。小毛说，可以自首吧，不可以，隔壁弄堂，烟纸店的小业主，主动去自首，坦白从宽，抗拒从严，结果呢，打得半死，下个月，就押送“白茅岭”劳改了。沪生说，为啥。小毛说，讲起来简单，小业主的邻居，就是邻居嫂嫂，经常独霸水龙头，脾气一直刁，因此小业主跑到曹家渡，请一个道士做法，道士这一行，道行最深，香火叫“熏天”，吹笛子叫“摸洞”，鱼叫“五面现鳞”。沪生说，根本听不懂。小毛说，小业主一上门，道士心里想，“账官”来了，就是付账的人来了。小业主讲了嫂嫂情况，道士讲，搞这种“流宫”，最便当。小业主讲，啥意思。道士讲，这是行话，流宫，意思就是“女人”。”</div>
+</div><div class="part-box part-tell">
+  <div class="part-label"> 💬 普通话讲述</div>
+  <div class="part-content"><b>曹杨新村，两万户生活</b> - 第十一章的关键段落。金宇澄以克制笔法书写，人物命运在平淡日常中展开，细节中见深意。</div>
+</div><div class="part-box part-dialect">
+  <div class="part-label"> 🗣 沪语时刻</div>
+  <div class="part-content"><div class="dialect-row"><span class="dialect-sh">"大伯压低声音说，如果以前就有觉悟，到十六铺码头当小工，现在我跟弟弟，就是工人无产"</span><span class="dialect-arrow">→</span><span class="dialect-std">大伯压低声音说，如果以前就有觉悟，到十六铺码头当小工，现在我跟弟弟，就是工人无产</span></div><div class="dialect-row"><span class="dialect-sh">"是伐？"</span><span class="dialect-arrow">→</span><span class="dialect-std">是吗？</span></div></div>
+</div><div class="part-box part-buzhong">
+  <div class="part-label"> 🔇 "不响"解读</div>
+  <div class="part-content">曹杨新村，两万户生活场景中，人物不响。沉默是金宇澄最常用的修辞——不响不是无话可说，而是一切尽在不言中。</div>
+</div><div class="part-box part-ask">
+  <div class="part-label"> ❓ 小白问答</div>
+  <div class="part-content"><div class="qa-item"><div class="qa-q">Q: 这段说了什么？</div><div class="qa-a">第十一章的重要场景，揭示人物关系和时代背景。</div></div><div class="qa-item"><div class="qa-q">Q: 和全书什么关系？</div><div class="qa-a">体现了《繁花》双线叙事的独特美学。</div></div></div>
+</div></div>
+</div></div><div class="tab-panel" data-panel="original"><div class="part-box part-original"><div class="part-label">📜 第十一章原文节选</div><div class="part-content"><p style="margin-bottom:14px;line-height:2.1">壹</p><p style="margin-bottom:14px;line-height:2.1">阿宝全家搬离的前夜，想不到小阿姨拎了半篮水红菱，忽然上门，见房内大乱，姐姐姐夫，闷声整理行李，深受刺激，当场与抄家人员大吵大闹，杀千刀跳黄浦，样样全来。阿宝娘哀求不止。值班监督人员，初以为小阿姨是保姆，最后认定神经病，明天就搬场，也就无心恋战。小阿姨揩了眼泪，摸摸阿宝肩胛说，阿宝，小阿姨来了，不要怕。第二日一早，小阿姨跟了阿宝全家，爬上了卡车，迁往沪西曹杨工人新村。阿宝朝蓓蒂，阿婆挥手。蝉鸣不止，附近尼古拉斯东正小教堂，洋葱头高高低低，阿宝记得蓓蒂讲过，上海每隔几条马路，就有教堂，上海呢，就是淮海路，复兴路。但卡车一路朝北开，经过无数低矮苍黑民房，经过了苏州河，烟囱高矗人云，路人黑瘦，到中山北路，香料厂气味冲鼻，氧化铁颜料厂红尘滚滚，大片农田，农舍，杨柳，黄瓜棚，番茄田，种芦粟的毛豆田，凌乱掘开的坟墓，这全部算上海。最后，看见一片整齐的房子，曹杨新村到了。</p><p style="margin-bottom:14px;line-height:2.1">此种房型，上海人称“两万户”，大名鼎鼎，五十年代苏联专家设计，沪东沪西建造约两万问，两层砖木结构，洋瓦，木窗木门，楼上杉木地板，楼下水门汀地坪，内墙泥草打底，罩薄薄一层纸筋灰。每个门牌十户人家，五上五下，五户合用一个灶间，两个马桶座位。对于苏州河旁边泥泞“滚地龙”，“潭子湾”油毛毡棚户的赤贫阶级，“两万户”遮风挡雨，人间天堂。阿宝家新地址为底楼４室，十五平方一小间，与１，２，３，５室共用走廊，窗外野草蔓生，室内灰尘蜘蛛网。一家人搬进箱笼，阿宝爸爸先捡一块砖头，到大门旁边敲钉子，挂一块硬板纸“认罪书”，上面贴了脱帽近照，全文工楷，起头是领袖语录，凡是反动的东西，你不打，他就不倒。下文是，认罪人何年何月脱离上海，混迹解放区，何年何月脱离解放区，混迹上海，心甘情愿做反动报纸编辑记者，破坏革命，解放后死不认账，罪该万死。居委会干部全体到场，其中一个女干部拿出认罪书副本，宣布说，工人阶级生活区，一户反革命搬了进来，对全体居民同志，是重大考验，大家要振作起来，行动起来，行使革命权利，监督认罪人，早夜扫地一次，１６号门口扫到１８号，认罪人要保持认罪书整洁，每早七点挂，十八点收。阿宝爸爸遵命。干部看了看工作手册说，新社会到现在，还有大小老婆。阿宝爸爸指小阿姨说，是我内人妹妹，帮忙搬场。女干部拿出钢笔，记到工作手册里，一声不响。４室门窗前，立满男女看客，窗台上坐三个小囡，一切尽收眼底。阿宝一家四人，睽睽之下布置房问，大床小床，五斗橱摆定。２室阿姨讲苏北上海话说，妹妹，你家里，最要紧的东西，忘记掉了。阿宝娘不响。２室阿姨说，煤球炉子。阿宝娘惊讶说，此地用煤炉。２室阿姨说，嗯哪，洋风炉子，也可以滴，我才刚，一件一件看你家的家当，没得煤球炉子，也没得火油瓶子。阿宝娘愁容满面。３室嫂嫂讲苏北话说，用我家煤炉子，下点面条子，快的。２室阿姨说，还是用我家的，煤球炉，最要紧了，要便宜，买个炉胆子，用洋油火油箱子，自家做一个炉子，也可以。阿宝娘说，谢谢谢谢。３室嫂嫂说，不要忘记了，去办个煤球卡。阿宝娘说，谢谢。只有５室阿姨旁边看，一声不响，细腰身，笑眯眯有礼貌。小阿姨对阿宝娘说，阿姐放心，我会生煤炉，也会烧洋风炉，以前住虹口，就靠洋风炉子过日脚，不急的。阿宝娘一时讲不出话来。</p><p style="margin-bottom:14px;line-height:2.1">“两万户”到处是人，走廊，灶披间，厕所，房前窗后，每天大人小人，从早到夜，楼上楼下，人声不断。木拖板声音，吵相骂，打小囡，骂老公，无线电声音，拉胡琴，吹笛子，唱江淮戏，京戏，本滩，咳嗽吐老痰，量米烧饭炒小菜，整副新鲜猪肺，套进自来水龙头，嘭嘭嘭拍打。钢钟镬盖，铁镬子声音，斩馄饨馅子，痰盂罐拉来拉去，倒脚盆，拎铅桶，拖地板，马桶间门砰一记关上，砰一记又一记。自来水按人头算，用电，照灯头算账，４灯收音机，等于１５支光电灯，５灯收音机，算２０支光灯泡的度数。阿宝爸爸每天准时扫地，赶到单位报到，认罪书天天挂进挂出，回来迟，阿宝代收。阿宝娘漶浴，方台靠边，小阿姨拖出床底的大木盆来，到灶间拎了热水冷水。房门关紧，家家一样。男人赤膊短裤，立到灶间外面，一块肥皂一只龙头，露天解决，再进马桶间里换衣裳。黄昏，各家小板凳摆到大门外，房前房后，密密麻麻是人，凳面当饭桌，女人最后收作碗筷，为一家老小，汰了衣裳，拉出躺椅来，搭铺板，外面乘凉过夜。小阿姨说，此地宽敞，市区郊区，上海人乡下人，其实差不多。阿宝不响。小阿姨说，南京路天津路，倒马桶的房子，要多少有多少。阿宝说，嗯。小阿姨说，阿宝，要多交朋友，看见了吧，楼上１０室的小珍，一直朝此地看。阿宝说，小阿姨，还不够烦呀。小阿姨笑笑。吃了夜饭，万家灯火，阿宝走出一排排房子，毫无眷恋，眼看前方，附近是田埂，几棵杨柳，白天，树下有螳螂，小草，蝴蝶飞过，现在漆黑。阿宝闭眼睛，风送凉爽，树叶与蒿草香气，大蒜炒豆干，焖大肠的气味，工厂的化学气味。等到夜深返回，整幢房子静了，家家开门过夜，点蚊香，熏艾蒿，走廊闷热黑暗。２室是两张双层铁床，月光泻到草席，照出四只脚，四条小腿。自家房门挂了半块门帘，阿宝爸爸已经打地铺，阿宝娘与小阿姨已经人梦。家人距离如此之近，如此拥挤，如此不真实，但阿宝对小阿姨，依然心存感激。搬来当日，小阿姨领了阿宝，阿宝娘，到日用品商店买了煤球炉，火钳，脚盆，铅桶，蒲扇，四只矮凳。阿宝娘说，买两只吧。</p><p style="margin-bottom:14px;line-height:2.1">小阿姨说，坐外面吃夜饭，两只凳不够。阿宝娘说，阿妹，我不习惯，不答应的。小阿姨说，外面吃饭，风凉。阿宝娘不响。小阿姨说，要跟邻居一样。阿宝娘说，要我坐到大门外，岔开两条大腿，端一碗粥，我做不出来。小阿姨说，苦头吃得不够，学习不够。阿宝娘说，十三点。小阿姨说，讲起来，以前我也算镇里有铜钿的二小姐，但吃苦比较早，人情世故早。阿宝娘说，结果呢，看错了男人。小阿姨说，是呀是呀，阿姐是享福人，房子好，男人好，现在呢，照样交“麻枯”运。阿宝娘不响。小阿姨说，放心，我会帮姐姐出头的。阿宝娘说，房子小，还是早点回乡吧。</p><p style="margin-bottom:14px;line-height:2.1">小阿姨面孔一板说，啥，我跟派出所这个死人，已经离婚了呀，要我回乡，煤球炉，啥人来弄呢，每一户，照例轮流负责七天卫生，马桶间臭得要死，１室山东人，一家门天天吃韭菜大蒜洋葱头，熏得眼睛睁不开，啥人去弄。阿宝娘说，不要讲了。小阿姨说，楼上楼下，一共四只马桶间，下面通一条水泥槽，盖了四块马桶板，楼下负责打扫两块，每块要拖出来冲，揩，要到太阳里去晒，罗宋瘪三，苏联人搞的名堂，又臭又重，啥人做呢。阿宝娘说，不要讲了。小阿姨说，楼上几只赤佬，专门到楼下马桶问里大便，真自私，讲起来工人阶级。阿宝娘说，嘘。小阿姨说，烂污撤到马桶圈上，底下的水泥槽子里，月经草纸，“米田共”，堆成山，竹丝扫帚也推不动，真腻心呀。阿宝娘叹气说，实在不想走，再讲好吧。</p><p style="margin-bottom:14px;line-height:2.1">礼拜天，大伯来到曹杨新村。思南路大房子扫地出门，一分为三。</p><p style="margin-bottom:14px;line-height:2.1">大伯一家，迁到提篮桥石库门前厢房。婊婊因为皮箱事件，单位加大力度，忍痛与老公离了婚，跟了祖父单过，住闸北鸿兴路街面房。小叔一家三口，搬到闸北青云路亭子问。祖父定息取消了，大伯每月只发二十九块三角，等于工厂学徒的满师标准，人口多，艰难。婊婊与小叔两家，单位工资一分不减，人少，还过得去。此刻，大伯靠了窗口，吃冷开水。</p><p style="margin-bottom:14px;line-height:2.1">从解放直到“文革”，阿宝父母只逢阴历年，到思南路与大伯见一面，来往不多。阿宝父母不响。大伯说，看来看去，此地最好，窗外有野趣，里厢有卫生。阿宝娘说，也有难处。大伯说，人比人，是气煞人，弟弟的工钿再减，也有六十八块，弟妹是事业单位，工资八十四块，跟我不能比。</p><p style="margin-bottom:14px;line-height:2.1">阿宝爸爸说，今朝来，有啥事体吧。大伯说，弟弟开口，还是硬邦邦，还不明白，两兄弟，其实是读书不用功，有啥好结果呢。阿宝爸爸不响。</p><p style="margin-bottom:14px;line-height:2.1">大伯压低声音说，如果以前就有觉悟，到十六铺码头当小工，现在我跟弟弟，就是工人无产阶级，为啥缺觉悟呢。阿宝爸爸冷笑。大伯说，我一直做小开，全部老爸做主，我做“马浪荡”，东荡西荡，吃点老酒，看《万有文库》，美国电影，听评弹迷魂调。阿宝爸爸不响。大伯说，弟弟当初，读书太不专心，听了宣传，参加了组织，吃苦不记苦吧。阿宝爸爸不响。大伯说，如果认真读英文，中国公司先做起来，账做得好，春秋两季“点元宝”。阿宝说，啥。大伯说，也就是盘账，盘点盈亏，两兄弟再出洋，英国美国，先做跑街先生，再做“康白度”，也就是洋行买办，就不会有今朝。阿宝爸爸压低声音说，马上滚出去，出去。大伯说，脾气真古怪，已经全部落难了，发啥火呢。阿宝娘说，阿哥难得来一趟，不要讲了。小阿姨说，吃了中饭回去，少讲两句。阿宝娘说，阿哥，衬衫先脱下来，房间里热。大伯说，弟妹，这件衣裳，阿哥脱不下来了，难为情的。</p><p style="margin-bottom:14px;line-height:2.1">阿宝爸爸说，皮带抽过几趟，有伤了。大伯解开纽子说，运动到现在，只吃过一记耳光，还算好，每天写交代，问我黄金放啥地方，自家人面前，我食不兼味，衣不华绮，无所谓了。大伯脱了衬衫，里面一件和尚领旧汗衫，千疮百孔，渔网一样。大家不响。大伯说，开销实在难，我只能做瘪三，每日吃咸菜，吃发芽豆，还要帮邻居倒马桶。大家不响。</p></div></div></div><div class="tab-panel" data-panel="timeline"><div class="part-box part-plot"><div class="part-label">🕐 第十一章时间线</div><div class="part-content"><div style="border-left:3px solid var(--gold);padding-left:16px"><div style="margin-bottom:18px"><span class="era-badge badge-60">60-70年代</span><div style="font-weight:bold;margin:6px 0;font-size:14px">4. 曹杨新村，两万户生活</div></div><div style="margin-bottom:18px"><span class="era-badge badge-60">60-70年代</span><div style="font-weight:bold;margin:6px 0;font-size:14px">4. 曹杨新村，两万户生活</div></div><div style="margin-bottom:18px"><span class="era-badge badge-60">60-70年代</span><div style="font-weight:bold;margin:6px 0;font-size:14px">4. 曹杨新村，两万户生活</div></div><div style="margin-bottom:18px"><span class="era-badge badge-60">60-70年代</span><div style="font-weight:bold;margin:6px 0;font-size:14px">4. 曹杨新村，两万户生活</div></div></div></div></div></div><div class="tab-panel" data-panel="analysis"><div class="part-box part-tell"><div class="part-label">🔍深度解析</div><div class="part-content"><h4 style="margin-bottom:10px;color:var(--accent)">第十一章：曹杨新村，两万户生活</h4><p style="margin-bottom:12px">第十一章：曹杨新村，两万户生活。金宇澄以独特的上海叙事风格，书写这段岁月的波澜与暗涌。</p><div class="note">📌本章属于60-70年代故事线，与另一时间线交替推进，构成全书复调叙事。</div><p style="margin-top:12px"><b>阅读建议：</b>注意每一处"不响"——那些沉默藏着最丰富的情感信息。</p></div></div></div></div><div class="chapter-nav"><a href="ch10.html" class="nav-btn"><small>上一章</small><span class="nav-label">← 第十章</span></a><a href="ch12.html" class="nav-btn" style="text-align:right"><small>下一章</small><span class="nav-label">第十二章 →</span></a></div>
+  </main>
+</div>
+<button class="back-top" onclick="window.scrollTo(0,0)" title="回到顶部" style="display:none">↑</button>
+<script>
+// Tabs
+function initTabs(){
+  document.querySelectorAll('.tabs').forEach(tabs=>{
+    tabs.querySelectorAll('.tab-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const panel = btn.dataset.tab;
+        tabs.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const wrap = tabs.closest('.tab-wrap')||tabs.parentElement;
+        wrap.querySelectorAll('.tab-panel').forEach(p=>{
+          p.classList.toggle('active', p.dataset.panel===panel);
+        });
+      });
+    });
+  });
+}
+
+// Back to top
+window.addEventListener('scroll',()=>{
+  const btn=document.querySelector('.back-top');
+  if(btn) btn.style.display=window.scrollY>400?'flex':'none';
+});
+
+// Sidebar active
+function updateSidebarActive(){
+  const sections = document.querySelectorAll('.scene-card[id]');
+  const links = document.querySelectorAll('.sidebar a[href*="#"]');
+  let active = null;
+  sections.forEach(s=>{
+    if(s.getBoundingClientRect().top < 120) active=s.id;
+  });
+  links.forEach(l=>{
+    l.classList.toggle('active', l.hash==='#'+active);
+  });
+}
+window.addEventListener('scroll', updateSidebarActive);
+
+document.addEventListener('DOMContentLoaded',()=>{
+  initTabs();
+  updateSidebarActive();
+});
+</script>
+</body>
+</html>
